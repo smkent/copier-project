@@ -85,7 +85,7 @@ project_type:
   type: str
   qmark: 🏗️
   help: Project type
-  default: library
+  default: application
   choices:
     - application
     - library
