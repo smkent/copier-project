@@ -181,6 +181,7 @@ copyright_holder:
   qmark: ©️
   help: Copyright holder's full name
   default: '{{ user_name }}'
+  validator: '{% if not copyright_holder %}Required{% endif %}'
 
 copyright_year:
   type: str
