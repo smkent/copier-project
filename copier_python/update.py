@@ -38,7 +38,6 @@ class UpdateAction:
         if not copier_status.get("update_available", False):
             return None
         repo.run(["copier", "update", "--skip-answered", "--vcs-ref", end_ref])
-        repo.run(["mise", "install"])
 
         status = repo.git_status()
         if not status:
@@ -53,6 +52,14 @@ class UpdateAction:
             status = repo.git_status()
             if repo.has_conflicts(status):
                 raise RuntimeError("Conflicts remain, aborting")
+
+        try:
+            repo.run(["mise", "install"])
+        except subprocess.CalledProcessError:
+            print(  # noqa: T201
+                "Lint/test failed. Fix errors and exit the shell to continue."
+            )
+            repo.shell()
 
         try:
             repo.run_task("lt")
