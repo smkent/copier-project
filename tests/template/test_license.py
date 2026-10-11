@@ -1,13 +1,17 @@
-"""Snapshot tests for LICENSE template."""
+from __future__ import annotations
 
-from collections.abc import Callable
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 import pytest
 import yaml
-from syrupy.assertion import SnapshotAssertion
 
 from tests.utils import template
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
+    from pathlib import Path
+
+    from syrupy.assertion import SnapshotAssertion
 
 
 @pytest.mark.parametrize(
