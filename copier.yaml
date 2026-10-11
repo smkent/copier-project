@@ -10,6 +10,7 @@ _subdirectory: template
 _message_after_copy: |
   {{ _copier_conf.dst_path }} is ready! Next steps:
 
+  {% if project_visibility == 'public' %}
   1. Create GitHub repository:
        https://github.com/new?owner={{ github_user }}&name={{ project_name }}
 
@@ -17,11 +18,7 @@ _message_after_copy: |
        mise run init
 
   3. Push:
-  {%- if project_visibility == 'private' %}
-       git remote add origin <repo-url>
-  {%- endif %}
        git push -u origin main
-  {%- if project_visibility == 'public' %}
 
   For GitHub repository configuration and additional features setup,
   see copier-python's Completing Setup documentation at
@@ -32,8 +29,15 @@ _message_after_copy: |
        mise run docs
 
   Then, see One Time Setup at: http://localhost:8000/{{ project_name }}/setup/
-  {%- endif %}
-  {%- endif %}
+  {%- endif -%}
+  {%- elif project_visibility == 'private' -%}
+  1. Initialize git and environment:
+       mise run init
+
+  2. Push:
+       git remote add origin <repo-url>
+       git push -u origin main
+  {%- endif -%}
 
 _message_after_update: |
   Template update applied. Before committing:
