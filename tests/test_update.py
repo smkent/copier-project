@@ -18,6 +18,7 @@ import pytest
 import yaml
 
 from copier_python.__main__ import main, update
+from tests.utils import template
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Generator, Sequence
@@ -29,7 +30,7 @@ DEFAULT_BRANCH_NAME = "fhqwhgads"
 DEFAULT_END_REF = "v0.22.2"
 
 
-@pytest.fixture(params=["v0.16.0"])
+@pytest.fixture(params=["v0.16.2"])
 def start_ref(request: pytest.FixtureRequest) -> str:
     return request.param
 
@@ -86,7 +87,7 @@ def create_project(
         postcreate: Callable[[Path], None] | None = None,
         **kwargs: Any,
     ) -> Path:
-        project = render_template(vcs_ref=vcs_ref)
+        project = render_template(vcs_ref=vcs_ref, **kwargs)
         timestamp = _vcs_ref_timestamp(vcs_ref)
         for cmd in (
             ["git", "init", "-b", DEFAULT_BRANCH_NAME],
@@ -223,15 +224,19 @@ def test_main_help(monkeypatch: pytest.MonkeyPatch) -> None:
         main()
 
 
+@pytest.mark.parametrize(
+    "project_visibility", template.choices.project_visibility
+)
 def test_main_update_with_project_current(
     worktree: Path,
     expect_run: ExpectRun,
     create_project: Callable[..., Path],
+    project_visibility: str,
     end_ref: str,
     *,
     dry_run: bool,
 ) -> None:
-    create_project(vcs_ref=end_ref)
+    create_project(vcs_ref=end_ref, project_visibility=project_visibility)
     expect_run.expect(
         ["git", "clone", "https://github.com/ness/pkfire", str(worktree)]
     )
@@ -364,16 +369,20 @@ def test_main_update_repo_arguments(
         update([arg], dry_run=True)
 
 
+@pytest.mark.parametrize(
+    "project_visibility", template.choices.project_visibility
+)
 def test_main_update_with_project(
     worktree: Path,
     expect_run: ExpectRun,
     create_project: Callable[..., Path],
+    project_visibility: str,
     end_ref: str,
     start_ref: str,
     *,
     dry_run: bool,
 ) -> None:
-    create_project(vcs_ref=start_ref)
+    create_project(vcs_ref=start_ref, project_visibility=project_visibility)
     commit_message = os.linesep.join(
         (
             "Apply template updates",
