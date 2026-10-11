@@ -26,7 +26,7 @@ if TYPE_CHECKING:
 
 
 DEFAULT_BRANCH_NAME = "fhqwhgads"
-DEFAULT_END_REF = "v0.20.0"
+DEFAULT_END_REF = "v0.22.2"
 
 
 @pytest.fixture(params=["v0.16.0"])
