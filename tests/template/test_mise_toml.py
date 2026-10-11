@@ -6,8 +6,12 @@ from pathlib import Path
 import pytest
 from syrupy.assertion import SnapshotAssertion
 
+from tests.utils import template
 
-@pytest.mark.parametrize("project_visibility", ["public", "private"])
+
+@pytest.mark.parametrize(
+    "project_visibility", template.choices.project_visibility
+)
 @pytest.mark.parametrize(
     "enable_docs",
     [pytest.param(True, id="docs"), pytest.param(False, id="no_docs")],

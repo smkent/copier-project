@@ -37,7 +37,9 @@ def test_docs_features(
         assert (rendered / "docs" / doc_file).read_text() == snapshot
 
 
-@pytest.mark.parametrize("project_visibility", ["public", "private"])
+@pytest.mark.parametrize(
+    "project_visibility", template.choices.project_visibility
+)
 @pytest.mark.parametrize(
     "enable_pypi",
     [pytest.param(True, id="pypi"), pytest.param(False, id="no_pypi")],
