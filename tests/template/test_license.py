@@ -24,7 +24,7 @@ def test_license(
             assert (rendered / name).read_text() == snapshot
 
 
-@pytest.mark.parametrize("project_type", ["application", "library"])
+@pytest.mark.parametrize("project_type", template.choices.project_type)
 def test_license_default(
     render_template: Callable[..., Path], project_type: str
 ) -> None:

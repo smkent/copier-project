@@ -6,8 +6,12 @@ from pathlib import Path
 import pytest
 from syrupy.assertion import SnapshotAssertion
 
+from tests.utils import template
 
-@pytest.mark.parametrize("project_visibility", ["public", "private"])
+
+@pytest.mark.parametrize(
+    "project_visibility", template.choices.project_visibility
+)
 def test_compose_features(
     render_template: Callable[..., Path],
     snapshot: SnapshotAssertion,

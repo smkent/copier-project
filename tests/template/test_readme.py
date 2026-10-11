@@ -40,7 +40,9 @@ def test_readme_features(
     assert (rendered / "README.md").read_text() == snapshot
 
 
-@pytest.mark.parametrize("project_visibility", ["public", "private"])
+@pytest.mark.parametrize(
+    "project_visibility", template.choices.project_visibility
+)
 @pytest.mark.parametrize(
     "copyright_license", template.choices.copyright_license
 )
@@ -57,7 +59,7 @@ def test_readme_project_visibility(
     assert (rendered / "README.md").read_text() == snapshot
 
 
-@pytest.mark.parametrize("project_type", ["application", "library"])
+@pytest.mark.parametrize("project_type", template.choices.project_type)
 def test_readme_project_type(
     render_template: Callable[..., Path],
     snapshot: SnapshotAssertion,
