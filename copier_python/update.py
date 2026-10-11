@@ -3,12 +3,15 @@ from __future__ import annotations
 import json
 import os
 import subprocess
+from contextlib import contextmanager
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
 from .repo import RepoWorktree
 
 if TYPE_CHECKING:
+    from collections.abc import Generator
+
     from .repo import RepoTarget
 
 TEMPLATE_REPO_URL = "https://github.com/smkent/copier-python"
@@ -24,6 +27,18 @@ class UpdateAction:
     def __call__(self) -> str | None:
         with RepoWorktree.clone(self.repo, branch=self.branch) as worktree:
             return self._run(worktree)
+
+    @contextmanager
+    def _success_or_shell(
+        self, repo: RepoWorktree, name: str
+    ) -> Generator[None]:
+        try:
+            yield
+        except subprocess.CalledProcessError:
+            print(  # noqa: T201
+                f"{name} failed. Fix errors and exit the shell to continue."
+            )
+            repo.shell()
 
     def _run(self, repo: RepoWorktree) -> str | None:
         """Run copier update in the repo worktree."""
@@ -53,21 +68,10 @@ class UpdateAction:
             if repo.has_conflicts(status):
                 raise RuntimeError("Conflicts remain, aborting")
 
-        try:
+        with self._success_or_shell(repo, "`mise install`"):
             repo.run(["mise", "install"])
-        except subprocess.CalledProcessError:
-            print(  # noqa: T201
-                "Lint/test failed. Fix errors and exit the shell to continue."
-            )
-            repo.shell()
-
-        try:
+        with self._success_or_shell(repo, "Lint/test"):
             repo.run_task("lt")
-        except subprocess.CalledProcessError:
-            print(  # noqa: T201
-                "Lint/test failed. Fix errors and exit the shell to continue."
-            )
-            repo.shell()
 
         title = "Apply template updates"
         body = ""
