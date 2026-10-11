@@ -103,7 +103,7 @@ python_version_minimum:
   type: str
   qmark: 🐍
   help: Minimum Python version
-  default: 3.{%- template_python_versions_supported.min_minor -%}
+  default: 3.{{- template_python_versions_supported.min_minor -}}
   choices: |
     {%- for minor in range(template_python_versions_supported.min_minor, template_python_versions_supported.max_minor + 1) %}
     - '3.{{ minor }}'

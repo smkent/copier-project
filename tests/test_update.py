@@ -250,7 +250,7 @@ def test_main_update_with_project_current(
         capture_output=True,
     )
     with expect_run.patch(mock=False):
-        update(["gh:ness/pkfire"], dry_run=dry_run)
+        update(["gh:ness/pkfire"], vcs_ref=end_ref, dry_run=dry_run)
 
 
 def test_main_update_error(
