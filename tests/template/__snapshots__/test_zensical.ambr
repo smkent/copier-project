@@ -88,6 +88,9 @@
   
   [project.markdown_extensions.pymdownx.inlinehilite]
   
+  [project.markdown_extensions.pymdownx.quotes]
+  callouts = true
+  
   [project.markdown_extensions.pymdownx.snippets]
   base_path = ["."]
   check_paths = true
@@ -222,6 +225,9 @@
   
   [project.markdown_extensions.pymdownx.inlinehilite]
   
+  [project.markdown_extensions.pymdownx.quotes]
+  callouts = true
+  
   [project.markdown_extensions.pymdownx.snippets]
   base_path = ["."]
   check_paths = true
@@ -344,6 +350,9 @@
   [project.markdown_extensions.pymdownx.highlight]
   
   [project.markdown_extensions.pymdownx.inlinehilite]
+  
+  [project.markdown_extensions.pymdownx.quotes]
+  callouts = true
   
   [project.markdown_extensions.pymdownx.snippets]
   base_path = ["."]
@@ -482,6 +491,9 @@
   [project.markdown_extensions.pymdownx.highlight]
   
   [project.markdown_extensions.pymdownx.inlinehilite]
+  
+  [project.markdown_extensions.pymdownx.quotes]
+  callouts = true
   
   [project.markdown_extensions.pymdownx.snippets]
   base_path = ["."]
