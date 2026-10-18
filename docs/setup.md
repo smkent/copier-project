@@ -14,7 +14,7 @@ icon: lucide/package-plus
 [Settings → General][repo-settings]:
 
 - [x] Allow merge commits
-- [ ] Allow squash merging
+- [x] Allow squash merging
 - [ ] Allow rebase merging
 - [x] Automatically delete head branches
 

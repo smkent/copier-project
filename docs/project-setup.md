@@ -22,7 +22,7 @@ icon: lucide/settings
 [Repository Settings → General][github-settings-docs]:
 
 - [x] Allow merge commits
-- [ ] Allow squash merging
+- [x] Allow squash merging
 - [ ] Allow rebase merging
 - [x] Automatically delete head branches
 
