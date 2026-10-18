@@ -282,9 +282,8 @@ def test_main_update_error(
     create_project(vcs_ref=start_ref, postcreate=_postcreate)
     commit_message = os.linesep.join(
         (
-            "Apply template updates",
+            f"Apply template updates from {start_ref} to {end_ref}",
             "",
-            (f"Applied updates from template: {start_ref}...{end_ref}"),
             (
                 f"https://github.com/smkent/copier-python/compare/"
                 f"{start_ref}...{end_ref}"
@@ -385,9 +384,8 @@ def test_main_update_with_project(
     create_project(vcs_ref=start_ref, project_visibility=project_visibility)
     commit_message = os.linesep.join(
         (
-            "Apply template updates",
+            f"Apply template updates from {start_ref} to {end_ref}",
             "",
-            (f"Applied updates from template: {start_ref}...{end_ref}"),
             (
                 f"https://github.com/smkent/copier-python/compare/"
                 f"{start_ref}...{end_ref}"
