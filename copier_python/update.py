@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import json
-import os
 import subprocess
 from contextlib import contextmanager
 from dataclasses import dataclass, field
@@ -73,16 +72,10 @@ class UpdateAction:
         with self._success_or_shell(repo, "Lint/test"):
             repo.run_task("lt")
 
-        title = "Apply template updates"
+        title = f"Apply template updates from {start_ref} to {end_ref}"
         body = ""
         if start_ref and end_ref and start_ref != end_ref:
-            ref_range = f"{start_ref}...{end_ref}"
-            body = os.linesep.join(
-                (
-                    f"Applied updates from template: {ref_range}",
-                    f"{TEMPLATE_REPO_URL}/compare/{ref_range}",
-                )
-            )
+            body = f"{TEMPLATE_REPO_URL}/compare/{start_ref}...{end_ref}"
         repo.run(["git", "add", "-A"])
         repo.run(["git", "commit", "-m", f"{title}\n\n{body}".strip()])
 
