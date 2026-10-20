@@ -62,9 +62,48 @@ def test_workflows_ci_versions(
     ).read_text() == snapshot
 
 
-def test_workflows_release(
+def test_workflows_audit(
+    render_template: Callable[..., Path], snapshot: SnapshotAssertion
+) -> None:
+    rendered = render_template(
+        project_type="application", project_visibility="public"
+    )
+    assert (
+        rendered / ".github" / "workflows" / "audit.yaml"
+    ).read_text() == snapshot
+
+
+def test_workflows_docs(
+    render_template: Callable[..., Path], snapshot: SnapshotAssertion
+) -> None:
+    rendered = render_template(
+        project_type="application",
+        project_visibility="public",
+        enable_docs=True,
+    )
+    assert (
+        rendered / ".github" / "workflows" / "docs.yaml"
+    ).read_text() == snapshot
+
+
+@pytest.mark.parametrize("workflow", ["container", "ghcr"])
+def test_workflows_container(
     render_template: Callable[..., Path],
     snapshot: SnapshotAssertion,
+    workflow: str,
+) -> None:
+    rendered = render_template(
+        project_type="application",
+        project_visibility="public",
+        enable_container=True,
+    )
+    assert (
+        rendered / ".github" / "workflows" / f"{workflow}.yaml"
+    ).read_text() == snapshot
+
+
+def test_workflows_release(
+    render_template: Callable[..., Path], snapshot: SnapshotAssertion
 ) -> None:
     rendered = render_template(
         project_type="application",

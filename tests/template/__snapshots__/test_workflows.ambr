@@ -1,4 +1,47 @@
 # serializer version: 1
+# name: test_workflows_audit
+  '''
+  name: Audit
+  
+  on:
+    push:
+      branches:
+        - main
+      paths:
+        - uv.lock
+    pull_request:
+      paths:
+        - uv.lock
+  
+  jobs:
+    audit:
+      name: Dependencies
+      runs-on: ubuntu-latest
+      env:
+        UV_PYTHON: '3.15'
+      steps:
+        - name: 💾 Check out repository
+          uses: actions/checkout@v7
+  
+        - name: 📦 Cache uv managed packages
+          uses: actions/cache@v6
+          with:
+            path: ~/.cache/uv
+            key: uv-${{ runner.os }}-${{ hashFiles('pyproject.toml', 'uv.lock') }}
+            restore-keys: |
+              uv-${{ runner.os }}-
+  
+        - name: 🍳 Set up mise
+          uses: jdx/mise-action@v5
+          with:
+            cache: true
+            install: true
+  
+        - name: 🔍 Check dependencies
+          run: mise run audit
+  
+  '''
+# ---
 # name: test_workflows_ci[docs-coverage]
   '''
   name: CI
@@ -1308,6 +1351,177 @@
           uses: commit-check/commit-check-action@v2
           with:
             branch: false
+  
+  '''
+# ---
+# name: test_workflows_container[container]
+  '''
+  name: Container
+  
+  on:
+    pull_request:
+    push:
+      branches:
+        - main
+      tags:
+        - v[0-9]*.[0-9]*
+  
+  jobs:
+    build-push:
+      name: Build and push image
+      runs-on: ubuntu-latest
+      permissions:
+        packages: write
+        contents: read
+        attestations: write
+        id-token: write
+      steps:
+        - name: 💾 Check out repository
+          uses: actions/checkout@v7
+  
+        - name: 🛠️ Set up buildx
+          uses: docker/setup-buildx-action@v3
+  
+        - name: 🔑 Log in to the container registry
+          uses: docker/login-action@v3
+          if: ${{ github.event_name != 'pull_request' }}
+          with:
+            registry: ghcr.io
+            username: ${{ github.actor }}
+            password: ${{ secrets.GITHUB_TOKEN }}
+  
+        - name: 📡 Collect image metadata
+          uses: docker/metadata-action@v5
+          id: meta
+          with:
+            images: ghcr.io/${{ github.repository }}
+            tags: |
+              type=ref,event=branch
+              type=semver,pattern={{version}}
+              type=semver,pattern={{major}}.{{minor}}
+              type=semver,pattern={{major}}
+              type=sha
+  
+        - name: 📦 Build and publish container image
+          uses: docker/build-push-action@v6
+          id: push
+          with:
+            context: .
+            push: ${{ github.event_name != 'pull_request' }}
+            platforms: linux/amd64,linux/arm64
+            tags: ${{ steps.meta.outputs.tags }}
+            labels: ${{ steps.meta.outputs.labels }}
+            cache-from: type=gha
+            cache-to: type=gha,mode=max
+  
+        - name: 🔒 Attest build provenance
+          uses: actions/attest-build-provenance@v2
+          if: ${{ github.event_name != 'pull_request' }}
+          with:
+            subject-name: ghcr.io/${{ github.repository }}
+            subject-digest: ${{ steps.push.outputs.digest }}
+  
+  '''
+# ---
+# name: test_workflows_container[ghcr]
+  '''
+  name: Container Registry
+  
+  on:
+    pull_request:
+      types:
+        - closed
+    schedule:
+      - cron: 0 3 * * 0
+    workflow_dispatch:
+  
+  jobs:
+    cleanup:
+      name: Clean up images
+      runs-on: ubuntu-latest
+      permissions:
+        packages: write
+  
+      steps:
+        - name: 🧹 Clean up old container images
+          uses: dataaxiom/ghcr-cleanup-action@v1
+          with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+            keep-n-tagged: 5
+            keep-n-untagged: 2
+            delete-untagged: true
+            exclude-tags: |
+              ^\d+(\.\d+){0,2}$
+              ^edge$
+              ^latest$
+              ^main$
+  
+  '''
+# ---
+# name: test_workflows_docs
+  '''
+  name: Docs
+  
+  on:
+    push:
+      branches:
+        - main
+    workflow_dispatch:
+  
+  permissions:
+    contents: read
+    pages: write
+    id-token: write
+  
+  concurrency:
+    group: pages
+    cancel-in-progress: false
+  
+  jobs:
+    build:
+      name: Build Documentation
+      runs-on: ubuntu-latest
+      env:
+        UV_PYTHON: '3.15'
+      steps:
+        - name: 💾 Check out repository
+          uses: actions/checkout@v7
+          with:
+            fetch-depth: 0
+  
+        - name: 📦 Cache uv managed packages
+          uses: actions/cache@v6
+          with:
+            path: ~/.cache/uv
+            key: uv-${{ runner.os }}-${{ hashFiles('pyproject.toml', 'uv.lock') }}
+            restore-keys: |
+              uv-${{ runner.os }}-
+  
+        - name: 🍳 Set up mise
+          uses: jdx/mise-action@v5
+          with:
+            cache: true
+            install: true
+  
+        - name: 📖 Build documentation
+          run: mise run docs-build
+  
+        - name: 🔼 Upload artifact
+          uses: actions/upload-pages-artifact@v5
+          with:
+            path: site/
+  
+    deploy:
+      name: Deploy Documentation
+      needs: build
+      runs-on: ubuntu-latest
+      environment:
+        name: github-pages
+        url: ${{ steps.deployment.outputs.page_url }}
+      steps:
+        - name: 🚀 Deploy site
+          uses: actions/deploy-pages@v5
+          id: deployment
   
   '''
 # ---
