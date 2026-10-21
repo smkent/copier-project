@@ -13,15 +13,25 @@
       paths:
         - uv.lock
   
+  concurrency:
+    group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+    cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  
+  permissions:
+    contents: read
+  
   jobs:
     audit:
       name: Dependencies
       runs-on: ubuntu-latest
+      timeout-minutes: 15
       env:
         UV_PYTHON: '3.15'
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
+          with:
+            persist-credentials: false
   
         - name: 📦 Cache uv managed packages
           uses: actions/cache@v6
@@ -52,6 +62,9 @@
         - main
     pull_request:
   
+  permissions:
+    contents: read
+  
   concurrency:
     group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
     cancel-in-progress: ${{ github.event_name == 'pull_request' }}
@@ -60,6 +73,7 @@
     ci:
       name: Test (Python ${{ matrix.python-version }})
       runs-on: ubuntu-latest
+      timeout-minutes: 15
       env:
         UV_PYTHON: ${{ matrix.python-version }}
       strategy:
@@ -74,6 +88,8 @@
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
+          with:
+            persist-credentials: false
   
         - name: 📦 Cache uv managed packages
           uses: actions/cache@v6
@@ -110,6 +126,7 @@
     docs:
       name: Documentation
       runs-on: ubuntu-latest
+      timeout-minutes: 15
       env:
         UV_PYTHON: '3.15'
       steps:
@@ -117,6 +134,7 @@
           uses: actions/checkout@v7
           with:
             fetch-depth: 0
+            persist-credentials: false
   
         - name: 📦 Cache uv managed packages
           uses: actions/cache@v6
@@ -138,13 +156,13 @@
     betterleaks:
       name: Secret scan
       runs-on: ubuntu-latest
-      permissions:
-        contents: read
+      timeout-minutes: 15
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
           with:
             fetch-depth: 0
+            persist-credentials: false
   
         - name: 📦 Cache uv managed packages
           uses: actions/cache@v6
@@ -167,13 +185,13 @@
       name: Commit messages
       if: ${{ github.event_name == 'pull_request' }}
       runs-on: ubuntu-latest
-      permissions:
-        contents: read
+      timeout-minutes: 15
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
           with:
             fetch-depth: 0
+            persist-credentials: false
   
         - name: ✉️ Check commit messages
           uses: commit-check/commit-check-action@v2
@@ -192,6 +210,9 @@
         - main
     pull_request:
   
+  permissions:
+    contents: read
+  
   concurrency:
     group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
     cancel-in-progress: ${{ github.event_name == 'pull_request' }}
@@ -200,6 +221,7 @@
     ci:
       name: Test (Python ${{ matrix.python-version }})
       runs-on: ubuntu-latest
+      timeout-minutes: 15
       env:
         UV_PYTHON: ${{ matrix.python-version }}
       strategy:
@@ -214,6 +236,8 @@
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
+          with:
+            persist-credentials: false
   
         - name: 📦 Cache uv managed packages
           uses: actions/cache@v6
@@ -238,6 +262,7 @@
     docs:
       name: Documentation
       runs-on: ubuntu-latest
+      timeout-minutes: 15
       env:
         UV_PYTHON: '3.15'
       steps:
@@ -245,6 +270,7 @@
           uses: actions/checkout@v7
           with:
             fetch-depth: 0
+            persist-credentials: false
   
         - name: 📦 Cache uv managed packages
           uses: actions/cache@v6
@@ -266,13 +292,13 @@
     betterleaks:
       name: Secret scan
       runs-on: ubuntu-latest
-      permissions:
-        contents: read
+      timeout-minutes: 15
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
           with:
             fetch-depth: 0
+            persist-credentials: false
   
         - name: 📦 Cache uv managed packages
           uses: actions/cache@v6
@@ -295,13 +321,13 @@
       name: Commit messages
       if: ${{ github.event_name == 'pull_request' }}
       runs-on: ubuntu-latest
-      permissions:
-        contents: read
+      timeout-minutes: 15
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
           with:
             fetch-depth: 0
+            persist-credentials: false
   
         - name: ✉️ Check commit messages
           uses: commit-check/commit-check-action@v2
@@ -320,6 +346,9 @@
         - main
     pull_request:
   
+  permissions:
+    contents: read
+  
   concurrency:
     group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
     cancel-in-progress: ${{ github.event_name == 'pull_request' }}
@@ -328,6 +357,7 @@
     ci:
       name: Test (Python ${{ matrix.python-version }})
       runs-on: ubuntu-latest
+      timeout-minutes: 15
       env:
         UV_PYTHON: ${{ matrix.python-version }}
       strategy:
@@ -342,6 +372,8 @@
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
+          with:
+            persist-credentials: false
   
         - name: 📦 Cache uv managed packages
           uses: actions/cache@v6
@@ -379,13 +411,13 @@
     betterleaks:
       name: Secret scan
       runs-on: ubuntu-latest
-      permissions:
-        contents: read
+      timeout-minutes: 15
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
           with:
             fetch-depth: 0
+            persist-credentials: false
   
         - name: 📦 Cache uv managed packages
           uses: actions/cache@v6
@@ -408,13 +440,13 @@
       name: Commit messages
       if: ${{ github.event_name == 'pull_request' }}
       runs-on: ubuntu-latest
-      permissions:
-        contents: read
+      timeout-minutes: 15
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
           with:
             fetch-depth: 0
+            persist-credentials: false
   
         - name: ✉️ Check commit messages
           uses: commit-check/commit-check-action@v2
@@ -433,6 +465,9 @@
         - main
     pull_request:
   
+  permissions:
+    contents: read
+  
   concurrency:
     group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
     cancel-in-progress: ${{ github.event_name == 'pull_request' }}
@@ -441,6 +476,7 @@
     ci:
       name: Test (Python ${{ matrix.python-version }})
       runs-on: ubuntu-latest
+      timeout-minutes: 15
       env:
         UV_PYTHON: ${{ matrix.python-version }}
       strategy:
@@ -455,6 +491,8 @@
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
+          with:
+            persist-credentials: false
   
         - name: 📦 Cache uv managed packages
           uses: actions/cache@v6
@@ -480,13 +518,13 @@
     betterleaks:
       name: Secret scan
       runs-on: ubuntu-latest
-      permissions:
-        contents: read
+      timeout-minutes: 15
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
           with:
             fetch-depth: 0
+            persist-credentials: false
   
         - name: 📦 Cache uv managed packages
           uses: actions/cache@v6
@@ -509,13 +547,13 @@
       name: Commit messages
       if: ${{ github.event_name == 'pull_request' }}
       runs-on: ubuntu-latest
-      permissions:
-        contents: read
+      timeout-minutes: 15
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
           with:
             fetch-depth: 0
+            persist-credentials: false
   
         - name: ✉️ Check commit messages
           uses: commit-check/commit-check-action@v2
@@ -534,6 +572,9 @@
         - main
     pull_request:
   
+  permissions:
+    contents: read
+  
   concurrency:
     group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
     cancel-in-progress: ${{ github.event_name == 'pull_request' }}
@@ -542,6 +583,7 @@
     ci:
       name: Test (Python ${{ matrix.python-version }})
       runs-on: ubuntu-latest
+      timeout-minutes: 15
       env:
         UV_PYTHON: ${{ matrix.python-version }}
       strategy:
@@ -554,6 +596,8 @@
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
+          with:
+            persist-credentials: false
   
         - name: 📦 Cache uv managed packages
           uses: actions/cache@v6
@@ -590,6 +634,7 @@
     docs:
       name: Documentation
       runs-on: ubuntu-latest
+      timeout-minutes: 15
       env:
         UV_PYTHON: '3.13'
       steps:
@@ -597,6 +642,7 @@
           uses: actions/checkout@v7
           with:
             fetch-depth: 0
+            persist-credentials: false
   
         - name: 📦 Cache uv managed packages
           uses: actions/cache@v6
@@ -618,13 +664,13 @@
     betterleaks:
       name: Secret scan
       runs-on: ubuntu-latest
-      permissions:
-        contents: read
+      timeout-minutes: 15
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
           with:
             fetch-depth: 0
+            persist-credentials: false
   
         - name: 📦 Cache uv managed packages
           uses: actions/cache@v6
@@ -647,13 +693,13 @@
       name: Commit messages
       if: ${{ github.event_name == 'pull_request' }}
       runs-on: ubuntu-latest
-      permissions:
-        contents: read
+      timeout-minutes: 15
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
           with:
             fetch-depth: 0
+            persist-credentials: false
   
         - name: ✉️ Check commit messages
           uses: commit-check/commit-check-action@v2
@@ -672,6 +718,9 @@
         - main
     pull_request:
   
+  permissions:
+    contents: read
+  
   concurrency:
     group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
     cancel-in-progress: ${{ github.event_name == 'pull_request' }}
@@ -680,6 +729,7 @@
     ci:
       name: Test (Python ${{ matrix.python-version }})
       runs-on: ubuntu-latest
+      timeout-minutes: 15
       env:
         UV_PYTHON: ${{ matrix.python-version }}
       strategy:
@@ -690,6 +740,8 @@
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
+          with:
+            persist-credentials: false
   
         - name: 📦 Cache uv managed packages
           uses: actions/cache@v6
@@ -726,6 +778,7 @@
     docs:
       name: Documentation
       runs-on: ubuntu-latest
+      timeout-minutes: 15
       env:
         UV_PYTHON: '3.13'
       steps:
@@ -733,6 +786,7 @@
           uses: actions/checkout@v7
           with:
             fetch-depth: 0
+            persist-credentials: false
   
         - name: 📦 Cache uv managed packages
           uses: actions/cache@v6
@@ -754,13 +808,13 @@
     betterleaks:
       name: Secret scan
       runs-on: ubuntu-latest
-      permissions:
-        contents: read
+      timeout-minutes: 15
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
           with:
             fetch-depth: 0
+            persist-credentials: false
   
         - name: 📦 Cache uv managed packages
           uses: actions/cache@v6
@@ -783,13 +837,13 @@
       name: Commit messages
       if: ${{ github.event_name == 'pull_request' }}
       runs-on: ubuntu-latest
-      permissions:
-        contents: read
+      timeout-minutes: 15
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
           with:
             fetch-depth: 0
+            persist-credentials: false
   
         - name: ✉️ Check commit messages
           uses: commit-check/commit-check-action@v2
@@ -808,6 +862,9 @@
         - main
     pull_request:
   
+  permissions:
+    contents: read
+  
   concurrency:
     group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
     cancel-in-progress: ${{ github.event_name == 'pull_request' }}
@@ -816,6 +873,7 @@
     ci:
       name: Test (Python ${{ matrix.python-version }})
       runs-on: ubuntu-latest
+      timeout-minutes: 15
       env:
         UV_PYTHON: ${{ matrix.python-version }}
       strategy:
@@ -830,6 +888,8 @@
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
+          with:
+            persist-credentials: false
   
         - name: 📦 Cache uv managed packages
           uses: actions/cache@v6
@@ -866,6 +926,7 @@
     docs:
       name: Documentation
       runs-on: ubuntu-latest
+      timeout-minutes: 15
       env:
         UV_PYTHON: '3.15'
       steps:
@@ -873,6 +934,7 @@
           uses: actions/checkout@v7
           with:
             fetch-depth: 0
+            persist-credentials: false
   
         - name: 📦 Cache uv managed packages
           uses: actions/cache@v6
@@ -894,13 +956,13 @@
     betterleaks:
       name: Secret scan
       runs-on: ubuntu-latest
-      permissions:
-        contents: read
+      timeout-minutes: 15
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
           with:
             fetch-depth: 0
+            persist-credentials: false
   
         - name: 📦 Cache uv managed packages
           uses: actions/cache@v6
@@ -923,13 +985,13 @@
       name: Commit messages
       if: ${{ github.event_name == 'pull_request' }}
       runs-on: ubuntu-latest
-      permissions:
-        contents: read
+      timeout-minutes: 15
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
           with:
             fetch-depth: 0
+            persist-credentials: false
   
         - name: ✉️ Check commit messages
           uses: commit-check/commit-check-action@v2
@@ -948,6 +1010,9 @@
         - main
     pull_request:
   
+  permissions:
+    contents: read
+  
   concurrency:
     group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
     cancel-in-progress: ${{ github.event_name == 'pull_request' }}
@@ -956,6 +1021,7 @@
     ci:
       name: Test (Python ${{ matrix.python-version }})
       runs-on: ubuntu-latest
+      timeout-minutes: 15
       env:
         UV_PYTHON: ${{ matrix.python-version }}
       strategy:
@@ -968,6 +1034,8 @@
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
+          with:
+            persist-credentials: false
   
         - name: 📦 Cache uv managed packages
           uses: actions/cache@v6
@@ -1004,6 +1072,7 @@
     docs:
       name: Documentation
       runs-on: ubuntu-latest
+      timeout-minutes: 15
       env:
         UV_PYTHON: '3.15'
       steps:
@@ -1011,6 +1080,7 @@
           uses: actions/checkout@v7
           with:
             fetch-depth: 0
+            persist-credentials: false
   
         - name: 📦 Cache uv managed packages
           uses: actions/cache@v6
@@ -1032,13 +1102,13 @@
     betterleaks:
       name: Secret scan
       runs-on: ubuntu-latest
-      permissions:
-        contents: read
+      timeout-minutes: 15
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
           with:
             fetch-depth: 0
+            persist-credentials: false
   
         - name: 📦 Cache uv managed packages
           uses: actions/cache@v6
@@ -1061,13 +1131,13 @@
       name: Commit messages
       if: ${{ github.event_name == 'pull_request' }}
       runs-on: ubuntu-latest
-      permissions:
-        contents: read
+      timeout-minutes: 15
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
           with:
             fetch-depth: 0
+            persist-credentials: false
   
         - name: ✉️ Check commit messages
           uses: commit-check/commit-check-action@v2
@@ -1086,6 +1156,9 @@
         - main
     pull_request:
   
+  permissions:
+    contents: read
+  
   concurrency:
     group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
     cancel-in-progress: ${{ github.event_name == 'pull_request' }}
@@ -1094,6 +1167,7 @@
     ci:
       name: Test (Python ${{ matrix.python-version }})
       runs-on: ubuntu-latest
+      timeout-minutes: 15
       env:
         UV_PYTHON: ${{ matrix.python-version }}
       strategy:
@@ -1108,6 +1182,8 @@
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
+          with:
+            persist-credentials: false
   
         - name: 📦 Cache uv managed packages
           uses: actions/cache@v6
@@ -1144,6 +1220,7 @@
     docs:
       name: Documentation
       runs-on: ubuntu-latest
+      timeout-minutes: 15
       env:
         UV_PYTHON: '3.15'
       steps:
@@ -1151,6 +1228,7 @@
           uses: actions/checkout@v7
           with:
             fetch-depth: 0
+            persist-credentials: false
   
         - name: 📦 Cache uv managed packages
           uses: actions/cache@v6
@@ -1172,13 +1250,13 @@
     betterleaks:
       name: Secret scan
       runs-on: ubuntu-latest
-      permissions:
-        contents: read
+      timeout-minutes: 15
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
           with:
             fetch-depth: 0
+            persist-credentials: false
   
         - name: 📦 Cache uv managed packages
           uses: actions/cache@v6
@@ -1201,13 +1279,13 @@
       name: Commit messages
       if: ${{ github.event_name == 'pull_request' }}
       runs-on: ubuntu-latest
-      permissions:
-        contents: read
+      timeout-minutes: 15
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
           with:
             fetch-depth: 0
+            persist-credentials: false
   
         - name: ✉️ Check commit messages
           uses: commit-check/commit-check-action@v2
@@ -1226,6 +1304,9 @@
         - main
     pull_request:
   
+  permissions:
+    contents: read
+  
   concurrency:
     group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
     cancel-in-progress: ${{ github.event_name == 'pull_request' }}
@@ -1234,6 +1315,7 @@
     ci:
       name: Test (Python ${{ matrix.python-version }})
       runs-on: ubuntu-latest
+      timeout-minutes: 15
       env:
         UV_PYTHON: ${{ matrix.python-version }}
       strategy:
@@ -1246,6 +1328,8 @@
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
+          with:
+            persist-credentials: false
   
         - name: 📦 Cache uv managed packages
           uses: actions/cache@v6
@@ -1282,6 +1366,7 @@
     docs:
       name: Documentation
       runs-on: ubuntu-latest
+      timeout-minutes: 15
       env:
         UV_PYTHON: '3.15'
       steps:
@@ -1289,6 +1374,7 @@
           uses: actions/checkout@v7
           with:
             fetch-depth: 0
+            persist-credentials: false
   
         - name: 📦 Cache uv managed packages
           uses: actions/cache@v6
@@ -1310,13 +1396,13 @@
     betterleaks:
       name: Secret scan
       runs-on: ubuntu-latest
-      permissions:
-        contents: read
+      timeout-minutes: 15
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
           with:
             fetch-depth: 0
+            persist-credentials: false
   
         - name: 📦 Cache uv managed packages
           uses: actions/cache@v6
@@ -1339,13 +1425,13 @@
       name: Commit messages
       if: ${{ github.event_name == 'pull_request' }}
       runs-on: ubuntu-latest
-      permissions:
-        contents: read
+      timeout-minutes: 15
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
           with:
             fetch-depth: 0
+            persist-credentials: false
   
         - name: ✉️ Check commit messages
           uses: commit-check/commit-check-action@v2
@@ -1366,10 +1452,18 @@
       tags:
         - v[0-9]*.[0-9]*
   
+  concurrency:
+    group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+    cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  
+  permissions:
+    contents: read
+  
   jobs:
     build-push:
       name: Build and push image
       runs-on: ubuntu-latest
+      timeout-minutes: 15
       permissions:
         packages: write
         contents: read
@@ -1378,9 +1472,13 @@
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
+          with:
+            persist-credentials: false
   
         - name: 🛠️ Set up buildx
           uses: docker/setup-buildx-action@v4
+          with:
+            cache-binary: ${{ !startsWith(github.ref, 'refs/tags/') }}
   
         - name: 🔑 Log in to the container registry
           uses: docker/login-action@v4
@@ -1411,7 +1509,7 @@
             platforms: linux/amd64,linux/arm64
             tags: ${{ steps.meta.outputs.tags }}
             labels: ${{ steps.meta.outputs.labels }}
-            cache-from: type=gha
+            cache-from: ${{ !startsWith(github.ref, 'refs/tags/') && 'type=gha' || '' }}
             cache-to: type=gha,mode=max
   
         - name: 🔒 Attest build provenance
@@ -1435,10 +1533,18 @@
       - cron: 0 3 * * 0
     workflow_dispatch:
   
+  concurrency:
+    group: ghcr-cleanup
+    cancel-in-progress: false
+  
+  permissions:
+    contents: read
+  
   jobs:
     cleanup:
       name: Clean up images
       runs-on: ubuntu-latest
+      timeout-minutes: 15
       permissions:
         packages: write
   
@@ -1470,17 +1576,16 @@
   
   permissions:
     contents: read
-    pages: write
-    id-token: write
   
   concurrency:
-    group: pages
+    group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
     cancel-in-progress: false
   
   jobs:
     build:
       name: Build Documentation
       runs-on: ubuntu-latest
+      timeout-minutes: 15
       env:
         UV_PYTHON: '3.15'
       steps:
@@ -1488,6 +1593,7 @@
           uses: actions/checkout@v7
           with:
             fetch-depth: 0
+            persist-credentials: false
   
         - name: 📦 Cache uv managed packages
           uses: actions/cache@v6
@@ -1515,9 +1621,16 @@
       name: Deploy Documentation
       needs: build
       runs-on: ubuntu-latest
+      timeout-minutes: 15
       environment:
         name: github-pages
         url: ${{ steps.deployment.outputs.page_url }}
+      permissions:
+        pages: write
+        id-token: write
+      concurrency:
+        group: pages
+        cancel-in-progress: false
       steps:
         - name: 🚀 Deploy site
           uses: actions/deploy-pages@v5
@@ -1534,10 +1647,19 @@
       tags:
         - v[0-9]*.[0-9]*
   
+  concurrency:
+    group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+    cancel-in-progress: false
+  
+  permissions:
+    contents: read
+  
   jobs:
     build:
       name: Build distribution
       runs-on: ubuntu-latest
+      cache-mode: none
+      timeout-minutes: 15
       env:
         UV_PYTHON: '3.15'
       steps:
@@ -1545,19 +1667,11 @@
           uses: actions/checkout@v7
           with:
             fetch-depth: 0
-  
-        - name: 📦 Cache uv managed packages
-          uses: actions/cache@v6
-          with:
-            path: ~/.cache/uv
-            key: uv-${{ runner.os }}-${{ hashFiles('pyproject.toml', 'uv.lock') }}
-            restore-keys: |
-              uv-${{ runner.os }}-
+            persist-credentials: false
   
         - name: 🍳 Set up mise
           uses: jdx/mise-action@v5
           with:
-            cache: true
             install: true
   
         - name: 📦 Build package
@@ -1566,6 +1680,7 @@
         - name: 🔼 Upload artifact
           uses: actions/upload-artifact@v7
           with:
+            if-no-files-found: error
             name: dist
             path: dist/
   
@@ -1573,6 +1688,7 @@
       name: Create GitHub release
       needs: build
       runs-on: ubuntu-latest
+      timeout-minutes: 15
       permissions:
         contents: write
       steps:
@@ -1583,15 +1699,17 @@
             path: dist/
   
         - name: 🏷️ Create GitHub release
-          run: gh release create ${{ github.ref_name }} dist/* --generate-notes
+          run: gh release create "${REF_NAME}" dist/* --generate-notes
           env:
             GH_REPO: ${{ github.repository }}
             GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            REF_NAME: ${{ github.ref_name }}
   
     publish:
       name: Publish to PyPI
       needs: build
       runs-on: ubuntu-latest
+      timeout-minutes: 15
       environment:
         name: pypi
         url: https://pypi.org/project/PKFire/
