@@ -70,7 +70,6 @@ jobs:
       url: https://pypi.org/project/{{ project_name }}/
     permissions:
       id-token: write
-      attestations: write
     steps:
       - name: 🔽 Download artifact
         uses: actions/download-artifact@v8
