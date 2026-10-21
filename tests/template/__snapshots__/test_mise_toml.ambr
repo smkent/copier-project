@@ -11,6 +11,7 @@
   
   [tools]
   betterleaks = "latest"
+  jactionlint = "latest"
   "pipx:copier" = "latest"
   prek = "latest"
   taplo = "latest"
@@ -128,6 +129,7 @@
   
   [tools]
   betterleaks = "latest"
+  jactionlint = "latest"
   "pipx:copier" = "latest"
   prek = "latest"
   taplo = "latest"
@@ -252,6 +254,7 @@
   
   [tools]
   betterleaks = "latest"
+  jactionlint = "latest"
   "pipx:copier" = "latest"
   prek = "latest"
   taplo = "latest"
@@ -355,6 +358,7 @@
   
   [tools]
   betterleaks = "latest"
+  jactionlint = "latest"
   "pipx:copier" = "latest"
   prek = "latest"
   taplo = "latest"
@@ -465,6 +469,7 @@
   
   [tools]
   betterleaks = "latest"
+  jactionlint = "latest"
   "pipx:copier" = "latest"
   prek = "latest"
   taplo = "latest"
@@ -587,6 +592,7 @@
   
   [tools]
   betterleaks = "latest"
+  jactionlint = "latest"
   "pipx:copier" = "latest"
   prek = "latest"
   taplo = "latest"
@@ -716,6 +722,7 @@
   
   [tools]
   betterleaks = "latest"
+  jactionlint = "latest"
   "pipx:copier" = "latest"
   prek = "latest"
   taplo = "latest"
@@ -824,6 +831,7 @@
   
   [tools]
   betterleaks = "latest"
+  jactionlint = "latest"
   "pipx:copier" = "latest"
   prek = "latest"
   taplo = "latest"
@@ -939,6 +947,7 @@
   
   [tools]
   betterleaks = "latest"
+  jactionlint = "latest"
   "pipx:copier" = "latest"
   prek = "latest"
   taplo = "latest"
@@ -1056,6 +1065,7 @@
   
   [tools]
   betterleaks = "latest"
+  jactionlint = "latest"
   "pipx:copier" = "latest"
   prek = "latest"
   taplo = "latest"
@@ -1180,6 +1190,7 @@
   
   [tools]
   betterleaks = "latest"
+  jactionlint = "latest"
   "pipx:copier" = "latest"
   prek = "latest"
   taplo = "latest"
@@ -1283,6 +1294,7 @@
   
   [tools]
   betterleaks = "latest"
+  jactionlint = "latest"
   "pipx:copier" = "latest"
   prek = "latest"
   taplo = "latest"
@@ -1393,6 +1405,7 @@
   
   [tools]
   betterleaks = "latest"
+  jactionlint = "latest"
   "pipx:copier" = "latest"
   prek = "latest"
   taplo = "latest"
@@ -1515,6 +1528,7 @@
   
   [tools]
   betterleaks = "latest"
+  jactionlint = "latest"
   "pipx:copier" = "latest"
   prek = "latest"
   taplo = "latest"
@@ -1644,6 +1658,7 @@
   
   [tools]
   betterleaks = "latest"
+  jactionlint = "latest"
   "pipx:copier" = "latest"
   prek = "latest"
   taplo = "latest"
@@ -1752,6 +1767,7 @@
   
   [tools]
   betterleaks = "latest"
+  jactionlint = "latest"
   "pipx:copier" = "latest"
   prek = "latest"
   taplo = "latest"

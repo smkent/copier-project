@@ -8,10 +8,18 @@ on:
     - cron: 0 3 * * 0
   workflow_dispatch:
 
+concurrency:
+  group: ghcr-cleanup
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
 jobs:
   cleanup:
     name: Clean up images
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     permissions:
       packages: write
 
