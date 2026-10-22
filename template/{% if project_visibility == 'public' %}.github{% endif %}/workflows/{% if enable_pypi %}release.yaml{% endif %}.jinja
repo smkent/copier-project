@@ -63,7 +63,6 @@ jobs:
           GH_REPO: {% raw %}${{ github.repository }}{% endraw %}
           GH_TOKEN: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
           REF_NAME: {% raw %}${{ github.ref_name }}{% endraw %}
-{%- if enable_pypi %}
 
   publish:
     name: Publish to PyPI
@@ -86,5 +85,4 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           attestations: true
-{%- endif %}
 {#- vim: set ft=yaml: #}
