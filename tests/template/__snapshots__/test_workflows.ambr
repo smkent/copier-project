@@ -1547,7 +1547,6 @@
       timeout-minutes: 15
       permissions:
         packages: write
-  
       steps:
         - name: 🧹 Clean up old container images
           uses: dataaxiom/ghcr-cleanup-action@v1
