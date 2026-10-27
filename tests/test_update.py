@@ -23,7 +23,7 @@ from tests.utils import template
 if TYPE_CHECKING:
     from collections.abc import Callable, Generator, Sequence
 
-    from .utils import DisallowCallable
+    from tests.utils import DisallowCallable
 
 
 DEFAULT_BRANCH_NAME = "fhqwhgads"
