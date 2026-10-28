@@ -9,8 +9,6 @@ from typing import TYPE_CHECKING
 import pytest
 
 if TYPE_CHECKING:
-    from collections.abc import Callable, Generator
-
     from tests.utils import DisallowCallable
 
 
@@ -19,32 +17,6 @@ class CommitMessageCase:
     name: str
     commit_message: str
     valid: bool = field(kw_only=True)
-
-
-@pytest.fixture(scope="module")
-def rendered_template(
-    session_render_template: Callable[..., Path],
-    disallow_subprocess: DisallowCallable,
-) -> Generator[Path]:
-    with tempfile.TemporaryDirectory() as td:
-        tmp_path = Path(td)
-        rendered = session_render_template(
-            tmp_path=tmp_path,
-            enable_container=True,
-            enable_coverage=True,
-            enable_docs=True,
-            enable_pypi=True,
-        )
-        with disallow_subprocess.pause():
-            subprocess.run(["mise", "run", "init"], cwd=rendered, check=True)
-        yield rendered
-
-
-@pytest.mark.usefixtures("allow_subprocess")
-def test_template_render_lint_test(
-    rendered_template: Path,
-) -> None:
-    subprocess.run(["mise", "run", "lt"], cwd=rendered_template, check=True)
 
 
 @pytest.mark.parametrize(
@@ -146,7 +118,7 @@ def test_template_render_lint_test(
         )
     ],
 )
-def test_template_commit_msg_hooks(
+def test_pre_commit_commit_msg_hooks(
     disallow_subprocess: DisallowCallable,
     rendered_template: Path,
     case: CommitMessageCase,

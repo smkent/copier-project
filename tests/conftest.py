@@ -10,7 +10,8 @@ import pytest
 import yaml
 
 from copier_python.__main__ import setup_env
-from tests.utils import DisallowCallable, template
+from tests.template.utils import template
+from tests.utils import DisallowCallable
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Iterator
