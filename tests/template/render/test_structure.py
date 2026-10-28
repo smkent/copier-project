@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING, Any
 
 import pytest
 
-from tests.utils import template
+from tests.template.utils import template
 
 if TYPE_CHECKING:
     from collections.abc import Callable

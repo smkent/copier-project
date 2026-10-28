@@ -18,7 +18,7 @@ import pytest
 import yaml
 
 from copier_python.__main__ import main, update
-from tests.utils import template
+from tests.template.utils import template
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Generator, Sequence
