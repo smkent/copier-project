@@ -1,0 +1,56 @@
+{%- import "common/blocks.jinja" as blocks -%}
+{% if enable_commit_check -%}
+default_install_hook_types: [pre-commit, commit-msg]
+default_stages: [pre-commit]
+{% endif -%}
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-merge-conflict
+      - id: check-yaml
+      - id: check-toml
+      - id: check-json
+      - id: check-added-large-files
+      - id: detect-private-key
+{%- set extra_builtin_hooks %}{% block extra_builtin_hooks %}{% endblock %}{% endset -%}
+{{- blocks.put(extra_builtin_hooks, indent=6) }}
+  - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
+    rev: v2.16.0
+    hooks:
+      - id: pretty-format-yaml
+        args: [--autofix, --offset, '2']
+        exclude: ^\.copier-answers\.yml$
+  - repo: local
+    hooks:
+      - id: betterleaks
+        name: betterleaks
+        entry: betterleaks git . --pre-commit --staged --redact
+        language: system
+        pass_filenames: false
+      - id: jactionlint
+        name: jactionlint
+        entry: jactionlint --fix
+        language: system
+        types:
+          - yaml
+        files: ^\.github/workflows/
+{%- set local_hooks_after_jactionlint %}{% block local_hooks_after_jactionlint %}{% endblock %}{% endset -%}
+{{- blocks.put(local_hooks_after_jactionlint, indent=6) }}
+      - id: taplo
+        name: taplo
+        entry: taplo format
+        language: system
+        types: [toml]
+{%- set local_hooks_after_taplo %}{% block local_hooks_after_taplo %}{% endblock %}{% endset -%}
+{{- blocks.put(local_hooks_after_taplo, indent=6) }}
+{%- if enable_commit_check %}
+      - id: commit-check
+        name: commit-check
+        entry: {{ commit_check_command | default('commit-check') }} --no-banner --message
+        language: system
+        stages: [commit-msg]
+{%- endif %}
+{#- vim: set ft=yaml: #}

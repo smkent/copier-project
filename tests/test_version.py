@@ -1,5 +1,5 @@
-import copier_python
+import copier_project
 
 
 def test_version() -> None:
-    assert copier_python.version
+    assert copier_project.version

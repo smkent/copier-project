@@ -44,8 +44,8 @@ run = [
   '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
   "git init",
   "mise install",
-  "git remote add origin https://github.com/smkent/copier-python",
-  "git config --local remote.origin.pushurl git@github.com:smkent/copier-python.git",
+  "git remote add origin https://github.com/smkent/copier-project",
+  "git config --local remote.origin.pushurl git@github.com:smkent/copier-project.git",
   "git add .",
   "git commit -m 'Create project from template'",
 ]

@@ -1,10 +1,10 @@
 [project]
-site_name = "copier-python"
-site_description = "Copier template for Python projects with modern tooling"
+site_name = "copier-project"
+site_description = "Copier template for software projects with modern tooling"
 site_author = "Stephen Kent"
-site_url = "https://smkent.github.io/copier-python"
-repo_url = "https://github.com/smkent/copier-python"
-repo_name = "smkent/copier-python"
+site_url = "https://smkent.github.io/copier-project"
+repo_url = "https://github.com/smkent/copier-project"
+repo_name = "smkent/copier-project"
 copyright = "&copy; 2026 Stephen Kent and contributors"
 
 nav = [
@@ -14,6 +14,7 @@ nav = [
     "contributing.md",
     { "Usage" = [
       "requirements.md",
+      "project-variants.md",
       "project-creation.md",
       "project-setup.md",
       "project-development.md",
@@ -81,11 +82,11 @@ toggle.name = "Switch to system preference"
 
 [[project.extra.social]]
 icon = "fontawesome/brands/github"
-link = "https://github.com/smkent/copier-python"
+link = "https://github.com/smkent/copier-project"
 
 [[project.extra.social]]
 icon = "fontawesome/brands/python"
-link = "https://pypi.org/project/copier-python/"
+link = "https://pypi.org/project/copier-project/"
 
 # ----------------------------------------------------------------------------
 # Markdown extensions

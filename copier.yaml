@@ -1,3 +1,4 @@
+---
 _min_copier_version: '9.5'
 _external_data:
   # Previous answers, used to migrate deprecated answer values
@@ -5,7 +6,7 @@ _external_data:
 _preserve_symlinks: true
 _skip_if_exists:
   - CHANGELOG.md
-_subdirectory: template
+_subdirectory: '{{ template_variant }}'
 
 _message_after_copy: |
   {{ _copier_conf.dst_path }} is ready! Next steps:
@@ -19,16 +20,18 @@ _message_after_copy: |
 
   3. Push:
        git push -u origin main
+  {%- if template_variant == 'python' %}
 
   For GitHub repository configuration and additional features setup,
-  see copier-python's Completing Setup documentation at
-  https://smkent.github.io/copier-python/project-setup/
+  see copier-project's Completing Setup documentation at
+  https://smkent.github.io/copier-project/project-setup/
   {%- if enable_docs %}
   OR run the documentation site locally:
 
        mise run docs
 
   Then, see One Time Setup at: http://localhost:8000/{{ project_name }}/setup/
+  {%- endif -%}
   {%- endif -%}
   {%- elif project_visibility == 'private' -%}
   1. Initialize git and environment:
@@ -45,210 +48,24 @@ _message_after_update: |
     git diff       # review all changes
     mise install   # install tools, dependencies, git hooks
     mise run lint  # verify code quality
+  {%- if template_variant == 'python' %}
     mise run test  # verify tests pass
+  {%- endif %}
 
-template_python_versions_supported:
-  type: yaml
-  qmark: 🐍
-  default:
-    min_minor: 11
-    max_minor: 15
-  when: false
-
-project_name:
+template_variant:
   type: str
-  qmark: 📝
-  help: Project (repository) name
-  default: '{{ _folder_name }}'
-  validator: |
-    {%- if not project_name -%}
-      Required
-    {%- elif project_name | lower | regex_replace('^([a-z0-9]|[a-z0-9][a-z0-9._-]*[a-z0-9])$','') != '' -%}
-      Python package distribution name must only contain letters, numbers, or . - _
-    {%- endif -%}
-
-project_slug:
-  type: str
-  qmark: 🐍
-  default: "{{ project_name | title | lower | regex_replace('[^a-za-z0-9]','_') | regex_replace('_{2,}', '_') | trim('_') }}"
-  help: Python module import name (slug)
-  validator: |
-    {%- if not project_slug -%}
-      Required
-    {%- elif project_slug | lower | regex_replace('^[a-z_][a-z0-9_]*$','') != '' -%}
-      Python package import name must only contain letters, numbers, or underscores
-    {%- endif -%}
-
-project_description:
-  type: str
-  qmark: 💬
-  help: One-line project summary
-  validator: '{% if not project_description %}Required{% endif %}'
-
-project_type:
-  type: str
-  qmark: 🏗️
-  help: Project type
-  default: application
-  choices:
-    - application
-    - library
-
-project_visibility:
-  type: str
-  qmark: 🔒
-  help: Project visibility
-  default: public
-  choices:
-    - public
-    - private
-
-python_version_minimum:
-  type: str
-  qmark: 🐍
-  help: Minimum Python version
-  default: 3.{{- template_python_versions_supported.min_minor -}}
-  choices: |
-    {%- for minor in range(template_python_versions_supported.min_minor, template_python_versions_supported.max_minor + 1) %}
-    - '3.{{ minor }}'
-    {%- endfor %}
-
-python_version_maximum:
-  type: str
-  qmark: 🐍
-  help: Maximum Python version
-  default: No maximum
-  choices: |
-    - 'No maximum'
-    {%- set min_minor = python_version_minimum.split(".")[1] | int -%}
-    {%- for minor in range(min_minor, template_python_versions_supported.max_minor + 1) %}
-    - '3.{{ minor }}'
-    {%- endfor %}
-
-enable_coverage:
-  type: bool
-  qmark: 📊
-  help: Enable coverage.io reports?
-  default: "{{ project_visibility == 'public' }}"
-  when: "{{ project_visibility == 'public' }}"
-
-enable_pypi:
-  type: bool
-  qmark: 🚀
-  help: Enable package publishing to PyPI?
-  default: "{{ project_visibility == 'public' }}"
-  when: "{{ project_visibility == 'public' }}"
-
-enable_container:
-  type: bool
-  qmark: 📦
-  help: Enable Docker container{% if project_visibility == 'public' %} build and publishing to ghcr.io{% endif %}?
-  default: "{{ project_type == 'application' }}"
-
-enable_docs:
-  type: bool
-  qmark: 📕
-  help: Enable documentation site (Zensical{% if project_visibility == 'public' %} with deployment to GitHub Pages{% endif %})?
-  default: yes
-
-enable_features:
-  type: str
-  qmark: 🧩
-  help: Enable miscellaneous features?
-  multiselect: true
-  choices:
-    pytest-syrupy for snapshots: syrupy
-    pytest-xdist for multiprocessing: xdist
-  default: '["syrupy", "xdist"]'
-
-user_name:
-  type: str
-  qmark: 🧑
-  help: Author's full name
-  validator: '{% if not user_name %}Required{% endif %}'
-
-user_email:
-  type: str
-  qmark: ✉️
-  help: Author's email address
-  validator: '{% if not user_email %}Required{% endif %}'
-
-github_user:
-  type: str
-  qmark: 👾
-  help: GitHub user or organization name
-  when: "{{ project_visibility == 'public' }}"
-  validator: '{% if not github_user %}Required{% endif %}'
-
-copyright_holder:
-  type: str
-  qmark: ©️
-  help: Copyright holder's full name
-  default: '{{ user_name }}'
-  validator: '{% if not copyright_holder %}Required{% endif %}'
-
-copyright_year:
-  type: str
-  qmark: 📅
-  help: The copyright year (e.g. 2026)
-  default: "{{ '%Y' | strftime }}"
-  validator: |
-    {%- if not copyright_year -%}
-      Required
-    {%- elif copyright_year | regex_replace('^[0-9]{4}$','') != '' -%}
-      Invalid year
-    {%- endif -%}
-
-copyright_license:
-  type: str
-  qmark: ⚖️
-  help: Project license (GNU "or later" also permits future license versions)
-  # Map deprecated GNU SPDX identifiers from existing answers to "-only" ones.
-  # Previous answers are only loaded during updates, detected by the presence
-  # of an answer to a question asked after this one.
+  qmark: 🧬
+  help: Project template variant
   default: >-
-    {%- set previous = (
-      _external_data.previous_answers.copyright_license | default('')
-      if template_attribution is defined else ''
-    ) -%}
-    {%- if previous in ['AGPL-3.0', 'GPL-3.0', 'LGPL-3.0'] -%}
-      {{ previous }}-only
+    {%- if python_version_minimum | default('') -%}
+      python
     {%- else -%}
-      {% if project_type == 'library' %}L{% endif %}GPL-3.0-only
+      generic
     {%- endif -%}
   choices:
-    Apache License 2.0: Apache-2.0
-    BSD 3-Clause "New" or "Revised" License: BSD-3-Clause
-    Creative Commons Attribution 4.0 International: CC-BY-4.0
-    Creative Commons Attribution Share Alike 4.0 International: CC-BY-SA-4.0
-    Creative Commons Zero v1.0 Universal: CC0-1.0
-    GNU Affero General Public License v3.0 only: AGPL-3.0-only
-    GNU Affero General Public License v3.0 or later: AGPL-3.0-or-later
-    GNU General Public License v3.0 only: GPL-3.0-only
-    GNU General Public License v3.0 or later: GPL-3.0-or-later
-    GNU Lesser General Public License v3.0 only: LGPL-3.0-only
-    GNU Lesser General Public License v3.0 or later: LGPL-3.0-or-later
-    ISC License: ISC
-    MIT License: MIT
-
-llm_contribution_policy:
-  type: str
-  qmark: 🤖
-  help: LLM contribution policy
-  default: accepted-with-disclosure
-  choices:
-    Accepted: accepted
-    Accepted with disclosure: accepted-with-disclosure
-    Not accepted: not-accepted
-
-enable_commit_check:
-  type: bool
-  qmark: 📃
-  default: "{{ llm_contribution_policy != 'accepted' }}"
-  when: false
-
-template_attribution:
-  type: bool
-  qmark: 🪧
-  help: Add copier-python attribution to README.md?
-  default: no
+    Generic: generic
+    Python: python
+---
+!include common/questions/project.yaml
+---
+!include common/questions/python.yaml

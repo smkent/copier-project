@@ -13,9 +13,9 @@ enable_features:
 enable_pypi: true
 github_user: smkent
 llm_contribution_policy: accepted-with-disclosure
-project_description: Copier template for Python projects with modern tooling
-project_name: copier-python
-project_slug: copier_python
+project_description: Copier template for software projects with modern tooling
+project_name: copier-project
+project_slug: copier_project
 project_type: library
 project_visibility: public
 python_version_maximum: No maximum

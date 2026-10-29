@@ -9,8 +9,8 @@ import copier
 import pytest
 import yaml
 
-from copier_python.__main__ import setup_env
-from tests.template.utils import template
+from copier_project.__main__ import setup_env
+from tests.template.utils import StructureTest, template
 from tests.utils import DisallowCallable
 
 if TYPE_CHECKING:
@@ -93,8 +93,26 @@ def session_render_template(
 
 
 @pytest.fixture
-def render_template(
-    session_render_template: Callable[..., Path],
-    tmp_path: Path,
+def render_template_common(
+    session_render_template: Callable[..., Path], tmp_path: Path
 ) -> Callable[..., Path]:
     return partial(session_render_template, tmp_path=tmp_path)
+
+
+@pytest.fixture
+def template_variant() -> str:
+    raise NotImplementedError
+
+
+@pytest.fixture
+def render_template(
+    render_template_common: Callable[..., Path], template_variant: str
+) -> Callable[..., Path]:
+    return partial(render_template_common, template_variant=template_variant)
+
+
+@pytest.fixture
+def structure_test(
+    render_template: Callable[..., Path],
+) -> StructureTest:
+    return StructureTest(render_template=render_template)

@@ -3,9 +3,11 @@ from __future__ import annotations
 import subprocess
 import tempfile
 from pathlib import Path
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 import pytest
+
+from tests.template.utils import template
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Generator
@@ -13,7 +15,17 @@ if TYPE_CHECKING:
     from tests.utils import DisallowCallable
 
 
-@pytest.fixture(scope="module")
+TEMPLATE_VARIANT_DATA: dict[str, dict[str, Any]] = {
+    "python": {
+        "enable_container": True,
+        "enable_coverage": True,
+        "enable_docs": True,
+        "enable_pypi": True,
+    },
+}
+
+
+@pytest.fixture(scope="module", params=template.choices.template_variant)
 def rendered_template(
     session_render_template: Callable[..., Path],
     disallow_subprocess: DisallowCallable,

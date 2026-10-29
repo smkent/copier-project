@@ -33,9 +33,9 @@ git push --tags
     [![PyPI][pypi-badge]][pypi-project]
 
 [bump-my-version]: https://callowayproject.github.io/bump-my-version/
-[github-release-latest]: https://github.com/smkent/copier-python/releases/latest
-[github-releases]: https://github.com/smkent/copier-python/releases
-[github-release-badge]: https://img.shields.io/github/v/release/smkent/copier-python
-[pypi-badge]: https://img.shields.io/pypi/v/copier-python
-[pypi-project]: https://pypi.org/project/copier-python/
+[github-release-badge]: https://img.shields.io/github/v/release/smkent/copier-project
+[github-release-latest]: https://github.com/smkent/copier-project/releases/latest
+[github-releases]: https://github.com/smkent/copier-project/releases
+[pypi-badge]: https://img.shields.io/pypi/v/copier-project
+[pypi-project]: https://pypi.org/project/copier-project/
 [semver]: https://semver.org/

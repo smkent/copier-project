@@ -1,0 +1,24 @@
+{% extends "common/templates/README.md.jinja" %}
+
+{% block badges_after_license %}
+{% if enable_pypi %}
+[![PyPI](https://img.shields.io/pypi/v/{{ project_name }})](https://pypi.org/project/{{ project_name }}/)
+[![Python](https://img.shields.io/pypi/pyversions/{{ project_name }})](https://pypi.org/project/{{ project_name }}/)
+{% endif %}
+{% endblock %}
+
+{% block badges_after_ci %}
+{% if enable_coverage %}
+[![Coverage](https://codecov.io/gh/{{ github_user }}/{{ project_name }}/branch/main/graph/badge.svg)](https://codecov.io/gh/{{ github_user }}/{{ project_name }})
+{% endif %}
+{% endblock %}
+
+{% block content %}
+{% if enable_pypi %}
+## Installation
+
+```sh
+pip install {{ project_name }}
+```
+{% endif %}
+{% endblock %}

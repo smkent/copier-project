@@ -1,0 +1,88 @@
+{% extends "common/templates/mise.toml.jinja" %}
+{%- import "common/python.jinja" as py with context -%}
+
+{% block postinstall_hooks %}
+"uv sync",
+{% endblock %}
+
+{% block check_tool %}
+{%- endblock %}
+
+{% block task_lt %}
+[tasks.lt]
+description = "Run all formatters, static checks and tests"
+run = [{ task = "lint" }, { task = "test" }]
+{% endblock %}
+
+{% block tasks_start %}
+{%- if project_visibility == 'public' %}
+
+[tasks.audit]
+description = "Run dependencies security audit"
+raw_args = true
+run = "uv run pysentry-rs"
+{%- endif %}
+
+[tasks.build]
+description = "Build distribution package"
+raw_args = true
+run = "uv build"
+{%- if enable_docs %}
+
+[tasks.docs]
+description = "Run documentation site locally"
+depends = ["docs-build"]
+run = 'uv run zensical serve -a "${usage_host:-localhost}:${usage_port:-8000}"'
+usage = '''
+flag "--host <host>" help="Bind IP" default="localhost"
+arg "[port]" help="Bind port" default="8000"
+'''
+
+[tasks.docs-build]
+description = "Build documentation site"
+raw_args = true
+run = "uv run zensical build -c"
+{%- endif %}
+{% endblock %}
+
+{% block tasks_after_lt %}
+[tasks.release]
+description = "Create and push a release tag (patch/minor/major)"
+raw_args = true
+run = "uv run bump-my-version bump -v"
+{% endblock %}
+
+{% block tasks_after_secretscan %}
+{%- if "syrupy" in enable_features %}
+
+[tasks.snapup]
+description = "Update test snapshots"
+raw_args = true
+run = "uv run pytest --snapshot-update{% if 'xdist' in enable_features %} --numprocesses 0{% endif %}"
+{%- endif %}
+
+[tasks.test]
+description = "Run tests"
+raw_args = true
+run = "uv run pytest"
+
+[tasks.test-versions]
+description = "Run tests across all Python versions"
+run = [
+{%- call(loop, v) py.for_each_version() %}
+  { task = "test-py{{ v | replace('.', '') }}" },
+{%- endcall %}
+]
+{% call(loop, v) py.for_each_version() %}
+[tasks.test-py{{ v | replace('.', '') }}]
+description = "Run tests using Python {{ v }}"
+env = { UV_PROJECT_ENVIRONMENT = ".venv-py{{ v | replace('.', '') }}" }
+raw_args = true
+run = "uv run --python {{ v }} pytest"
+{% endcall %}
+[tasks.ti]
+description = "Run tests with debug friendly options"
+raw_args = true
+run = "uv run pytest{% if 'xdist' in enable_features %} --numprocesses 0{% endif %} --no-cov -vv"
+{% endblock %}
+{#- vim: set ft=toml: #}

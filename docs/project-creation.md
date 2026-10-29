@@ -5,11 +5,23 @@ icon: lucide/wand-sparkles
 
 # Creating a new project
 
+## Choose a template variant
+
+See [Project variants](project-variants.md) for available project template
+variants.
+
 ## Choose a project name
 
-Select a name for your project that meets the
-[Python package naming criteria][pyproject-name]. This name will be used for
-`pip install` if you choose to [publish your project on PyPI][pypi].
+Project names must meet
+[GitHub's repository name criteria][github-repository-name].
+
+### Python project names
+
+Python project names must meet the
+[Python package name criteria][pyproject-name].
+
+If you choose to [publish your project on PyPI][pypi], the project name will be
+used as the package name (e.g. for `pip install`).
 
 !!! tip
     If you plan to publish your project on PyPI, ensure:
@@ -27,7 +39,7 @@ Set **Repository name** to your chosen project name.
 1. In the directory where the new project should be created, run Copier:
 
     ```sh
-    copier copy "gh:smkent/copier-python" ./project_name
+    copier copy "gh:smkent/copier-project" ./project_name
     ```
 
     Copier will prompt for project information.
@@ -67,6 +79,7 @@ git push -u origin main
 Your project's contents should now be visible on GitHub!
 
 [github-new]: https://github.com/new
+[github-repository-name]: https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository
 [pypi-login]: https://pypi.org/account/login/
 [pypi]: https://pypi.org
 [pyproject-name]: https://packaging.python.org/en/latest/guides/writing-pyproject-toml/#name

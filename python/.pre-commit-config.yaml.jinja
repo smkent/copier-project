@@ -1,0 +1,29 @@
+{% extends "common/templates/.pre-commit-config.yaml.jinja" %}
+
+{% set commit_check_command = "uv run commit-check" %}
+
+{% block extra_builtin_hooks %}
+- id: debug-statements
+{% endblock %}
+
+{% block local_hooks_after_jactionlint %}
+- id: ruff
+  name: ruff
+  entry: uv run ruff check --fix
+  language: system
+  types_or: [python, pyi]
+- id: ruff-format
+  name: ruff-format
+  entry: uv run ruff format
+  language: system
+  types_or: [python, pyi]
+{% endblock %}
+
+{% block local_hooks_after_taplo %}
+- id: ty
+  name: ty
+  entry: uv run ty check
+  language: system
+  types: [python]
+  pass_filenames: false
+{% endblock %}

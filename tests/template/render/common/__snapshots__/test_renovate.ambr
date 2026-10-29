@@ -1,0 +1,41 @@
+# serializer version: 1
+# name: test_renovate[generic]
+  '''
+  {
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": ["config:recommended", "schedule:weekly"],
+    "osvVulnerabilityAlerts": true,
+    "vulnerabilityAlerts": {
+      "schedule": ["at any time"]
+    },
+    "packageRules": [
+      {
+        "matchManagers": ["github-actions", "mise", "pre-commit"],
+        "matchUpdateTypes": ["minor", "patch"],
+        "groupName": "non-major dependencies"
+      }
+    ]
+  }
+  
+  '''
+# ---
+# name: test_renovate[python]
+  '''
+  {
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": ["config:recommended", "schedule:weekly"],
+    "osvVulnerabilityAlerts": true,
+    "vulnerabilityAlerts": {
+      "schedule": ["at any time"]
+    },
+    "packageRules": [
+      {
+        "matchManagers": ["github-actions", "mise", "pre-commit", "uv"],
+        "matchUpdateTypes": ["minor", "patch"],
+        "groupName": "non-major dependencies"
+      }
+    ]
+  }
+  
+  '''
+# ---

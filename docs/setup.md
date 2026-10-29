@@ -28,7 +28,7 @@ for the Default branch (`main`):
 ## Renovate
 
 Ensure the [Renovate app][renovate] is installed on your account, then
-enable it for `smkent/copier-python`.
+enable it for `smkent/copier-project`.
 
 ## PyPI publishing
 
@@ -39,7 +39,7 @@ need to be stored as secrets.
    [Trusted Publisher Management][pypi-publishing-settings] settings:
      - Publisher: GitHub Actions
      - Owner: `smkent`
-     - Repository: `copier-python`
+     - Repository: `copier-project`
      - Workflow: `release.yaml`
      - Environment: `pypi`
 2. Create the `pypi` environment in the GitHub repository:
@@ -57,7 +57,7 @@ need to be stored as secrets.
 [pypi-publishing-settings]: https://pypi.org/manage/account/publishing/
 [pypi-trusted-publishing]: https://docs.pypi.org/trusted-publishers/
 [renovate]: https://github.com/apps/renovate
-[repo-settings]: https://github.com/smkent/copier-python/settings
-[repo-settings-envs]: https://github.com/smkent/copier-python/settings/environments
-[repo-settings-branches]: https://github.com/smkent/copier-python/settings/branches
-[repo-settings-pages]: https://github.com/smkent/copier-python/settings/pages
+[repo-settings]: https://github.com/smkent/copier-project/settings
+[repo-settings-envs]: https://github.com/smkent/copier-project/settings/environments
+[repo-settings-branches]: https://github.com/smkent/copier-project/settings/branches
+[repo-settings-pages]: https://github.com/smkent/copier-project/settings/pages

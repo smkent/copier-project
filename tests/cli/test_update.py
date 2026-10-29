@@ -1,4 +1,4 @@
-"""Tests for the copier-python update management command."""
+"""Tests for the copier-project update management command."""
 
 from __future__ import annotations
 
@@ -17,7 +17,7 @@ from unittest.mock import MagicMock, _Call, call, patch
 import pytest
 import yaml
 
-from copier_python.__main__ import main, update
+from copier_project.__main__ import main, update
 from tests.template.utils import template
 
 if TYPE_CHECKING:
@@ -69,7 +69,7 @@ def origin(tmp_path: Path, disallow_subprocess: DisallowCallable) -> Path:
 @pytest.fixture
 def create_project(
     disallow_subprocess: DisallowCallable,
-    render_template: Callable[..., Path],
+    render_template_common: Callable[..., Path],
     origin: Path,
 ) -> Callable[..., Path]:
 
@@ -87,7 +87,7 @@ def create_project(
         postcreate: Callable[[Path], None] | None = None,
         **kwargs: Any,
     ) -> Path:
-        project = render_template(vcs_ref=vcs_ref, **kwargs)
+        project = render_template_common(vcs_ref=vcs_ref, **kwargs)
         timestamp = _vcs_ref_timestamp(vcs_ref)
         for cmd in (
             ["git", "init", "-b", DEFAULT_BRANCH_NAME],
@@ -219,7 +219,7 @@ def expect_run(
 
 
 def test_main_help(monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setattr(sys, "argv", ["copier-python", "--help"])
+    monkeypatch.setattr(sys, "argv", ["copier-project", "--help"])
     with pytest.raises(SystemExit, match=str(0)):
         main()
 
@@ -285,7 +285,7 @@ def test_main_update_error(
             f"Apply template updates from {start_ref} to {end_ref}",
             "",
             (
-                f"https://github.com/smkent/copier-python/compare/"
+                f"https://github.com/smkent/copier-project/compare/"
                 f"{start_ref}...{end_ref}"
             ),
         )
@@ -387,7 +387,7 @@ def test_main_update_with_project(
             f"Apply template updates from {start_ref} to {end_ref}",
             "",
             (
-                f"https://github.com/smkent/copier-python/compare/"
+                f"https://github.com/smkent/copier-project/compare/"
                 f"{start_ref}...{end_ref}"
             ),
         )

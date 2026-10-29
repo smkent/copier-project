@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from functools import cached_property
 from pathlib import Path
 from types import SimpleNamespace
@@ -9,7 +9,7 @@ from typing import TYPE_CHECKING, Any
 import yaml
 
 if TYPE_CHECKING:
-    from collections.abc import Sequence
+    from collections.abc import Callable, Sequence
 
 
 @dataclass
@@ -37,14 +37,69 @@ class PythonVersionsSupported:
         )
 
 
+@dataclass
+class StructureTestCase:
+    extra_data: dict[str, Any] = field(default_factory=dict)
+    expected_present: set[str] = field(default_factory=set)
+    expected_absent: set[str] = field(default_factory=set)
+
+    def expect_if(self, present: bool, *items: str) -> None:  # noqa: FBT001
+        if present:
+            self.expected_present |= set(items)
+        else:
+            self.expected_absent |= set(items)
+
+    def run(self, render_template: Callable[..., Path]) -> None:
+        rendered = render_template(**self.extra_data)
+        for path in self.expected_present:
+            assert (rendered / path).exists(), f"{path!r} should exist"
+        for path in self.expected_absent:
+            assert not (rendered / path).exists(), f"{path!r} should be absent"
+
+
+@dataclass
+class StructureTest:
+    render_template: Callable[..., Path] = field(repr=False)
+
+    def __call__(self, case: StructureTestCase) -> None:
+        case.run(self.render_template)
+
+
+@dataclass
 class Template:
-    @cached_property
-    def dir(self) -> Path:
-        return Path(__file__).parent.parent.parent
+    dir: Path = field(default=Path(__file__).parent.parent.parent)
 
     @cached_property
     def config(self) -> dict[str, Any]:
-        return yaml.safe_load((self.dir / "copier.yaml").read_text())
+        class Loader(yaml.SafeLoader):
+            """Load copier.yaml with its `!include` documents merged in order.
+
+            Duplicate keys across documents are errors.
+            """
+
+            _dir = self.dir
+
+            def include(self, node: yaml.ScalarNode) -> list[Any]:
+                include_path = self._dir / self.construct_scalar(node)
+                return list(
+                    yaml.load_all(include_path.read_text(), Loader=type(self))
+                )
+
+            @classmethod
+            def load(cls) -> dict[str, Any]:
+                config_path = cls._dir / "copier.yaml"
+                config: dict[str, Any] = {}
+                for doc in yaml.load_all(config_path.read_text(), Loader=cls):
+                    for part in doc if isinstance(doc, list) else [doc]:
+                        if dupes := config.keys() & part.keys():
+                            raise ValueError(
+                                f"Duplicate keys {dupes} in {config_path}"
+                            )
+                        config.update(part)
+                return config
+
+        Loader.add_constructor("!include", Loader.include)
+        return Loader.load()
 
     @cached_property
     def choices(self) -> SimpleNamespace:

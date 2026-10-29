@@ -1,24 +1,24 @@
-# Contributing to copier-python
+# Contributing to copier-project
 
 **Contributions are welcome!**
 
 Thank you for your time and interest in improving
-**copier-python**!
+**copier-project**!
 
 ## Contribution resources
 
-* **Web site**: **<https://smkent.github.io/copier-python>**
+* **Web site**: **<https://smkent.github.io/copier-project>**
   for general project information, usage, and development documentation
-* **Repository**: <https://github.com/smkent/copier-python>
+* **Repository**: <https://github.com/smkent/copier-project>
   for submitting pull requests
-* **Issue tracker**: <https://github.com/smkent/copier-python/issues>
+* **Issue tracker**: <https://github.com/smkent/copier-project/issues>
   for questions or bug reports
 
 ## Contribution terms
 
-By submitting a contribution to copier-python, you agree that it is
+By submitting a contribution to copier-project, you agree that it is
 licensed under the project's license, the
-[MIT License](https://github.com/smkent/copier-python/blob/main/LICENSE),
+[MIT License](https://github.com/smkent/copier-project/blob/main/LICENSE),
 with no additional terms,
 and that you have the right to submit it under that license.
 

@@ -1,0 +1,43 @@
+{% extends "common/templates/github_workflow.yaml.jinja" %}
+{% import "common/github-workflow-steps.jinja" as ci with context %}
+
+{% block name -%}
+CI
+{%- endblock %}
+
+{% block triggers %}
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+{% endblock %}
+
+{% block jobs %}
+betterleaks:
+  name: Secret scan
+  runs-on: ubuntu-latest
+  timeout-minutes: 15
+  steps:
+    {{ ci.step_checkout(full_history=true) | indent(4) }}
+
+    {{ ci.steps_project_setup() | indent(4) }}
+
+    - name: 🔍 Check for secrets
+      run: mise run secretscan
+{%- if enable_commit_check %}
+
+commit-messages:
+  name: Commit messages
+  if: {% raw %}${{ github.event_name == 'pull_request' }}{% endraw %}
+  runs-on: ubuntu-latest
+  timeout-minutes: 15
+  steps:
+    {{ ci.step_checkout(full_history=true) | indent(4) }}
+
+    - name: ✉️ Check commit messages
+      uses: commit-check/commit-check-action@v2
+      with:
+        branch: false
+{%- endif %}
+{% endblock %}

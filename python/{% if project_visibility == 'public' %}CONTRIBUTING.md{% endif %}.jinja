@@ -1,0 +1,17 @@
+{% extends "common/templates/CONTRIBUTING.md.jinja" %}
+
+{% set docs_url = "https://" + github_user + ".github.io/" + project_name %}
+
+{% block project_resources %}
+{% if enable_docs %}
+* **Web site**: **<{{ docs_url }}>**
+  for general project information, usage, and development documentation
+{%- endif %}
+{{ super() | trim }}
+{% endblock %}
+
+{% block development %}
+{% if not enable_docs %}
+{{ super() }}
+{% endif %}
+{% endblock %}

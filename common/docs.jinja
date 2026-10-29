@@ -1,0 +1,121 @@
+{%- macro requirements(h='') -%}
+{{h}}# Prerequisites
+
+- [x] [**git** for version control][git]
+- [x] [**mise**][mise] tool manager: `curl https://mise.run | sh` or
+  [alternate installation method][mise-installation]
+{%- if template_variant == 'python' %}
+
+    !!! info
+
+        `mise` ensures additional software is available, such as:
+
+        * A [supported version][python-versions] of [**Python**][python]
+        * [Astral's **uv** Python project manager][uv]
+{%- endif %}
+
+[git]: https://git-scm.com
+[mise-installation]: https://mise.jdx.dev/installing-mise.html
+[mise]: https://mise.jdx.dev
+{%- if template_variant == 'python' %}
+[python-versions]: https://devguide.python.org/versions/
+[python]: https://python.org
+[uv]: https://docs.astral.sh/uv/
+{%- endif %}
+{%- endmacro -%}
+
+{%- macro workflow(h='') -%}
+{{h}}# Project development workflow
+
+{{h}}## Cloning the repository
+{%- if project_visibility == 'public' %}
+
+```sh
+git clone https://github.com/{{ github_user }}/{{ project_name }}
+cd {{ project_name }}
+```
+{%- endif %}
+
+{% if template_variant == 'python' -%}
+Run `mise install` in new repository clones to install tools, dependencies, and
+git hooks:
+{%- else -%}
+Run `mise install` in new repository clones to install tools and git hooks:
+{%- endif %}
+
+```sh
+mise install
+```
+
+{{h}}## Development tools
+
+* `mise run lint`: Run formatters and static checks
+{%- if template_variant == 'python' %}
+* `mise run test`: Run tests
+
+The `lint` and `test` tasks can also be run as a single combined command with:
+
+```sh
+mise run lt
+```
+{%- if "syrupy" in enable_features %}
+
+### Test snapshots
+
+Some tests compare test results with saved snapshots. Test snapshots can be
+updated by running:
+
+```sh
+mise run snapup
+```
+{%- endif %}
+{%- if enable_docs %}
+
+{{h}}## Documentation server
+
+Start the development server with:
+
+```sh
+mise run docs
+```
+
+The documentation site will be served at:
+
+[**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
+
+To use a different bind host/port, run `mise run docs --help` for usage info.
+{%- endif %}
+{%- endif %}
+{%- endmacro -%}
+
+{%- macro updates(h='') -%}
+{{h}}# Applying copier-project template updates
+
+Copier can update your project with template changes that have occurred since
+the project was created.
+
+To apply updates, simply run in your project directory:
+
+```sh
+copier update
+```
+
+This will repeat the setup prompts, in case any prompts have been added or
+changed.
+
+!!! tip
+    To change template-provided features in your project, simply change your
+    answers in the update prompts.
+
+To apply updates without being prompted (reusing all previous answers), run:
+
+```sh
+copier update -l
+```
+
+When [`copier update`][copier-update] is finished, view changes with
+`git status` and `git diff`. Resolve any conflicts, and then commit the result.
+
+[copier-update]: https://copier.readthedocs.io/en/stable/updating/
+{%- endmacro -%}
+{#- vim: set ft=markdown: #}
