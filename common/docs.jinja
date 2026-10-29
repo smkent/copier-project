@@ -1,18 +1,10 @@
-{%- macro contributing() -%}
-{%- set h = "##" -%}
-{{ requirements(h) }}
-
-{{ workflow(h) }}
-
-{{ updates(h) }}
-{%- endmacro -%}
-
 {%- macro requirements(h='') -%}
 {{h}}# Prerequisites
 
 - [x] [**git** for version control][git]
 - [x] [**mise**][mise] tool manager: `curl https://mise.run | sh` or
   [alternate installation method][mise-installation]
+{%- if template_variant == 'python' %}
 
     !!! info
 
@@ -20,13 +12,16 @@
 
         * A [supported version][python-versions] of [**Python**][python]
         * [Astral's **uv** Python project manager][uv]
+{%- endif %}
 
 [git]: https://git-scm.com
 [mise-installation]: https://mise.jdx.dev/installing-mise.html
 [mise]: https://mise.jdx.dev
+{%- if template_variant == 'python' %}
 [python-versions]: https://devguide.python.org/versions/
 [python]: https://python.org
 [uv]: https://docs.astral.sh/uv/
+{%- endif %}
 {%- endmacro -%}
 
 {%- macro workflow(h='') -%}
@@ -41,8 +36,12 @@ cd {{ project_name }}
 ```
 {%- endif %}
 
+{% if template_variant == 'python' -%}
 Run `mise install` in new repository clones to install tools, dependencies, and
 git hooks:
+{%- else -%}
+Run `mise install` in new repository clones to install tools and git hooks:
+{%- endif %}
 
 ```sh
 mise install
@@ -51,6 +50,7 @@ mise install
 {{h}}## Development tools
 
 * `mise run lint`: Run formatters and static checks
+{%- if template_variant == 'python' %}
 * `mise run test`: Run tests
 
 The `lint` and `test` tasks can also be run as a single combined command with:
@@ -84,6 +84,7 @@ The documentation site will be served at:
 [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
 
 To use a different bind host/port, run `mise run docs --help` for usage info.
+{%- endif %}
 {%- endif %}
 {%- endmacro -%}
 

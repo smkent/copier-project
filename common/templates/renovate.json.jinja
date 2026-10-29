@@ -1,3 +1,5 @@
+{%- set base_match_managers = ["github-actions", "mise", "pre-commit"] -%}
+{%- set current_match_managers = base_match_managers + match_managers | default([]) -%}
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended", "schedule:weekly"],
@@ -7,7 +9,7 @@
   },
   "packageRules": [
     {
-      "matchManagers": ["github-actions", "pre-commit", "mise", "uv"],
+      "matchManagers": {{ current_match_managers | unique | sort | tojson }},
       "matchUpdateTypes": ["minor", "patch"],
       "groupName": "non-major dependencies"
     }

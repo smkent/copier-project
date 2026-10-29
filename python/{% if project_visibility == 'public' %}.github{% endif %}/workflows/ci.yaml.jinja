@@ -1,148 +1,60 @@
-{%- import "common/python.jinja" as py with context -%}
-name: CI
+{% extends "common/templates/ci.yaml.jinja" %}
+{% import "common/github-workflow-steps.jinja" as ci with context %}
+{% import "common/python.jinja" as py with context %}
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-
-permissions:
-  contents: read
-
-concurrency:
-  group: {% raw %}${{ github.workflow }}-${{ github.head_ref || github.ref }}{% endraw %}
-  cancel-in-progress: {% raw %}${{ github.event_name == 'pull_request' }}{% endraw %}
-
-jobs:
-  ci:
-    name: {% raw %}Test (Python ${{ matrix.python-version }}){% endraw %}
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    env:
-      UV_PYTHON: {% raw %}${{ matrix.python-version }}{% endraw %}
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version:
+{% block jobs %}
+ci:
+  name: {% raw %}Test (Python ${{ matrix.python-version }}){% endraw %}
+  runs-on: ubuntu-latest
+  timeout-minutes: 15
+  env:
+    UV_PYTHON: {% raw %}${{ matrix.python-version }}{% endraw %}
+  strategy:
+    fail-fast: false
+    matrix:
+      python-version:
 {%- call(loop, v) py.for_each_version() %}
-          - '{{ v }}'
+        - '{{ v }}'
 {%- endcall %}
-    steps:
-      - name: 💾 Check out repository
-        uses: actions/checkout@v7
-        with:
-          persist-credentials: false
+  steps:
+    {{ ci.step_checkout() | indent(4) }}
 
-      - name: 📦 Cache uv managed packages
-        uses: actions/cache@v6
-        with:
-          path: ~/.cache/uv
-          key: {% raw %}uv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('pyproject.toml', 'uv.lock') }}{% endraw %}
-          restore-keys: |
-            {% raw %}uv-${{ runner.os }}-${{ matrix.python-version }}-{% endraw %}
+    {{ ci.steps_project_setup(cache_key_suffix="${{ matrix.python-version }}-") | indent(4) }}
 
-      - name: 🍳 Set up mise
-        uses: jdx/mise-action@v5
-        with:
-          cache: true
-          install: true
+    - name: 📐 Lint
+      run: mise run lint
 
-      - name: 📐 Lint
-        run: mise run lint
-
-      - name: 🔥 Test
-        run: mise run test
+    - name: 🔥 Test
+      run: mise run test
 {%- if enable_coverage %}
 
-      - name: 🔍 Collect coverage results
-        run: uv run coverage xml
-        if: {% raw %}${{ matrix.python-version == '{% endraw %}{{ py.latest() }}{% raw %}' }}{% endraw %}
+    - name: 🔍 Collect coverage results
+      run: uv run coverage xml
+      if: {% raw %}${{ matrix.python-version == '{% endraw %}{{ py.latest() }}{% raw %}' }}{% endraw %}
 
-      - name: 📊 Upload coverage to Codecov
-        uses: codecov/codecov-action@v7
-        if: {% raw %}${{ matrix.python-version == '{% endraw %}{{ py.latest() }}{% raw %}' }}{% endraw %}
-        with:
-          fail_ci_if_error: true
-          use_pypi: true
-          version: 11.2.8
+    - name: 📊 Upload coverage to Codecov
+      uses: codecov/codecov-action@v7
+      if: {% raw %}${{ matrix.python-version == '{% endraw %}{{ py.latest() }}{% raw %}' }}{% endraw %}
+      with:
+        fail_ci_if_error: true
+        use_pypi: true
+        version: 11.2.8
 {%- endif %}
-{% if enable_docs %}
-  docs:
-    name: Documentation
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    env:
-      UV_PYTHON: '{{ py.latest() }}'
-    steps:
-      - name: 💾 Check out repository
-        uses: actions/checkout@v7
-        with:
-          fetch-depth: 0
-          persist-credentials: false
+{%- if enable_docs %}
 
-      - name: 📦 Cache uv managed packages
-        uses: actions/cache@v6
-        with:
-          path: ~/.cache/uv
-          key: {% raw %}uv-${{ runner.os }}-${{ hashFiles('pyproject.toml', 'uv.lock') }}{% endraw %}
-          restore-keys: |
-            {% raw %}uv-${{ runner.os }}-{% endraw %}
+docs:
+  name: Documentation
+  runs-on: ubuntu-latest
+  timeout-minutes: 15
+  env:
+    UV_PYTHON: '{{ py.latest() }}'
+  steps:
+    {{ ci.step_checkout(full_history=true) | indent(4) }}
 
-      - name: 🍳 Set up mise
-        uses: jdx/mise-action@v5
-        with:
-          cache: true
-          install: true
+    {{ ci.steps_project_setup() | indent(4) }}
 
-      - name: 📖 Build documentation
-        run: mise run docs-build
+    - name: 📖 Build documentation
+      run: mise run docs-build
 {%- endif %}
-
-  betterleaks:
-    name: Secret scan
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    steps:
-      - name: 💾 Check out repository
-        uses: actions/checkout@v7
-        with:
-          fetch-depth: 0
-          persist-credentials: false
-
-      - name: 📦 Cache uv managed packages
-        uses: actions/cache@v6
-        with:
-          path: ~/.cache/uv
-          key: {% raw %}uv-${{ runner.os }}-${{ hashFiles('pyproject.toml', 'uv.lock') }}{% endraw %}
-          restore-keys: |
-            {% raw %}uv-${{ runner.os }}-{% endraw %}
-
-      - name: 🍳 Set up mise
-        uses: jdx/mise-action@v5
-        with:
-          cache: true
-          install: true
-
-      - name: 🔍 Check for secrets
-        run: mise run secretscan
-{%- if enable_commit_check %}
-
-  commit-messages:
-    name: Commit messages
-    if: {% raw %}${{ github.event_name == 'pull_request' }}{% endraw %}
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    steps:
-      - name: 💾 Check out repository
-        uses: actions/checkout@v7
-        with:
-          fetch-depth: 0
-          persist-credentials: false
-
-      - name: ✉️ Check commit messages
-        uses: commit-check/commit-check-action@v2
-        with:
-          branch: false
-{%- endif %}
-{#- vim: set ft=yaml: #}
+{{ super() }}
+{% endblock %}

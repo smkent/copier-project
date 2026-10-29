@@ -1,66 +1,29 @@
-{% if enable_commit_check -%}
-default_install_hook_types: [pre-commit, commit-msg]
-default_stages: [pre-commit]
-{% endif -%}
-repos:
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v6.0.0
-    hooks:
-      - id: trailing-whitespace
-      - id: end-of-file-fixer
-      - id: check-merge-conflict
-      - id: check-yaml
-      - id: check-toml
-      - id: check-json
-      - id: check-added-large-files
-      - id: detect-private-key
-      - id: debug-statements
-  - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
-    rev: v2.16.0
-    hooks:
-      - id: pretty-format-yaml
-        args: [--autofix, --offset, '2']
-        exclude: ^\.copier-answers\.yml$
-  - repo: local
-    hooks:
-      - id: betterleaks
-        name: betterleaks
-        entry: betterleaks git . --pre-commit --staged --redact
-        language: system
-        pass_filenames: false
-      - id: jactionlint
-        name: jactionlint
-        entry: jactionlint --fix
-        language: system
-        types:
-          - yaml
-        files: ^\.github/workflows/
-      - id: ruff
-        name: ruff
-        entry: uv run ruff check --fix
-        language: system
-        types_or: [python, pyi]
-      - id: ruff-format
-        name: ruff-format
-        entry: uv run ruff format
-        language: system
-        types_or: [python, pyi]
-      - id: taplo
-        name: taplo
-        entry: taplo format
-        language: system
-        types: [toml]
-      - id: ty
-        name: ty
-        entry: uv run ty check
-        language: system
-        types: [python]
-        pass_filenames: false
-{%- if enable_commit_check %}
-      - id: commit-check
-        name: commit-check
-        entry: uv run commit-check --no-banner --message
-        language: system
-        stages: [commit-msg]
-{%- endif %}
-{#- vim: set ft=yaml: #}
+{% extends "common/templates/.pre-commit-config.yaml.jinja" %}
+
+{% set commit_check_command = "uv run commit-check" %}
+
+{% block extra_builtin_hooks %}
+- id: debug-statements
+{% endblock %}
+
+{% block local_hooks_after_jactionlint %}
+- id: ruff
+  name: ruff
+  entry: uv run ruff check --fix
+  language: system
+  types_or: [python, pyi]
+- id: ruff-format
+  name: ruff-format
+  entry: uv run ruff format
+  language: system
+  types_or: [python, pyi]
+{% endblock %}
+
+{% block local_hooks_after_taplo %}
+- id: ty
+  name: ty
+  entry: uv run ty check
+  language: system
+  types: [python]
+  pass_filenames: false
+{% endblock %}

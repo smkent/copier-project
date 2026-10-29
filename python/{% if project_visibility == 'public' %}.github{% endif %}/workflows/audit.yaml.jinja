@@ -1,6 +1,12 @@
-{%- import "common/python.jinja" as py with context -%}
-name: Audit
+{% extends "common/templates/github_workflow.yaml.jinja" %}
+{% import "common/github-workflow-steps.jinja" as ci with context %}
+{% import "common/python.jinja" as py with context %}
 
+{% block name -%}
+Audit
+{%- endblock %}
+
+{% block triggers %}
 on:
   push:
     branches:
@@ -10,41 +16,20 @@ on:
   pull_request:
     paths:
       - uv.lock
+{% endblock %}
 
-concurrency:
-  group: {% raw %}${{ github.workflow }}-${{ github.head_ref || github.ref }}{% endraw %}
-  cancel-in-progress: {% raw %}${{ github.event_name == 'pull_request' }}{% endraw %}
+{% block jobs %}
+audit:
+  name: Dependencies
+  runs-on: ubuntu-latest
+  timeout-minutes: 15
+  env:
+    UV_PYTHON: '{{ py.latest() }}'
+  steps:
+    {{ ci.step_checkout() | indent(4) }}
 
-permissions:
-  contents: read
+    {{ ci.steps_project_setup() | indent(4) }}
 
-jobs:
-  audit:
-    name: Dependencies
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    env:
-      UV_PYTHON: '{{ py.latest() }}'
-    steps:
-      - name: 💾 Check out repository
-        uses: actions/checkout@v7
-        with:
-          persist-credentials: false
-
-      - name: 📦 Cache uv managed packages
-        uses: actions/cache@v6
-        with:
-          path: ~/.cache/uv
-          key: {% raw %}uv-${{ runner.os }}-${{ hashFiles('pyproject.toml', 'uv.lock') }}{% endraw %}
-          restore-keys: |
-            {% raw %}uv-${{ runner.os }}-{% endraw %}
-
-      - name: 🍳 Set up mise
-        uses: jdx/mise-action@v5
-        with:
-          cache: true
-          install: true
-
-      - name: 🔍 Check dependencies
-        run: mise run audit
-{#- vim: set ft=yaml: #}
+    - name: 🔍 Check dependencies
+      run: mise run audit
+{% endblock %}

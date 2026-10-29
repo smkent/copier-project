@@ -1,14 +1,20 @@
-{%- import "common/mise.toml.jinja" as mise_toml with context -%}
+{% extends "common/templates/mise.toml.jinja" %}
 {%- import "common/python.jinja" as py with context -%}
-{{ mise_toml.min_version() }}
 
-[hooks]
-postinstall = [
-  "uv sync",
-  {{ mise_toml.hooks_postinstall_prek() }},
-]
+{% block postinstall_hooks %}
+"uv sync",
+{% endblock %}
 
-{{ mise_toml.tools(commit_check=false) }}
+{% block check_tool %}
+{%- endblock %}
+
+{% block task_lt %}
+[tasks.lt]
+description = "Run all formatters, static checks and tests"
+run = [{ task = "lint" }, { task = "test" }]
+{% endblock %}
+
+{% block tasks_start %}
 {%- if project_visibility == 'public' %}
 
 [tasks.audit]
@@ -37,21 +43,16 @@ description = "Build documentation site"
 raw_args = true
 run = "uv run zensical build -c"
 {%- endif %}
+{% endblock %}
 
-{{ mise_toml.task_init() }}
-
-{{ mise_toml.task_lint() }}
-
-[tasks.lt]
-description = "Run all formatters, static checks and tests"
-run = [{ task = "lint" }, { task = "test" }]
-
+{% block tasks_after_lt %}
 [tasks.release]
 description = "Create and push a release tag (patch/minor/major)"
 raw_args = true
 run = "uv run bump-my-version bump -v"
+{% endblock %}
 
-{{ mise_toml.task_secretscan() }}
+{% block tasks_after_secretscan %}
 {%- if "syrupy" in enable_features %}
 
 [tasks.snapup]
@@ -83,4 +84,5 @@ run = "uv run --python {{ v }} pytest"
 description = "Run tests with debug friendly options"
 raw_args = true
 run = "uv run pytest{% if 'xdist' in enable_features %} --numprocesses 0{% endif %} --no-cov -vv"
+{% endblock %}
 {#- vim: set ft=toml: #}

@@ -1,0 +1,30 @@
+{%- macro step_checkout(full_history=false) -%}
+- name: 💾 Check out repository
+  uses: actions/checkout@v7
+  with:
+{%- if full_history %}
+    fetch-depth: 0
+{%- endif %}
+    persist-credentials: false
+{%- endmacro -%}
+
+{%- macro steps_project_setup(cache=true, cache_key_suffix="") -%}
+{%- if template_variant == 'python' and cache -%}
+{%- set key = "uv-${{ runner.os }}-" + cache_key_suffix -%}
+- name: 📦 Cache uv managed packages
+  uses: actions/cache@v6
+  with:
+    path: ~/.cache/uv
+    key: {{ key }}{% raw %}${{ hashFiles('pyproject.toml', 'uv.lock') }}{% endraw %}
+    restore-keys: |
+      {{ key }}
+
+{% endif -%}
+- name: 🍳 Set up mise
+  uses: jdx/mise-action@v5
+  with:
+{%- if cache %}
+    cache: true
+{%- endif %}
+    install: true
+{%- endmacro -%}

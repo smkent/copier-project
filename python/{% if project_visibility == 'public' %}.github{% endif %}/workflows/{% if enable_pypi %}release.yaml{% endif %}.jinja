@@ -1,88 +1,86 @@
-{%- import "common/python.jinja" as py with context -%}
-name: Release
+{% extends "common/templates/github_workflow.yaml.jinja" %}
+{% import "common/github-workflow-steps.jinja" as ci with context %}
+{% import "common/python.jinja" as py with context %}
 
+{% block name -%}
+Release
+{%- endblock %}
+
+{% block triggers %}
 on:
   push:
     tags:
       - v[0-9]*.[0-9]*
+{% endblock %}
 
-concurrency:
-  group: {% raw %}${{ github.workflow }}-${{ github.head_ref || github.ref }}{% endraw %}
-  cancel-in-progress: false
+{% block concurrency_cancel_in_progress -%}
+false
+{%- endblock %}
 
-permissions:
-  contents: read
+{% block jobs %}
+build:
+  name: Build distribution
+  runs-on: ubuntu-latest
+  cache-mode: none
+  timeout-minutes: 15
+  env:
+    UV_PYTHON: '{{ py.latest() }}'
+  steps:
+    {{ ci.step_checkout(full_history=true) | indent(4) }}
 
-jobs:
-  build:
-    name: Build distribution
-    runs-on: ubuntu-latest
-    cache-mode: none
-    timeout-minutes: 15
-    env:
-      UV_PYTHON: '{{ py.latest() }}'
-    steps:
-      - name: 💾 Check out repository
-        uses: actions/checkout@v7
-        with:
-          fetch-depth: 0
-          persist-credentials: false
+    {{ ci.steps_project_setup(cache=false) | indent(4) }}
 
-      - name: 🍳 Set up mise
-        uses: jdx/mise-action@v5
-        with:
-          install: true
+    - name: 📦 Build package
+      run: mise run build
 
-      - name: 📦 Build package
-        run: mise run build
+    - name: 🔼 Upload artifact
+      uses: actions/upload-artifact@v7
+      with:
+        if-no-files-found: error
+        name: dist
+        path: dist/
 
-      - name: 🔼 Upload artifact
-        uses: actions/upload-artifact@v7
-        with:
-          if-no-files-found: error
-          name: dist
-          path: dist/
+release:
+  name: Create GitHub release
+  needs: build
+  runs-on: ubuntu-latest
+  timeout-minutes: 15
+  permissions:
+    contents: write
+  steps:
+    - name: 🔽 Download artifact
+      uses: actions/download-artifact@v8
+      with:
+        name: dist
+        path: dist/
 
-  release:
-    name: Create GitHub release
-    needs: build
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    permissions:
-      contents: write
-    steps:
-      - name: 🔽 Download artifact
-        uses: actions/download-artifact@v8
-        with:
-          name: dist
-          path: dist/
+    - name: 🏷️ Create GitHub release
+      run: gh release create "${REF_NAME}" dist/* --generate-notes
+      env:
+        GH_REPO: {% raw %}${{ github.repository }}{% endraw %}
+        GH_TOKEN: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
+        REF_NAME: {% raw %}${{ github.ref_name }}{% endraw %}
 
-      - name: 🏷️ Create GitHub release
-        run: gh release create "${REF_NAME}" dist/* --generate-notes
-        env:
-          GH_REPO: {% raw %}${{ github.repository }}{% endraw %}
-          GH_TOKEN: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
-          REF_NAME: {% raw %}${{ github.ref_name }}{% endraw %}
+publish:
+  name: Publish to PyPI
+  needs: build
+  runs-on: ubuntu-latest
+  timeout-minutes: 15
+  environment:
+    name: pypi
+    url: https://pypi.org/project/{{ project_name }}/
+  permissions:
+    id-token: write
+  steps:
+    - name: 🔽 Download artifact
+      uses: actions/download-artifact@v8
+      with:
+        name: dist
+        path: dist/
 
-  publish:
-    name: Publish to PyPI
-    needs: build
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    environment:
-      name: pypi
-      url: https://pypi.org/project/{{ project_name }}/
-    permissions:
-      id-token: write
-    steps:
-      - name: 🔽 Download artifact
-        uses: actions/download-artifact@v8
-        with:
-          name: dist
-          path: dist/
-
-      - name: ☢️ Publish to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          attestations: true
+    - name: ☢️ Publish to PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        attestations: true
+{% endblock %}
 {#- vim: set ft=yaml: #}

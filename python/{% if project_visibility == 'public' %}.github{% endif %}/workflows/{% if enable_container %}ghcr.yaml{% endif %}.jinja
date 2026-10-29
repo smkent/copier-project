@@ -1,5 +1,11 @@
-name: Container Registry
+{% extends "common/templates/github_workflow.yaml.jinja" %}
+{% import "common/github-workflow-steps.jinja" as ci with context %}
 
+{% block name -%}
+Container Registry
+{%- endblock %}
+
+{% block triggers %}
 on:
   pull_request:
     types:
@@ -7,32 +13,33 @@ on:
   schedule:
     - cron: 0 3 * * 0
   workflow_dispatch:
+{% endblock %}
 
+{% block concurrency %}
 concurrency:
   group: ghcr-cleanup
   cancel-in-progress: false
+{% endblock %}
 
-permissions:
-  contents: read
-
-jobs:
-  cleanup:
-    name: Clean up images
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    permissions:
-      packages: write
-    steps:
-      - name: 🧹 Clean up old container images
-        uses: dataaxiom/ghcr-cleanup-action@v1
-        with:
-          token: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
-          keep-n-tagged: 5
-          keep-n-untagged: 2
-          delete-untagged: true
-          exclude-tags: |
-            ^\d+(\.\d+){0,2}$
-            ^edge$
-            ^latest$
-            ^main$
+{% block jobs %}
+cleanup:
+  name: Clean up images
+  runs-on: ubuntu-latest
+  timeout-minutes: 15
+  permissions:
+    packages: write
+  steps:
+    - name: 🧹 Clean up old container images
+      uses: dataaxiom/ghcr-cleanup-action@v1
+      with:
+        token: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
+        keep-n-tagged: 5
+        keep-n-untagged: 2
+        delete-untagged: true
+        exclude-tags: |
+          ^\d+(\.\d+){0,2}$
+          ^edge$
+          ^latest$
+          ^main$
+{% endblock %}
 {#- vim: set ft=yaml: #}

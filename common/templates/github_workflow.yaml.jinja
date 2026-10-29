@@ -1,0 +1,23 @@
+{%- import "common/blocks.jinja" as blocks -%}
+
+name: {% block name required -%}{%- endblock %}
+
+{%- set triggers %}{% block triggers required %}{% endblock %}{% endset -%}
+{{- blocks.put(triggers, blank_lines=1) }}
+
+{%- set permissions %}{% block permissions %}
+permissions:
+  contents: read
+{% endblock %}{% endset -%}
+{{- blocks.put(permissions, blank_lines=1) }}
+
+{%- set concurrency %}{% block concurrency %}
+concurrency:
+  group: {% raw %}${{ github.workflow }}-${{ github.head_ref || github.ref }}{% endraw %}
+  cancel-in-progress: {% block concurrency_cancel_in_progress -%}{% raw %}${{ github.event_name == 'pull_request' }}{% endraw %}{% endblock %}
+{% endblock %}{% endset -%}
+{{- blocks.put(concurrency, blank_lines=1) }}
+
+jobs:
+{%- set jobs %}{% block jobs -%}{%- endblock %}{% endset -%}
+{{- blocks.put(jobs, indent=2) }}
