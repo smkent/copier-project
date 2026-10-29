@@ -1,3 +1,7 @@
+> [!NOTE]
+>
+> **copier-python is now published as [copier-project](https://github.com/smkent/copier-project) with support for multiple template variants!**
+
 # copier-python
 
 [Copier][copier] template for Python projects with modern tooling
