@@ -13,7 +13,7 @@ if TYPE_CHECKING:
 
     from .repo import RepoTarget
 
-TEMPLATE_REPO_URL = "https://github.com/smkent/copier-python"
+TEMPLATE_REPO_URL = "https://github.com/smkent/copier-project"
 
 
 @dataclass

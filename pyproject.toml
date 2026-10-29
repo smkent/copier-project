@@ -3,9 +3,9 @@ requires = ["hatchling", "uv-dynamic-versioning"]
 build-backend = "hatchling.build"
 
 [project]
-name = "copier-python"
+name = "copier-project"
 dynamic = ["version"]
-description = "Copier template for Python projects with modern tooling"
+description = "Copier template for software projects with modern tooling"
 readme = "README.md"
 license = "MIT"
 license-files = ["LICENSE"]
@@ -35,12 +35,12 @@ dependencies = [
 ]
 
 [project.scripts]
-copier-python = "copier_python.__main__:main"
+copier-project = "copier_project.__main__:main"
 
 [project.urls]
-Homepage = "https://smkent.github.io/copier-python"
-Repository = "https://github.com/smkent/copier-python"
-Issues = "https://github.com/smkent/copier-python/issues"
+Homepage = "https://smkent.github.io/copier-project"
+Repository = "https://github.com/smkent/copier-project"
+Issues = "https://github.com/smkent/copier-project/issues"
 
 [dependency-groups]
 dev = [
@@ -68,7 +68,7 @@ tag_message = ""
 push = true
 
 [tool.hatch.build.targets.sdist]
-include = ["/copier_python", "/tests", "*.md", "LICENSE"]
+include = ["/copier_project", "/tests", "*.md", "LICENSE"]
 
 [tool.hatch.version]
 source = "uv-dynamic-versioning"
@@ -76,7 +76,7 @@ source = "uv-dynamic-versioning"
 [tool.pytest]
 addopts = [
   "-ra",
-  "--cov=copier_python",
+  "--cov=copier_project",
   "--strict-config",
   "--strict-markers",
   "--numprocesses",
@@ -85,7 +85,7 @@ addopts = [
 testpaths = ["tests"]
 
 [tool.coverage.run]
-source = ["copier_python"]
+source = ["copier_project"]
 branch = true
 
 [tool.coverage.report]
@@ -114,7 +114,7 @@ ignore = [
 ]
 
 [tool.ruff.lint.isort]
-known-first-party = ["copier_python"]
+known-first-party = ["copier_project"]
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**/*.py" = [
@@ -126,7 +126,7 @@ known-first-party = ["copier_python"]
 convention = "google"
 
 [tool.ty.src]
-include = ["copier_python/", "tests/"]
+include = ["copier_project/", "tests/"]
 
 [tool.ty.terminal]
 error-on-warning = true

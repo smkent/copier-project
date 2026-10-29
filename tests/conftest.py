@@ -9,7 +9,7 @@ import copier
 import pytest
 import yaml
 
-from copier_python.__main__ import setup_env
+from copier_project.__main__ import setup_env
 from tests.template.utils import StructureTest, template
 from tests.utils import DisallowCallable
 

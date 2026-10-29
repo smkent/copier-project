@@ -39,7 +39,7 @@ Set **Repository name** to your chosen project name.
 1. In the directory where the new project should be created, run Copier:
 
     ```sh
-    copier copy "gh:smkent/copier-python" ./project_name
+    copier copy "gh:smkent/copier-project" ./project_name
     ```
 
     Copier will prompt for project information.

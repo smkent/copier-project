@@ -1,4 +1,4 @@
-"""Copier template for Python projects with modern tooling."""
+"""Copier template for software projects with modern tooling."""
 
 from importlib.metadata import PackageNotFoundError
 from importlib.metadata import version as import_version

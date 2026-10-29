@@ -3,13 +3,13 @@ title: Development workflow
 icon: lucide/braces
 ---
 
-# copier-python development workflow
+# copier-project development workflow
 
 ## Cloning the repository
 
 ```sh
-git clone https://github.com/smkent/copier-python
-cd copier-python
+git clone https://github.com/smkent/copier-project
+cd copier-project
 ```
 
 Run `mise install` in new repository clones to install tools, dependencies, and
@@ -21,12 +21,12 @@ mise install
 
 ## Local template usage
 
-While making development changes to copier-python, the local template can be
+While making development changes to copier-project, the local template can be
 used to create projects. To do so, run `copier copy` with the `-r`/`--vcs-ref`
 argument:
 
 ```sh
-copier copy -r HEAD path/to/copier-python/clone/ path/to/new/project/
+copier copy -r HEAD path/to/copier-project/clone/ path/to/new/project/
 ```
 
 This will render the new project from the current template state including
@@ -45,7 +45,7 @@ mise run lt
 
 ### Test snapshots
 
-Many copier-python tests compare template-rendered files with saved snapshots.
+Many copier-project tests compare template-rendered files with saved snapshots.
 When templates are modified, the snapshots need to be updated. Update test
 snapshots by running:
 

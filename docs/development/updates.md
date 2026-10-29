@@ -3,10 +3,10 @@ title: Template updates
 icon: lucide/git-merge
 ---
 
-# Applying copier-python template updates
+# Applying copier-project template updates
 
-**copier-python is managed by its own template!**
-When the template changes, copier-python itself can be updated with:
+**copier-project is managed by its own template!**
+When the template changes, copier-project itself can be updated with:
 
 ```sh
 copier update

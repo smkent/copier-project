@@ -23,8 +23,8 @@ _message_after_copy: |
   {%- if template_variant == 'python' %}
 
   For GitHub repository configuration and additional features setup,
-  see copier-python's Completing Setup documentation at
-  https://smkent.github.io/copier-python/project-setup/
+  see copier-project's Completing Setup documentation at
+  https://smkent.github.io/copier-project/project-setup/
   {%- if enable_docs %}
   OR run the documentation site locally:
 

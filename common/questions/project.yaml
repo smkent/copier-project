@@ -127,5 +127,5 @@ enable_commit_check:
 template_attribution:
   type: bool
   qmark: 🪧
-  help: Add copier-python attribution to README.md?
+  help: Add copier-project attribution to README.md?
   default: no

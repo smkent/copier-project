@@ -39,7 +39,7 @@ class Args:
 
 
 cli = Typer(
-    help="copier-python utilities",
+    help="copier-project utilities",
     add_completion=False,
     no_args_is_help=True,
     pretty_exceptions_enable=False,
@@ -79,7 +79,7 @@ def update(
     dry_run: Args.DryRun = False,
     branch: Annotated[str, Option(help="Branch name to create.")] = "updates",
 ) -> None:
-    """Apply copier-python template updates to one or more downstream repos."""
+    """Apply copier-project template updates to downstream repositories."""
     results = []
 
     repo_targets = {(target := RepoTarget(repo)).url: target for repo in repos}

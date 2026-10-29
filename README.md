@@ -1,12 +1,12 @@
-# copier-python
+# copier-project
 
-[Copier][copier] template for Python projects with modern tooling
+[Copier][copier] template for software projects with modern tooling
 
 [![Copier][copier-badge]][copier]
-[![License](https://img.shields.io/github/license/smkent/copier-python)](https://github.com/smkent/copier-python/blob/main/LICENSE)
-[![PyPI](https://img.shields.io/pypi/v/copier-python)](https://pypi.org/project/copier-python/)
-[![Python](https://img.shields.io/pypi/pyversions/copier-python)](https://pypi.org/project/copier-python/)
-[![GitHub stars](https://img.shields.io/github/stars/smkent/copier-python?style=social)](https://github.com/smkent/copier-python)
+[![License](https://img.shields.io/github/license/smkent/copier-project)](https://github.com/smkent/copier-project/blob/main/LICENSE)
+[![PyPI](https://img.shields.io/pypi/v/copier-project)](https://pypi.org/project/copier-project/)
+[![Python](https://img.shields.io/pypi/pyversions/copier-project)](https://pypi.org/project/copier-project/)
+[![GitHub stars](https://img.shields.io/github/stars/smkent/copier-project?style=social)](https://github.com/smkent/copier-project)
 
 ## Quick start
 
@@ -19,7 +19,7 @@ Install required software:
 Create a new project from the template:
 
 ```sh
-copier copy "gh:smkent/copier-python" /new/project/path
+copier copy "gh:smkent/copier-project" /new/project/path
 ```
 
 **[For more details, see the documentation!][docs-usage]**
@@ -75,7 +75,7 @@ This template was inspired by [pawamoy/copier-uv][copier-uv] and
 Copyright (C) 2026 Stephen Kent and contributors
 
 Licensed under the MIT License
-([`MIT`](https://github.com/smkent/copier-python/blob/main/LICENSE)).
+([`MIT`](https://github.com/smkent/copier-project/blob/main/LICENSE)).
 
 [astral]: https://astral.sh
 [codecovio]: https://codecov.io
@@ -86,7 +86,7 @@ Licensed under the MIT License
 [copier-update]: https://copier.readthedocs.io/en/stable/updating/
 [copier-uv]: https://pawamoy.github.io/copier-uv/
 [copier]: https://copier.readthedocs.io
-[docs-usage]: https://smkent.github.io/copier-python/requirements/
+[docs-usage]: https://smkent.github.io/copier-project/requirements/
 [ghcr-docs]: https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry
 [github-actions]: https://github.com/features/actions
 [github-pages]: https://pages.github.com
