@@ -1,5 +1,5 @@
 # Changes here will be overwritten by Copier
-_commit: v0.27.1
+_commit: v0.28.0
 _src_path: .
 copyright_holder: Stephen Kent
 copyright_license: MIT
@@ -21,5 +21,6 @@ project_visibility: public
 python_version_maximum: No maximum
 python_version_minimum: '3.11'
 template_attribution: false
+template_variant: python
 user_email: smkent@smkent.net
 user_name: Stephen Kent
