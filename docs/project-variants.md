@@ -1,6 +1,6 @@
 ---
 title: Project variants
-icon: lucide/flask-conical
+icon: lucide/dna
 ---
 
 # Project variants
