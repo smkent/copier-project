@@ -1,0 +1,83 @@
+template_python_versions_supported:
+  type: yaml
+  qmark: 🐍
+  default:
+    min_minor: 11
+    max_minor: 15
+  when: false
+
+project_slug:
+  type: str
+  qmark: 🐍
+  default: "{{ project_name | title | lower | regex_replace('[^a-za-z0-9]','_') | regex_replace('_{2,}', '_') | trim('_') }}"
+  help: Python module import name (slug)
+  validator: |
+    {%- if not project_slug -%}
+      Required
+    {%- elif project_slug | lower | regex_replace('^[a-z_][a-z0-9_]*$','') != '' -%}
+      Python package import name must only contain letters, numbers, or underscores
+    {%- endif -%}
+  when: "{{ template_variant == 'python' }}"
+
+python_version_minimum:
+  type: str
+  qmark: 🐍
+  help: Minimum Python version
+  default: 3.{{- template_python_versions_supported.min_minor -}}
+  choices: |
+    {%- for minor in range(template_python_versions_supported.min_minor, template_python_versions_supported.max_minor + 1) %}
+    - '3.{{ minor }}'
+    {%- endfor %}
+  when: "{{ template_variant == 'python' }}"
+
+python_version_maximum:
+  type: str
+  qmark: 🐍
+  help: Maximum Python version
+  default: No maximum
+  choices: |
+    - 'No maximum'
+    {%- set min_minor = python_version_minimum.split(".")[1] | int -%}
+    {%- for minor in range(min_minor, template_python_versions_supported.max_minor + 1) %}
+    - '3.{{ minor }}'
+    {%- endfor %}
+  when: "{{ template_variant == 'python' }}"
+
+enable_coverage:
+  type: bool
+  qmark: 📊
+  help: Enable coverage.io reports?
+  default: "{{ project_visibility == 'public' }}"
+  when: "{{ template_variant == 'python' and project_visibility == 'public' }}"
+
+enable_pypi:
+  type: bool
+  qmark: 🚀
+  help: Enable package publishing to PyPI?
+  default: "{{ project_visibility == 'public' }}"
+  when: "{{ template_variant == 'python' and project_visibility == 'public' }}"
+
+enable_container:
+  type: bool
+  qmark: 📦
+  help: Enable Docker container{% if project_visibility == 'public' %} build and publishing to ghcr.io{% endif %}?
+  default: "{{ project_type == 'application' }}"
+  when: "{{ template_variant == 'python' }}"
+
+enable_docs:
+  type: bool
+  qmark: 📕
+  help: Enable documentation site (Zensical{% if project_visibility == 'public' %} with deployment to GitHub Pages{% endif %})?
+  default: yes
+  when: "{{ template_variant == 'python' }}"
+
+enable_features:
+  type: str
+  qmark: 🧩
+  help: Enable miscellaneous features?
+  multiselect: true
+  choices:
+    pytest-syrupy for snapshots: syrupy
+    pytest-xdist for multiprocessing: xdist
+  default: '["syrupy", "xdist"]'
+  when: "{{ template_variant == 'python' }}"

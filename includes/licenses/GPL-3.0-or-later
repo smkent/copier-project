@@ -1,1 +1,0 @@
-{%- include pathjoin("includes", "licenses", "GPL-3.0-only") -%}

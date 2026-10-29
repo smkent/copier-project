@@ -1,0 +1,26 @@
+{%- import "common/python.jinja" as py with context -%}
+FROM python:{{ py.latest() }}-slim AS builder
+
+COPY --from=ghcr.io/astral-sh/uv /uv /uvx /bin/
+
+WORKDIR /app
+
+# Install dependencies first (cached layer, only invalidated by pyproject.toml changes)
+COPY pyproject.toml README.md .
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv sync --no-dev --no-install-project
+
+# Copy source and install project
+COPY {{ project_slug }}/ ./{{ project_slug }}/
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv sync --no-dev --no-editable
+
+FROM python:{{ py.latest() }}-slim
+
+COPY --from=builder /app/.venv /app/.venv
+
+RUN useradd --no-create-home --shell /bin/false app
+USER app
+
+CMD ["/app/.venv/bin/python", "-m", "{{ project_slug }}"]
+{#- vim: set ft=dockerfile: #}

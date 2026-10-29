@@ -69,7 +69,7 @@ def origin(tmp_path: Path, disallow_subprocess: DisallowCallable) -> Path:
 @pytest.fixture
 def create_project(
     disallow_subprocess: DisallowCallable,
-    render_template: Callable[..., Path],
+    render_template_common: Callable[..., Path],
     origin: Path,
 ) -> Callable[..., Path]:
 
@@ -87,7 +87,7 @@ def create_project(
         postcreate: Callable[[Path], None] | None = None,
         **kwargs: Any,
     ) -> Path:
-        project = render_template(vcs_ref=vcs_ref, **kwargs)
+        project = render_template_common(vcs_ref=vcs_ref, **kwargs)
         timestamp = _vcs_ref_timestamp(vcs_ref)
         for cmd in (
             ["git", "init", "-b", DEFAULT_BRANCH_NAME],

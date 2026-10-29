@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from functools import cached_property
 from pathlib import Path
 from types import SimpleNamespace
@@ -37,14 +37,41 @@ class PythonVersionsSupported:
         )
 
 
+@dataclass
 class Template:
-    @cached_property
-    def dir(self) -> Path:
-        return Path(__file__).parent.parent.parent
+    dir: Path = field(default=Path(__file__).parent.parent.parent)
 
     @cached_property
     def config(self) -> dict[str, Any]:
-        return yaml.safe_load((self.dir / "copier.yaml").read_text())
+        class Loader(yaml.SafeLoader):
+            """Load copier.yaml with its `!include` documents merged in order.
+
+            Duplicate keys across documents are errors.
+            """
+
+            _dir = self.dir
+
+            def include(self, node: yaml.ScalarNode) -> list[Any]:
+                include_path = self._dir / self.construct_scalar(node)
+                return list(
+                    yaml.load_all(include_path.read_text(), Loader=type(self))
+                )
+
+            @classmethod
+            def load(cls) -> dict[str, Any]:
+                config_path = cls._dir / "copier.yaml"
+                config: dict[str, Any] = {}
+                for doc in yaml.load_all(config_path.read_text(), Loader=cls):
+                    for part in doc if isinstance(doc, list) else [doc]:
+                        if dupes := config.keys() & part.keys():
+                            raise ValueError(
+                                f"Duplicate keys {dupes} in {config_path}"
+                            )
+                        config.update(part)
+                return config
+
+        Loader.add_constructor("!include", Loader.include)
+        return Loader.load()
 
     @cached_property
     def choices(self) -> SimpleNamespace:

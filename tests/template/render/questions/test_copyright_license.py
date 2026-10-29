@@ -34,9 +34,7 @@ def test_license_default(
     "copyright_license", template.choices.copyright_license
 )
 def test_license_choices_have_templates(copyright_license: str) -> None:
-    assert (
-        template.dir / "includes" / "licenses" / copyright_license
-    ).is_file()
+    assert (template.dir / "common" / "licenses" / copyright_license).is_file()
 
 
 @pytest.mark.parametrize(

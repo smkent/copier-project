@@ -1,0 +1,1 @@
+{%- include pathjoin("common", "licenses", "LGPL-3.0-only") -%}

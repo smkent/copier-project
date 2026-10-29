@@ -10,6 +10,11 @@ repos:
         exclude: \.ambr$
       - id: check-merge-conflict
       - id: check-yaml
+        exclude: ^copier\.yaml$
+      - id: check-yaml
+        name: check copier.yaml
+        args: [--unsafe]
+        files: ^copier\.yaml$
       - id: check-toml
       - id: check-json
       - id: check-added-large-files

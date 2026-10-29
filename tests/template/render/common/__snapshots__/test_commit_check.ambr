@@ -1,0 +1,55 @@
+# serializer version: 1
+# name: test_commit_check_config[python-private-commit-check.toml-accepted-with-disclosure]
+  '''
+  [commit]
+  conventional_commits = false
+  subject_max_length = 72
+  subject_min_length = 1
+  # Reject LLM session URL trailers and promotional "Generated with" lines
+  message_pattern = '(?ims)(?!.*^(?:[\w-]+-session:\s|\W*generated (?:with|by) \S))'
+  ai_attribution = "disclose"
+  ai_disclosure_trailers = ["Assisted-by"]
+  # Assisted-by: values must not be email addresses or URLs
+  ai_disclosure_pattern = '^(?!.*(@|://)).*\S'
+  
+  '''
+# ---
+# name: test_commit_check_config[python-private-commit-check.toml-not-accepted]
+  '''
+  [commit]
+  conventional_commits = false
+  subject_max_length = 72
+  subject_min_length = 1
+  # Reject LLM session URL trailers and promotional "Generated with" lines
+  message_pattern = '(?ims)(?!.*^(?:[\w-]+-session:\s|\W*generated (?:with|by) \S))'
+  ai_attribution = "forbid"
+  
+  '''
+# ---
+# name: test_commit_check_config[python-public-.github/commit-check.toml-accepted-with-disclosure]
+  '''
+  [commit]
+  conventional_commits = false
+  subject_max_length = 72
+  subject_min_length = 1
+  # Reject LLM session URL trailers and promotional "Generated with" lines
+  message_pattern = '(?ims)(?!.*^(?:[\w-]+-session:\s|\W*generated (?:with|by) \S))'
+  ai_attribution = "disclose"
+  ai_disclosure_trailers = ["Assisted-by"]
+  # Assisted-by: values must not be email addresses or URLs
+  ai_disclosure_pattern = '^(?!.*(@|://)).*\S'
+  
+  '''
+# ---
+# name: test_commit_check_config[python-public-.github/commit-check.toml-not-accepted]
+  '''
+  [commit]
+  conventional_commits = false
+  subject_max_length = 72
+  subject_min_length = 1
+  # Reject LLM session URL trailers and promotional "Generated with" lines
+  message_pattern = '(?ims)(?!.*^(?:[\w-]+-session:\s|\W*generated (?:with|by) \S))'
+  ai_attribution = "forbid"
+  
+  '''
+# ---
