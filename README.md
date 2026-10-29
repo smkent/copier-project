@@ -24,21 +24,24 @@ copier copy "gh:smkent/copier-python" /new/project/path
 
 **[For more details, see the documentation!][docs-usage]**
 
-## Features
+## Variants and features
+
+The **Generic** project variant is a language-agnostic project template with
+features common to all project variants:
 
 * [**mise-en-place**][mise] ("mise") for development toolchain management
 
     [![mise][mise-badge]][mise]
 
-* [Astral][astral] toolset: [**uv**][uv], [**ruff**][ruff], and [**ty**][ty]
-
-    [![uv][uv-badge]][uv]
-    [![ruff][ruff-badge]][ruff]
-    [![ty][ty-badge]][ty]
-
-* [**prek**][prek] for [pre-commit][pre-commit] compatible git hooks
+* [**prek**][prek] for [pre-commit][pre-commit] compatible git hooks, with
+  [**GitHub Actions**][github-actions] CI workflow
 
     [![prek][prek-badge]][prek]
+
+* Contribution terms including selectable LLM use policy, with commit message
+  checks by [**commit-check**][commit-check]
+
+    [![commit-check][commit-check-badge]][commit-check]
 
 * Update automation with [**Renovate**][renovate] and
   [**`copier update`**][copier-update]
@@ -46,16 +49,21 @@ copier copy "gh:smkent/copier-python" /new/project/path
     [![Copier][copier-badge]][copier-update]
     [![renovate][renovate-badge]][renovate]
 
+### Python
+
+The **Python** project variant adds Python-specific features:
+
+* [Astral][astral] toolset: [**uv**][uv], [**ruff**][ruff], and [**ty**][ty]
+
+    [![uv][uv-badge]][uv]
+    [![ruff][ruff-badge]][ruff]
+    [![ty][ty-badge]][ty]
+
 * [**PyPI package**][pypi] and [**container image**][ghcr-docs] release
   automation via [**GitHub Actions**][github-actions]
 * [**pytest**][pytest] test framework with [**codecov.io**][codecovio] support
 * [**Zensical**][zensical] project documentation with automatic deployment to
   [**GitHub Pages**][github-pages]
-* Contribution terms including selectable LLM use policy, with commit message
-  checks by [**commit-check**][commit-check]
-
-    [![commit-check][commit-check-badge]][commit-check]
-
 
 ## Credits
 

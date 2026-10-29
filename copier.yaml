@@ -20,6 +20,7 @@ _message_after_copy: |
 
   3. Push:
        git push -u origin main
+  {%- if template_variant == 'python' %}
 
   For GitHub repository configuration and additional features setup,
   see copier-python's Completing Setup documentation at
@@ -30,6 +31,7 @@ _message_after_copy: |
        mise run docs
 
   Then, see One Time Setup at: http://localhost:8000/{{ project_name }}/setup/
+  {%- endif -%}
   {%- endif -%}
   {%- elif project_visibility == 'private' -%}
   1. Initialize git and environment:
@@ -46,16 +48,23 @@ _message_after_update: |
     git diff       # review all changes
     mise install   # install tools, dependencies, git hooks
     mise run lint  # verify code quality
+  {%- if template_variant == 'python' %}
     mise run test  # verify tests pass
+  {%- endif %}
 
 template_variant:
   type: str
   qmark: 🧬
   help: Project template variant
-  default: python
+  default: >-
+    {%- if python_version_minimum | default('') -%}
+      python
+    {%- else -%}
+      generic
+    {%- endif -%}
   choices:
+    Generic: generic
     Python: python
-  when: false
 ---
 !include common/questions/project.yaml
 ---

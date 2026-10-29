@@ -7,7 +7,11 @@ project_name:
     {%- if not project_name -%}
       Required
     {%- elif project_name | lower | regex_replace('^([a-z0-9]|[a-z0-9][a-z0-9._-]*[a-z0-9])$','') != '' -%}
-      Python package distribution name must only contain letters, numbers, or . - _
+      {% if template_variant == 'python' -%}
+        Python package distribution name
+      {%- else -%}
+        Project name
+      {%- endif %} must only contain letters, numbers, or . - _
     {%- endif -%}
 
 project_description:

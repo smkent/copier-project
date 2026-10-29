@@ -1,0 +1,17 @@
+{% extends "common/templates/ci.yaml.jinja" %}
+{% import "common/github-workflow-steps.jinja" as ci with context %}
+
+{% block jobs %}
+lint:
+  name: Lint
+  runs-on: ubuntu-latest
+  timeout-minutes: 15
+  steps:
+    {{ ci.step_checkout() | indent(4) }}
+
+    {{ ci.steps_project_setup() | indent(4) }}
+
+    - name: 📐 Lint
+      run: mise run lint
+{{ super() }}
+{% endblock %}
