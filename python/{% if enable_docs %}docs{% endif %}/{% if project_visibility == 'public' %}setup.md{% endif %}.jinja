@@ -60,12 +60,10 @@ Enable write access for Actions:
 [Settings → Actions → General][repo-settings-actions-general]
 → Workflow permissions → Read and write permissions
 {%- endif %}
-{%- if enable_docs %}
 
 ## GitHub Pages
 
 [Settings → Pages][repo-settings-pages] → Source → GitHub Actions
-{%- endif %}
 
 {% if enable_pypi -%}
 [pypi-publishing-settings]: https://pypi.org/manage/account/publishing/
@@ -80,7 +78,5 @@ Enable write access for Actions:
 [repo-settings-envs]: {{ repo_settings }}/environments
 {% endif -%}
 [repo-settings-branches]: {{ repo_settings }}/branches
-{%- if enable_docs %}
 [repo-settings-pages]: {{ repo_settings }}/pages
-{%- endif %}
 {#- vim: set ft=markdown: #}
