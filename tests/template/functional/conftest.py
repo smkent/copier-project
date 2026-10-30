@@ -27,6 +27,7 @@ TEMPLATE_VARIANT_DATA: dict[str, dict[str, Any]] = {
 
 @pytest.fixture(scope="module", params=template.choices.template_variant)
 def rendered_template(
+    request: pytest.FixtureRequest,
     session_render_template: Callable[..., Path],
     disallow_subprocess: DisallowCallable,
 ) -> Generator[Path]:
@@ -34,10 +35,7 @@ def rendered_template(
         tmp_path = Path(td)
         rendered = session_render_template(
             tmp_path=tmp_path,
-            enable_container=True,
-            enable_coverage=True,
-            enable_docs=True,
-            enable_pypi=True,
+            **(TEMPLATE_VARIANT_DATA.get(request.param) or {}),
         )
         with disallow_subprocess.pause():
             subprocess.run(["mise", "run", "init"], cwd=rendered, check=True)
