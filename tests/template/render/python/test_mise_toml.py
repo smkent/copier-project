@@ -14,6 +14,9 @@ if TYPE_CHECKING:
 
 
 @pytest.mark.parametrize(
+    "llm_contribution_policy", template.choices.llm_contribution_policy
+)
+@pytest.mark.parametrize(
     "project_visibility", template.choices.project_visibility
 )
 @pytest.mark.parametrize(
@@ -33,12 +36,14 @@ def test_mise_toml_features(
     snapshot: SnapshotAssertion,
     *,
     project_visibility: bool,
+    llm_contribution_policy: str,
     enable_docs: bool,
     enable_syrupy: bool,
     enable_xdist: bool,
 ) -> None:
     rendered = render_template(
         project_visibility=project_visibility,
+        llm_contribution_policy=llm_contribution_policy,
         enable_docs=enable_docs,
         enable_features=[
             *(["syrupy"] if enable_syrupy else []),
