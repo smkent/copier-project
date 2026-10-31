@@ -5,7 +5,7 @@ icon: lucide/bookmark-check
 
 # Required software
 
-- [x] [**git** for verson control][git]
+- [x] [**git** for version control][git]
 - [x] [**mise**][mise] tool manager: `curl https://mise.run | sh` or
   [alternate installation method][mise-installation]
 
