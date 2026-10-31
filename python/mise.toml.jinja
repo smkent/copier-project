@@ -8,12 +8,6 @@
 {% block check_tool %}
 {%- endblock %}
 
-{% block task_lt %}
-[tasks.lt]
-description = "Run all formatters, static checks and tests"
-run = [{ task = "lint" }, { task = "test" }]
-{% endblock %}
-
 {% block tasks_start %}
 {%- if project_visibility == 'public' %}
 
@@ -60,12 +54,13 @@ description = "Update test snapshots"
 raw_args = true
 run = "uv run pytest --snapshot-update{% if 'xdist' in enable_features %} --numprocesses 0{% endif %}"
 {%- endif %}
+{% endblock %}
 
-[tasks.test]
-description = "Run tests"
-raw_args = true
-run = "uv run pytest"
+{% block tasks_test_run %}
+uv run pytest
+{% endblock %}
 
+{% block tasks_after_test %}
 [tasks.test-versions]
 description = "Run tests across all Python versions"
 run = [

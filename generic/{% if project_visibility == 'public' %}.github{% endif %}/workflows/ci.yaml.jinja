@@ -2,7 +2,7 @@
 {% import "common/github-workflow-steps.jinja" as ci with context %}
 
 {% block jobs %}
-lint:
+ci:
   name: Lint
   runs-on: ubuntu-latest
   timeout-minutes: 15
@@ -13,5 +13,8 @@ lint:
 
     - name: 📐 Lint
       run: mise run lint
+
+    - name: 🔥 Test
+      run: mise run test
 {{ super() }}
 {% endblock %}
