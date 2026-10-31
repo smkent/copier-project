@@ -30,12 +30,9 @@ description = "Run all formatters and static checks"
 raw_args = true
 run = "prek run --all-files"
 
-{%- set task_lt %}{% block task_lt %}
 [tasks.lt]
-description = "Run all formatters and static checks (same as lint)"
-run = [{ task = "lint" }]
-{% endblock %}{% endset -%}
-{{- blocks.put(task_lt, blank_lines=1) }}
+description = "Run all formatters, static checks, and tests"
+run = [{ task = "lint" }, { task = "test" }]
 
 {%- set tasks_after_lt %}{% block tasks_after_lt %}{% endblock %}{% endset -%}
 {{- blocks.put(tasks_after_lt, blank_lines=1) }}
@@ -47,3 +44,11 @@ run = "betterleaks git . --redact"
 
 {%- set tasks_after_secretscan %}{% block tasks_after_secretscan %}{% endblock %}{% endset -%}
 {{- blocks.put(tasks_after_secretscan, blank_lines=1) }}
+
+[tasks.test]
+description = "Run tests"
+raw_args = true
+run = "{%- set tasks_test_run %}{% block tasks_test_run %}echo \"No test command defined. Set the \\`test\\` command in mise.toml -> [tasks.test] -> \\`run\\`.\"{% endblock %}{% endset -%}{{- tasks_test_run | trim -}}"
+
+{%- set tasks_after_test %}{% block tasks_after_test %}{% endblock %}{% endset -%}
+{{- blocks.put(tasks_after_test, blank_lines=1) }}

@@ -69,6 +69,13 @@
   #### Development tools
   
   * `mise run lint`: Run formatters and static checks
+  * `mise run test`: Run tests
+  
+  The `lint` and `test` tasks can also be run as a single combined command with:
+  
+  ```sh
+  mise run lt
+  ```
   
   ### Applying copier-project template updates
   
@@ -161,6 +168,13 @@
   #### Development tools
   
   * `mise run lint`: Run formatters and static checks
+  * `mise run test`: Run tests
+  
+  The `lint` and `test` tasks can also be run as a single combined command with:
+  
+  ```sh
+  mise run lt
+  ```
   
   ### Applying copier-project template updates
   
@@ -258,6 +272,13 @@
   #### Development tools
   
   * `mise run lint`: Run formatters and static checks
+  * `mise run test`: Run tests
+  
+  The `lint` and `test` tasks can also be run as a single combined command with:
+  
+  ```sh
+  mise run lt
+  ```
   
   ### Applying copier-project template updates
   
@@ -360,6 +381,13 @@
   #### Development tools
   
   * `mise run lint`: Run formatters and static checks
+  * `mise run test`: Run tests
+  
+  The `lint` and `test` tasks can also be run as a single combined command with:
+  
+  ```sh
+  mise run lt
+  ```
   
   ### Applying copier-project template updates
   
@@ -462,6 +490,13 @@
   #### Development tools
   
   * `mise run lint`: Run formatters and static checks
+  * `mise run test`: Run tests
+  
+  The `lint` and `test` tasks can also be run as a single combined command with:
+  
+  ```sh
+  mise run lt
+  ```
   
   ### Applying copier-project template updates
   
@@ -564,6 +599,13 @@
   #### Development tools
   
   * `mise run lint`: Run formatters and static checks
+  * `mise run test`: Run tests
+  
+  The `lint` and `test` tasks can also be run as a single combined command with:
+  
+  ```sh
+  mise run lt
+  ```
   
   ### Applying copier-project template updates
   
@@ -666,6 +708,13 @@
   #### Development tools
   
   * `mise run lint`: Run formatters and static checks
+  * `mise run test`: Run tests
+  
+  The `lint` and `test` tasks can also be run as a single combined command with:
+  
+  ```sh
+  mise run lt
+  ```
   
   ### Applying copier-project template updates
   
@@ -768,6 +817,13 @@
   #### Development tools
   
   * `mise run lint`: Run formatters and static checks
+  * `mise run test`: Run tests
+  
+  The `lint` and `test` tasks can also be run as a single combined command with:
+  
+  ```sh
+  mise run lt
+  ```
   
   ### Applying copier-project template updates
   
@@ -870,6 +926,13 @@
   #### Development tools
   
   * `mise run lint`: Run formatters and static checks
+  * `mise run test`: Run tests
+  
+  The `lint` and `test` tasks can also be run as a single combined command with:
+  
+  ```sh
+  mise run lt
+  ```
   
   ### Applying copier-project template updates
   
@@ -972,6 +1035,13 @@
   #### Development tools
   
   * `mise run lint`: Run formatters and static checks
+  * `mise run test`: Run tests
+  
+  The `lint` and `test` tasks can also be run as a single combined command with:
+  
+  ```sh
+  mise run lt
+  ```
   
   ### Applying copier-project template updates
   
@@ -1074,6 +1144,13 @@
   #### Development tools
   
   * `mise run lint`: Run formatters and static checks
+  * `mise run test`: Run tests
+  
+  The `lint` and `test` tasks can also be run as a single combined command with:
+  
+  ```sh
+  mise run lt
+  ```
   
   ### Applying copier-project template updates
   
@@ -1176,6 +1253,13 @@
   #### Development tools
   
   * `mise run lint`: Run formatters and static checks
+  * `mise run test`: Run tests
+  
+  The `lint` and `test` tasks can also be run as a single combined command with:
+  
+  ```sh
+  mise run lt
+  ```
   
   ### Applying copier-project template updates
   
@@ -1278,6 +1362,13 @@
   #### Development tools
   
   * `mise run lint`: Run formatters and static checks
+  * `mise run test`: Run tests
+  
+  The `lint` and `test` tasks can also be run as a single combined command with:
+  
+  ```sh
+  mise run lt
+  ```
   
   ### Applying copier-project template updates
   
@@ -1380,6 +1471,13 @@
   #### Development tools
   
   * `mise run lint`: Run formatters and static checks
+  * `mise run test`: Run tests
+  
+  The `lint` and `test` tasks can also be run as a single combined command with:
+  
+  ```sh
+  mise run lt
+  ```
   
   ### Applying copier-project template updates
   
@@ -1482,6 +1580,13 @@
   #### Development tools
   
   * `mise run lint`: Run formatters and static checks
+  * `mise run test`: Run tests
+  
+  The `lint` and `test` tasks can also be run as a single combined command with:
+  
+  ```sh
+  mise run lt
+  ```
   
   ### Applying copier-project template updates
   
@@ -1584,6 +1689,13 @@
   #### Development tools
   
   * `mise run lint`: Run formatters and static checks
+  * `mise run test`: Run tests
+  
+  The `lint` and `test` tasks can also be run as a single combined command with:
+  
+  ```sh
+  mise run lt
+  ```
   
   ### Applying copier-project template updates
   

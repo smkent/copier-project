@@ -50,7 +50,6 @@ mise install
 {{h}}## Development tools
 
 * `mise run lint`: Run formatters and static checks
-{%- if template_variant == 'python' %}
 * `mise run test`: Run tests
 
 The `lint` and `test` tasks can also be run as a single combined command with:
@@ -58,6 +57,7 @@ The `lint` and `test` tasks can also be run as a single combined command with:
 ```sh
 mise run lt
 ```
+{%- if template_variant == 'python' %}
 {%- if "syrupy" in enable_features %}
 
 ### Test snapshots
