@@ -35,6 +35,7 @@ def rendered_template(
         tmp_path = Path(td)
         rendered = session_render_template(
             tmp_path=tmp_path,
+            template_variant=request.param,
             **(TEMPLATE_VARIANT_DATA.get(request.param) or {}),
         )
         with disallow_subprocess.pause():
