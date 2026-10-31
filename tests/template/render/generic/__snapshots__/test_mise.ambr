@@ -1,11 +1,11 @@
 # serializer version: 1
-# name: test_mise_toml[private-accepted-with-disclosure]
+# name: test_mise_config[private-accepted-with-disclosure]
   '''
   min_version = "2026.2.5"
   
   [hooks]
   postinstall = [
-    "[ -e .git ] && prek --quiet install || { echo \"No git repository found. If this is a new project, run \\`mise run init\\` to create it.\"; }",
+    "[ -e .git ] && prek --quiet install || { echo \"No git repository found.\"; }",
   ]
   
   [tools]
@@ -16,16 +16,6 @@
   prek = "latest"
   taplo = "latest"
   uv = "latest"
-  
-  [tasks.init]
-  description = "Initialize git repository once on project creation"
-  run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
-    "git init",
-    "mise install",
-    "git add .",
-    "git commit -m 'Create project from template'",
-  ]
   
   [tasks.lint]
   description = "Run all formatters and static checks"
@@ -43,13 +33,28 @@
   
   '''
 # ---
-# name: test_mise_toml[private-accepted]
+# name: test_mise_config[private-accepted-with-disclosure].1
+  '''
+  [tasks.init]
+  description = "Initialize git repository once on project creation"
+  run = [
+    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
+    "git init",
+    "mise install",
+    "git add .",
+    "git rm -f .mise/conf.d/init.toml",
+    "git commit -m 'Create project from template'",
+  ]
+  
+  '''
+# ---
+# name: test_mise_config[private-accepted]
   '''
   min_version = "2026.2.5"
   
   [hooks]
   postinstall = [
-    "[ -e .git ] && prek --quiet install || { echo \"No git repository found. If this is a new project, run \\`mise run init\\` to create it.\"; }",
+    "[ -e .git ] && prek --quiet install || { echo \"No git repository found.\"; }",
   ]
   
   [tools]
@@ -59,16 +64,6 @@
   prek = "latest"
   taplo = "latest"
   uv = "latest"
-  
-  [tasks.init]
-  description = "Initialize git repository once on project creation"
-  run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
-    "git init",
-    "mise install",
-    "git add .",
-    "git commit -m 'Create project from template'",
-  ]
   
   [tasks.lint]
   description = "Run all formatters and static checks"
@@ -86,13 +81,28 @@
   
   '''
 # ---
-# name: test_mise_toml[private-not-accepted]
+# name: test_mise_config[private-accepted].1
+  '''
+  [tasks.init]
+  description = "Initialize git repository once on project creation"
+  run = [
+    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
+    "git init",
+    "mise install",
+    "git add .",
+    "git rm -f .mise/conf.d/init.toml",
+    "git commit -m 'Create project from template'",
+  ]
+  
+  '''
+# ---
+# name: test_mise_config[private-not-accepted]
   '''
   min_version = "2026.2.5"
   
   [hooks]
   postinstall = [
-    "[ -e .git ] && prek --quiet install || { echo \"No git repository found. If this is a new project, run \\`mise run init\\` to create it.\"; }",
+    "[ -e .git ] && prek --quiet install || { echo \"No git repository found.\"; }",
   ]
   
   [tools]
@@ -103,16 +113,6 @@
   prek = "latest"
   taplo = "latest"
   uv = "latest"
-  
-  [tasks.init]
-  description = "Initialize git repository once on project creation"
-  run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
-    "git init",
-    "mise install",
-    "git add .",
-    "git commit -m 'Create project from template'",
-  ]
   
   [tasks.lint]
   description = "Run all formatters and static checks"
@@ -130,13 +130,28 @@
   
   '''
 # ---
-# name: test_mise_toml[public-accepted-with-disclosure]
+# name: test_mise_config[private-not-accepted].1
+  '''
+  [tasks.init]
+  description = "Initialize git repository once on project creation"
+  run = [
+    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
+    "git init",
+    "mise install",
+    "git add .",
+    "git rm -f .mise/conf.d/init.toml",
+    "git commit -m 'Create project from template'",
+  ]
+  
+  '''
+# ---
+# name: test_mise_config[public-accepted-with-disclosure]
   '''
   min_version = "2026.2.5"
   
   [hooks]
   postinstall = [
-    "[ -e .git ] && prek --quiet install || { echo \"No git repository found. If this is a new project, run \\`mise run init\\` to create it.\"; }",
+    "[ -e .git ] && prek --quiet install || { echo \"No git repository found.\"; }",
   ]
   
   [tools]
@@ -148,6 +163,24 @@
   taplo = "latest"
   uv = "latest"
   
+  [tasks.lint]
+  description = "Run all formatters and static checks"
+  raw_args = true
+  run = "prek run --all-files"
+  
+  [tasks.lt]
+  description = "Run all formatters and static checks (same as lint)"
+  run = [{ task = "lint" }]
+  
+  [tasks.secretscan]
+  description = "Scan git history for secrets"
+  raw_args = true
+  run = "betterleaks git . --redact"
+  
+  '''
+# ---
+# name: test_mise_config[public-accepted-with-disclosure].1
+  '''
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
@@ -157,32 +190,19 @@
     "git remote add origin https://github.com/ness/PKFire",
     "git config --local url.\"git@github.com:\".pushInsteadOf \"https://github.com/\"",
     "git add .",
+    "git rm -f .mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
   ]
   
-  [tasks.lint]
-  description = "Run all formatters and static checks"
-  raw_args = true
-  run = "prek run --all-files"
-  
-  [tasks.lt]
-  description = "Run all formatters and static checks (same as lint)"
-  run = [{ task = "lint" }]
-  
-  [tasks.secretscan]
-  description = "Scan git history for secrets"
-  raw_args = true
-  run = "betterleaks git . --redact"
-  
   '''
 # ---
-# name: test_mise_toml[public-accepted]
+# name: test_mise_config[public-accepted]
   '''
   min_version = "2026.2.5"
   
   [hooks]
   postinstall = [
-    "[ -e .git ] && prek --quiet install || { echo \"No git repository found. If this is a new project, run \\`mise run init\\` to create it.\"; }",
+    "[ -e .git ] && prek --quiet install || { echo \"No git repository found.\"; }",
   ]
   
   [tools]
@@ -193,18 +213,6 @@
   taplo = "latest"
   uv = "latest"
   
-  [tasks.init]
-  description = "Initialize git repository once on project creation"
-  run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
-    "git init",
-    "mise install",
-    "git remote add origin https://github.com/ness/PKFire",
-    "git config --local url.\"git@github.com:\".pushInsteadOf \"https://github.com/\"",
-    "git add .",
-    "git commit -m 'Create project from template'",
-  ]
-  
   [tasks.lint]
   description = "Run all formatters and static checks"
   raw_args = true
@@ -221,13 +229,30 @@
   
   '''
 # ---
-# name: test_mise_toml[public-not-accepted]
+# name: test_mise_config[public-accepted].1
+  '''
+  [tasks.init]
+  description = "Initialize git repository once on project creation"
+  run = [
+    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
+    "git init",
+    "mise install",
+    "git remote add origin https://github.com/ness/PKFire",
+    "git config --local url.\"git@github.com:\".pushInsteadOf \"https://github.com/\"",
+    "git add .",
+    "git rm -f .mise/conf.d/init.toml",
+    "git commit -m 'Create project from template'",
+  ]
+  
+  '''
+# ---
+# name: test_mise_config[public-not-accepted]
   '''
   min_version = "2026.2.5"
   
   [hooks]
   postinstall = [
-    "[ -e .git ] && prek --quiet install || { echo \"No git repository found. If this is a new project, run \\`mise run init\\` to create it.\"; }",
+    "[ -e .git ] && prek --quiet install || { echo \"No git repository found.\"; }",
   ]
   
   [tools]
@@ -239,18 +264,6 @@
   taplo = "latest"
   uv = "latest"
   
-  [tasks.init]
-  description = "Initialize git repository once on project creation"
-  run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
-    "git init",
-    "mise install",
-    "git remote add origin https://github.com/ness/PKFire",
-    "git config --local url.\"git@github.com:\".pushInsteadOf \"https://github.com/\"",
-    "git add .",
-    "git commit -m 'Create project from template'",
-  ]
-  
   [tasks.lint]
   description = "Run all formatters and static checks"
   raw_args = true
@@ -264,6 +277,23 @@
   description = "Scan git history for secrets"
   raw_args = true
   run = "betterleaks git . --redact"
+  
+  '''
+# ---
+# name: test_mise_config[public-not-accepted].1
+  '''
+  [tasks.init]
+  description = "Initialize git repository once on project creation"
+  run = [
+    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
+    "git init",
+    "mise install",
+    "git remote add origin https://github.com/ness/PKFire",
+    "git config --local url.\"git@github.com:\".pushInsteadOf \"https://github.com/\"",
+    "git add .",
+    "git rm -f .mise/conf.d/init.toml",
+    "git commit -m 'Create project from template'",
+  ]
   
   '''
 # ---
