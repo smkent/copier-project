@@ -6,7 +6,7 @@ min_version = "2026.2.5"
 postinstall = [
 {%- set postinstall_hooks %}{% block postinstall_hooks %}{% endblock %}{% endset -%}
 {{- blocks.put(postinstall_hooks, indent=2) }}
-  "[ -e .git ] && prek --quiet install || { echo \"No git repository found. If this is a new project, run \\`mise run init\\` to create it.\"; }",
+  "[ -e .git ] && prek --quiet install || { echo \"No git repository found.\"; }",
 ]
 
 [tools]
@@ -24,20 +24,6 @@ uv = "latest"
 
 {%- set tasks_start %}{% block tasks_start %}{% endblock %}{% endset -%}
 {{- blocks.put(tasks_start, blank_lines=1) }}
-
-[tasks.init]
-description = "Initialize git repository once on project creation"
-run = [
-  '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
-  "git init",
-  "mise install",
-{%- if project_visibility == 'public' %}
-  "git remote add origin https://github.com/{{ github_user }}/{{ project_name }}",
-  "git config --local url.\"git@github.com:\".pushInsteadOf \"https://github.com/\"",
-{%- endif %}
-  "git add .",
-  "git commit -m 'Create project from template'",
-]
 
 [tasks.lint]
 description = "Run all formatters and static checks"

@@ -31,7 +31,7 @@ if TYPE_CHECKING:
     "enable_xdist",
     [pytest.param(True, id="xdist"), pytest.param(False, id="no_xdist")],
 )
-def test_mise_toml_features(
+def test_mise_config(
     render_template: Callable[..., Path],
     snapshot: SnapshotAssertion,
     *,
@@ -50,4 +50,5 @@ def test_mise_toml_features(
             *(["xdist"] if enable_xdist else []),
         ],
     )
-    assert (rendered / "mise.toml").read_text() == snapshot
+    for file in ["mise.toml", ".mise/conf.d/init.toml"]:
+        assert (rendered / file).read_text() == snapshot

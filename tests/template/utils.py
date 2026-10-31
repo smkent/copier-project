@@ -44,6 +44,7 @@ class StructureTestCase:
         default_factory=lambda: {
             ".copier-answers.yml",
             ".gitignore",
+            ".mise/conf.d/init.toml",
             ".pre-commit-config.yaml",
             "AGENTS.md",
             "README.md",

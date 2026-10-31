@@ -38,6 +38,9 @@ def rendered_template(
             template_variant=request.param,
             **(TEMPLATE_VARIANT_DATA.get(request.param) or {}),
         )
+        init_task_file = rendered / ".mise" / "conf.d" / "init.toml"
+        assert init_task_file.is_file()
         with disallow_subprocess.pause():
             subprocess.run(["mise", "run", "init"], cwd=rendered, check=True)
+        assert not init_task_file.is_file()
         yield rendered
