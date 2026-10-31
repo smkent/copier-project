@@ -155,7 +155,7 @@
     "git init",
     "mise install",
     "git remote add origin https://github.com/ness/PKFire",
-    "git config --local remote.origin.pushurl git@github.com:ness/PKFire.git",
+    "git config --local url.\"git@github.com:\".pushInsteadOf \"https://github.com/\"",
     "git add .",
     "git commit -m 'Create project from template'",
   ]
@@ -200,7 +200,7 @@
     "git init",
     "mise install",
     "git remote add origin https://github.com/ness/PKFire",
-    "git config --local remote.origin.pushurl git@github.com:ness/PKFire.git",
+    "git config --local url.\"git@github.com:\".pushInsteadOf \"https://github.com/\"",
     "git add .",
     "git commit -m 'Create project from template'",
   ]
@@ -246,7 +246,7 @@
     "git init",
     "mise install",
     "git remote add origin https://github.com/ness/PKFire",
-    "git config --local remote.origin.pushurl git@github.com:ness/PKFire.git",
+    "git config --local url.\"git@github.com:\".pushInsteadOf \"https://github.com/\"",
     "git add .",
     "git commit -m 'Create project from template'",
   ]

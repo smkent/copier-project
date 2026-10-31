@@ -33,7 +33,7 @@ run = [
   "mise install",
 {%- if project_visibility == 'public' %}
   "git remote add origin https://github.com/{{ github_user }}/{{ project_name }}",
-  "git config --local remote.origin.pushurl git@github.com:{{ github_user }}/{{ project_name }}.git",
+  "git config --local url.\"git@github.com:\".pushInsteadOf \"https://github.com/\"",
 {%- endif %}
   "git add .",
   "git commit -m 'Create project from template'",
