@@ -44,7 +44,7 @@ raw_args = true
 run = "prek run --all-files"
 
 [tasks.lt]
-description = "Run all formatters, static checks and tests"
+description = "Run all formatters, static checks, and tests"
 run = [{ task = "lint" }, { task = "test" }]
 
 [tasks.release]
