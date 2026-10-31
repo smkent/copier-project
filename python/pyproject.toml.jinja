@@ -49,7 +49,7 @@ dev = [
 {%- if project_visibility == 'public' %}
   "pysentry-rs>=0.4",
 {%- endif %}
-  "pytest>=9",
+  "pytest>=9,<=9.2",
   "pytest-cov>=7",
   "pytest-sugar>=1",
 {%- if "xdist" in enable_features %}
