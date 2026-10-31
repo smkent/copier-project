@@ -18,6 +18,9 @@ from rich.text import Text
 if TYPE_CHECKING:
     from collections.abc import Generator, Sequence
 
+SELF_ALIAS = "self"
+PROJECT_URL = "https://github.com/smkent/copier-project"
+
 
 @dataclass(unsafe_hash=True)
 class RepoTarget:
@@ -33,6 +36,8 @@ class RepoTarget:
 
     def __post_init__(self, arg: str | Path) -> None:
         arg = str(arg).strip()
+        if arg == SELF_ALIAS:
+            arg = PROJECT_URL
         if ((path := Path(arg)).is_dir()) and (root := self.repo_root(path)):
             arg = root
         for regex in self._GITHUB_REGEXES:

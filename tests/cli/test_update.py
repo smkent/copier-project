@@ -18,6 +18,7 @@ import pytest
 import yaml
 
 from copier_project.__main__ import main, update
+from copier_project.repo import PROJECT_URL, SELF_ALIAS
 from tests.template.utils import template
 
 if TYPE_CHECKING:
@@ -366,6 +367,14 @@ def test_main_update_repo_arguments(
     )
     with expect_run.patch(mock=True, has_any=True):
         update([arg], dry_run=True)
+
+
+def test_main_update_repo_arguments_self(
+    worktree: Path, expect_run: ExpectRun
+) -> None:
+    expect_run.expect(["git", "clone", PROJECT_URL, str(worktree)])
+    with expect_run.patch(mock=True, has_any=True):
+        update([SELF_ALIAS], dry_run=True)
 
 
 @pytest.mark.parametrize(
