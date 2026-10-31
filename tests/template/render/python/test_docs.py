@@ -13,6 +13,15 @@ if TYPE_CHECKING:
     from syrupy.assertion import SnapshotAssertion
 
 
+def test_docs_basic(
+    render_template: Callable[..., Path],
+    snapshot: SnapshotAssertion,
+) -> None:
+    rendered = render_template(project_visibility="public", enable_docs=True)
+    for doc_file in ["index.md", "contributing.md", "license.md"]:
+        assert (rendered / "docs" / doc_file).read_text() == snapshot
+
+
 @pytest.mark.parametrize(
     "enable_pypi",
     [pytest.param(True, id="pypi"), pytest.param(False, id="no_pypi")],

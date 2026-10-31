@@ -1,4 +1,43 @@
 # serializer version: 1
+# name: test_docs_basic
+  '''
+  ---
+  title: Overview
+  icon: lucide/book-open
+  hide:
+    - path
+  ---
+  
+  --8<-- "README.md"
+  
+  '''
+# ---
+# name: test_docs_basic.1
+  '''
+  ---
+  title: Contributing
+  icon: lucide/code
+  ---
+  
+  --8<-- "CONTRIBUTING.md"
+  
+  '''
+# ---
+# name: test_docs_basic.2
+  '''
+  ---
+  title: License
+  icon: lucide/scale
+  ---
+  
+  # License
+  
+  ```
+  --8<-- "LICENSE"
+  ```
+  
+  '''
+# ---
 # name: test_docs_development_features[no_syrupy-no_pypi-private]
   '''
   ---
