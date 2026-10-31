@@ -40,7 +40,17 @@ class PythonVersionsSupported:
 @dataclass
 class StructureTestCase:
     extra_data: dict[str, Any] = field(default_factory=dict)
-    expected_present: set[str] = field(default_factory=set)
+    expected_present: set[str] = field(
+        default_factory=lambda: {
+            ".copier-answers.yml",
+            ".gitignore",
+            ".pre-commit-config.yaml",
+            "AGENTS.md",
+            "README.md",
+            "mise.toml",
+            "renovate.json",
+        }
+    )
     expected_absent: set[str] = field(default_factory=set)
 
     def expect_if(self, present: bool, *items: str) -> None:  # noqa: FBT001

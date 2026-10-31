@@ -38,15 +38,6 @@ def test_structure(
             "project_type": project_type,
             "project_visibility": project_visibility,
         },
-        expected_present={
-            ".copier-answers.yml",
-            ".gitignore",
-            ".pre-commit-config.yaml",
-            "AGENTS.md",
-            "README.md",
-            "mise.toml",
-            "renovate.json",
-        },
         expected_absent={"common", *PYTHON_ONLY_PATHS},
     )
     case.expect_if(
