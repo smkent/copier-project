@@ -6,14 +6,12 @@ from contextlib import contextmanager
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
-from .repo import RepoWorktree
+from .repo import PROJECT_URL, RepoWorktree
 
 if TYPE_CHECKING:
     from collections.abc import Generator
 
     from .repo import RepoTarget
-
-TEMPLATE_REPO_URL = "https://github.com/smkent/copier-project"
 
 
 @dataclass
@@ -75,7 +73,7 @@ class UpdateAction:
         title = f"Apply template updates from {start_ref} to {end_ref}"
         body = ""
         if start_ref and end_ref and start_ref != end_ref:
-            body = f"{TEMPLATE_REPO_URL}/compare/{start_ref}...{end_ref}"
+            body = f"{PROJECT_URL}/compare/{start_ref}...{end_ref}"
         repo.run(["git", "add", "-A"])
         repo.run(["git", "commit", "-m", f"{title}\n\n{body}".strip()])
 
