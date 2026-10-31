@@ -11,8 +11,9 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 from rich.text import Text
-from typer import Argument, Context, Exit, Option, Typer
+from typer import Argument, Exit, Option, Typer
 
+from . import version as package_version
 from .repo import RepoTarget
 from .update import UpdateAction
 
@@ -43,12 +44,20 @@ cli = Typer(
     add_completion=False,
     no_args_is_help=True,
     pretty_exceptions_enable=False,
+    invoke_without_command=True,
 )
 
 
 @cli.callback()
-def setup(ctx: Context) -> None:
-    pass
+def setup(
+    *,
+    version_option: Annotated[
+        bool, Option("-V", "--version", hidden=True)
+    ] = False,
+) -> None:
+    if version_option:
+        version()
+        raise Exit
 
 
 class UpdateStatus(Enum):
@@ -103,6 +112,11 @@ def update(
     _print_summary(results, dry_run=dry_run)
     if any(r.status == UpdateStatus.FAILED for r in results):
         raise Exit(1)
+
+
+@cli.command(help=f"Show version ({package_version}) and exit.")
+def version() -> None:
+    console.print(package_version, highlight=False)
 
 
 def _print_summary(results: Sequence[UpdateResult], *, dry_run: bool) -> None:
