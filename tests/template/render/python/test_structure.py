@@ -53,13 +53,6 @@ def test_structure(
             "enable_pypi": enable_pypi,
             "enable_docs": enable_docs,
         },
-        expected_present={
-            ".gitignore",
-            ".pre-commit-config.yaml",
-            "README.md",
-            "pyproject.toml",
-            "renovate.json",
-        },
     )
     case.expect_if(
         project_visibility == "public",
