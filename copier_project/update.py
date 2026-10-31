@@ -80,7 +80,7 @@ class UpdateAction:
         repo.run(["git", "commit", "-m", f"{title}\n\n{body}".strip()])
 
         if self.dry_run:
-            return None
+            return f"Update from {start_ref} to {end_ref}"
 
         repo.run(
             ["git", "push", "-u", "origin", repo.branch, "--force-with-lease"]
