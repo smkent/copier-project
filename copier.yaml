@@ -6,6 +6,8 @@ _external_data:
 _preserve_symlinks: true
 _skip_if_exists:
   - CHANGELOG.md
+_exclude:
+  - "{% if _copier_operation == 'update' -%}.mise/conf.d/init.toml{% endif %}"
 _subdirectory: '{{ template_variant }}'
 
 _message_after_copy: |
