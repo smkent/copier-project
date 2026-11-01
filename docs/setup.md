@@ -58,6 +58,6 @@ need to be stored as secrets.
 [pypi-trusted-publishing]: https://docs.pypi.org/trusted-publishers/
 [renovate]: https://github.com/apps/renovate
 [repo-settings]: https://github.com/smkent/copier-project/settings
-[repo-settings-envs]: https://github.com/smkent/copier-project/settings/environments
 [repo-settings-branches]: https://github.com/smkent/copier-project/settings/branches
+[repo-settings-envs]: https://github.com/smkent/copier-project/settings/environments
 [repo-settings-pages]: https://github.com/smkent/copier-project/settings/pages
