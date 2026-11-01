@@ -218,7 +218,7 @@ class ExpectRun:
     def expect_shell(self) -> None:
         self.expect([str(self.mock_shell)], cwd=self.worktree)
 
-    def expect_clone_and_setup(self) -> None:
+    def expect_clone_and_setup(self, *, poe: bool = False) -> None:
         self.expect(
             [
                 "git",
@@ -232,7 +232,7 @@ class ExpectRun:
                 *["git", "remote", "set-url", "--push", "origin"],
                 "git@github.com:ness/pkfire.git",
             ],
-            ["mise", "install"],
+            (["poe", "setup"] if poe else ["mise", "install"]),
             ["git", "checkout", "-b", "updates"],
         ]:
             self.expect(cmd, cwd=self.worktree)
@@ -254,6 +254,9 @@ class ExpectRun:
             cwd=self.worktree,
         )
         self.expect_git_status()
+
+    def expect_poe_lt(self) -> None:
+        self.expect(["uv", "run", "poe", "lt"], cwd=self.worktree)
 
     def expect_mise_install_and_lt(self) -> None:
         self.expect(["mise", "install"], cwd=self.worktree)
@@ -386,6 +389,35 @@ def test_main_update_allow_empty(
             dry_run=dry_run,
             allow_empty=allow_empty,
         )
+
+
+@pytest.mark.parametrize("start_ref", ["v0.2.0"])
+@pytest.mark.parametrize(
+    ("end_ref", "expect_lt_poe"),
+    [
+        pytest.param("v0.12.0", True, id="v0.12.0"),
+        pytest.param(DEFAULT_END_REF, False, id=DEFAULT_END_REF),
+    ],
+)
+def test_main_update_legacy_poethepoet(
+    expect_run: ExpectRun,
+    create_project: Callable[..., Path],
+    start_ref: str,
+    end_ref: str,
+    *,
+    expect_lt_poe: bool,
+) -> None:
+    create_project(vcs_ref=start_ref)
+    expect_run.latest_ref = end_ref
+    expect_run.expect_clone_and_setup(poe=True)
+    expect_run.expect_copier_update()
+    if expect_lt_poe:
+        expect_run.expect_poe_lt()
+    else:
+        expect_run.expect_mise_install_and_lt()
+    expect_run.expect_git_commit(start_ref, end_ref)
+    with expect_run.patch(mock=False):
+        update(["gh:ness/pkfire"], dry_run=True)
 
 
 def test_main_update_error(
