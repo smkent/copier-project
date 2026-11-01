@@ -420,6 +420,38 @@ def test_main_update_legacy_poethepoet(
         update(["gh:ness/pkfire"], dry_run=True)
 
 
+@pytest.mark.parametrize("start_ref", ["v0.27.0"])
+def test_main_update_mise_config_moved(
+    disallow_subprocess: DisallowCallable,
+    expect_run: ExpectRun,
+    create_project: Callable[..., Path],
+    start_ref: str,
+    end_ref: str,
+) -> None:
+    def _postcreate(project: Path) -> None:
+        if not (project / "mise.toml").is_file():
+            return
+        for cmd in (
+            ["git", "mv", "mise.toml", ".mise.toml"],
+            ["git", "add", "."],
+            ["git", "commit", "-n", "-m", "Add conflicting change"],
+            ["git", "push"],
+        ):
+            with disallow_subprocess.pause():
+                subprocess.run(  # noqa: S603
+                    cmd, cwd=project, check=True, capture_output=True
+                )
+
+    create_project(vcs_ref=start_ref, postcreate=_postcreate)
+    expect_run.latest_ref = end_ref
+    expect_run.expect_clone_and_setup()
+    expect_run.expect_copier_update()
+    expect_run.expect_mise_install_and_lt()
+    expect_run.expect_git_commit(start_ref, end_ref)
+    with expect_run.patch(mock=False):
+        update(["gh:ness/pkfire"], dry_run=True)
+
+
 def test_main_update_error(
     disallow_subprocess: DisallowCallable,
     worktree: Path,
