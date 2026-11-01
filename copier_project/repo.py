@@ -100,7 +100,14 @@ class RepoWorktree(ExitStack):
         return self
 
     def use_mise(self) -> bool:
-        return (self.path / "mise.toml").is_file()
+        if (self.path / "mise.toml").is_file():
+            return True
+        if (pyproject_toml := (self.path / "pyproject.toml")).is_file():
+            with pyproject_toml.open() as f:
+                for line in f:
+                    if line.startswith("[tool.poe"):
+                        return False
+        return True
 
     def run(
         self, cmd: list[str], *, set_cwd: bool = True, **kwargs: Any
