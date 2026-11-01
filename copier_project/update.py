@@ -23,7 +23,7 @@ class UpdateAction:
     allow_empty: bool = field(default=False, kw_only=True)
 
     def __call__(self) -> str | None:
-        with RepoWorktree.clone(self.repo, branch=self.branch) as worktree:
+        with RepoWorktree(self.repo, branch=self.branch) as worktree:
             return self._run(worktree)
 
     @contextmanager
