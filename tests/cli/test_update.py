@@ -207,6 +207,107 @@ class ExpectRun:
         kwargs.setdefault("text", True)
         self.expected_calls.append(call(list(cmd), **kwargs))
 
+    def expect_shell(self) -> None:
+        self.expect([str(self.mock_shell)], cwd=self.worktree)
+
+    def expect_clone_and_setup(self) -> None:
+        self.expect(
+            [
+                "git",
+                "clone",
+                "https://github.com/ness/pkfire",
+                str(self.worktree),
+            ]
+        )
+        for cmd in [
+            [
+                *["git", "remote", "set-url", "--push", "origin"],
+                "git@github.com:ness/pkfire.git",
+            ],
+            ["mise", "install"],
+            ["git", "checkout", "-b", "updates"],
+        ]:
+            self.expect(cmd, cwd=self.worktree)
+        self.expect(
+            ["copier", "check-update", "--output-format", "json"],
+            cwd=self.worktree,
+            capture_output=True,
+        )
+
+    def expect_copier_update(self) -> None:
+        self.expect(
+            [
+                "copier",
+                "update",
+                "--skip-answered",
+                "--vcs-ref",
+                self.latest_ref,
+            ],
+            cwd=self.worktree,
+        )
+        self.expect_git_status()
+
+    def expect_mise_install_and_lt(self) -> None:
+        self.expect(["mise", "install"], cwd=self.worktree)
+        self.expect(["mise", "run", "lt"], cwd=self.worktree)
+
+    def expect_git_status(self) -> None:
+        self.expect(
+            ["git", "status", "--porcelain"],
+            cwd=self.worktree,
+            capture_output=True,
+        )
+
+    def expect_git_commit(
+        self, start_ref: str, end_ref: str, *, dry_run: bool = True
+    ) -> None:
+        commit_message = os.linesep.join(
+            (
+                f"Apply template updates from {start_ref} to {end_ref}",
+                "",
+                (
+                    f"https://github.com/smkent/copier-project/compare/"
+                    f"{start_ref}...{end_ref}"
+                ),
+            )
+        )
+        for cmd in [
+            ["git", "add", "-A"],
+            ["git", "commit", "-m", commit_message],
+        ]:
+            self.expect(cmd, cwd=self.worktree)
+
+        if not dry_run:
+            for cmd in [
+                [
+                    "git",
+                    "push",
+                    "-u",
+                    "origin",
+                    "updates",
+                    "--force-with-lease",
+                ],
+            ]:
+                self.expect(cmd, cwd=self.worktree)
+
+            title, _, *body = commit_message.splitlines()
+            self.expect(
+                [
+                    "gh",
+                    "pr",
+                    "create",
+                    "--title",
+                    title,
+                    "--body",
+                    os.linesep.join(body),
+                    "--head",
+                    "updates",
+                ],
+                cwd=self.worktree,
+                check=False,
+                capture_output=True,
+            )
+
 
 @pytest.fixture
 def expect_run(
@@ -233,7 +334,6 @@ def test_main_help(monkeypatch: pytest.MonkeyPatch) -> None:
     "project_visibility", template.choices.project_visibility
 )
 def test_main_update_with_project_current(
-    worktree: Path,
     expect_run: ExpectRun,
     create_project: Callable[..., Path],
     project_visibility: str,
@@ -243,23 +343,7 @@ def test_main_update_with_project_current(
 ) -> None:
     create_project(vcs_ref=end_ref, project_visibility=project_visibility)
     expect_run.latest_ref = end_ref
-    expect_run.expect(
-        ["git", "clone", "https://github.com/ness/pkfire", str(worktree)]
-    )
-    for cmd in [
-        [
-            *["git", "remote", "set-url", "--push", "origin"],
-            "git@github.com:ness/pkfire.git",
-        ],
-        [*["mise", "install"]],
-        [*["git", "checkout", "-b", "updates"]],
-    ]:
-        expect_run.expect(cmd, cwd=worktree)
-    expect_run.expect(
-        ["copier", "check-update", "--output-format", "json"],
-        cwd=worktree,
-        capture_output=True,
-    )
+    expect_run.expect_clone_and_setup()
     with expect_run.patch(mock=False):
         update(["gh:ness/pkfire"], dry_run=dry_run)
 
@@ -267,7 +351,6 @@ def test_main_update_with_project_current(
 def test_main_update_error(
     disallow_subprocess: DisallowCallable,
     worktree: Path,
-    mock_shell: Path,
     expect_run: ExpectRun,
     create_project: Callable[..., Path],
     start_ref: str,
@@ -286,16 +369,6 @@ def test_main_update_error(
                 )
 
     create_project(vcs_ref=start_ref, postcreate=_postcreate)
-    commit_message = os.linesep.join(
-        (
-            f"Apply template updates from {start_ref} to {end_ref}",
-            "",
-            (
-                f"https://github.com/smkent/copier-project/compare/"
-                f"{start_ref}...{end_ref}"
-            ),
-        )
-    )
 
     def _shell() -> None:
         with disallow_subprocess.pause():
@@ -306,43 +379,13 @@ def test_main_update_error(
                 subprocess.check_call(cmd, cwd=worktree)  # noqa: S603
 
     expect_run.latest_ref = end_ref
-    expect_run.expect(
-        ["git", "clone", "https://github.com/ness/pkfire", str(worktree)]
-    )
-    for cmd in [
-        [
-            *["git", "remote", "set-url", "--push", "origin"],
-            "git@github.com:ness/pkfire.git",
-        ],
-        [*["mise", "install"]],
-        [*["git", "checkout", "-b", "updates"]],
-    ]:
-        expect_run.expect(cmd, cwd=worktree)
-    expect_run.expect(
-        ["copier", "check-update", "--output-format", "json"],
-        cwd=worktree,
-        capture_output=True,
-    )
-    expect_run.expect(
-        ["copier", "update", "--skip-answered", "--vcs-ref", end_ref],
-        cwd=worktree,
-    )
-    expect_run.expect(
-        ["git", "status", "--porcelain"], cwd=worktree, capture_output=True
-    )
-    expect_run.expect([str(mock_shell)], cwd=worktree)
-    expect_run.expect(
-        ["git", "status", "--porcelain"], cwd=worktree, capture_output=True
-    )
-    expect_run.expect(["mise", "install"], cwd=worktree)
-    expect_run.expect(["mise", "run", "lt"], cwd=worktree)
-    expect_run.expect([str(mock_shell)], cwd=worktree)
-    for cmd in [
-        [*["git", "add", "-A"]],
-        [*["git", "commit", "-m", commit_message]],
-    ]:
-        expect_run.expect(cmd, cwd=worktree)
-
+    expect_run.expect_clone_and_setup()
+    expect_run.expect_copier_update()
+    expect_run.expect_shell()
+    expect_run.expect_git_status()
+    expect_run.expect_mise_install_and_lt()
+    expect_run.expect_shell()
+    expect_run.expect_git_commit(start_ref, end_ref)
     with expect_run.patch(mock=False, shell_callback=_shell):
         update(["gh:ness/pkfire"], dry_run=True)
 
@@ -387,7 +430,6 @@ def test_main_update_repo_arguments_self(
     "project_visibility", template.choices.project_visibility
 )
 def test_main_update_with_project(
-    worktree: Path,
     expect_run: ExpectRun,
     create_project: Callable[..., Path],
     project_visibility: str,
@@ -397,71 +439,10 @@ def test_main_update_with_project(
     dry_run: bool,
 ) -> None:
     create_project(vcs_ref=start_ref, project_visibility=project_visibility)
-    commit_message = os.linesep.join(
-        (
-            f"Apply template updates from {start_ref} to {end_ref}",
-            "",
-            (
-                f"https://github.com/smkent/copier-project/compare/"
-                f"{start_ref}...{end_ref}"
-            ),
-        )
-    )
-
     expect_run.latest_ref = end_ref
-    expect_run.expect(
-        ["git", "clone", "https://github.com/ness/pkfire", str(worktree)]
-    )
-    for cmd in [
-        [
-            *["git", "remote", "set-url", "--push", "origin"],
-            "git@github.com:ness/pkfire.git",
-        ],
-        [*["mise", "install"]],
-        [*["git", "checkout", "-b", "updates"]],
-    ]:
-        expect_run.expect(cmd, cwd=worktree)
-    expect_run.expect(
-        ["copier", "check-update", "--output-format", "json"],
-        cwd=worktree,
-        capture_output=True,
-    )
-    expect_run.expect(
-        ["copier", "update", "--skip-answered", "--vcs-ref", end_ref],
-        cwd=worktree,
-    )
-    expect_run.expect(
-        ["git", "status", "--porcelain"], cwd=worktree, capture_output=True
-    )
-    expect_run.expect(["mise", "install"], cwd=worktree)
-    for cmd in [
-        [*["mise", "run", "lt"]],
-        [*["git", "add", "-A"]],
-        [*["git", "commit", "-m", commit_message]],
-    ]:
-        expect_run.expect(cmd, cwd=worktree)
-    if not dry_run:
-        for cmd in [
-            ["git", "push", "-u", "origin", "updates", "--force-with-lease"],
-        ]:
-            expect_run.expect(cmd, cwd=worktree)
-
-        title, _, *body = commit_message.splitlines()
-        expect_run.expect(
-            [
-                "gh",
-                "pr",
-                "create",
-                "--title",
-                title,
-                "--body",
-                os.linesep.join(body),
-                "--head",
-                "updates",
-            ],
-            cwd=worktree,
-            check=False,
-            capture_output=True,
-        )
+    expect_run.expect_clone_and_setup()
+    expect_run.expect_copier_update()
+    expect_run.expect_mise_install_and_lt()
+    expect_run.expect_git_commit(start_ref, end_ref, dry_run=dry_run)
     with expect_run.patch(mock=False):
         update(["gh:ness/pkfire"], dry_run=dry_run)
