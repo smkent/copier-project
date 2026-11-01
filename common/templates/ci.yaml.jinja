@@ -6,11 +6,10 @@ CI
 {%- endblock %}
 
 {% block triggers %}
-on:
-  push:
-    branches:
-      - main
-  pull_request:
+push:
+  branches:
+    - main
+pull_request:
 {% endblock %}
 
 {% block jobs %}

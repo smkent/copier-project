@@ -7,10 +7,9 @@ Release
 {%- endblock %}
 
 {% block triggers %}
-on:
-  push:
-    tags:
-      - v[0-9]*.[0-9]*
+push:
+  tags:
+    - v[0-9]*.[0-9]*
 {% endblock %}
 
 {% block concurrency_cancel_in_progress -%}

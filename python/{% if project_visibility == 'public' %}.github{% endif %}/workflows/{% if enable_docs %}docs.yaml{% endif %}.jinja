@@ -7,11 +7,10 @@ Docs
 {%- endblock %}
 
 {% block triggers %}
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+push:
+  branches:
+    - main
+workflow_dispatch:
 {% endblock %}
 
 {% block concurrency_cancel_in_progress -%}
