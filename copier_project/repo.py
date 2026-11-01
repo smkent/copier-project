@@ -134,15 +134,18 @@ class RepoWorktree:
         )
         return self.run([*task_runner, name], **kwargs)
 
-    def git_status(self) -> list[str]:
-        return self.run(
-            ["git", "status", "--porcelain"], capture_output=True
-        ).stdout.splitlines()
+    def git_status(self) -> dict[str, str]:
+        return {
+            line[3:]: line[:2]
+            for line in self.run(
+                ["git", "status", "--porcelain"], capture_output=True
+            ).stdout.splitlines()
+        }
 
     @staticmethod
-    def has_conflicts(status: list[str]) -> bool:
+    def has_conflicts(status: dict[str, str]) -> bool:
         conflict_codes = {"UU", "AA", "DD", "AU", "UA", "DU", "UD"}
-        return any(line[:2] in conflict_codes for line in status)
+        return bool(set(status.values()) & conflict_codes)
 
     @property
     def template_ref(self) -> str:
