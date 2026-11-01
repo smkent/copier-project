@@ -68,8 +68,9 @@ class UpdateAction:
             if repo.has_conflicts(status):
                 raise RuntimeError("Conflicts remain, aborting")
 
-        with self._success_or_shell(repo, "`mise install`"):
-            repo.run(["mise", "install"])
+        if (repo.path / "mise.toml").is_file():
+            with self._success_or_shell(repo, "`mise install`"):
+                repo.run(["mise", "install"])
         with self._success_or_shell(repo, "Lint/test"):
             repo.run_task("lt")
 
