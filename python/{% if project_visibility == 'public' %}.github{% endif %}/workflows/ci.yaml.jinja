@@ -25,11 +25,7 @@ ci:
 
     {{ ci.steps_project_setup(cache_key_suffix="${{ matrix.python-version }}-") | indent(4) }}
 
-    - name: 📐 Lint
-      run: mise run lint
-
-    - name: 🔥 Test
-      run: mise run test
+    {{ ci.steps_lint_test() | indent(4) }}
 {%- if enable_coverage %}
 
     - name: 🔍 Collect coverage results
