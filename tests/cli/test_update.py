@@ -363,7 +363,7 @@ def test_main_update_with_project_current(
         pytest.param(False, id="no_allow_empty"),
     ],
 )
-def test_main_update_with_project_current_sandbox(
+def test_main_update_allow_empty(
     expect_run: ExpectRun,
     create_project: Callable[..., Path],
     *,
