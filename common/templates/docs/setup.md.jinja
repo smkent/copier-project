@@ -1,0 +1,53 @@
+{%- import "common/blocks.jinja" as blocks -%}
+{%- set repo_url = "https://github.com/" + github_user + "/" + project_name -%}
+{%- set repo_settings = repo_url + "/settings" -%}
+---
+title: One time setup
+icon: lucide/package-plus
+---
+
+# One time setup
+
+These steps only need to be completed once after the project is first created.
+
+## GitHub repository
+
+[Settings → General][repo-settings]:
+
+- [x] Allow merge commits
+- [x] Allow squash merging
+- [ ] Allow rebase merging
+- [x] Automatically delete head branches
+
+[Settings → Branches][repo-settings-branches] → Add branch protection rule
+for the Default branch (`main`):
+
+- [x] Restrict deletions
+- [x] Require a pull request before merging
+- [x] Block force pushes
+
+## Renovate
+
+Ensure the [Renovate app][renovate] is installed on your account, then
+enable it for `{{ github_user }}/{{ project_name }}`.
+{%- set extra_sections %}{% block extra_sections %}{% endblock %}{% endset -%}
+{{- blocks.put(extra_sections, blank_lines=1) }}
+
+## GitHub Pages
+
+[Settings → Pages][repo-settings-pages] → Source → GitHub Actions
+
+{%- set base_urls = {
+    "renovate": "https://github.com/apps/renovate",
+    "repo-settings": repo_settings,
+    "repo-settings-branches": repo_settings + "/branches",
+    "repo-settings-pages": repo_settings + "/pages",
+} -%}
+{%- set _ = base_urls.update(urls | default({})) %}
+{%- set footer_urls %}
+{%- for key, url in base_urls.items() | sort %}
+[{{ key }}]: {{ url }}
+{%- endfor %}
+{%- endset %}
+{{- blocks.put(footer_urls, blank_lines=1) }}
+{#- vim: set ft=markdown: #}

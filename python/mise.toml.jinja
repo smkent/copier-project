@@ -8,6 +8,11 @@
 {% block check_tool %}
 {%- endblock %}
 
+{% block zensical_tool %}
+{%- endblock %}
+
+{% block task_run_prefix %}uv run {% endblock %}
+
 {% block tasks_start %}
 {%- if project_visibility == 'public' %}
 
@@ -21,22 +26,6 @@ run = "uv run pysentry-rs"
 description = "Build distribution package"
 raw_args = true
 run = "uv build"
-{%- if enable_docs %}
-
-[tasks.docs]
-description = "Run documentation site locally"
-depends = ["docs-build"]
-run = 'uv run zensical serve -a "${usage_host:-localhost}:${usage_port:-8000}"'
-usage = '''
-flag "--host <host>" help="Bind IP" default="localhost"
-arg "[port]" help="Bind port" default="8000"
-'''
-
-[tasks.docs-build]
-description = "Build documentation site"
-raw_args = true
-run = "uv run zensical build -c"
-{%- endif %}
 {% endblock %}
 
 {% block tasks_after_lt %}

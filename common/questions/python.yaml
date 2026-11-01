@@ -64,13 +64,6 @@ enable_container:
   default: "{{ project_type == 'application' }}"
   when: "{{ template_variant == 'python' }}"
 
-enable_docs:
-  type: bool
-  qmark: 📕
-  help: Enable documentation site (Zensical{% if project_visibility == 'public' %} with deployment to GitHub Pages{% endif %})?
-  default: yes
-  when: "{{ template_variant == 'python' }}"
-
 enable_features:
   type: str
   qmark: 🧩

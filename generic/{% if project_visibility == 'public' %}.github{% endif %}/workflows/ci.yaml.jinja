@@ -11,10 +11,6 @@ ci:
 
     {{ ci.steps_project_setup() | indent(4) }}
 
-    - name: 📐 Lint
-      run: mise run lint
-
-    - name: 🔥 Test
-      run: mise run test
+    {{ ci.steps_lint_test() | indent(4) }}
 {{ super() }}
 {% endblock %}

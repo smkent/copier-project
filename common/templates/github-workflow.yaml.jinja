@@ -1,23 +1,31 @@
 {%- import "common/blocks.jinja" as blocks -%}
 
+{%- macro put_key(key, text, blank_lines=0, indent=0) -%}
+{%- if text | trim -%}
+{{ "\n" * (blank_lines + 1) }}
+{{ key }}:
+{{- blocks.put(text, blank_lines=0, indent=indent + 2) -}}
+{%- endif -%}
+{%- endmacro -%}
+
 name: {% block name required -%}{%- endblock %}
 
 {%- set triggers %}{% block triggers required %}{% endblock %}{% endset -%}
-{{- blocks.put(triggers, blank_lines=1) }}
+{{- put_key("on", triggers) }}
 
 {%- set permissions %}{% block permissions %}
-permissions:
-  contents: read
+contents: read
 {% endblock %}{% endset -%}
-{{- blocks.put(permissions, blank_lines=1) }}
+{{- put_key("permissions", permissions) }}
 
 {%- set concurrency %}{% block concurrency %}
-concurrency:
-  group: {% raw %}${{ github.workflow }}-${{ github.head_ref || github.ref }}{% endraw %}
-  cancel-in-progress: {% block concurrency_cancel_in_progress -%}{% raw %}${{ github.event_name == 'pull_request' }}{% endraw %}{% endblock %}
+group: {% raw %}${{ github.workflow }}-${{ github.head_ref || github.ref }}{% endraw %}
+cancel-in-progress: {% block concurrency_cancel_in_progress -%}{% raw %}${{ github.event_name == 'pull_request' }}{% endraw %}{% endblock %}
 {% endblock %}{% endset -%}
-{{- blocks.put(concurrency, blank_lines=1) }}
+{{- put_key("concurrency", concurrency) }}
 
-jobs:
-{%- set jobs %}{% block jobs -%}{%- endblock %}{% endset -%}
-{{- blocks.put(jobs, indent=2) }}
+{%- set env %}{% block env -%}{%- endblock %}{% endset -%}
+{{- put_key("env", env) }}
+
+{%- set jobs %}{% block jobs required -%}{%- endblock %}{% endset -%}
+{{- put_key("jobs", jobs) }}

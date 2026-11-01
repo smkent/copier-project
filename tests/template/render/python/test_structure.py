@@ -78,7 +78,6 @@ def test_structure(
         enable_docs,
         "docs",
         "docs/api.md",
-        "docs/contributing.md",
         "docs/development/requirements.md",
         "docs/development/updates.md",
         "docs/development/workflow.md",
@@ -89,6 +88,7 @@ def test_structure(
     case.expect_if(
         project_visibility == "public" and enable_docs,
         ".github/workflows/docs.yaml",
+        "docs/contributing.md",
         "docs/setup.md",
         "docs/releasing.md",
     )

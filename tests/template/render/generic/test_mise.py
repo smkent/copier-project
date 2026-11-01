@@ -17,6 +17,10 @@ if TYPE_CHECKING:
     "llm_contribution_policy", template.choices.llm_contribution_policy
 )
 @pytest.mark.parametrize(
+    "enable_docs",
+    [pytest.param(True, id="docs"), pytest.param(False, id="no_docs")],
+)
+@pytest.mark.parametrize(
     "project_visibility", template.choices.project_visibility
 )
 def test_mise_config(
@@ -24,10 +28,13 @@ def test_mise_config(
     snapshot: SnapshotAssertion,
     project_visibility: str,
     llm_contribution_policy: str,
+    *,
+    enable_docs: bool,
 ) -> None:
     rendered = render_template(
         project_visibility=project_visibility,
         llm_contribution_policy=llm_contribution_policy,
+        enable_docs=enable_docs,
     )
     for file in ["mise.toml", ".mise/conf.d/init.toml"]:
         assert (rendered / file).read_text() == snapshot

@@ -7,15 +7,18 @@ Audit
 {%- endblock %}
 
 {% block triggers %}
-on:
-  push:
-    branches:
-      - main
-    paths:
-      - uv.lock
-  pull_request:
-    paths:
-      - uv.lock
+push:
+  branches:
+    - main
+  paths:
+    - uv.lock
+pull_request:
+  paths:
+    - uv.lock
+{% endblock %}
+
+{% block env %}
+UV_PYTHON: '{{ py.latest() }}'
 {% endblock %}
 
 {% block jobs %}
@@ -23,8 +26,6 @@ audit:
   name: Dependencies
   runs-on: ubuntu-latest
   timeout-minutes: 15
-  env:
-    UV_PYTHON: '{{ py.latest() }}'
   steps:
     {{ ci.step_checkout() | indent(4) }}
 

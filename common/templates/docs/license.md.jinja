@@ -1,0 +1,14 @@
+{%- import "common/license.jinja" as license with context -%}
+---
+title: License
+icon: lucide/scale
+---
+
+# License
+{%- for file in license.files | reverse %}
+
+```
+--8<-- "{{ file }}"
+```
+{%- endfor %}
+{#- vim: set ft=markdown: #}

@@ -77,6 +77,20 @@
   mise run lt
   ```
   
+  #### Documentation server
+  
+  Start the development server with:
+  
+  ```sh
+  mise run docs
+  ```
+  
+  The documentation site will be served at:
+  
+  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
+  
+  To use a different bind host/port, run `mise run docs --help` for usage info.
+  
   ### Applying copier-project template updates
   
   Copier can update your project with template changes that have occurred since
@@ -175,6 +189,20 @@
   ```sh
   mise run lt
   ```
+  
+  #### Documentation server
+  
+  Start the development server with:
+  
+  ```sh
+  mise run docs
+  ```
+  
+  The documentation site will be served at:
+  
+  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
+  
+  To use a different bind host/port, run `mise run docs --help` for usage info.
   
   ### Applying copier-project template updates
   
@@ -279,6 +307,20 @@
   ```sh
   mise run lt
   ```
+  
+  #### Documentation server
+  
+  Start the development server with:
+  
+  ```sh
+  mise run docs
+  ```
+  
+  The documentation site will be served at:
+  
+  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
+  
+  To use a different bind host/port, run `mise run docs --help` for usage info.
   
   ### Applying copier-project template updates
   
@@ -389,6 +431,20 @@
   mise run lt
   ```
   
+  #### Documentation server
+  
+  Start the development server with:
+  
+  ```sh
+  mise run docs
+  ```
+  
+  The documentation site will be served at:
+  
+  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
+  
+  To use a different bind host/port, run `mise run docs --help` for usage info.
+  
   ### Applying copier-project template updates
   
   Copier can update your project with template changes that have occurred since
@@ -497,6 +553,20 @@
   ```sh
   mise run lt
   ```
+  
+  #### Documentation server
+  
+  Start the development server with:
+  
+  ```sh
+  mise run docs
+  ```
+  
+  The documentation site will be served at:
+  
+  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
+  
+  To use a different bind host/port, run `mise run docs --help` for usage info.
   
   ### Applying copier-project template updates
   
@@ -607,6 +677,20 @@
   mise run lt
   ```
   
+  #### Documentation server
+  
+  Start the development server with:
+  
+  ```sh
+  mise run docs
+  ```
+  
+  The documentation site will be served at:
+  
+  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
+  
+  To use a different bind host/port, run `mise run docs --help` for usage info.
+  
   ### Applying copier-project template updates
   
   Copier can update your project with template changes that have occurred since
@@ -715,6 +799,20 @@
   ```sh
   mise run lt
   ```
+  
+  #### Documentation server
+  
+  Start the development server with:
+  
+  ```sh
+  mise run docs
+  ```
+  
+  The documentation site will be served at:
+  
+  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
+  
+  To use a different bind host/port, run `mise run docs --help` for usage info.
   
   ### Applying copier-project template updates
   
@@ -825,6 +923,20 @@
   mise run lt
   ```
   
+  #### Documentation server
+  
+  Start the development server with:
+  
+  ```sh
+  mise run docs
+  ```
+  
+  The documentation site will be served at:
+  
+  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
+  
+  To use a different bind host/port, run `mise run docs --help` for usage info.
+  
   ### Applying copier-project template updates
   
   Copier can update your project with template changes that have occurred since
@@ -933,6 +1045,20 @@
   ```sh
   mise run lt
   ```
+  
+  #### Documentation server
+  
+  Start the development server with:
+  
+  ```sh
+  mise run docs
+  ```
+  
+  The documentation site will be served at:
+  
+  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
+  
+  To use a different bind host/port, run `mise run docs --help` for usage info.
   
   ### Applying copier-project template updates
   
@@ -1043,6 +1169,20 @@
   mise run lt
   ```
   
+  #### Documentation server
+  
+  Start the development server with:
+  
+  ```sh
+  mise run docs
+  ```
+  
+  The documentation site will be served at:
+  
+  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
+  
+  To use a different bind host/port, run `mise run docs --help` for usage info.
+  
   ### Applying copier-project template updates
   
   Copier can update your project with template changes that have occurred since
@@ -1151,6 +1291,20 @@
   ```sh
   mise run lt
   ```
+  
+  #### Documentation server
+  
+  Start the development server with:
+  
+  ```sh
+  mise run docs
+  ```
+  
+  The documentation site will be served at:
+  
+  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
+  
+  To use a different bind host/port, run `mise run docs --help` for usage info.
   
   ### Applying copier-project template updates
   
@@ -1261,6 +1415,20 @@
   mise run lt
   ```
   
+  #### Documentation server
+  
+  Start the development server with:
+  
+  ```sh
+  mise run docs
+  ```
+  
+  The documentation site will be served at:
+  
+  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
+  
+  To use a different bind host/port, run `mise run docs --help` for usage info.
+  
   ### Applying copier-project template updates
   
   Copier can update your project with template changes that have occurred since
@@ -1369,6 +1537,20 @@
   ```sh
   mise run lt
   ```
+  
+  #### Documentation server
+  
+  Start the development server with:
+  
+  ```sh
+  mise run docs
+  ```
+  
+  The documentation site will be served at:
+  
+  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
+  
+  To use a different bind host/port, run `mise run docs --help` for usage info.
   
   ### Applying copier-project template updates
   
@@ -1479,6 +1661,20 @@
   mise run lt
   ```
   
+  #### Documentation server
+  
+  Start the development server with:
+  
+  ```sh
+  mise run docs
+  ```
+  
+  The documentation site will be served at:
+  
+  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
+  
+  To use a different bind host/port, run `mise run docs --help` for usage info.
+  
   ### Applying copier-project template updates
   
   Copier can update your project with template changes that have occurred since
@@ -1588,6 +1784,20 @@
   mise run lt
   ```
   
+  #### Documentation server
+  
+  Start the development server with:
+  
+  ```sh
+  mise run docs
+  ```
+  
+  The documentation site will be served at:
+  
+  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
+  
+  To use a different bind host/port, run `mise run docs --help` for usage info.
+  
   ### Applying copier-project template updates
   
   Copier can update your project with template changes that have occurred since
@@ -1696,6 +1906,20 @@
   ```sh
   mise run lt
   ```
+  
+  #### Documentation server
+  
+  Start the development server with:
+  
+  ```sh
+  mise run docs
+  ```
+  
+  The documentation site will be served at:
+  
+  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
+  
+  To use a different bind host/port, run `mise run docs --help` for usage info.
   
   ### Applying copier-project template updates
   
