@@ -28,7 +28,7 @@ if TYPE_CHECKING:
 
 
 DEFAULT_BRANCH_NAME = "fhqwhgads"
-DEFAULT_END_REF = "v0.22.2"
+DEFAULT_END_REF = "v0.32.1"
 
 
 @pytest.fixture(params=["v0.16.2"])
@@ -88,17 +88,25 @@ def create_project(
         postcreate: Callable[[Path], None] | None = None,
         **kwargs: Any,
     ) -> Path:
+        kwargs.setdefault("template_variant", "generic")
         project = render_template_common(vcs_ref=vcs_ref, **kwargs)
         timestamp = _vcs_ref_timestamp(vcs_ref)
-        for cmd in (
+
+        setup_commands = [
             ["git", "init", "-b", DEFAULT_BRANCH_NAME],
             ["git", "remote", "add", "origin", str(origin)],
-            ["uv", "sync", f"--exclude-newer={timestamp}"],
-            ["uv", "sync"],
+        ]
+        if (project / "pyproject.toml").is_file():
+            setup_commands.append(
+                ["env", f"UV_EXCLUDE_NEWER={timestamp}", "mise", "install"]
+            )
+            setup_commands.append(["mise", "install"])
+        setup_commands += [
             ["git", "add", "."],
             ["git", "commit", "-m", "init from template"],
             ["git", "push", "-u", "origin", DEFAULT_BRANCH_NAME],
-        ):
+        ]
+        for cmd in setup_commands:
             with disallow_subprocess.pause():
                 subprocess.run(  # noqa: S603
                     cmd, cwd=project, check=True, capture_output=True
@@ -360,7 +368,7 @@ def test_main_update_error(
         (project / "AGENTS.md").write_text("Overwritten file, no newline")
         for cmd in (
             ["git", "add", "."],
-            ["git", "commit", "-m", "Add conflicting change"],
+            ["git", "commit", "-n", "-m", "Add conflicting change"],
             ["git", "push"],
         ):
             with disallow_subprocess.pause():
@@ -426,19 +434,25 @@ def test_main_update_repo_arguments_self(
         update([SELF_ALIAS], dry_run=True)
 
 
+@pytest.mark.parametrize("template_variant", template.choices.template_variant)
 @pytest.mark.parametrize(
     "project_visibility", template.choices.project_visibility
 )
 def test_main_update_with_project(
     expect_run: ExpectRun,
     create_project: Callable[..., Path],
+    template_variant: str,
     project_visibility: str,
     end_ref: str,
     start_ref: str,
     *,
     dry_run: bool,
 ) -> None:
-    create_project(vcs_ref=start_ref, project_visibility=project_visibility)
+    create_project(
+        vcs_ref=start_ref,
+        template_variant=template_variant,
+        project_visibility=project_visibility,
+    )
     expect_run.latest_ref = end_ref
     expect_run.expect_clone_and_setup()
     expect_run.expect_copier_update()
