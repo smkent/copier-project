@@ -139,6 +139,7 @@ class ExpectRun:
     mock_shell: Path
     origin: Path
     worktree: Path
+    latest_ref: str = field(default=DEFAULT_END_REF)
     expected_calls: list[_Call] = field(default_factory=list, init=False)
 
     @contextmanager
@@ -165,7 +166,7 @@ class ExpectRun:
                     current_version = yaml.safe_load(
                         (self.worktree / ".copier-answers.yml").read_text()
                     )["_commit"].removeprefix("v")
-                    latest_version = DEFAULT_END_REF.removeprefix("v")
+                    latest_version = self.latest_ref.removeprefix("v")
                 data = {
                     "update_available": (current_version != latest_version),
                     "current_version": current_version,
@@ -174,8 +175,11 @@ class ExpectRun:
                 return SimpleNamespace(stdout=json.dumps(data))
             if mock:
                 return MagicMock()
-            if tuple(cmd[:3]) == ("copier", "update", "--skip-answered"):
-                cmd = [*cmd[:2], "--defaults", "--vcs-ref", DEFAULT_END_REF]
+            if tuple(cmd[:2]) == ("copier", "update"):
+                cmd = tuple(
+                    "--defaults" if arg == "--skip-answered" else arg
+                    for arg in cmd
+                )
             cmd = [
                 (
                     str(self.origin)
@@ -238,6 +242,7 @@ def test_main_update_with_project_current(
     dry_run: bool,
 ) -> None:
     create_project(vcs_ref=end_ref, project_visibility=project_visibility)
+    expect_run.latest_ref = end_ref
     expect_run.expect(
         ["git", "clone", "https://github.com/ness/pkfire", str(worktree)]
     )
@@ -256,7 +261,7 @@ def test_main_update_with_project_current(
         capture_output=True,
     )
     with expect_run.patch(mock=False):
-        update(["gh:ness/pkfire"], vcs_ref=end_ref, dry_run=dry_run)
+        update(["gh:ness/pkfire"], dry_run=dry_run)
 
 
 def test_main_update_error(
@@ -300,6 +305,7 @@ def test_main_update_error(
             ):
                 subprocess.check_call(cmd, cwd=worktree)  # noqa: S603
 
+    expect_run.latest_ref = end_ref
     expect_run.expect(
         ["git", "clone", "https://github.com/ness/pkfire", str(worktree)]
     )
@@ -402,6 +408,7 @@ def test_main_update_with_project(
         )
     )
 
+    expect_run.latest_ref = end_ref
     expect_run.expect(
         ["git", "clone", "https://github.com/ness/pkfire", str(worktree)]
     )
