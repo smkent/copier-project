@@ -11,7 +11,6 @@
     { "About" = [
       "index.md",
       "license.md",
-      "contributing.md",
       { "Development" = [
         "development/requirements.md",
         "development/workflow.md",
@@ -274,7 +273,6 @@
     { "About" = [
       "index.md",
       "license.md",
-      "contributing.md",
       { "Development" = [
         "development/requirements.md",
         "development/workflow.md",

@@ -1,0 +1,220 @@
+# serializer version: 1
+# name: test_zensical_features[private]
+  '''
+  [project]
+  site_name = "PKFire"
+  site_description = "Onett Little League"
+  site_author = "Ness"
+  copyright = "&copy; 1995 Ness and contributors"
+  
+  nav = [
+    { "About" = [
+      "index.md",
+      "license.md",
+      { "Development" = [
+        "development/requirements.md",
+        "development/workflow.md",
+        "development/updates.md",
+      ] },
+    ] },
+  ]
+  
+  # ----------------------------------------------------------------------------
+  # Theme
+  # ----------------------------------------------------------------------------
+  [project.theme]
+  language = "en"
+  features = [
+    "content.code.annotate",
+    "content.code.copy",
+    "content.tooltips",
+    "navigation.expand",
+    "navigation.footer",
+    "navigation.instant",
+    "navigation.path",
+    "navigation.sections",
+    "navigation.tabs",
+    "navigation.tabs.sticky",
+    "navigation.top",
+    "search.highlight",
+    "toc.follow",
+  ]
+  
+  [project.theme.icon]
+  logo = "lucide/sparkles"
+  
+  [[project.theme.palette]]
+  media = "(prefers-color-scheme)"
+  toggle.icon = "material/brightness-auto"
+  toggle.name = "Switch to light mode"
+  
+  [[project.theme.palette]]
+  media = "(prefers-color-scheme: light)"
+  scheme = "default"
+  primary = "teal"
+  accent = "purple"
+  toggle.icon = "material/weather-sunny"
+  toggle.name = "Switch to dark mode"
+  
+  [[project.theme.palette]]
+  media = "(prefers-color-scheme: dark)"
+  scheme = "slate"
+  primary = "black"
+  accent = "lime"
+  toggle.icon = "material/weather-night"
+  toggle.name = "Switch to system preference"
+  
+  # ----------------------------------------------------------------------------
+  # Markdown extensions
+  # ----------------------------------------------------------------------------
+  [project.markdown_extensions.admonition]
+  
+  [project.markdown_extensions.attr_list]
+  
+  [project.markdown_extensions.def_list]
+  
+  [project.markdown_extensions.footnotes]
+  
+  [project.markdown_extensions.md_in_html]
+  
+  [project.markdown_extensions.toc]
+  permalink = true
+  
+  [project.markdown_extensions.pymdownx.details]
+  
+  [project.markdown_extensions.pymdownx.highlight]
+  
+  [project.markdown_extensions.pymdownx.inlinehilite]
+  
+  [project.markdown_extensions.pymdownx.quotes]
+  callouts = true
+  
+  [project.markdown_extensions.pymdownx.snippets]
+  base_path = ["."]
+  check_paths = true
+  
+  [project.markdown_extensions.pymdownx.superfences]
+  
+  [project.markdown_extensions.pymdownx.tabbed]
+  alternate_style = true
+  
+  [project.markdown_extensions.pymdownx.tasklist]
+  custom_checkbox = true
+  
+  '''
+# ---
+# name: test_zensical_features[public]
+  '''
+  [project]
+  site_name = "PKFire"
+  site_description = "Onett Little League"
+  site_author = "Ness"
+  site_url = "https://ness.github.io/PKFire"
+  repo_url = "https://github.com/ness/PKFire"
+  repo_name = "ness/PKFire"
+  copyright = "&copy; 1995 Ness and contributors"
+  
+  nav = [
+    { "About" = [
+      "index.md",
+      "license.md",
+      "contributing.md",
+      { "Development" = [
+        "development/requirements.md",
+        "development/workflow.md",
+        "development/updates.md",
+      ] },
+      { "Project Operations" = [
+        "setup.md",
+      ] },
+    ] },
+  ]
+  
+  # ----------------------------------------------------------------------------
+  # Theme
+  # ----------------------------------------------------------------------------
+  [project.theme]
+  language = "en"
+  features = [
+    "content.code.annotate",
+    "content.code.copy",
+    "content.tooltips",
+    "navigation.expand",
+    "navigation.footer",
+    "navigation.instant",
+    "navigation.path",
+    "navigation.sections",
+    "navigation.tabs",
+    "navigation.tabs.sticky",
+    "navigation.top",
+    "search.highlight",
+    "toc.follow",
+  ]
+  
+  [project.theme.icon]
+  logo = "lucide/sparkles"
+  
+  [[project.theme.palette]]
+  media = "(prefers-color-scheme)"
+  toggle.icon = "material/brightness-auto"
+  toggle.name = "Switch to light mode"
+  
+  [[project.theme.palette]]
+  media = "(prefers-color-scheme: light)"
+  scheme = "default"
+  primary = "teal"
+  accent = "purple"
+  toggle.icon = "material/weather-sunny"
+  toggle.name = "Switch to dark mode"
+  
+  [[project.theme.palette]]
+  media = "(prefers-color-scheme: dark)"
+  scheme = "slate"
+  primary = "black"
+  accent = "lime"
+  toggle.icon = "material/weather-night"
+  toggle.name = "Switch to system preference"
+  
+  [[project.extra.social]]
+  icon = "fontawesome/brands/github"
+  link = "https://github.com/ness/PKFire"
+  
+  # ----------------------------------------------------------------------------
+  # Markdown extensions
+  # ----------------------------------------------------------------------------
+  [project.markdown_extensions.admonition]
+  
+  [project.markdown_extensions.attr_list]
+  
+  [project.markdown_extensions.def_list]
+  
+  [project.markdown_extensions.footnotes]
+  
+  [project.markdown_extensions.md_in_html]
+  
+  [project.markdown_extensions.toc]
+  permalink = true
+  
+  [project.markdown_extensions.pymdownx.details]
+  
+  [project.markdown_extensions.pymdownx.highlight]
+  
+  [project.markdown_extensions.pymdownx.inlinehilite]
+  
+  [project.markdown_extensions.pymdownx.quotes]
+  callouts = true
+  
+  [project.markdown_extensions.pymdownx.snippets]
+  base_path = ["."]
+  check_paths = true
+  
+  [project.markdown_extensions.pymdownx.superfences]
+  
+  [project.markdown_extensions.pymdownx.tabbed]
+  alternate_style = true
+  
+  [project.markdown_extensions.pymdownx.tasklist]
+  custom_checkbox = true
+  
+  '''
+# ---

@@ -1,0 +1,493 @@
+# serializer version: 1
+# name: test_docs_basic
+  '''
+  ---
+  title: Overview
+  icon: lucide/book-open
+  hide:
+    - path
+  ---
+  
+  --8<-- "README.md"
+  
+  '''
+# ---
+# name: test_docs_basic.1
+  '''
+  ---
+  title: Contributing
+  icon: lucide/code
+  ---
+  
+  --8<-- "CONTRIBUTING.md"
+  
+  '''
+# ---
+# name: test_docs_basic.2
+  '''
+  ---
+  title: License
+  icon: lucide/scale
+  ---
+  
+  # License
+  
+  ```
+  --8<-- "LICENSE"
+  ```
+  
+  '''
+# ---
+# name: test_docs_development_features[private]
+  '''
+  ---
+  title: Required software
+  icon: lucide/bookmark-check
+  ---
+  
+  # Prerequisites
+  
+  - [x] [**git** for version control][git]
+  - [x] [**mise**][mise] tool manager: `curl https://mise.run | sh` or
+    [alternate installation method][mise-installation]
+  
+  [git]: https://git-scm.com
+  [mise-installation]: https://mise.jdx.dev/installing-mise.html
+  [mise]: https://mise.jdx.dev
+  
+  '''
+# ---
+# name: test_docs_development_features[private].1
+  '''
+  ---
+  title: Development workflow
+  icon: lucide/braces
+  ---
+  
+  # Project development workflow
+  
+  ## Cloning the repository
+  
+  Run `mise install` in new repository clones to install tools and git hooks:
+  
+  ```sh
+  mise install
+  ```
+  
+  ## Development tools
+  
+  * `mise run lint`: Run formatters and static checks
+  * `mise run test`: Run tests
+  
+  The `lint` and `test` tasks can also be run as a single combined command with:
+  
+  ```sh
+  mise run lt
+  ```
+  
+  ## Documentation server
+  
+  Start the development server with:
+  
+  ```sh
+  mise run docs
+  ```
+  
+  The documentation site will be served at:
+  
+  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
+  
+  To use a different bind host/port, run `mise run docs --help` for usage info.
+  
+  '''
+# ---
+# name: test_docs_development_features[private].2
+  '''
+  ---
+  title: Template updates
+  icon: lucide/git-merge
+  ---
+  
+  # Applying copier-project template updates
+  
+  Copier can update your project with template changes that have occurred since
+  the project was created.
+  
+  To apply updates, simply run in your project directory:
+  
+  ```sh
+  copier update
+  ```
+  
+  This will repeat the setup prompts, in case any prompts have been added or
+  changed.
+  
+  !!! tip
+      To change template-provided features in your project, simply change your
+      answers in the update prompts.
+  
+  To apply updates without being prompted (reusing all previous answers), run:
+  
+  ```sh
+  copier update -l
+  ```
+  
+  When [`copier update`][copier-update] is finished, view changes with
+  `git status` and `git diff`. Resolve any conflicts, and then commit the result.
+  
+  [copier-update]: https://copier.readthedocs.io/en/stable/updating/
+  
+  '''
+# ---
+# name: test_docs_development_features[public]
+  '''
+  ---
+  title: Required software
+  icon: lucide/bookmark-check
+  ---
+  
+  # Prerequisites
+  
+  - [x] [**git** for version control][git]
+  - [x] [**mise**][mise] tool manager: `curl https://mise.run | sh` or
+    [alternate installation method][mise-installation]
+  
+  [git]: https://git-scm.com
+  [mise-installation]: https://mise.jdx.dev/installing-mise.html
+  [mise]: https://mise.jdx.dev
+  
+  '''
+# ---
+# name: test_docs_development_features[public].1
+  '''
+  ---
+  title: Development workflow
+  icon: lucide/braces
+  ---
+  
+  # Project development workflow
+  
+  ## Cloning the repository
+  
+  ```sh
+  git clone https://github.com/ness/PKFire
+  cd PKFire
+  ```
+  
+  Run `mise install` in new repository clones to install tools and git hooks:
+  
+  ```sh
+  mise install
+  ```
+  
+  ## Development tools
+  
+  * `mise run lint`: Run formatters and static checks
+  * `mise run test`: Run tests
+  
+  The `lint` and `test` tasks can also be run as a single combined command with:
+  
+  ```sh
+  mise run lt
+  ```
+  
+  ## Documentation server
+  
+  Start the development server with:
+  
+  ```sh
+  mise run docs
+  ```
+  
+  The documentation site will be served at:
+  
+  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
+  
+  To use a different bind host/port, run `mise run docs --help` for usage info.
+  
+  '''
+# ---
+# name: test_docs_development_features[public].2
+  '''
+  ---
+  title: Template updates
+  icon: lucide/git-merge
+  ---
+  
+  # Applying copier-project template updates
+  
+  Copier can update your project with template changes that have occurred since
+  the project was created.
+  
+  To apply updates, simply run in your project directory:
+  
+  ```sh
+  copier update
+  ```
+  
+  This will repeat the setup prompts, in case any prompts have been added or
+  changed.
+  
+  !!! tip
+      To change template-provided features in your project, simply change your
+      answers in the update prompts.
+  
+  To apply updates without being prompted (reusing all previous answers), run:
+  
+  ```sh
+  copier update -l
+  ```
+  
+  When [`copier update`][copier-update] is finished, view changes with
+  `git status` and `git diff`. Resolve any conflicts, and then commit the result.
+  
+  [copier-update]: https://copier.readthedocs.io/en/stable/updating/
+  
+  '''
+# ---
+# name: test_docs_features
+  '''
+  ---
+  title: One time setup
+  icon: lucide/package-plus
+  ---
+  
+  # One time setup
+  
+  These steps only need to be completed once after the project is first created.
+  
+  ## GitHub repository
+  
+  [Settings → General][repo-settings]:
+  
+  - [x] Allow merge commits
+  - [x] Allow squash merging
+  - [ ] Allow rebase merging
+  - [x] Automatically delete head branches
+  
+  [Settings → Branches][repo-settings-branches] → Add branch protection rule
+  for the Default branch (`main`):
+  
+  - [x] Restrict deletions
+  - [x] Require a pull request before merging
+  - [x] Block force pushes
+  
+  ## Renovate
+  
+  Ensure the [Renovate app][renovate] is installed on your account, then
+  enable it for `ness/PKFire`.
+  
+  ## GitHub Pages
+  
+  [Settings → Pages][repo-settings-pages] → Source → GitHub Actions
+  
+  [renovate]: https://github.com/apps/renovate
+  [repo-settings]: https://github.com/ness/PKFire/settings
+  [repo-settings-branches]: https://github.com/ness/PKFire/settings/branches
+  [repo-settings-pages]: https://github.com/ness/PKFire/settings/pages
+  
+  '''
+# ---
+# name: test_docs_license[AGPL-3.0-only]
+  '''
+  ---
+  title: License
+  icon: lucide/scale
+  ---
+  
+  # License
+  
+  ```
+  --8<-- "COPYING"
+  ```
+  
+  '''
+# ---
+# name: test_docs_license[AGPL-3.0-or-later]
+  '''
+  ---
+  title: License
+  icon: lucide/scale
+  ---
+  
+  # License
+  
+  ```
+  --8<-- "COPYING"
+  ```
+  
+  '''
+# ---
+# name: test_docs_license[Apache-2.0]
+  '''
+  ---
+  title: License
+  icon: lucide/scale
+  ---
+  
+  # License
+  
+  ```
+  --8<-- "LICENSE"
+  ```
+  
+  '''
+# ---
+# name: test_docs_license[BSD-3-Clause]
+  '''
+  ---
+  title: License
+  icon: lucide/scale
+  ---
+  
+  # License
+  
+  ```
+  --8<-- "LICENSE"
+  ```
+  
+  '''
+# ---
+# name: test_docs_license[CC-BY-4.0]
+  '''
+  ---
+  title: License
+  icon: lucide/scale
+  ---
+  
+  # License
+  
+  ```
+  --8<-- "LICENSE"
+  ```
+  
+  '''
+# ---
+# name: test_docs_license[CC-BY-SA-4.0]
+  '''
+  ---
+  title: License
+  icon: lucide/scale
+  ---
+  
+  # License
+  
+  ```
+  --8<-- "LICENSE"
+  ```
+  
+  '''
+# ---
+# name: test_docs_license[CC0-1.0]
+  '''
+  ---
+  title: License
+  icon: lucide/scale
+  ---
+  
+  # License
+  
+  ```
+  --8<-- "LICENSE"
+  ```
+  
+  '''
+# ---
+# name: test_docs_license[GPL-3.0-only]
+  '''
+  ---
+  title: License
+  icon: lucide/scale
+  ---
+  
+  # License
+  
+  ```
+  --8<-- "COPYING"
+  ```
+  
+  '''
+# ---
+# name: test_docs_license[GPL-3.0-or-later]
+  '''
+  ---
+  title: License
+  icon: lucide/scale
+  ---
+  
+  # License
+  
+  ```
+  --8<-- "COPYING"
+  ```
+  
+  '''
+# ---
+# name: test_docs_license[ISC]
+  '''
+  ---
+  title: License
+  icon: lucide/scale
+  ---
+  
+  # License
+  
+  ```
+  --8<-- "LICENSE"
+  ```
+  
+  '''
+# ---
+# name: test_docs_license[LGPL-3.0-only]
+  '''
+  ---
+  title: License
+  icon: lucide/scale
+  ---
+  
+  # License
+  
+  ```
+  --8<-- "COPYING.LESSER"
+  ```
+  
+  ```
+  --8<-- "COPYING"
+  ```
+  
+  '''
+# ---
+# name: test_docs_license[LGPL-3.0-or-later]
+  '''
+  ---
+  title: License
+  icon: lucide/scale
+  ---
+  
+  # License
+  
+  ```
+  --8<-- "COPYING.LESSER"
+  ```
+  
+  ```
+  --8<-- "COPYING"
+  ```
+  
+  '''
+# ---
+# name: test_docs_license[MIT]
+  '''
+  ---
+  title: License
+  icon: lucide/scale
+  ---
+  
+  # License
+  
+  ```
+  --8<-- "LICENSE"
+  ```
+  
+  '''
+# ---

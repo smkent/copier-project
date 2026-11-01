@@ -18,12 +18,41 @@ jactionlint = "latest"
 {%- endif %}
 {%- endblock %}
 "pipx:copier" = "latest"
+{%- block zensical_tool %}
+{%- if enable_docs %}
+"pipx:zensical" = "latest"
+{%- endif %}
+{%- endblock %}
 prek = "latest"
 taplo = "latest"
 uv = "latest"
 
 {%- set tasks_start %}{% block tasks_start %}{% endblock %}{% endset -%}
 {{- blocks.put(tasks_start, blank_lines=1) }}
+
+{%- set task_run_prefix %}{% block task_run_prefix %}{% endblock %}{% endset -%}
+
+{%- set task_docs %}{% block task_docs %}
+{%- if enable_docs %}
+[tasks.docs]
+description = "Run documentation site locally"
+depends = ["docs-build"]
+run = '{{ task_run_prefix }}zensical serve -a "${usage_host:-localhost}:${usage_port:-8000}"'
+usage = '''
+flag "--host <host>" help="Bind IP" default="localhost"
+arg "[port]" help="Bind port" default="8000"
+'''
+
+[tasks.docs-build]
+description = "Build documentation site"
+raw_args = true
+run = "{{ task_run_prefix }}zensical build -c"
+{%- endif %}
+{% endblock %}{% endset -%}
+{{- blocks.put(task_docs, blank_lines=1) }}
+
+{%- set tasks_after_docs %}{% block tasks_after_docs %}{% endblock %}{% endset -%}
+{{- blocks.put(tasks_after_docs, blank_lines=1) }}
 
 [tasks.lint]
 description = "Run all formatters and static checks"

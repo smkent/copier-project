@@ -1153,8 +1153,8 @@
   [renovate]: https://github.com/apps/renovate
   [repo-settings]: https://github.com/ness/PKFire/settings
   [repo-settings-actions-general]: https://github.com/ness/PKFire/settings/actions
-  [repo-settings-envs]: https://github.com/ness/PKFire/settings/environments
   [repo-settings-branches]: https://github.com/ness/PKFire/settings/branches
+  [repo-settings-envs]: https://github.com/ness/PKFire/settings/environments
   [repo-settings-pages]: https://github.com/ness/PKFire/settings/pages
   
   '''
@@ -1352,8 +1352,8 @@
   [pypi-trusted-publishing]: https://docs.pypi.org/trusted-publishers/
   [renovate]: https://github.com/apps/renovate
   [repo-settings]: https://github.com/ness/PKFire/settings
-  [repo-settings-envs]: https://github.com/ness/PKFire/settings/environments
   [repo-settings-branches]: https://github.com/ness/PKFire/settings/branches
+  [repo-settings-envs]: https://github.com/ness/PKFire/settings/environments
   [repo-settings-pages]: https://github.com/ness/PKFire/settings/pages
   
   '''

@@ -14,13 +14,12 @@ PYTHON_ONLY_PATHS = {
     ".dockerignore",
     ".github/workflows/audit.yaml",
     ".github/workflows/release.yaml",
+    "docs/releasing.md",
     "Dockerfile",
     "compose.yaml",
-    "docs",
     "py.typed",
     "pyproject.toml",
     "tests",
-    "zensical.toml",
 }
 
 
@@ -28,15 +27,22 @@ PYTHON_ONLY_PATHS = {
 @pytest.mark.parametrize(
     "project_visibility", template.choices.project_visibility
 )
+@pytest.mark.parametrize(
+    "enable_docs",
+    [pytest.param(True, id="docs"), pytest.param(False, id="no_docs")],
+)
 def test_structure(
     structure_test: StructureTest,
     project_type: str,
     project_visibility: str,
+    *,
+    enable_docs: bool,
 ) -> None:
     case = StructureTestCase(
         extra_data={
             "project_type": project_type,
             "project_visibility": project_visibility,
+            "enable_docs": enable_docs,
         },
         expected_absent={"common", *PYTHON_ONLY_PATHS},
     )
@@ -44,6 +50,22 @@ def test_structure(
         project_visibility == "public",
         ".github/workflows/ci.yaml",
         "CONTRIBUTING.md",
+    )
+    case.expect_if(
+        enable_docs,
+        "docs",
+        "docs/development/requirements.md",
+        "docs/development/updates.md",
+        "docs/development/workflow.md",
+        "docs/index.md",
+        "docs/license.md",
+        "zensical.toml",
+    )
+    case.expect_if(
+        project_visibility == "public" and enable_docs,
+        ".github/workflows/docs.yaml",
+        "docs/contributing.md",
+        "docs/setup.md",
     )
     structure_test(case)
 

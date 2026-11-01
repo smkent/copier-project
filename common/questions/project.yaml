@@ -118,6 +118,12 @@ llm_contribution_policy:
     Accepted with disclosure: accepted-with-disclosure
     Not accepted: not-accepted
 
+enable_docs:
+  type: bool
+  qmark: 📕
+  help: Enable documentation site (Zensical{% if project_visibility == 'public' %} with deployment to GitHub Pages{% endif %})?
+  default: yes
+
 enable_commit_check:
   type: bool
   qmark: 📃

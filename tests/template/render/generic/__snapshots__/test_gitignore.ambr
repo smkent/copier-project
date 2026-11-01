@@ -1,0 +1,20 @@
+# serializer version: 1
+# name: test_gitignore[docs]
+  '''
+  # mise
+  mise.local.toml
+  .mise.local.toml
+  
+  # Development tools
+  /site/
+  
+  '''
+# ---
+# name: test_gitignore[no_docs]
+  '''
+  # mise
+  mise.local.toml
+  .mise.local.toml
+  
+  '''
+# ---

@@ -30,6 +30,9 @@ features common to all project variants:
     [![Copier][copier-badge]][copier-update]
     [![renovate][renovate-badge]][renovate]
 
+* [**Zensical**][zensical] project documentation with automatic deployment to
+  [**GitHub Pages**][github-pages]
+
 ### Python
 
 The **Python** project variant adds Python-specific features:
@@ -43,8 +46,6 @@ The **Python** project variant adds Python-specific features:
 * [**PyPI package**][pypi] and [**container image**][ghcr-docs] release
   automation via [**GitHub Actions**][github-actions]
 * [**pytest**][pytest] test framework with [**codecov.io**][codecovio] support
-* [**Zensical**][zensical] project documentation with automatic deployment to
-  [**GitHub Pages**][github-pages]
 
 [astral]: https://astral.sh
 [codecovio]: https://codecov.io
