@@ -90,15 +90,22 @@ def create_project(
     ) -> Path:
         project = render_template_common(vcs_ref=vcs_ref, **kwargs)
         timestamp = _vcs_ref_timestamp(vcs_ref)
-        for cmd in (
+
+        setup_commands = [
             ["git", "init", "-b", DEFAULT_BRANCH_NAME],
             ["git", "remote", "add", "origin", str(origin)],
-            ["uv", "sync", f"--exclude-newer={timestamp}"],
-            ["uv", "sync"],
+        ]
+        if (project / "pyproject.toml").is_file():
+            setup_commands.append(
+                ["env", f"UV_EXCLUDE_NEWER={timestamp}", "mise", "install"]
+            )
+            setup_commands.append(["mise", "install"])
+        setup_commands += [
             ["git", "add", "."],
             ["git", "commit", "-m", "init from template"],
             ["git", "push", "-u", "origin", DEFAULT_BRANCH_NAME],
-        ):
+        ]
+        for cmd in setup_commands:
             with disallow_subprocess.pause():
                 subprocess.run(  # noqa: S603
                     cmd, cwd=project, check=True, capture_output=True
@@ -360,7 +367,7 @@ def test_main_update_error(
         (project / "AGENTS.md").write_text("Overwritten file, no newline")
         for cmd in (
             ["git", "add", "."],
-            ["git", "commit", "-m", "Add conflicting change"],
+            ["git", "commit", "-n", "-m", "Add conflicting change"],
             ["git", "push"],
         ):
             with disallow_subprocess.pause():
