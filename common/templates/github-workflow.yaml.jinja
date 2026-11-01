@@ -24,5 +24,8 @@ cancel-in-progress: {% block concurrency_cancel_in_progress -%}{% raw %}${{ gith
 {% endblock %}{% endset -%}
 {{- put_key("concurrency", concurrency) }}
 
+{%- set env %}{% block env -%}{%- endblock %}{% endset -%}
+{{- put_key("env", env) }}
+
 {%- set jobs %}{% block jobs required -%}{%- endblock %}{% endset -%}
 {{- put_key("jobs", jobs) }}

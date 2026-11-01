@@ -20,13 +20,14 @@
     group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
     cancel-in-progress: ${{ github.event_name == 'pull_request' }}
   
+  env:
+    UV_PYTHON: '3.15'
+  
   jobs:
     audit:
       name: Dependencies
       runs-on: ubuntu-latest
       timeout-minutes: 15
-      env:
-        UV_PYTHON: '3.15'
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
@@ -68,6 +69,9 @@
   concurrency:
     group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
     cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  
+  env:
+    UV_PYTHON: '3.15'
   
   jobs:
     ci:
@@ -127,8 +131,6 @@
       name: Documentation
       runs-on: ubuntu-latest
       timeout-minutes: 15
-      env:
-        UV_PYTHON: '3.15'
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
@@ -217,6 +219,9 @@
     group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
     cancel-in-progress: ${{ github.event_name == 'pull_request' }}
   
+  env:
+    UV_PYTHON: '3.15'
+  
   jobs:
     ci:
       name: Test (Python ${{ matrix.python-version }})
@@ -263,8 +268,6 @@
       name: Documentation
       runs-on: ubuntu-latest
       timeout-minutes: 15
-      env:
-        UV_PYTHON: '3.15'
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
@@ -352,6 +355,9 @@
   concurrency:
     group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
     cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  
+  env:
+    UV_PYTHON: '3.15'
   
   jobs:
     ci:
@@ -471,6 +477,9 @@
     group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
     cancel-in-progress: ${{ github.event_name == 'pull_request' }}
   
+  env:
+    UV_PYTHON: '3.15'
+  
   jobs:
     ci:
       name: Test (Python ${{ matrix.python-version }})
@@ -577,6 +586,9 @@
     group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
     cancel-in-progress: ${{ github.event_name == 'pull_request' }}
   
+  env:
+    UV_PYTHON: '3.13'
+  
   jobs:
     ci:
       name: Test (Python ${{ matrix.python-version }})
@@ -633,8 +645,6 @@
       name: Documentation
       runs-on: ubuntu-latest
       timeout-minutes: 15
-      env:
-        UV_PYTHON: '3.13'
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
@@ -723,6 +733,9 @@
     group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
     cancel-in-progress: ${{ github.event_name == 'pull_request' }}
   
+  env:
+    UV_PYTHON: '3.13'
+  
   jobs:
     ci:
       name: Test (Python ${{ matrix.python-version }})
@@ -777,8 +790,6 @@
       name: Documentation
       runs-on: ubuntu-latest
       timeout-minutes: 15
-      env:
-        UV_PYTHON: '3.13'
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
@@ -867,6 +878,9 @@
     group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
     cancel-in-progress: ${{ github.event_name == 'pull_request' }}
   
+  env:
+    UV_PYTHON: '3.15'
+  
   jobs:
     ci:
       name: Test (Python ${{ matrix.python-version }})
@@ -925,8 +939,6 @@
       name: Documentation
       runs-on: ubuntu-latest
       timeout-minutes: 15
-      env:
-        UV_PYTHON: '3.15'
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
@@ -1015,6 +1027,9 @@
     group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
     cancel-in-progress: ${{ github.event_name == 'pull_request' }}
   
+  env:
+    UV_PYTHON: '3.15'
+  
   jobs:
     ci:
       name: Test (Python ${{ matrix.python-version }})
@@ -1071,8 +1086,6 @@
       name: Documentation
       runs-on: ubuntu-latest
       timeout-minutes: 15
-      env:
-        UV_PYTHON: '3.15'
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
@@ -1161,6 +1174,9 @@
     group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
     cancel-in-progress: ${{ github.event_name == 'pull_request' }}
   
+  env:
+    UV_PYTHON: '3.15'
+  
   jobs:
     ci:
       name: Test (Python ${{ matrix.python-version }})
@@ -1219,8 +1235,6 @@
       name: Documentation
       runs-on: ubuntu-latest
       timeout-minutes: 15
-      env:
-        UV_PYTHON: '3.15'
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
@@ -1309,6 +1323,9 @@
     group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
     cancel-in-progress: ${{ github.event_name == 'pull_request' }}
   
+  env:
+    UV_PYTHON: '3.15'
+  
   jobs:
     ci:
       name: Test (Python ${{ matrix.python-version }})
@@ -1365,8 +1382,6 @@
       name: Documentation
       runs-on: ubuntu-latest
       timeout-minutes: 15
-      env:
-        UV_PYTHON: '3.15'
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
@@ -1578,13 +1593,14 @@
     group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
     cancel-in-progress: false
   
+  env:
+    UV_PYTHON: '3.15'
+  
   jobs:
     build:
       name: Build Documentation
       runs-on: ubuntu-latest
       timeout-minutes: 15
-      env:
-        UV_PYTHON: '3.15'
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
@@ -1651,14 +1667,15 @@
     group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
     cancel-in-progress: false
   
+  env:
+    UV_PYTHON: '3.15'
+  
   jobs:
     build:
       name: Build distribution
       runs-on: ubuntu-latest
       cache-mode: none
       timeout-minutes: 15
-      env:
-        UV_PYTHON: '3.15'
       steps:
         - name: 💾 Check out repository
           uses: actions/checkout@v7
