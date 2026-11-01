@@ -1,0 +1,107 @@
+# serializer version: 1
+# name: test_gitignore[docs-private]
+  '''
+  # Python
+  __pycache__/
+  *.egg-info/
+  *.py[cod]
+  
+  # uv and packaging
+  .venv*/
+  /build/
+  /dist/
+  
+  # mise
+  mise.local.toml
+  .mise.local.toml
+  
+  # Development tools
+  .cache/
+  .coverage*
+  .pytest_cache/
+  .ruff_cache/
+  /htmlcov/
+  /site/
+  coverage.xml
+  
+  '''
+# ---
+# name: test_gitignore[docs-public]
+  '''
+  # Python
+  __pycache__/
+  *.egg-info/
+  *.py[cod]
+  
+  # uv and packaging
+  .venv*/
+  /build/
+  /dist/
+  
+  # mise
+  mise.local.toml
+  .mise.local.toml
+  
+  # Development tools
+  .cache/
+  .coverage*
+  .pytest_cache/
+  .ruff_cache/
+  /htmlcov/
+  /site/
+  coverage.xml
+  
+  '''
+# ---
+# name: test_gitignore[no_docs-private]
+  '''
+  # Python
+  __pycache__/
+  *.egg-info/
+  *.py[cod]
+  
+  # uv and packaging
+  .venv*/
+  /build/
+  /dist/
+  
+  # mise
+  mise.local.toml
+  .mise.local.toml
+  
+  # Development tools
+  .cache/
+  .coverage*
+  .pytest_cache/
+  .ruff_cache/
+  /htmlcov/
+  coverage.xml
+  
+  '''
+# ---
+# name: test_gitignore[no_docs-public]
+  '''
+  # Python
+  __pycache__/
+  *.egg-info/
+  *.py[cod]
+  
+  # uv and packaging
+  .venv*/
+  /build/
+  /dist/
+  
+  # mise
+  mise.local.toml
+  .mise.local.toml
+  
+  # Development tools
+  .cache/
+  .coverage*
+  .pytest_cache/
+  .ruff_cache/
+  /htmlcov/
+  coverage.xml
+  
+  '''
+# ---
