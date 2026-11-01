@@ -4,7 +4,7 @@ import os
 import re
 import subprocess
 import tempfile
-from contextlib import contextmanager, suppress
+from contextlib import ExitStack, suppress
 from dataclasses import InitVar, dataclass, field
 from functools import cached_property
 from pathlib import Path
@@ -16,7 +16,7 @@ from rich.panel import Panel
 from rich.text import Text
 
 if TYPE_CHECKING:
-    from collections.abc import Generator, Sequence
+    from collections.abc import Sequence
 
 SELF_ALIAS = "self"
 PROJECT_URL = "https://github.com/smkent/copier-project"
@@ -69,20 +69,19 @@ class RepoTarget:
 
 
 @dataclass
-class RepoWorktree:
-    path: Path
+class RepoWorktree(ExitStack):
+    path: Path = field(init=False)
     repo: RepoTarget
     branch: str
 
-    @classmethod
-    @contextmanager
-    def clone(
-        cls, repo: RepoTarget, branch: str
-    ) -> Generator[Self, None, None]:
-        with tempfile.TemporaryDirectory() as td:
-            yield cls(path=Path(td) / "worktree", repo=repo, branch=branch)
-
     def __post_init__(self) -> None:
+        super().__init__()
+
+    def __enter__(self) -> Self:
+        self.path = (
+            Path(self.enter_context(tempfile.TemporaryDirectory()))
+            / "worktree"
+        )
         self.run(
             ["git", "clone", self.repo.url, str(self.path)], set_cwd=False
         )
@@ -98,6 +97,7 @@ class RepoWorktree:
         )
         self.run(["mise", "install"] if self.use_mise() else ["poe", "setup"])
         self.run(["git", "checkout", "-b", self.branch])
+        return self
 
     def use_mise(self) -> bool:
         return (self.path / "mise.toml").is_file()
