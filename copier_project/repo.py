@@ -80,29 +80,24 @@ class RepoWorktree:
         cls, repo: RepoTarget, branch: str
     ) -> Generator[Self, None, None]:
         with tempfile.TemporaryDirectory() as td:
-            repo_dir = Path(td) / "worktree"
-            cls.run_in(["git", "clone", repo.url, str(repo_dir)], repo=repo)
-            cls.run_in(
-                [
-                    *["git", "remote", "set-url", "--push", "origin"],
-                    repo.push_url,
-                ],
-                repo=repo,
-                cwd=repo_dir,
-            )
-            cls.run_in(
-                (
-                    ["mise", "install"]
-                    if (repo_dir / "mise.toml").is_file()
-                    else ["poe", "setup"]
-                ),
-                repo=repo,
-                cwd=repo_dir,
-            )
-            cls.run_in(
-                ["git", "checkout", "-b", branch], repo=repo, cwd=repo_dir
-            )
-            yield cls(path=repo_dir, repo=repo, branch=branch)
+            yield cls(path=Path(td) / "worktree", repo=repo, branch=branch)
+
+    def __post_init__(self) -> None:
+        self.run(
+            ["git", "clone", self.repo.url, str(self.path)], set_cwd=False
+        )
+        self.run(
+            [
+                "git",
+                "remote",
+                "set-url",
+                "--push",
+                "origin",
+                self.repo.push_url,
+            ],
+        )
+        self.run(["mise", "install"] if self.use_mise() else ["poe", "setup"])
+        self.run(["git", "checkout", "-b", self.branch])
 
     @classmethod
     def run_in(
@@ -118,19 +113,21 @@ class RepoWorktree:
         print(Panel(txt, expand=False, border_style="white dim"))
         return subprocess.run(cmd, **kwargs)  # noqa: S603 PLW1510
 
+    def use_mise(self) -> bool:
+        return (self.path / "mise.toml").is_file()
+
     def run(
-        self, cmd: list[str], **kwargs: Any
+        self, cmd: list[str], *, set_cwd: bool = True, **kwargs: Any
     ) -> subprocess.CompletedProcess[str]:
-        kwargs.setdefault("cwd", self.path)
+        if set_cwd:
+            kwargs.setdefault("cwd", self.path)
         return self.run_in(cmd, repo=self.repo, **kwargs)
 
     def run_task(
         self, name: str, **kwargs: Any
     ) -> subprocess.CompletedProcess[str]:
         task_runner = (
-            ["mise", "run"]
-            if (self.path / "mise.toml").is_file()
-            else ["uv", "run", "poe"]
+            ["mise", "run"] if self.use_mise() else ["uv", "run", "poe"]
         )
         return self.run([*task_runner, name], **kwargs)
 
