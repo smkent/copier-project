@@ -99,20 +99,6 @@ class RepoWorktree:
         self.run(["mise", "install"] if self.use_mise() else ["poe", "setup"])
         self.run(["git", "checkout", "-b", self.branch])
 
-    @classmethod
-    def run_in(
-        cls, cmd: list[str], *, repo: RepoTarget, **kwargs: Any
-    ) -> subprocess.CompletedProcess[str]:
-        kwargs.setdefault("check", True)
-        kwargs.setdefault("text", True)
-        cmd_text = Text(" ".join(cmd), style="color(153)")
-        txt = Text.assemble(
-            Text(f"{repo.github_repo} => ", style="bold"),
-            cmd_text,
-        )
-        print(Panel(txt, expand=False, border_style="white dim"))
-        return subprocess.run(cmd, **kwargs)  # noqa: S603 PLW1510
-
     def use_mise(self) -> bool:
         return (self.path / "mise.toml").is_file()
 
@@ -121,7 +107,15 @@ class RepoWorktree:
     ) -> subprocess.CompletedProcess[str]:
         if set_cwd:
             kwargs.setdefault("cwd", self.path)
-        return self.run_in(cmd, repo=self.repo, **kwargs)
+        kwargs.setdefault("check", True)
+        kwargs.setdefault("text", True)
+        cmd_text = Text(" ".join(cmd), style="color(153)")
+        txt = Text.assemble(
+            Text(f"{self.repo.github_repo} => ", style="bold"),
+            cmd_text,
+        )
+        print(Panel(txt, expand=False, border_style="white dim"))
+        return subprocess.run(cmd, **kwargs)  # noqa: S603 PLW1510
 
     def run_task(
         self, name: str, **kwargs: Any
