@@ -356,6 +356,38 @@ def test_main_update_with_project_current(
         update(["gh:ness/pkfire"], dry_run=dry_run)
 
 
+@pytest.mark.parametrize(
+    "allow_empty",
+    [
+        pytest.param(True, id="allow_empty"),
+        pytest.param(False, id="no_allow_empty"),
+    ],
+)
+def test_main_update_with_project_current_sandbox(
+    expect_run: ExpectRun,
+    create_project: Callable[..., Path],
+    *,
+    allow_empty: bool,
+) -> None:
+    start_ref = "v0.23.0"
+    end_ref = "v0.23.1"
+    dry_run = True
+    create_project(vcs_ref=start_ref, project_visibility="public")
+    expect_run.latest_ref = end_ref
+    expect_run.expect_clone_and_setup()
+    expect_run.expect_copier_update()
+    if allow_empty:
+        expect_run.expect_mise_install_and_lt()
+        expect_run.expect_git_commit(start_ref, end_ref, dry_run=dry_run)
+    with expect_run.patch(mock=False):
+        update(
+            ["gh:ness/pkfire"],
+            vcs_ref=end_ref,
+            dry_run=dry_run,
+            allow_empty=allow_empty,
+        )
+
+
 def test_main_update_error(
     disallow_subprocess: DisallowCallable,
     worktree: Path,

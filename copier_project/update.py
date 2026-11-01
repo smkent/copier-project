@@ -20,6 +20,7 @@ class UpdateAction:
     branch: str
     vcs_ref: str | None = None
     dry_run: bool = field(default=False, kw_only=True)
+    allow_empty: bool = field(default=False, kw_only=True)
 
     def __call__(self) -> str | None:
         with RepoWorktree.clone(self.repo, branch=self.branch) as worktree:
@@ -52,7 +53,9 @@ class UpdateAction:
         repo.run(["copier", "update", "--skip-answered", "--vcs-ref", end_ref])
 
         status = repo.git_status()
-        if not status:
+        if not status or (
+            not self.allow_empty and status.keys() == {".copier-answers.yml"}
+        ):
             return None
 
         if repo.has_conflicts(status):

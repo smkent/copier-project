@@ -86,6 +86,14 @@ def update(
         str | None, Option("--vcs-ref", "-r", help="Template ref to update to")
     ] = None,
     dry_run: Args.DryRun = False,
+    allow_empty: Annotated[
+        bool,
+        Option(
+            "--allow-empty",
+            "-e",
+            help="Apply update even if template diff is blank.",
+        ),
+    ] = False,
     branch: Annotated[str, Option(help="Branch name to create.")] = "updates",
 ) -> None:
     """Apply copier-project template updates to downstream repositories."""
@@ -95,7 +103,11 @@ def update(
     for target in repo_targets.values():
         try:
             pr_url = UpdateAction(
-                target, branch=branch, vcs_ref=vcs_ref, dry_run=dry_run
+                target,
+                branch=branch,
+                vcs_ref=vcs_ref,
+                dry_run=dry_run,
+                allow_empty=allow_empty,
             )()
             if pr_url:
                 results.append(
