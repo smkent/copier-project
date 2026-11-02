@@ -68,6 +68,23 @@ This will:
 4. Add your GitHub repository as the `origin` remote
    (when `project_visibility: public`)
 
+    !!! note
+
+        The `origin` remote will be set to the repository's HTTP url.
+
+        To push using `ssh`, configure git with an `ssh` URL for your project:
+
+        ```sh
+        git config --local url."git@github.com:".pushInsteadOf https://github.com/
+        ```
+
+        git can be configured to push using `ssh` for all GitHub projects by
+        changing `--local` to `--global`:
+
+        ```sh
+        git config --global url."git@github.com:".pushInsteadOf https://github.com/
+        ```
+
 ## Push repository to GitHub
 
 Push your new project to your GitHub repository:
