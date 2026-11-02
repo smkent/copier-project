@@ -1,5 +1,124 @@
 # serializer version: 1
-# name: test_pre_commit_config[generic-accepted-with-disclosure]
+# name: test_pre_commit_config[generic-accepted-private]
+  '''
+  repos:
+    - repo: https://github.com/pre-commit/pre-commit-hooks
+      rev: v6.0.0
+      hooks:
+        - id: trailing-whitespace
+        - id: end-of-file-fixer
+        - id: check-merge-conflict
+        - id: check-yaml
+        - id: check-toml
+        - id: check-json
+        - id: check-added-large-files
+        - id: detect-private-key
+    - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
+      rev: v2.16.0
+      hooks:
+        - id: pretty-format-yaml
+          args: [--autofix, --offset, '2']
+          exclude: ^\.copier-answers\.yml$
+    - repo: local
+      hooks:
+        - id: betterleaks
+          name: betterleaks
+          entry: betterleaks git . --pre-commit --staged --redact
+          language: system
+          pass_filenames: false
+        - id: taplo
+          name: taplo
+          entry: taplo format
+          language: system
+          types: [toml]
+  
+  '''
+# ---
+# name: test_pre_commit_config[generic-accepted-public]
+  '''
+  repos:
+    - repo: https://github.com/pre-commit/pre-commit-hooks
+      rev: v6.0.0
+      hooks:
+        - id: trailing-whitespace
+        - id: end-of-file-fixer
+        - id: check-merge-conflict
+        - id: check-yaml
+        - id: check-toml
+        - id: check-json
+        - id: check-added-large-files
+        - id: detect-private-key
+    - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
+      rev: v2.16.0
+      hooks:
+        - id: pretty-format-yaml
+          args: [--autofix, --offset, '2']
+          exclude: ^\.copier-answers\.yml$
+    - repo: local
+      hooks:
+        - id: betterleaks
+          name: betterleaks
+          entry: betterleaks git . --pre-commit --staged --redact
+          language: system
+          pass_filenames: false
+        - id: jactionlint
+          name: jactionlint
+          entry: jactionlint --fix
+          language: system
+          types:
+            - yaml
+          files: ^\.github/workflows/
+        - id: taplo
+          name: taplo
+          entry: taplo format
+          language: system
+          types: [toml]
+  
+  '''
+# ---
+# name: test_pre_commit_config[generic-accepted-with-disclosure-private]
+  '''
+  default_install_hook_types: [pre-commit, commit-msg]
+  default_stages: [pre-commit]
+  repos:
+    - repo: https://github.com/pre-commit/pre-commit-hooks
+      rev: v6.0.0
+      hooks:
+        - id: trailing-whitespace
+        - id: end-of-file-fixer
+        - id: check-merge-conflict
+        - id: check-yaml
+        - id: check-toml
+        - id: check-json
+        - id: check-added-large-files
+        - id: detect-private-key
+    - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
+      rev: v2.16.0
+      hooks:
+        - id: pretty-format-yaml
+          args: [--autofix, --offset, '2']
+          exclude: ^\.copier-answers\.yml$
+    - repo: local
+      hooks:
+        - id: betterleaks
+          name: betterleaks
+          entry: betterleaks git . --pre-commit --staged --redact
+          language: system
+          pass_filenames: false
+        - id: taplo
+          name: taplo
+          entry: taplo format
+          language: system
+          types: [toml]
+        - id: commit-check
+          name: commit-check
+          entry: commit-check --no-banner --message
+          language: system
+          stages: [commit-msg]
+  
+  '''
+# ---
+# name: test_pre_commit_config[generic-accepted-with-disclosure-public]
   '''
   default_install_hook_types: [pre-commit, commit-msg]
   default_stages: [pre-commit]
@@ -48,8 +167,10 @@
   
   '''
 # ---
-# name: test_pre_commit_config[generic-accepted]
+# name: test_pre_commit_config[generic-not-accepted-private]
   '''
+  default_install_hook_types: [pre-commit, commit-msg]
+  default_stages: [pre-commit]
   repos:
     - repo: https://github.com/pre-commit/pre-commit-hooks
       rev: v6.0.0
@@ -75,22 +196,20 @@
           entry: betterleaks git . --pre-commit --staged --redact
           language: system
           pass_filenames: false
-        - id: jactionlint
-          name: jactionlint
-          entry: jactionlint --fix
-          language: system
-          types:
-            - yaml
-          files: ^\.github/workflows/
         - id: taplo
           name: taplo
           entry: taplo format
           language: system
           types: [toml]
+        - id: commit-check
+          name: commit-check
+          entry: commit-check --no-banner --message
+          language: system
+          stages: [commit-msg]
   
   '''
 # ---
-# name: test_pre_commit_config[generic-not-accepted]
+# name: test_pre_commit_config[generic-not-accepted-public]
   '''
   default_install_hook_types: [pre-commit, commit-msg]
   default_stages: [pre-commit]
@@ -139,7 +258,177 @@
   
   '''
 # ---
-# name: test_pre_commit_config[python-accepted-with-disclosure]
+# name: test_pre_commit_config[python-accepted-private]
+  '''
+  repos:
+    - repo: https://github.com/pre-commit/pre-commit-hooks
+      rev: v6.0.0
+      hooks:
+        - id: trailing-whitespace
+        - id: end-of-file-fixer
+        - id: check-merge-conflict
+        - id: check-yaml
+        - id: check-toml
+        - id: check-json
+        - id: check-added-large-files
+        - id: detect-private-key
+        - id: debug-statements
+    - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
+      rev: v2.16.0
+      hooks:
+        - id: pretty-format-yaml
+          args: [--autofix, --offset, '2']
+          exclude: ^\.copier-answers\.yml$
+    - repo: local
+      hooks:
+        - id: betterleaks
+          name: betterleaks
+          entry: betterleaks git . --pre-commit --staged --redact
+          language: system
+          pass_filenames: false
+        - id: ruff
+          name: ruff
+          entry: uv run ruff check --fix
+          language: system
+          types_or: [python, pyi]
+        - id: ruff-format
+          name: ruff-format
+          entry: uv run ruff format
+          language: system
+          types_or: [python, pyi]
+        - id: taplo
+          name: taplo
+          entry: taplo format
+          language: system
+          types: [toml]
+        - id: ty
+          name: ty
+          entry: uv run ty check
+          language: system
+          types: [python]
+          pass_filenames: false
+  
+  '''
+# ---
+# name: test_pre_commit_config[python-accepted-public]
+  '''
+  repos:
+    - repo: https://github.com/pre-commit/pre-commit-hooks
+      rev: v6.0.0
+      hooks:
+        - id: trailing-whitespace
+        - id: end-of-file-fixer
+        - id: check-merge-conflict
+        - id: check-yaml
+        - id: check-toml
+        - id: check-json
+        - id: check-added-large-files
+        - id: detect-private-key
+        - id: debug-statements
+    - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
+      rev: v2.16.0
+      hooks:
+        - id: pretty-format-yaml
+          args: [--autofix, --offset, '2']
+          exclude: ^\.copier-answers\.yml$
+    - repo: local
+      hooks:
+        - id: betterleaks
+          name: betterleaks
+          entry: betterleaks git . --pre-commit --staged --redact
+          language: system
+          pass_filenames: false
+        - id: jactionlint
+          name: jactionlint
+          entry: jactionlint --fix
+          language: system
+          types:
+            - yaml
+          files: ^\.github/workflows/
+        - id: ruff
+          name: ruff
+          entry: uv run ruff check --fix
+          language: system
+          types_or: [python, pyi]
+        - id: ruff-format
+          name: ruff-format
+          entry: uv run ruff format
+          language: system
+          types_or: [python, pyi]
+        - id: taplo
+          name: taplo
+          entry: taplo format
+          language: system
+          types: [toml]
+        - id: ty
+          name: ty
+          entry: uv run ty check
+          language: system
+          types: [python]
+          pass_filenames: false
+  
+  '''
+# ---
+# name: test_pre_commit_config[python-accepted-with-disclosure-private]
+  '''
+  default_install_hook_types: [pre-commit, commit-msg]
+  default_stages: [pre-commit]
+  repos:
+    - repo: https://github.com/pre-commit/pre-commit-hooks
+      rev: v6.0.0
+      hooks:
+        - id: trailing-whitespace
+        - id: end-of-file-fixer
+        - id: check-merge-conflict
+        - id: check-yaml
+        - id: check-toml
+        - id: check-json
+        - id: check-added-large-files
+        - id: detect-private-key
+        - id: debug-statements
+    - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
+      rev: v2.16.0
+      hooks:
+        - id: pretty-format-yaml
+          args: [--autofix, --offset, '2']
+          exclude: ^\.copier-answers\.yml$
+    - repo: local
+      hooks:
+        - id: betterleaks
+          name: betterleaks
+          entry: betterleaks git . --pre-commit --staged --redact
+          language: system
+          pass_filenames: false
+        - id: ruff
+          name: ruff
+          entry: uv run ruff check --fix
+          language: system
+          types_or: [python, pyi]
+        - id: ruff-format
+          name: ruff-format
+          entry: uv run ruff format
+          language: system
+          types_or: [python, pyi]
+        - id: taplo
+          name: taplo
+          entry: taplo format
+          language: system
+          types: [toml]
+        - id: ty
+          name: ty
+          entry: uv run ty check
+          language: system
+          types: [python]
+          pass_filenames: false
+        - id: commit-check
+          name: commit-check
+          entry: uv run commit-check --no-banner --message
+          language: system
+          stages: [commit-msg]
+  
+  '''
+# ---
+# name: test_pre_commit_config[python-accepted-with-disclosure-public]
   '''
   default_install_hook_types: [pre-commit, commit-msg]
   default_stages: [pre-commit]
@@ -205,8 +494,10 @@
   
   '''
 # ---
-# name: test_pre_commit_config[python-accepted]
+# name: test_pre_commit_config[python-not-accepted-private]
   '''
+  default_install_hook_types: [pre-commit, commit-msg]
+  default_stages: [pre-commit]
   repos:
     - repo: https://github.com/pre-commit/pre-commit-hooks
       rev: v6.0.0
@@ -233,13 +524,6 @@
           entry: betterleaks git . --pre-commit --staged --redact
           language: system
           pass_filenames: false
-        - id: jactionlint
-          name: jactionlint
-          entry: jactionlint --fix
-          language: system
-          types:
-            - yaml
-          files: ^\.github/workflows/
         - id: ruff
           name: ruff
           entry: uv run ruff check --fix
@@ -261,10 +545,15 @@
           language: system
           types: [python]
           pass_filenames: false
+        - id: commit-check
+          name: commit-check
+          entry: uv run commit-check --no-banner --message
+          language: system
+          stages: [commit-msg]
   
   '''
 # ---
-# name: test_pre_commit_config[python-not-accepted]
+# name: test_pre_commit_config[python-not-accepted-public]
   '''
   default_install_hook_types: [pre-commit, commit-msg]
   default_stages: [pre-commit]

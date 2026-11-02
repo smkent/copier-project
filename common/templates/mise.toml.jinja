@@ -11,7 +11,9 @@ postinstall = [
 
 [tools]
 betterleaks = "latest"
+{%- if project_visibility == "public" %}
 jactionlint = "latest"
+{%- endif %}
 {%- block check_tool %}
 {%- if enable_commit_check %}
 "pipx:commit-check" = "latest"

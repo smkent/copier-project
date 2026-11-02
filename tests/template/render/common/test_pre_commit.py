@@ -14,12 +14,19 @@ if TYPE_CHECKING:
 
 
 @pytest.mark.parametrize(
+    "project_visibility", template.choices.project_visibility
+)
+@pytest.mark.parametrize(
     "llm_contribution_policy", template.choices.llm_contribution_policy
 )
 def test_pre_commit_config(
     render_template: Callable[..., Path],
     snapshot: SnapshotAssertion,
+    project_visibility: str,
     llm_contribution_policy: str,
 ) -> None:
-    rendered = render_template(llm_contribution_policy=llm_contribution_policy)
+    rendered = render_template(
+        project_visibility=project_visibility,
+        llm_contribution_policy=llm_contribution_policy,
+    )
     assert (rendered / ".pre-commit-config.yaml").read_text() == snapshot

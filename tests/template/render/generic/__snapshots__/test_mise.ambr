@@ -10,7 +10,6 @@
   
   [tools]
   betterleaks = "latest"
-  jactionlint = "latest"
   "pipx:commit-check" = "latest"
   "pipx:copier" = "latest"
   "pipx:zensical" = "latest"
@@ -79,7 +78,6 @@
   
   [tools]
   betterleaks = "latest"
-  jactionlint = "latest"
   "pipx:copier" = "latest"
   "pipx:zensical" = "latest"
   prek = "latest"
@@ -147,7 +145,6 @@
   
   [tools]
   betterleaks = "latest"
-  jactionlint = "latest"
   "pipx:commit-check" = "latest"
   "pipx:copier" = "latest"
   "pipx:zensical" = "latest"
@@ -216,7 +213,6 @@
   
   [tools]
   betterleaks = "latest"
-  jactionlint = "latest"
   "pipx:commit-check" = "latest"
   "pipx:copier" = "latest"
   prek = "latest"
@@ -270,7 +266,6 @@
   
   [tools]
   betterleaks = "latest"
-  jactionlint = "latest"
   "pipx:copier" = "latest"
   prek = "latest"
   taplo = "latest"
@@ -323,7 +318,6 @@
   
   [tools]
   betterleaks = "latest"
-  jactionlint = "latest"
   "pipx:commit-check" = "latest"
   "pipx:copier" = "latest"
   prek = "latest"
