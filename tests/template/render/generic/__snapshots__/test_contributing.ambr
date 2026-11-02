@@ -10,6 +10,8 @@
   
   ## Project resources
   
+  * **Web site**: **<https://ness.github.io/PKFire>**
+    for general project information, usage, and development documentation
   * **Repository**: <https://github.com/ness/PKFire>
     for submitting pull requests
   * **Issue tracker**: <https://github.com/ness/PKFire/issues>
@@ -39,87 +41,6 @@
   Do not include LLM session URLs, or promotional lines such as
   "Generated with [...]."
   
-  ## Development documentation
-  
-  ### Prerequisites
-  
-  - [x] [**git** for version control][git]
-  - [x] [**mise**][mise] tool manager: `curl https://mise.run | sh` or
-    [alternate installation method][mise-installation]
-  
-  [git]: https://git-scm.com
-  [mise-installation]: https://mise.jdx.dev/installing-mise.html
-  [mise]: https://mise.jdx.dev
-  
-  ### Project development workflow
-  
-  #### Cloning the repository
-  
-  ```sh
-  git clone https://github.com/ness/PKFire
-  cd PKFire
-  ```
-  
-  Run `mise install` in new repository clones to install tools and git hooks:
-  
-  ```sh
-  mise install
-  ```
-  
-  #### Development tools
-  
-  * `mise run lint`: Run formatters and static checks
-  * `mise run test`: Run tests
-  
-  The `lint` and `test` tasks can also be run as a single combined command with:
-  
-  ```sh
-  mise run lt
-  ```
-  
-  #### Documentation server
-  
-  Start the development server with:
-  
-  ```sh
-  mise run docs
-  ```
-  
-  The documentation site will be served at:
-  
-  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
-  
-  To use a different bind host/port, run `mise run docs --help` for usage info.
-  
-  ### Applying copier-project template updates
-  
-  Copier can update your project with template changes that have occurred since
-  the project was created.
-  
-  To apply updates, simply run in your project directory:
-  
-  ```sh
-  copier update
-  ```
-  
-  This will repeat the setup prompts, in case any prompts have been added or
-  changed.
-  
-  !!! tip
-      To change template-provided features in your project, simply change your
-      answers in the update prompts.
-  
-  To apply updates without being prompted (reusing all previous answers), run:
-  
-  ```sh
-  copier update -l
-  ```
-  
-  When [`copier update`][copier-update] is finished, view changes with
-  `git status` and `git diff`. Resolve any conflicts, and then commit the result.
-  
-  [copier-update]: https://copier.readthedocs.io/en/stable/updating/
-  
   '''
 # ---
 # name: test_contributing_features[accepted]
@@ -133,6 +54,8 @@
   
   ## Project resources
   
+  * **Web site**: **<https://ness.github.io/PKFire>**
+    for general project information, usage, and development documentation
   * **Repository**: <https://github.com/ness/PKFire>
     for submitting pull requests
   * **Issue tracker**: <https://github.com/ness/PKFire/issues>
@@ -152,87 +75,6 @@
   You must read, review, and understand everything you submit, including
   LLM-generated code or text, and be able to explain it on request.
   
-  ## Development documentation
-  
-  ### Prerequisites
-  
-  - [x] [**git** for version control][git]
-  - [x] [**mise**][mise] tool manager: `curl https://mise.run | sh` or
-    [alternate installation method][mise-installation]
-  
-  [git]: https://git-scm.com
-  [mise-installation]: https://mise.jdx.dev/installing-mise.html
-  [mise]: https://mise.jdx.dev
-  
-  ### Project development workflow
-  
-  #### Cloning the repository
-  
-  ```sh
-  git clone https://github.com/ness/PKFire
-  cd PKFire
-  ```
-  
-  Run `mise install` in new repository clones to install tools and git hooks:
-  
-  ```sh
-  mise install
-  ```
-  
-  #### Development tools
-  
-  * `mise run lint`: Run formatters and static checks
-  * `mise run test`: Run tests
-  
-  The `lint` and `test` tasks can also be run as a single combined command with:
-  
-  ```sh
-  mise run lt
-  ```
-  
-  #### Documentation server
-  
-  Start the development server with:
-  
-  ```sh
-  mise run docs
-  ```
-  
-  The documentation site will be served at:
-  
-  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
-  
-  To use a different bind host/port, run `mise run docs --help` for usage info.
-  
-  ### Applying copier-project template updates
-  
-  Copier can update your project with template changes that have occurred since
-  the project was created.
-  
-  To apply updates, simply run in your project directory:
-  
-  ```sh
-  copier update
-  ```
-  
-  This will repeat the setup prompts, in case any prompts have been added or
-  changed.
-  
-  !!! tip
-      To change template-provided features in your project, simply change your
-      answers in the update prompts.
-  
-  To apply updates without being prompted (reusing all previous answers), run:
-  
-  ```sh
-  copier update -l
-  ```
-  
-  When [`copier update`][copier-update] is finished, view changes with
-  `git status` and `git diff`. Resolve any conflicts, and then commit the result.
-  
-  [copier-update]: https://copier.readthedocs.io/en/stable/updating/
-  
   '''
 # ---
 # name: test_contributing_features[not-accepted]
@@ -246,6 +88,8 @@
   
   ## Project resources
   
+  * **Web site**: **<https://ness.github.io/PKFire>**
+    for general project information, usage, and development documentation
   * **Repository**: <https://github.com/ness/PKFire>
     for submitting pull requests
   * **Issue tracker**: <https://github.com/ness/PKFire/issues>
@@ -270,87 +114,6 @@
   `Co-authored-by:` trailers, LLM session URLs, and promotional lines such as
   "Generated with [...]".
   
-  ## Development documentation
-  
-  ### Prerequisites
-  
-  - [x] [**git** for version control][git]
-  - [x] [**mise**][mise] tool manager: `curl https://mise.run | sh` or
-    [alternate installation method][mise-installation]
-  
-  [git]: https://git-scm.com
-  [mise-installation]: https://mise.jdx.dev/installing-mise.html
-  [mise]: https://mise.jdx.dev
-  
-  ### Project development workflow
-  
-  #### Cloning the repository
-  
-  ```sh
-  git clone https://github.com/ness/PKFire
-  cd PKFire
-  ```
-  
-  Run `mise install` in new repository clones to install tools and git hooks:
-  
-  ```sh
-  mise install
-  ```
-  
-  #### Development tools
-  
-  * `mise run lint`: Run formatters and static checks
-  * `mise run test`: Run tests
-  
-  The `lint` and `test` tasks can also be run as a single combined command with:
-  
-  ```sh
-  mise run lt
-  ```
-  
-  #### Documentation server
-  
-  Start the development server with:
-  
-  ```sh
-  mise run docs
-  ```
-  
-  The documentation site will be served at:
-  
-  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
-  
-  To use a different bind host/port, run `mise run docs --help` for usage info.
-  
-  ### Applying copier-project template updates
-  
-  Copier can update your project with template changes that have occurred since
-  the project was created.
-  
-  To apply updates, simply run in your project directory:
-  
-  ```sh
-  copier update
-  ```
-  
-  This will repeat the setup prompts, in case any prompts have been added or
-  changed.
-  
-  !!! tip
-      To change template-provided features in your project, simply change your
-      answers in the update prompts.
-  
-  To apply updates without being prompted (reusing all previous answers), run:
-  
-  ```sh
-  copier update -l
-  ```
-  
-  When [`copier update`][copier-update] is finished, view changes with
-  `git status` and `git diff`. Resolve any conflicts, and then commit the result.
-  
-  [copier-update]: https://copier.readthedocs.io/en/stable/updating/
-  
   '''
 # ---
 # name: test_contributing_license[AGPL-3.0-only]
@@ -364,6 +127,8 @@
   
   ## Project resources
   
+  * **Web site**: **<https://ness.github.io/PKFire>**
+    for general project information, usage, and development documentation
   * **Repository**: <https://github.com/ness/PKFire>
     for submitting pull requests
   * **Issue tracker**: <https://github.com/ness/PKFire/issues>
@@ -393,87 +158,6 @@
   Do not include LLM session URLs, or promotional lines such as
   "Generated with [...]."
   
-  ## Development documentation
-  
-  ### Prerequisites
-  
-  - [x] [**git** for version control][git]
-  - [x] [**mise**][mise] tool manager: `curl https://mise.run | sh` or
-    [alternate installation method][mise-installation]
-  
-  [git]: https://git-scm.com
-  [mise-installation]: https://mise.jdx.dev/installing-mise.html
-  [mise]: https://mise.jdx.dev
-  
-  ### Project development workflow
-  
-  #### Cloning the repository
-  
-  ```sh
-  git clone https://github.com/ness/PKFire
-  cd PKFire
-  ```
-  
-  Run `mise install` in new repository clones to install tools and git hooks:
-  
-  ```sh
-  mise install
-  ```
-  
-  #### Development tools
-  
-  * `mise run lint`: Run formatters and static checks
-  * `mise run test`: Run tests
-  
-  The `lint` and `test` tasks can also be run as a single combined command with:
-  
-  ```sh
-  mise run lt
-  ```
-  
-  #### Documentation server
-  
-  Start the development server with:
-  
-  ```sh
-  mise run docs
-  ```
-  
-  The documentation site will be served at:
-  
-  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
-  
-  To use a different bind host/port, run `mise run docs --help` for usage info.
-  
-  ### Applying copier-project template updates
-  
-  Copier can update your project with template changes that have occurred since
-  the project was created.
-  
-  To apply updates, simply run in your project directory:
-  
-  ```sh
-  copier update
-  ```
-  
-  This will repeat the setup prompts, in case any prompts have been added or
-  changed.
-  
-  !!! tip
-      To change template-provided features in your project, simply change your
-      answers in the update prompts.
-  
-  To apply updates without being prompted (reusing all previous answers), run:
-  
-  ```sh
-  copier update -l
-  ```
-  
-  When [`copier update`][copier-update] is finished, view changes with
-  `git status` and `git diff`. Resolve any conflicts, and then commit the result.
-  
-  [copier-update]: https://copier.readthedocs.io/en/stable/updating/
-  
   '''
 # ---
 # name: test_contributing_license[AGPL-3.0-or-later]
@@ -487,6 +171,8 @@
   
   ## Project resources
   
+  * **Web site**: **<https://ness.github.io/PKFire>**
+    for general project information, usage, and development documentation
   * **Repository**: <https://github.com/ness/PKFire>
     for submitting pull requests
   * **Issue tracker**: <https://github.com/ness/PKFire/issues>
@@ -516,87 +202,6 @@
   Do not include LLM session URLs, or promotional lines such as
   "Generated with [...]."
   
-  ## Development documentation
-  
-  ### Prerequisites
-  
-  - [x] [**git** for version control][git]
-  - [x] [**mise**][mise] tool manager: `curl https://mise.run | sh` or
-    [alternate installation method][mise-installation]
-  
-  [git]: https://git-scm.com
-  [mise-installation]: https://mise.jdx.dev/installing-mise.html
-  [mise]: https://mise.jdx.dev
-  
-  ### Project development workflow
-  
-  #### Cloning the repository
-  
-  ```sh
-  git clone https://github.com/ness/PKFire
-  cd PKFire
-  ```
-  
-  Run `mise install` in new repository clones to install tools and git hooks:
-  
-  ```sh
-  mise install
-  ```
-  
-  #### Development tools
-  
-  * `mise run lint`: Run formatters and static checks
-  * `mise run test`: Run tests
-  
-  The `lint` and `test` tasks can also be run as a single combined command with:
-  
-  ```sh
-  mise run lt
-  ```
-  
-  #### Documentation server
-  
-  Start the development server with:
-  
-  ```sh
-  mise run docs
-  ```
-  
-  The documentation site will be served at:
-  
-  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
-  
-  To use a different bind host/port, run `mise run docs --help` for usage info.
-  
-  ### Applying copier-project template updates
-  
-  Copier can update your project with template changes that have occurred since
-  the project was created.
-  
-  To apply updates, simply run in your project directory:
-  
-  ```sh
-  copier update
-  ```
-  
-  This will repeat the setup prompts, in case any prompts have been added or
-  changed.
-  
-  !!! tip
-      To change template-provided features in your project, simply change your
-      answers in the update prompts.
-  
-  To apply updates without being prompted (reusing all previous answers), run:
-  
-  ```sh
-  copier update -l
-  ```
-  
-  When [`copier update`][copier-update] is finished, view changes with
-  `git status` and `git diff`. Resolve any conflicts, and then commit the result.
-  
-  [copier-update]: https://copier.readthedocs.io/en/stable/updating/
-  
   '''
 # ---
 # name: test_contributing_license[Apache-2.0]
@@ -610,6 +215,8 @@
   
   ## Project resources
   
+  * **Web site**: **<https://ness.github.io/PKFire>**
+    for general project information, usage, and development documentation
   * **Repository**: <https://github.com/ness/PKFire>
     for submitting pull requests
   * **Issue tracker**: <https://github.com/ness/PKFire/issues>
@@ -639,87 +246,6 @@
   Do not include LLM session URLs, or promotional lines such as
   "Generated with [...]."
   
-  ## Development documentation
-  
-  ### Prerequisites
-  
-  - [x] [**git** for version control][git]
-  - [x] [**mise**][mise] tool manager: `curl https://mise.run | sh` or
-    [alternate installation method][mise-installation]
-  
-  [git]: https://git-scm.com
-  [mise-installation]: https://mise.jdx.dev/installing-mise.html
-  [mise]: https://mise.jdx.dev
-  
-  ### Project development workflow
-  
-  #### Cloning the repository
-  
-  ```sh
-  git clone https://github.com/ness/PKFire
-  cd PKFire
-  ```
-  
-  Run `mise install` in new repository clones to install tools and git hooks:
-  
-  ```sh
-  mise install
-  ```
-  
-  #### Development tools
-  
-  * `mise run lint`: Run formatters and static checks
-  * `mise run test`: Run tests
-  
-  The `lint` and `test` tasks can also be run as a single combined command with:
-  
-  ```sh
-  mise run lt
-  ```
-  
-  #### Documentation server
-  
-  Start the development server with:
-  
-  ```sh
-  mise run docs
-  ```
-  
-  The documentation site will be served at:
-  
-  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
-  
-  To use a different bind host/port, run `mise run docs --help` for usage info.
-  
-  ### Applying copier-project template updates
-  
-  Copier can update your project with template changes that have occurred since
-  the project was created.
-  
-  To apply updates, simply run in your project directory:
-  
-  ```sh
-  copier update
-  ```
-  
-  This will repeat the setup prompts, in case any prompts have been added or
-  changed.
-  
-  !!! tip
-      To change template-provided features in your project, simply change your
-      answers in the update prompts.
-  
-  To apply updates without being prompted (reusing all previous answers), run:
-  
-  ```sh
-  copier update -l
-  ```
-  
-  When [`copier update`][copier-update] is finished, view changes with
-  `git status` and `git diff`. Resolve any conflicts, and then commit the result.
-  
-  [copier-update]: https://copier.readthedocs.io/en/stable/updating/
-  
   '''
 # ---
 # name: test_contributing_license[BSD-3-Clause]
@@ -733,6 +259,8 @@
   
   ## Project resources
   
+  * **Web site**: **<https://ness.github.io/PKFire>**
+    for general project information, usage, and development documentation
   * **Repository**: <https://github.com/ness/PKFire>
     for submitting pull requests
   * **Issue tracker**: <https://github.com/ness/PKFire/issues>
@@ -762,87 +290,6 @@
   Do not include LLM session URLs, or promotional lines such as
   "Generated with [...]."
   
-  ## Development documentation
-  
-  ### Prerequisites
-  
-  - [x] [**git** for version control][git]
-  - [x] [**mise**][mise] tool manager: `curl https://mise.run | sh` or
-    [alternate installation method][mise-installation]
-  
-  [git]: https://git-scm.com
-  [mise-installation]: https://mise.jdx.dev/installing-mise.html
-  [mise]: https://mise.jdx.dev
-  
-  ### Project development workflow
-  
-  #### Cloning the repository
-  
-  ```sh
-  git clone https://github.com/ness/PKFire
-  cd PKFire
-  ```
-  
-  Run `mise install` in new repository clones to install tools and git hooks:
-  
-  ```sh
-  mise install
-  ```
-  
-  #### Development tools
-  
-  * `mise run lint`: Run formatters and static checks
-  * `mise run test`: Run tests
-  
-  The `lint` and `test` tasks can also be run as a single combined command with:
-  
-  ```sh
-  mise run lt
-  ```
-  
-  #### Documentation server
-  
-  Start the development server with:
-  
-  ```sh
-  mise run docs
-  ```
-  
-  The documentation site will be served at:
-  
-  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
-  
-  To use a different bind host/port, run `mise run docs --help` for usage info.
-  
-  ### Applying copier-project template updates
-  
-  Copier can update your project with template changes that have occurred since
-  the project was created.
-  
-  To apply updates, simply run in your project directory:
-  
-  ```sh
-  copier update
-  ```
-  
-  This will repeat the setup prompts, in case any prompts have been added or
-  changed.
-  
-  !!! tip
-      To change template-provided features in your project, simply change your
-      answers in the update prompts.
-  
-  To apply updates without being prompted (reusing all previous answers), run:
-  
-  ```sh
-  copier update -l
-  ```
-  
-  When [`copier update`][copier-update] is finished, view changes with
-  `git status` and `git diff`. Resolve any conflicts, and then commit the result.
-  
-  [copier-update]: https://copier.readthedocs.io/en/stable/updating/
-  
   '''
 # ---
 # name: test_contributing_license[CC-BY-4.0]
@@ -856,6 +303,8 @@
   
   ## Project resources
   
+  * **Web site**: **<https://ness.github.io/PKFire>**
+    for general project information, usage, and development documentation
   * **Repository**: <https://github.com/ness/PKFire>
     for submitting pull requests
   * **Issue tracker**: <https://github.com/ness/PKFire/issues>
@@ -885,87 +334,6 @@
   Do not include LLM session URLs, or promotional lines such as
   "Generated with [...]."
   
-  ## Development documentation
-  
-  ### Prerequisites
-  
-  - [x] [**git** for version control][git]
-  - [x] [**mise**][mise] tool manager: `curl https://mise.run | sh` or
-    [alternate installation method][mise-installation]
-  
-  [git]: https://git-scm.com
-  [mise-installation]: https://mise.jdx.dev/installing-mise.html
-  [mise]: https://mise.jdx.dev
-  
-  ### Project development workflow
-  
-  #### Cloning the repository
-  
-  ```sh
-  git clone https://github.com/ness/PKFire
-  cd PKFire
-  ```
-  
-  Run `mise install` in new repository clones to install tools and git hooks:
-  
-  ```sh
-  mise install
-  ```
-  
-  #### Development tools
-  
-  * `mise run lint`: Run formatters and static checks
-  * `mise run test`: Run tests
-  
-  The `lint` and `test` tasks can also be run as a single combined command with:
-  
-  ```sh
-  mise run lt
-  ```
-  
-  #### Documentation server
-  
-  Start the development server with:
-  
-  ```sh
-  mise run docs
-  ```
-  
-  The documentation site will be served at:
-  
-  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
-  
-  To use a different bind host/port, run `mise run docs --help` for usage info.
-  
-  ### Applying copier-project template updates
-  
-  Copier can update your project with template changes that have occurred since
-  the project was created.
-  
-  To apply updates, simply run in your project directory:
-  
-  ```sh
-  copier update
-  ```
-  
-  This will repeat the setup prompts, in case any prompts have been added or
-  changed.
-  
-  !!! tip
-      To change template-provided features in your project, simply change your
-      answers in the update prompts.
-  
-  To apply updates without being prompted (reusing all previous answers), run:
-  
-  ```sh
-  copier update -l
-  ```
-  
-  When [`copier update`][copier-update] is finished, view changes with
-  `git status` and `git diff`. Resolve any conflicts, and then commit the result.
-  
-  [copier-update]: https://copier.readthedocs.io/en/stable/updating/
-  
   '''
 # ---
 # name: test_contributing_license[CC-BY-SA-4.0]
@@ -979,6 +347,8 @@
   
   ## Project resources
   
+  * **Web site**: **<https://ness.github.io/PKFire>**
+    for general project information, usage, and development documentation
   * **Repository**: <https://github.com/ness/PKFire>
     for submitting pull requests
   * **Issue tracker**: <https://github.com/ness/PKFire/issues>
@@ -1008,87 +378,6 @@
   Do not include LLM session URLs, or promotional lines such as
   "Generated with [...]."
   
-  ## Development documentation
-  
-  ### Prerequisites
-  
-  - [x] [**git** for version control][git]
-  - [x] [**mise**][mise] tool manager: `curl https://mise.run | sh` or
-    [alternate installation method][mise-installation]
-  
-  [git]: https://git-scm.com
-  [mise-installation]: https://mise.jdx.dev/installing-mise.html
-  [mise]: https://mise.jdx.dev
-  
-  ### Project development workflow
-  
-  #### Cloning the repository
-  
-  ```sh
-  git clone https://github.com/ness/PKFire
-  cd PKFire
-  ```
-  
-  Run `mise install` in new repository clones to install tools and git hooks:
-  
-  ```sh
-  mise install
-  ```
-  
-  #### Development tools
-  
-  * `mise run lint`: Run formatters and static checks
-  * `mise run test`: Run tests
-  
-  The `lint` and `test` tasks can also be run as a single combined command with:
-  
-  ```sh
-  mise run lt
-  ```
-  
-  #### Documentation server
-  
-  Start the development server with:
-  
-  ```sh
-  mise run docs
-  ```
-  
-  The documentation site will be served at:
-  
-  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
-  
-  To use a different bind host/port, run `mise run docs --help` for usage info.
-  
-  ### Applying copier-project template updates
-  
-  Copier can update your project with template changes that have occurred since
-  the project was created.
-  
-  To apply updates, simply run in your project directory:
-  
-  ```sh
-  copier update
-  ```
-  
-  This will repeat the setup prompts, in case any prompts have been added or
-  changed.
-  
-  !!! tip
-      To change template-provided features in your project, simply change your
-      answers in the update prompts.
-  
-  To apply updates without being prompted (reusing all previous answers), run:
-  
-  ```sh
-  copier update -l
-  ```
-  
-  When [`copier update`][copier-update] is finished, view changes with
-  `git status` and `git diff`. Resolve any conflicts, and then commit the result.
-  
-  [copier-update]: https://copier.readthedocs.io/en/stable/updating/
-  
   '''
 # ---
 # name: test_contributing_license[CC0-1.0]
@@ -1102,6 +391,8 @@
   
   ## Project resources
   
+  * **Web site**: **<https://ness.github.io/PKFire>**
+    for general project information, usage, and development documentation
   * **Repository**: <https://github.com/ness/PKFire>
     for submitting pull requests
   * **Issue tracker**: <https://github.com/ness/PKFire/issues>
@@ -1131,87 +422,6 @@
   Do not include LLM session URLs, or promotional lines such as
   "Generated with [...]."
   
-  ## Development documentation
-  
-  ### Prerequisites
-  
-  - [x] [**git** for version control][git]
-  - [x] [**mise**][mise] tool manager: `curl https://mise.run | sh` or
-    [alternate installation method][mise-installation]
-  
-  [git]: https://git-scm.com
-  [mise-installation]: https://mise.jdx.dev/installing-mise.html
-  [mise]: https://mise.jdx.dev
-  
-  ### Project development workflow
-  
-  #### Cloning the repository
-  
-  ```sh
-  git clone https://github.com/ness/PKFire
-  cd PKFire
-  ```
-  
-  Run `mise install` in new repository clones to install tools and git hooks:
-  
-  ```sh
-  mise install
-  ```
-  
-  #### Development tools
-  
-  * `mise run lint`: Run formatters and static checks
-  * `mise run test`: Run tests
-  
-  The `lint` and `test` tasks can also be run as a single combined command with:
-  
-  ```sh
-  mise run lt
-  ```
-  
-  #### Documentation server
-  
-  Start the development server with:
-  
-  ```sh
-  mise run docs
-  ```
-  
-  The documentation site will be served at:
-  
-  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
-  
-  To use a different bind host/port, run `mise run docs --help` for usage info.
-  
-  ### Applying copier-project template updates
-  
-  Copier can update your project with template changes that have occurred since
-  the project was created.
-  
-  To apply updates, simply run in your project directory:
-  
-  ```sh
-  copier update
-  ```
-  
-  This will repeat the setup prompts, in case any prompts have been added or
-  changed.
-  
-  !!! tip
-      To change template-provided features in your project, simply change your
-      answers in the update prompts.
-  
-  To apply updates without being prompted (reusing all previous answers), run:
-  
-  ```sh
-  copier update -l
-  ```
-  
-  When [`copier update`][copier-update] is finished, view changes with
-  `git status` and `git diff`. Resolve any conflicts, and then commit the result.
-  
-  [copier-update]: https://copier.readthedocs.io/en/stable/updating/
-  
   '''
 # ---
 # name: test_contributing_license[GPL-3.0-only]
@@ -1225,6 +435,8 @@
   
   ## Project resources
   
+  * **Web site**: **<https://ness.github.io/PKFire>**
+    for general project information, usage, and development documentation
   * **Repository**: <https://github.com/ness/PKFire>
     for submitting pull requests
   * **Issue tracker**: <https://github.com/ness/PKFire/issues>
@@ -1254,87 +466,6 @@
   Do not include LLM session URLs, or promotional lines such as
   "Generated with [...]."
   
-  ## Development documentation
-  
-  ### Prerequisites
-  
-  - [x] [**git** for version control][git]
-  - [x] [**mise**][mise] tool manager: `curl https://mise.run | sh` or
-    [alternate installation method][mise-installation]
-  
-  [git]: https://git-scm.com
-  [mise-installation]: https://mise.jdx.dev/installing-mise.html
-  [mise]: https://mise.jdx.dev
-  
-  ### Project development workflow
-  
-  #### Cloning the repository
-  
-  ```sh
-  git clone https://github.com/ness/PKFire
-  cd PKFire
-  ```
-  
-  Run `mise install` in new repository clones to install tools and git hooks:
-  
-  ```sh
-  mise install
-  ```
-  
-  #### Development tools
-  
-  * `mise run lint`: Run formatters and static checks
-  * `mise run test`: Run tests
-  
-  The `lint` and `test` tasks can also be run as a single combined command with:
-  
-  ```sh
-  mise run lt
-  ```
-  
-  #### Documentation server
-  
-  Start the development server with:
-  
-  ```sh
-  mise run docs
-  ```
-  
-  The documentation site will be served at:
-  
-  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
-  
-  To use a different bind host/port, run `mise run docs --help` for usage info.
-  
-  ### Applying copier-project template updates
-  
-  Copier can update your project with template changes that have occurred since
-  the project was created.
-  
-  To apply updates, simply run in your project directory:
-  
-  ```sh
-  copier update
-  ```
-  
-  This will repeat the setup prompts, in case any prompts have been added or
-  changed.
-  
-  !!! tip
-      To change template-provided features in your project, simply change your
-      answers in the update prompts.
-  
-  To apply updates without being prompted (reusing all previous answers), run:
-  
-  ```sh
-  copier update -l
-  ```
-  
-  When [`copier update`][copier-update] is finished, view changes with
-  `git status` and `git diff`. Resolve any conflicts, and then commit the result.
-  
-  [copier-update]: https://copier.readthedocs.io/en/stable/updating/
-  
   '''
 # ---
 # name: test_contributing_license[GPL-3.0-or-later]
@@ -1348,6 +479,8 @@
   
   ## Project resources
   
+  * **Web site**: **<https://ness.github.io/PKFire>**
+    for general project information, usage, and development documentation
   * **Repository**: <https://github.com/ness/PKFire>
     for submitting pull requests
   * **Issue tracker**: <https://github.com/ness/PKFire/issues>
@@ -1377,87 +510,6 @@
   Do not include LLM session URLs, or promotional lines such as
   "Generated with [...]."
   
-  ## Development documentation
-  
-  ### Prerequisites
-  
-  - [x] [**git** for version control][git]
-  - [x] [**mise**][mise] tool manager: `curl https://mise.run | sh` or
-    [alternate installation method][mise-installation]
-  
-  [git]: https://git-scm.com
-  [mise-installation]: https://mise.jdx.dev/installing-mise.html
-  [mise]: https://mise.jdx.dev
-  
-  ### Project development workflow
-  
-  #### Cloning the repository
-  
-  ```sh
-  git clone https://github.com/ness/PKFire
-  cd PKFire
-  ```
-  
-  Run `mise install` in new repository clones to install tools and git hooks:
-  
-  ```sh
-  mise install
-  ```
-  
-  #### Development tools
-  
-  * `mise run lint`: Run formatters and static checks
-  * `mise run test`: Run tests
-  
-  The `lint` and `test` tasks can also be run as a single combined command with:
-  
-  ```sh
-  mise run lt
-  ```
-  
-  #### Documentation server
-  
-  Start the development server with:
-  
-  ```sh
-  mise run docs
-  ```
-  
-  The documentation site will be served at:
-  
-  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
-  
-  To use a different bind host/port, run `mise run docs --help` for usage info.
-  
-  ### Applying copier-project template updates
-  
-  Copier can update your project with template changes that have occurred since
-  the project was created.
-  
-  To apply updates, simply run in your project directory:
-  
-  ```sh
-  copier update
-  ```
-  
-  This will repeat the setup prompts, in case any prompts have been added or
-  changed.
-  
-  !!! tip
-      To change template-provided features in your project, simply change your
-      answers in the update prompts.
-  
-  To apply updates without being prompted (reusing all previous answers), run:
-  
-  ```sh
-  copier update -l
-  ```
-  
-  When [`copier update`][copier-update] is finished, view changes with
-  `git status` and `git diff`. Resolve any conflicts, and then commit the result.
-  
-  [copier-update]: https://copier.readthedocs.io/en/stable/updating/
-  
   '''
 # ---
 # name: test_contributing_license[ISC]
@@ -1471,6 +523,8 @@
   
   ## Project resources
   
+  * **Web site**: **<https://ness.github.io/PKFire>**
+    for general project information, usage, and development documentation
   * **Repository**: <https://github.com/ness/PKFire>
     for submitting pull requests
   * **Issue tracker**: <https://github.com/ness/PKFire/issues>
@@ -1500,87 +554,6 @@
   Do not include LLM session URLs, or promotional lines such as
   "Generated with [...]."
   
-  ## Development documentation
-  
-  ### Prerequisites
-  
-  - [x] [**git** for version control][git]
-  - [x] [**mise**][mise] tool manager: `curl https://mise.run | sh` or
-    [alternate installation method][mise-installation]
-  
-  [git]: https://git-scm.com
-  [mise-installation]: https://mise.jdx.dev/installing-mise.html
-  [mise]: https://mise.jdx.dev
-  
-  ### Project development workflow
-  
-  #### Cloning the repository
-  
-  ```sh
-  git clone https://github.com/ness/PKFire
-  cd PKFire
-  ```
-  
-  Run `mise install` in new repository clones to install tools and git hooks:
-  
-  ```sh
-  mise install
-  ```
-  
-  #### Development tools
-  
-  * `mise run lint`: Run formatters and static checks
-  * `mise run test`: Run tests
-  
-  The `lint` and `test` tasks can also be run as a single combined command with:
-  
-  ```sh
-  mise run lt
-  ```
-  
-  #### Documentation server
-  
-  Start the development server with:
-  
-  ```sh
-  mise run docs
-  ```
-  
-  The documentation site will be served at:
-  
-  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
-  
-  To use a different bind host/port, run `mise run docs --help` for usage info.
-  
-  ### Applying copier-project template updates
-  
-  Copier can update your project with template changes that have occurred since
-  the project was created.
-  
-  To apply updates, simply run in your project directory:
-  
-  ```sh
-  copier update
-  ```
-  
-  This will repeat the setup prompts, in case any prompts have been added or
-  changed.
-  
-  !!! tip
-      To change template-provided features in your project, simply change your
-      answers in the update prompts.
-  
-  To apply updates without being prompted (reusing all previous answers), run:
-  
-  ```sh
-  copier update -l
-  ```
-  
-  When [`copier update`][copier-update] is finished, view changes with
-  `git status` and `git diff`. Resolve any conflicts, and then commit the result.
-  
-  [copier-update]: https://copier.readthedocs.io/en/stable/updating/
-  
   '''
 # ---
 # name: test_contributing_license[LGPL-3.0-only]
@@ -1594,6 +567,8 @@
   
   ## Project resources
   
+  * **Web site**: **<https://ness.github.io/PKFire>**
+    for general project information, usage, and development documentation
   * **Repository**: <https://github.com/ness/PKFire>
     for submitting pull requests
   * **Issue tracker**: <https://github.com/ness/PKFire/issues>
@@ -1623,87 +598,6 @@
   Do not include LLM session URLs, or promotional lines such as
   "Generated with [...]."
   
-  ## Development documentation
-  
-  ### Prerequisites
-  
-  - [x] [**git** for version control][git]
-  - [x] [**mise**][mise] tool manager: `curl https://mise.run | sh` or
-    [alternate installation method][mise-installation]
-  
-  [git]: https://git-scm.com
-  [mise-installation]: https://mise.jdx.dev/installing-mise.html
-  [mise]: https://mise.jdx.dev
-  
-  ### Project development workflow
-  
-  #### Cloning the repository
-  
-  ```sh
-  git clone https://github.com/ness/PKFire
-  cd PKFire
-  ```
-  
-  Run `mise install` in new repository clones to install tools and git hooks:
-  
-  ```sh
-  mise install
-  ```
-  
-  #### Development tools
-  
-  * `mise run lint`: Run formatters and static checks
-  * `mise run test`: Run tests
-  
-  The `lint` and `test` tasks can also be run as a single combined command with:
-  
-  ```sh
-  mise run lt
-  ```
-  
-  #### Documentation server
-  
-  Start the development server with:
-  
-  ```sh
-  mise run docs
-  ```
-  
-  The documentation site will be served at:
-  
-  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
-  
-  To use a different bind host/port, run `mise run docs --help` for usage info.
-  
-  ### Applying copier-project template updates
-  
-  Copier can update your project with template changes that have occurred since
-  the project was created.
-  
-  To apply updates, simply run in your project directory:
-  
-  ```sh
-  copier update
-  ```
-  
-  This will repeat the setup prompts, in case any prompts have been added or
-  changed.
-  
-  !!! tip
-      To change template-provided features in your project, simply change your
-      answers in the update prompts.
-  
-  To apply updates without being prompted (reusing all previous answers), run:
-  
-  ```sh
-  copier update -l
-  ```
-  
-  When [`copier update`][copier-update] is finished, view changes with
-  `git status` and `git diff`. Resolve any conflicts, and then commit the result.
-  
-  [copier-update]: https://copier.readthedocs.io/en/stable/updating/
-  
   '''
 # ---
 # name: test_contributing_license[LGPL-3.0-or-later]
@@ -1717,6 +611,8 @@
   
   ## Project resources
   
+  * **Web site**: **<https://ness.github.io/PKFire>**
+    for general project information, usage, and development documentation
   * **Repository**: <https://github.com/ness/PKFire>
     for submitting pull requests
   * **Issue tracker**: <https://github.com/ness/PKFire/issues>
@@ -1746,87 +642,6 @@
   Do not include LLM session URLs, or promotional lines such as
   "Generated with [...]."
   
-  ## Development documentation
-  
-  ### Prerequisites
-  
-  - [x] [**git** for version control][git]
-  - [x] [**mise**][mise] tool manager: `curl https://mise.run | sh` or
-    [alternate installation method][mise-installation]
-  
-  [git]: https://git-scm.com
-  [mise-installation]: https://mise.jdx.dev/installing-mise.html
-  [mise]: https://mise.jdx.dev
-  
-  ### Project development workflow
-  
-  #### Cloning the repository
-  
-  ```sh
-  git clone https://github.com/ness/PKFire
-  cd PKFire
-  ```
-  
-  Run `mise install` in new repository clones to install tools and git hooks:
-  
-  ```sh
-  mise install
-  ```
-  
-  #### Development tools
-  
-  * `mise run lint`: Run formatters and static checks
-  * `mise run test`: Run tests
-  
-  The `lint` and `test` tasks can also be run as a single combined command with:
-  
-  ```sh
-  mise run lt
-  ```
-  
-  #### Documentation server
-  
-  Start the development server with:
-  
-  ```sh
-  mise run docs
-  ```
-  
-  The documentation site will be served at:
-  
-  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
-  
-  To use a different bind host/port, run `mise run docs --help` for usage info.
-  
-  ### Applying copier-project template updates
-  
-  Copier can update your project with template changes that have occurred since
-  the project was created.
-  
-  To apply updates, simply run in your project directory:
-  
-  ```sh
-  copier update
-  ```
-  
-  This will repeat the setup prompts, in case any prompts have been added or
-  changed.
-  
-  !!! tip
-      To change template-provided features in your project, simply change your
-      answers in the update prompts.
-  
-  To apply updates without being prompted (reusing all previous answers), run:
-  
-  ```sh
-  copier update -l
-  ```
-  
-  When [`copier update`][copier-update] is finished, view changes with
-  `git status` and `git diff`. Resolve any conflicts, and then commit the result.
-  
-  [copier-update]: https://copier.readthedocs.io/en/stable/updating/
-  
   '''
 # ---
 # name: test_contributing_license[MIT]
@@ -1840,6 +655,8 @@
   
   ## Project resources
   
+  * **Web site**: **<https://ness.github.io/PKFire>**
+    for general project information, usage, and development documentation
   * **Repository**: <https://github.com/ness/PKFire>
     for submitting pull requests
   * **Issue tracker**: <https://github.com/ness/PKFire/issues>
@@ -1868,87 +685,6 @@
   Do not use `Co-authored-by:` for LLM attribution. LLMs are tools, not authors.
   Do not include LLM session URLs, or promotional lines such as
   "Generated with [...]."
-  
-  ## Development documentation
-  
-  ### Prerequisites
-  
-  - [x] [**git** for version control][git]
-  - [x] [**mise**][mise] tool manager: `curl https://mise.run | sh` or
-    [alternate installation method][mise-installation]
-  
-  [git]: https://git-scm.com
-  [mise-installation]: https://mise.jdx.dev/installing-mise.html
-  [mise]: https://mise.jdx.dev
-  
-  ### Project development workflow
-  
-  #### Cloning the repository
-  
-  ```sh
-  git clone https://github.com/ness/PKFire
-  cd PKFire
-  ```
-  
-  Run `mise install` in new repository clones to install tools and git hooks:
-  
-  ```sh
-  mise install
-  ```
-  
-  #### Development tools
-  
-  * `mise run lint`: Run formatters and static checks
-  * `mise run test`: Run tests
-  
-  The `lint` and `test` tasks can also be run as a single combined command with:
-  
-  ```sh
-  mise run lt
-  ```
-  
-  #### Documentation server
-  
-  Start the development server with:
-  
-  ```sh
-  mise run docs
-  ```
-  
-  The documentation site will be served at:
-  
-  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
-  
-  To use a different bind host/port, run `mise run docs --help` for usage info.
-  
-  ### Applying copier-project template updates
-  
-  Copier can update your project with template changes that have occurred since
-  the project was created.
-  
-  To apply updates, simply run in your project directory:
-  
-  ```sh
-  copier update
-  ```
-  
-  This will repeat the setup prompts, in case any prompts have been added or
-  changed.
-  
-  !!! tip
-      To change template-provided features in your project, simply change your
-      answers in the update prompts.
-  
-  To apply updates without being prompted (reusing all previous answers), run:
-  
-  ```sh
-  copier update -l
-  ```
-  
-  When [`copier update`][copier-update] is finished, view changes with
-  `git status` and `git diff`. Resolve any conflicts, and then commit the result.
-  
-  [copier-update]: https://copier.readthedocs.io/en/stable/updating/
   
   '''
 # ---

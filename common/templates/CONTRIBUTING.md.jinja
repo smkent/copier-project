@@ -2,14 +2,20 @@
 {%- import "common/docs.jinja" as docs with context -%}
 {%- import "common/license.jinja" as license with context -%}
 {%- set repo_url = "https://github.com/" + github_user + "/" + project_name -%}
+{%- set docs_url = "https://" + github_user + ".github.io/" + project_name -%}
 
 {%- set project_resources %}{% block project_resources %}
+{%- if enable_docs %}
+* **Web site**: **<{{ docs_url }}>**
+  for general project information, usage, and development documentation
+{%- endif %}
 * **Repository**: <{{ repo_url }}>
   for submitting pull requests
 * **Issue tracker**: <{{ repo_url }}/issues>
   for questions or bug reports
 {% endblock %}{% endset -%}
 {%- set development %}{% block development %}
+{% if not enable_docs %}
 ## Development documentation
 
 {% set h = "##" -%}
@@ -18,6 +24,7 @@
 {{ docs.workflow(h) }}
 
 {{ docs.updates(h) }}
+{% endif %}
 {% endblock %}{% endset -%}
 
 # Contributing to {{ project_name }}
