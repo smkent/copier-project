@@ -63,10 +63,6 @@ class RepoTarget:
     def url(self) -> str:
         return f"https://github.com/{self.github_repo}"
 
-    @cached_property
-    def push_url(self) -> str:
-        return f"git@github.com:{self.github_repo}.git"
-
 
 @dataclass
 class RepoWorktree(ExitStack):
@@ -84,16 +80,6 @@ class RepoWorktree(ExitStack):
         )
         self.run(
             ["git", "clone", self.repo.url, str(self.path)], set_cwd=False
-        )
-        self.run(
-            [
-                "git",
-                "remote",
-                "set-url",
-                "--push",
-                "origin",
-                self.repo.push_url,
-            ],
         )
         self.run(["mise", "install"] if self.use_mise() else ["poe", "setup"])
         self.run(["git", "checkout", "-b", self.branch])

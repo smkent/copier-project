@@ -228,10 +228,6 @@ class ExpectRun:
             ]
         )
         for cmd in [
-            [
-                *["git", "remote", "set-url", "--push", "origin"],
-                "git@github.com:ness/pkfire.git",
-            ],
             (["poe", "setup"] if poe else ["mise", "install"]),
             ["git", "checkout", "-b", "updates"],
         ]:
