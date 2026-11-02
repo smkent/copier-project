@@ -26,17 +26,29 @@ TEMPLATE_VARIANT_DATA: dict[str, dict[str, Any]] = {
 
 
 @pytest.fixture(scope="module", params=template.choices.template_variant)
+def template_variant(request: pytest.FixtureRequest) -> str:
+    return request.param
+
+
+@pytest.fixture(scope="module", params=template.choices.project_visibility)
+def project_visibility(request: pytest.FixtureRequest) -> str:
+    return request.param
+
+
+@pytest.fixture(scope="module")
 def rendered_template(
-    request: pytest.FixtureRequest,
     session_render_template: Callable[..., Path],
     disallow_subprocess: DisallowCallable,
+    template_variant: str,
+    project_visibility: str,
 ) -> Generator[Path]:
     with tempfile.TemporaryDirectory() as td:
         tmp_path = Path(td)
         rendered = session_render_template(
             tmp_path=tmp_path,
-            template_variant=request.param,
-            **(TEMPLATE_VARIANT_DATA.get(request.param) or {}),
+            template_variant=template_variant,
+            project_visibility=project_visibility,
+            **(TEMPLATE_VARIANT_DATA.get(template_variant) or {}),
         )
         init_task_file = rendered / ".mise" / "conf.d" / "init.toml"
         assert init_task_file.is_file()
