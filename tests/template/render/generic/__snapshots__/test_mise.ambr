@@ -1,7 +1,7 @@
 # serializer version: 1
 # name: test_mise_config[private-docs-accepted-with-disclosure]
   '''
-  min_version = "2026.2.5"
+  min_version = "2026.10.3"
   
   [hooks]
   postinstall = [
@@ -69,7 +69,7 @@
 # ---
 # name: test_mise_config[private-docs-accepted]
   '''
-  min_version = "2026.2.5"
+  min_version = "2026.10.3"
   
   [hooks]
   postinstall = [
@@ -136,7 +136,7 @@
 # ---
 # name: test_mise_config[private-docs-not-accepted]
   '''
-  min_version = "2026.2.5"
+  min_version = "2026.10.3"
   
   [hooks]
   postinstall = [
@@ -204,7 +204,7 @@
 # ---
 # name: test_mise_config[private-no_docs-accepted-with-disclosure]
   '''
-  min_version = "2026.2.5"
+  min_version = "2026.10.3"
   
   [hooks]
   postinstall = [
@@ -257,7 +257,7 @@
 # ---
 # name: test_mise_config[private-no_docs-accepted]
   '''
-  min_version = "2026.2.5"
+  min_version = "2026.10.3"
   
   [hooks]
   postinstall = [
@@ -309,7 +309,7 @@
 # ---
 # name: test_mise_config[private-no_docs-not-accepted]
   '''
-  min_version = "2026.2.5"
+  min_version = "2026.10.3"
   
   [hooks]
   postinstall = [
@@ -362,7 +362,7 @@
 # ---
 # name: test_mise_config[public-docs-accepted-with-disclosure]
   '''
-  min_version = "2026.2.5"
+  min_version = "2026.10.3"
   
   [hooks]
   postinstall = [
@@ -432,7 +432,7 @@
 # ---
 # name: test_mise_config[public-docs-accepted]
   '''
-  min_version = "2026.2.5"
+  min_version = "2026.10.3"
   
   [hooks]
   postinstall = [
@@ -501,7 +501,7 @@
 # ---
 # name: test_mise_config[public-docs-not-accepted]
   '''
-  min_version = "2026.2.5"
+  min_version = "2026.10.3"
   
   [hooks]
   postinstall = [
@@ -571,7 +571,7 @@
 # ---
 # name: test_mise_config[public-no_docs-accepted-with-disclosure]
   '''
-  min_version = "2026.2.5"
+  min_version = "2026.10.3"
   
   [hooks]
   postinstall = [
@@ -626,7 +626,7 @@
 # ---
 # name: test_mise_config[public-no_docs-accepted]
   '''
-  min_version = "2026.2.5"
+  min_version = "2026.10.3"
   
   [hooks]
   postinstall = [
@@ -680,7 +680,7 @@
 # ---
 # name: test_mise_config[public-no_docs-not-accepted]
   '''
-  min_version = "2026.2.5"
+  min_version = "2026.10.3"
   
   [hooks]
   postinstall = [
