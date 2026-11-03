@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import subprocess
 import tempfile
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -10,6 +9,13 @@ import pytest
 
 if TYPE_CHECKING:
     from tests.utils import DisallowCallable
+
+    from .mise_env import MiseEnv
+
+
+@pytest.fixture(scope="module")
+def mise_release() -> str:
+    return "current"
 
 
 @dataclass
@@ -121,14 +127,18 @@ class CommitMessageCase:
 def test_pre_commit_commit_msg_hooks(
     disallow_subprocess: DisallowCallable,
     rendered_template: Path,
+    mise_env: MiseEnv,
     case: CommitMessageCase,
 ) -> None:
     with tempfile.TemporaryDirectory() as td:
         message_file = Path(td) / "message.txt"
         message_file.write_text(case.commit_message)
         with disallow_subprocess.pause():
-            result = subprocess.run(  # noqa: S603
+            result = mise_env.run(
                 [
+                    "mise",
+                    "exec",
+                    "--",
                     "prek",
                     "run",
                     "--hook-stage",
