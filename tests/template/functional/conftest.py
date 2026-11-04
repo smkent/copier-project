@@ -12,7 +12,7 @@ from tests.template.utils import template
 from .mise_env import MiseEnv, MiseManager
 
 if TYPE_CHECKING:
-    from collections.abc import Callable, Generator
+    from collections.abc import Callable, Iterator
 
     from tests.utils import DisallowCallable
 
@@ -76,7 +76,7 @@ def rendered_template(
     template_variant: str,
     project_visibility: str,
     mise_env: MiseEnv,
-) -> Generator[Path]:
+) -> Iterator[Path]:
     with tempfile.TemporaryDirectory() as td:
         tmp_path = Path(td)
         rendered = session_render_template(
