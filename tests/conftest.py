@@ -34,6 +34,13 @@ def ensure_env() -> None:
     setup_env()
 
 
+@pytest.fixture(scope="session", autouse=True)
+def subprocess_tmp(tmp_path_factory: pytest.TempPathFactory) -> Iterator[None]:
+    with pytest.MonkeyPatch.context() as mp:
+        mp.setenv("TMPDIR", str(tmp_path_factory.mktemp("tmp")))
+        yield
+
+
 @pytest.fixture(autouse=True, scope="session")
 def disallow_subprocess(
     request: pytest.FixtureRequest,
