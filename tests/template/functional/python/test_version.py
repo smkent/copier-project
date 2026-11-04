@@ -12,17 +12,17 @@ if TYPE_CHECKING:
 
 
 def test_package_version(
-    disallow_subprocess: DisallowCallable,
-    render_template: Callable[..., Path],
-    project_slug: str | None,
+    disallow_subprocess: DisallowCallable, render_template: Callable[..., Path]
 ) -> None:
     rendered = render_template()
-    if not (pkg_import := project_slug):
-        pyproject = rendered / "pyproject.toml"
-        pyproject_data = tomllib.loads(pyproject.read_text())
-        project_name = pyproject_data["project"]["name"]
-        pkg_import = project_name.lower()
-    code = f"from {pkg_import} import version; print(version)"
+    pyproject = rendered / "pyproject.toml"
+    pyproject_data = tomllib.loads(pyproject.read_text())
+    project_name = pyproject_data["project"]["name"]
+    pkg_import = project_name.lower()
+    code = (
+        f"from importlib.metadata import version as v;"
+        f' print(v("{pkg_import}"))'
+    )
     cmd = ["uv", "run", "python", "-c", code]
     with disallow_subprocess.pause():
         version = subprocess.run(  # noqa: S603
