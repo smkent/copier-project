@@ -75,6 +75,9 @@ push = true
 [tool.hatch.build.targets.sdist]
 include = ["/{{ project_slug }}", "/tests", "*.md", "{{ license.files | join('", "') }}"]
 
+[tool.hatch.build.targets.wheel]
+packages = ["{{ project_slug }}"]
+
 [tool.hatch.version]
 source = "uv-dynamic-versioning"
 
