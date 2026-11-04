@@ -118,6 +118,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev", "docs"]
   
   [tool.uv-dynamic-versioning]
@@ -251,6 +255,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev", "docs"]
   
   [tool.uv-dynamic-versioning]
@@ -374,6 +382,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev", "docs"]
   
   [tool.uv-dynamic-versioning]
@@ -503,6 +515,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev", "docs"]
   
   [tool.uv-dynamic-versioning]
@@ -629,6 +645,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev"]
   
   [tool.uv-dynamic-versioning]
@@ -761,6 +781,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev"]
   
   [tool.uv-dynamic-versioning]
@@ -883,6 +907,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev"]
   
   [tool.uv-dynamic-versioning]
@@ -1011,6 +1039,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev"]
   
   [tool.uv-dynamic-versioning]
@@ -1139,6 +1171,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev", "docs"]
   
   [tool.uv-dynamic-versioning]
@@ -1273,6 +1309,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev", "docs"]
   
   [tool.uv-dynamic-versioning]
@@ -1397,6 +1437,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev", "docs"]
   
   [tool.uv-dynamic-versioning]
@@ -1527,6 +1571,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev", "docs"]
   
   [tool.uv-dynamic-versioning]
@@ -1654,6 +1702,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev"]
   
   [tool.uv-dynamic-versioning]
@@ -1787,6 +1839,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev"]
   
   [tool.uv-dynamic-versioning]
@@ -1910,6 +1966,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev"]
   
   [tool.uv-dynamic-versioning]
@@ -2039,6 +2099,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev"]
   
   [tool.uv-dynamic-versioning]
@@ -2169,6 +2233,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev", "docs"]
   
   [tool.uv-dynamic-versioning]
@@ -2305,6 +2373,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev", "docs"]
   
   [tool.uv-dynamic-versioning]
@@ -2431,6 +2503,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev", "docs"]
   
   [tool.uv-dynamic-versioning]
@@ -2563,6 +2639,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev", "docs"]
   
   [tool.uv-dynamic-versioning]
@@ -2692,6 +2772,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev"]
   
   [tool.uv-dynamic-versioning]
@@ -2827,6 +2911,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev"]
   
   [tool.uv-dynamic-versioning]
@@ -2952,6 +3040,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev"]
   
   [tool.uv-dynamic-versioning]
@@ -3083,6 +3175,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev"]
   
   [tool.uv-dynamic-versioning]
@@ -3214,6 +3310,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev", "docs"]
   
   [tool.uv-dynamic-versioning]
@@ -3351,6 +3451,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev", "docs"]
   
   [tool.uv-dynamic-versioning]
@@ -3478,6 +3582,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev", "docs"]
   
   [tool.uv-dynamic-versioning]
@@ -3611,6 +3719,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev", "docs"]
   
   [tool.uv-dynamic-versioning]
@@ -3741,6 +3853,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev"]
   
   [tool.uv-dynamic-versioning]
@@ -3877,6 +3993,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev"]
   
   [tool.uv-dynamic-versioning]
@@ -4003,6 +4123,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev"]
   
   [tool.uv-dynamic-versioning]
@@ -4135,6 +4259,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev"]
   
   [tool.uv-dynamic-versioning]
@@ -4272,6 +4400,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev", "docs"]
   
   [tool.uv-dynamic-versioning]
@@ -4409,6 +4541,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev", "docs"]
   
   [tool.uv-dynamic-versioning]
@@ -4546,6 +4682,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev", "docs"]
   
   [tool.uv-dynamic-versioning]
@@ -4683,6 +4823,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev", "docs"]
   
   [tool.uv-dynamic-versioning]
@@ -4820,6 +4964,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev", "docs"]
   
   [tool.uv-dynamic-versioning]
@@ -4957,6 +5105,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev", "docs"]
   
   [tool.uv-dynamic-versioning]
@@ -5094,6 +5246,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev", "docs"]
   
   [tool.uv-dynamic-versioning]
@@ -5231,6 +5387,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev", "docs"]
   
   [tool.uv-dynamic-versioning]
@@ -5368,6 +5528,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev", "docs"]
   
   [tool.uv-dynamic-versioning]
@@ -5505,6 +5669,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev", "docs"]
   
   [tool.uv-dynamic-versioning]
@@ -5642,6 +5810,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev", "docs"]
   
   [tool.uv-dynamic-versioning]
@@ -5779,6 +5951,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev", "docs"]
   
   [tool.uv-dynamic-versioning]
@@ -5916,6 +6092,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev", "docs"]
   
   [tool.uv-dynamic-versioning]
@@ -6051,6 +6231,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev", "docs"]
   
   [tool.uv-dynamic-versioning]
@@ -6184,6 +6368,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev", "docs"]
   
   [tool.uv-dynamic-versioning]
@@ -6321,6 +6509,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev", "docs"]
   
   [tool.uv-dynamic-versioning]
@@ -6456,6 +6648,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev", "docs"]
   
   [tool.uv-dynamic-versioning]
@@ -6593,6 +6789,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev", "docs"]
   
   [tool.uv-dynamic-versioning]
@@ -6728,6 +6928,10 @@
   output-format = "concise"
   
   [tool.uv]
+  cache-keys = [
+    { file = "pyproject.toml" },
+    { git = { commit = true, tags = true } },
+  ]
   default-groups = ["dev", "docs"]
   
   [tool.uv-dynamic-versioning]
