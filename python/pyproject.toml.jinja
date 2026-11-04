@@ -143,6 +143,10 @@ error-on-warning = true
 output-format = "concise"
 
 [tool.uv]
+cache-keys = [
+  { file = "pyproject.toml" },
+  { git = { commit = true, tags = true } },
+]
 {%- if enable_docs %}
 default-groups = ["dev", "docs"]
 {%- else %}
