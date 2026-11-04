@@ -4,6 +4,7 @@ import os
 import subprocess
 import warnings
 from functools import partial
+from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
 import copier
@@ -16,7 +17,6 @@ from tests.utils import DisallowCallable
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Iterator
-    from pathlib import Path
 
 DEFAULT_DATA: dict[str, Any] = {
     "project_name": "PKFire",
@@ -58,6 +58,25 @@ def git_config(tmp_path_factory: pytest.TempPathFactory) -> Iterator[None]:
                 mp.delenv(key)
         mp.setenv("GIT_CONFIG_GLOBAL", str(gitconfig))
         mp.setenv("GIT_CONFIG_NOSYSTEM", "1")
+        yield
+
+
+@pytest.fixture(scope="session", autouse=True)
+def uv_dirs(disallow_subprocess: DisallowCallable) -> Iterator[None]:
+    def _uv_dir(name: str) -> Path:
+        with disallow_subprocess.pause():
+            return Path(
+                subprocess.run(  # noqa: S603
+                    ["uv", name, "dir"],
+                    capture_output=True,
+                    check=True,
+                    text=True,
+                ).stdout.strip()
+            )
+
+    with pytest.MonkeyPatch.context() as mp:
+        mp.setenv("UV_CACHE_DIR", str(_uv_dir("cache")))
+        mp.setenv("UV_PYTHON_INSTALL_DIR", str(_uv_dir("python")))
         yield
 
 

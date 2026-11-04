@@ -76,17 +76,6 @@ class MiseManager:
 
     @cached_property
     def env(self) -> dict[str, str]:
-        def _uv_dir(name: str) -> Path:
-            with self.disallow_subprocess.pause():
-                return Path(
-                    subprocess.run(  # noqa: S603
-                        ["uv", name, "dir"],
-                        capture_output=True,
-                        check=True,
-                        text=True,
-                    ).stdout.strip()
-                )
-
         base_env = {
             k: v
             for k, v in os.environ.items()
@@ -102,8 +91,6 @@ class MiseManager:
         return base_env | {
             "PATH": path,
             "MISE_YES": "1",
-            "UV_CACHE_DIR": str(_uv_dir("cache")),
-            "UV_PYTHON_INSTALL_DIR": str(_uv_dir("python")),
         }
 
     def executable_version(self, executable: Path) -> str:
