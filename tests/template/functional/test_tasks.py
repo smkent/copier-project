@@ -10,6 +10,11 @@ if TYPE_CHECKING:
     from .mise_env import MiseEnv
 
 
+@pytest.fixture(scope="module", params=["current", "minimum"])
+def mise_release(request: pytest.FixtureRequest) -> str:
+    return request.param
+
+
 @pytest.mark.usefixtures("allow_subprocess")
-def test_task_lt_lint_test(rendered_template: Path, mise_env: MiseEnv) -> None:
-    mise_env.run(["mise", "run", "lt"], cwd=rendered_template)
+def test_task_lt_lint_test(rendered_project: Path, mise_env: MiseEnv) -> None:
+    mise_env.run(["mise", "run", "lt"], cwd=rendered_project)

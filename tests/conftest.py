@@ -80,7 +80,7 @@ def uv_dirs(disallow_subprocess: DisallowCallable) -> Iterator[None]:
         yield
 
 
-@pytest.fixture(autouse=True, scope="session")
+@pytest.fixture(scope="session", autouse=True)
 def disallow_subprocess(
     request: pytest.FixtureRequest,
 ) -> Iterator[DisallowCallable]:
@@ -95,7 +95,7 @@ def allow_subprocess(disallow_subprocess: DisallowCallable) -> Iterator[None]:
 
 
 @pytest.fixture(scope="session")
-def session_render_template(
+def base_render_template(
     disallow_subprocess: DisallowCallable,
 ) -> Callable[..., Path]:
     def _render(
@@ -138,23 +138,25 @@ def session_render_template(
     return _render
 
 
-@pytest.fixture
-def render_template_common(
-    session_render_template: Callable[..., Path], tmp_path: Path
-) -> Callable[..., Path]:
-    return partial(session_render_template, tmp_path=tmp_path)
-
-
-@pytest.fixture
+@pytest.fixture(scope="session")
 def template_variant() -> str:
     raise NotImplementedError
 
 
+@pytest.fixture(scope="module")
+def template_args(template_variant: str) -> dict[str, str] | None:
+    return {"template_variant": template_variant}
+
+
 @pytest.fixture
 def render_template(
-    render_template_common: Callable[..., Path], template_variant: str
+    base_render_template: Callable[..., Path],
+    template_args: dict[str, str] | None,
+    tmp_path: Path,
 ) -> Callable[..., Path]:
-    return partial(render_template_common, template_variant=template_variant)
+    return partial(
+        base_render_template, tmp_path=tmp_path, **(template_args or {})
+    )
 
 
 @pytest.fixture
