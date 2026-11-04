@@ -12,7 +12,7 @@ from tests.template.utils import template
 from .mise_env import MiseEnv, MiseManager
 
 if TYPE_CHECKING:
-    from collections.abc import Callable, Generator
+    from collections.abc import Callable, Iterator
 
     from tests.utils import DisallowCallable
 
@@ -37,7 +37,7 @@ def project_visibility(request: pytest.FixtureRequest) -> str:
     return request.param
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="package")
 def mise_min_version(
     session_render_template: Callable[..., Path],
     tmp_path_factory: pytest.TempPathFactory,
@@ -51,7 +51,7 @@ def mise_release(request: pytest.FixtureRequest) -> str:
     return request.param
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="package")
 def mise_manager(
     request: pytest.FixtureRequest,
     disallow_subprocess: DisallowCallable,
@@ -76,7 +76,7 @@ def rendered_template(
     template_variant: str,
     project_visibility: str,
     mise_env: MiseEnv,
-) -> Generator[Path]:
+) -> Iterator[Path]:
     with tempfile.TemporaryDirectory() as td:
         tmp_path = Path(td)
         rendered = session_render_template(

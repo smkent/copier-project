@@ -1,8 +1,10 @@
 from __future__ import annotations
 
+import os
 import subprocess
 import warnings
 from functools import partial
+from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
 import copier
@@ -15,7 +17,6 @@ from tests.utils import DisallowCallable
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Iterator
-    from pathlib import Path
 
 DEFAULT_DATA: dict[str, Any] = {
     "project_name": "PKFire",
@@ -32,6 +33,51 @@ DEFAULT_DATA: dict[str, Any] = {
 @pytest.fixture(scope="session", autouse=True)
 def ensure_env() -> None:
     setup_env()
+
+
+@pytest.fixture(scope="session", autouse=True)
+def subprocess_tmp(tmp_path_factory: pytest.TempPathFactory) -> Iterator[None]:
+    with pytest.MonkeyPatch.context() as mp:
+        mp.setenv("TMPDIR", str(tmp_path_factory.mktemp("tmp")))
+        yield
+
+
+@pytest.fixture(scope="session", autouse=True)
+def git_config(tmp_path_factory: pytest.TempPathFactory) -> Iterator[None]:
+    gitconfig = tmp_path_factory.mktemp("git") / "gitconfig"
+    gitconfig.write_text(
+        "[init]\n"
+        "\tdefaultBranch = main\n"
+        "[user]\n"
+        "\tname = Ness\n"
+        "\temail = ness@onett.example.com\n"
+    )
+    with pytest.MonkeyPatch.context() as mp:
+        for key in list(os.environ):
+            if key.startswith("GIT_CONFIG"):
+                mp.delenv(key)
+        mp.setenv("GIT_CONFIG_GLOBAL", str(gitconfig))
+        mp.setenv("GIT_CONFIG_NOSYSTEM", "1")
+        yield
+
+
+@pytest.fixture(scope="session", autouse=True)
+def uv_dirs(disallow_subprocess: DisallowCallable) -> Iterator[None]:
+    def _uv_dir(name: str) -> Path:
+        with disallow_subprocess.pause():
+            return Path(
+                subprocess.run(  # noqa: S603
+                    ["uv", name, "dir"],
+                    capture_output=True,
+                    check=True,
+                    text=True,
+                ).stdout.strip()
+            )
+
+    with pytest.MonkeyPatch.context() as mp:
+        mp.setenv("UV_CACHE_DIR", str(_uv_dir("cache")))
+        mp.setenv("UV_PYTHON_INSTALL_DIR", str(_uv_dir("python")))
+        yield
 
 
 @pytest.fixture(autouse=True, scope="session")

@@ -83,6 +83,8 @@ addopts = [
   "auto",
 ]
 testpaths = ["tests"]
+tmp_path_retention_policy = "failed"
+tmp_path_retention_count = "1"
 
 [tool.coverage.run]
 source = ["copier_project"]

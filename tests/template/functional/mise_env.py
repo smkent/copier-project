@@ -20,7 +20,7 @@ if TYPE_CHECKING:
 
 @dataclass(frozen=True)
 class MiseManager:
-    ENV_REMOVE_PREFIXES = ("GIT_CONFIG", "MISE_", "__MISE_", "XDG_")
+    ENV_REMOVE_PREFIXES = ("MISE_", "__MISE_", "XDG_")
     MISE_TOOL = "aqua:jdx/mise"
 
     request: pytest.FixtureRequest
@@ -76,17 +76,6 @@ class MiseManager:
 
     @cached_property
     def env(self) -> dict[str, str]:
-        def _uv_dir(name: str) -> Path:
-            with self.disallow_subprocess.pause():
-                return Path(
-                    subprocess.run(  # noqa: S603
-                        ["uv", name, "dir"],
-                        capture_output=True,
-                        check=True,
-                        text=True,
-                    ).stdout.strip()
-                )
-
         base_env = {
             k: v
             for k, v in os.environ.items()
@@ -101,10 +90,7 @@ class MiseManager:
         )
         return base_env | {
             "PATH": path,
-            "GIT_CONFIG_NOSYSTEM": "1",
             "MISE_YES": "1",
-            "UV_CACHE_DIR": str(_uv_dir("cache")),
-            "UV_PYTHON_INSTALL_DIR": str(_uv_dir("python")),
         }
 
     def executable_version(self, executable: Path) -> str:
@@ -168,18 +154,6 @@ class MiseEnv:
     def home(self) -> Path:
         path = self.root / "home"
         path.mkdir(parents=True, exist_ok=True)
-        # Configure git
-        gitconfig = path / ".gitconfig"
-        content = (
-            "[init]\n"
-            "defaultBranch = main\n"
-            "[user]\n"
-            "name = Ness\n"
-            "email = ness@onett.example.com\n"
-        )
-        if not gitconfig.is_file() or gitconfig.read_text() != content:
-            with self._replace_atomic(gitconfig) as tmp:
-                tmp.write_text(content)
         return path
 
     @cached_property
