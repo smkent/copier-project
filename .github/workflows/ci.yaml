@@ -39,11 +39,6 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: 🪪 Configure git identity for tests
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
       - name: 📦 Cache uv managed packages
         uses: actions/cache@v6
         with:
