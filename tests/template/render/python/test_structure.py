@@ -45,6 +45,9 @@ def test_structure(
     enable_docs: bool,
 ) -> None:
     case = StructureTestCase(
+        expected_present={
+            "pkfire/py.typed",
+        },
         extra_data={
             "project_type": project_type,
             "project_visibility": project_visibility,
