@@ -70,6 +70,9 @@ push = true
 [tool.hatch.build.targets.sdist]
 include = ["/copier_project", "/tests", "*.md", "LICENSE"]
 
+[tool.hatch.build.targets.wheel]
+packages = ["copier_project"]
+
 [tool.hatch.version]
 source = "uv-dynamic-versioning"
 
@@ -135,6 +138,10 @@ error-on-warning = true
 output-format = "concise"
 
 [tool.uv]
+cache-keys = [
+  { file = "pyproject.toml" },
+  { git = { commit = true, tags = true } },
+]
 default-groups = ["dev", "docs"]
 
 [tool.uv-dynamic-versioning]
