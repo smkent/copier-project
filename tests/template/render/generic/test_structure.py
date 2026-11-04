@@ -17,7 +17,7 @@ PYTHON_ONLY_PATHS = {
     "docs/releasing.md",
     "Dockerfile",
     "compose.yaml",
-    "py.typed",
+    "pkfire/py.typed",
     "pyproject.toml",
     "tests",
 }
