@@ -12,7 +12,7 @@ if TYPE_CHECKING:
     from pathlib import Path
 
 
-@pytest.fixture
+@pytest.fixture(scope="module")
 def template_variant() -> str:
     return "python"
 

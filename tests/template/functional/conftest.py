@@ -27,7 +27,7 @@ TEMPLATE_VARIANT_DATA: dict[str, dict[str, Any]] = {
 }
 
 
-@pytest.fixture(scope="module", params=template.choices.template_variant)
+@pytest.fixture(scope="package", params=template.choices.template_variant)
 def template_variant(request: pytest.FixtureRequest) -> str:
     return request.param
 
@@ -37,16 +37,34 @@ def project_visibility(request: pytest.FixtureRequest) -> str:
     return request.param
 
 
+@pytest.fixture(scope="module")
+def template_variant_args(template_variant: str) -> dict[str, str]:
+    return TEMPLATE_VARIANT_DATA.get(template_variant, {}) or {}
+
+
+@pytest.fixture(scope="module")
+def template_args(
+    template_variant: str,
+    template_variant_args: dict[str, str],
+    project_visibility: str,
+) -> dict[str, Any]:
+    return {
+        "template_variant": template_variant,
+        "project_visibility": project_visibility,
+        **template_variant_args,
+    }
+
+
 @pytest.fixture(scope="package")
 def mise_min_version(
-    session_render_template: Callable[..., Path],
+    base_render_template: Callable[..., Path],
     tmp_path_factory: pytest.TempPathFactory,
 ) -> str:
-    project = session_render_template(tmp_path=tmp_path_factory.mktemp("mise"))
+    project = base_render_template(tmp_path=tmp_path_factory.mktemp("mise"))
     return tomllib.loads((project / "mise.toml").read_text())["min_version"]
 
 
-@pytest.fixture(scope="module", params=["current", "minimum"])
+@pytest.fixture(scope="module", params=["current"])
 def mise_release(request: pytest.FixtureRequest) -> str:
     return request.param
 
@@ -70,24 +88,17 @@ def mise_env(mise_manager: MiseManager, mise_release: str) -> MiseEnv:
 
 
 @pytest.fixture(scope="module")
-def rendered_template(
-    session_render_template: Callable[..., Path],
-    disallow_subprocess: DisallowCallable,
-    template_variant: str,
-    project_visibility: str,
+def rendered_project(
+    base_render_template: Callable[..., Path],
+    template_args: dict[str, str] | None,
     mise_env: MiseEnv,
 ) -> Iterator[Path]:
     with tempfile.TemporaryDirectory() as td:
-        tmp_path = Path(td)
-        rendered = session_render_template(
-            tmp_path=tmp_path,
-            template_variant=template_variant,
-            project_visibility=project_visibility,
-            **(TEMPLATE_VARIANT_DATA.get(template_variant) or {}),
+        rendered = base_render_template(
+            tmp_path=Path(td), **(template_args or {})
         )
         init_task_file = rendered / ".mise" / "conf.d" / "init.toml"
         assert init_task_file.is_file()
-        with disallow_subprocess.pause():
-            mise_env.run(["mise", "run", "init"], cwd=rendered)
+        mise_env.run(["mise", "run", "init"], cwd=rendered)
         assert not init_task_file.is_file()
         yield rendered

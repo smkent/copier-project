@@ -12,6 +12,11 @@ if TYPE_CHECKING:
     from pathlib import Path
 
 
+@pytest.fixture(scope="module")
+def template_args() -> None:
+    return None
+
+
 @pytest.mark.parametrize(
     ("previous_answers", "expected"),
     [
@@ -43,10 +48,10 @@ if TYPE_CHECKING:
     ],
 )
 def test_template_variant_default(
-    render_template_common: Callable[..., Path],
+    render_template: Callable[..., Path],
     previous_answers: dict[str, Any] | None,
     expected: str,
 ) -> None:
-    rendered = render_template_common(previous_answers=previous_answers)
+    rendered = render_template(previous_answers=previous_answers)
     answers = yaml.safe_load((rendered / ".copier-answers.yml").read_text())
     assert answers["template_variant"] == expected

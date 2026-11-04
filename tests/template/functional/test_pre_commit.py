@@ -13,11 +13,6 @@ if TYPE_CHECKING:
     from .mise_env import MiseEnv
 
 
-@pytest.fixture(scope="module")
-def mise_release() -> str:
-    return "current"
-
-
 @dataclass
 class CommitMessageCase:
     name: str
@@ -126,7 +121,7 @@ class CommitMessageCase:
 )
 def test_pre_commit_commit_msg_hooks(
     disallow_subprocess: DisallowCallable,
-    rendered_template: Path,
+    rendered_project: Path,
     mise_env: MiseEnv,
     case: CommitMessageCase,
 ) -> None:
@@ -146,7 +141,7 @@ def test_pre_commit_commit_msg_hooks(
                     "--commit-msg-filename",
                     str(message_file),
                 ],
-                cwd=rendered_template,
+                cwd=rendered_project,
                 check=False,
             )
         assert result.returncode == (0 if case.valid else 1)

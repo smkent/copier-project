@@ -70,7 +70,7 @@ def origin(tmp_path: Path, disallow_subprocess: DisallowCallable) -> Path:
 @pytest.fixture
 def create_project(
     disallow_subprocess: DisallowCallable,
-    render_template_common: Callable[..., Path],
+    render_template: Callable[..., Path],
     origin: Path,
 ) -> Callable[..., Path]:
 
@@ -89,7 +89,7 @@ def create_project(
         **kwargs: Any,
     ) -> Path:
         kwargs.setdefault("template_variant", "generic")
-        project = render_template_common(vcs_ref=vcs_ref, **kwargs)
+        project = render_template(vcs_ref=vcs_ref, **kwargs)
         timestamp = _vcs_ref_timestamp(vcs_ref)
 
         setup_commands = [
