@@ -37,7 +37,7 @@ def project_visibility(request: pytest.FixtureRequest) -> str:
     return request.param
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="package")
 def mise_min_version(
     session_render_template: Callable[..., Path],
     tmp_path_factory: pytest.TempPathFactory,
@@ -51,7 +51,7 @@ def mise_release(request: pytest.FixtureRequest) -> str:
     return request.param
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="package")
 def mise_manager(
     request: pytest.FixtureRequest,
     disallow_subprocess: DisallowCallable,
