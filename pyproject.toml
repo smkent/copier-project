@@ -35,7 +35,7 @@ dependencies = [
 ]
 
 [project.scripts]
-copier-project = "copier_project.__main__:main"
+"copier-project" = "copier_project.__main__:main"
 
 [project.urls]
 Homepage = "https://smkent.github.io/copier-project"
