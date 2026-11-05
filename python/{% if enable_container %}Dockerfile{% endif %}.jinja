@@ -21,5 +21,7 @@ COPY --from=builder /app/.venv /app/.venv
 RUN useradd --no-create-home --shell /bin/false app
 USER app
 
+ENV PYTHONUNBUFFERED=1
+
 CMD ["/app/.venv/bin/python", "-m", "{{ project_slug }}"]
 {#- vim: set ft=dockerfile: #}
