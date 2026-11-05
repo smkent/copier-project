@@ -1,5 +1,8 @@
 {%- import "common/license.jinja" as license with context -%}
 {%- import "common/python.jinja" as py with context -%}
+{%- set uv_sync -%}
+uv sync{% if project_type == "application" %} --locked{% endif %} --no-default-groups
+{%- endset -%}
 FROM python:{{ py.latest() }}-slim AS builder
 
 COPY --from=ghcr.io/astral-sh/uv /uv /uvx /bin/
@@ -7,15 +10,18 @@ COPY --from=ghcr.io/astral-sh/uv /uv /uvx /bin/
 WORKDIR /app
 
 # Install dependencies
-COPY pyproject.toml uv.lock .
+COPY pyproject.toml{% if project_type == "application" %} uv.lock{% endif %} .
 RUN --mount=type=cache,target=/root/.cache/uv \
-    uv sync --locked --no-default-groups --no-install-project
+{%- if project_type != "application" %}
+    touch README.md && \
+{%- endif %}
+    {{ uv_sync }} --no-install-project
 
 # Install project
 COPY README.md {{ license.files | join(' ') }} .
 COPY {{ project_slug }}/ ./{{ project_slug }}/
 ARG UV_DYNAMIC_VERSIONING_BYPASS=0.0.0
-RUN uv sync --locked --no-default-groups --no-editable
+RUN {{ uv_sync }} --no-editable
 
 FROM python:{{ py.latest() }}-slim
 

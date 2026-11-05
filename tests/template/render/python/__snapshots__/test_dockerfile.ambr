@@ -1,5 +1,5 @@
 # serializer version: 1
-# name: test_dockerfile[3.13-3.11]
+# name: test_dockerfile[3.13-3.11-application]
   '''
   FROM python:3.13-slim AS builder
   
@@ -34,7 +34,43 @@
   
   '''
 # ---
-# name: test_dockerfile[3.13-3.13]
+# name: test_dockerfile[3.13-3.11-library]
+  '''
+  FROM python:3.13-slim AS builder
+  
+  COPY --from=ghcr.io/astral-sh/uv /uv /uvx /bin/
+  
+  WORKDIR /app
+  
+  # Install dependencies
+  COPY pyproject.toml .
+  RUN --mount=type=cache,target=/root/.cache/uv \
+      touch README.md && \
+      uv sync --no-default-groups --no-install-project
+  
+  # Install project
+  COPY README.md LICENSE .
+  COPY pkfire/ ./pkfire/
+  ARG UV_DYNAMIC_VERSIONING_BYPASS=0.0.0
+  RUN uv sync --no-default-groups --no-editable
+  
+  FROM python:3.13-slim
+  
+  LABEL org.opencontainers.image.licenses="MIT"
+  
+  COPY --from=builder /app/.venv /app/.venv
+  
+  RUN useradd --no-create-home --shell /bin/false app
+  USER app
+  
+  ENV PATH="/app/.venv/bin:$PATH"
+  ENV PYTHONUNBUFFERED=1
+  
+  CMD ["python", "-m", "pkfire"]
+  
+  '''
+# ---
+# name: test_dockerfile[3.13-3.13-application]
   '''
   FROM python:3.13-slim AS builder
   
@@ -69,7 +105,43 @@
   
   '''
 # ---
-# name: test_dockerfile[3.15-3.11]
+# name: test_dockerfile[3.13-3.13-library]
+  '''
+  FROM python:3.13-slim AS builder
+  
+  COPY --from=ghcr.io/astral-sh/uv /uv /uvx /bin/
+  
+  WORKDIR /app
+  
+  # Install dependencies
+  COPY pyproject.toml .
+  RUN --mount=type=cache,target=/root/.cache/uv \
+      touch README.md && \
+      uv sync --no-default-groups --no-install-project
+  
+  # Install project
+  COPY README.md LICENSE .
+  COPY pkfire/ ./pkfire/
+  ARG UV_DYNAMIC_VERSIONING_BYPASS=0.0.0
+  RUN uv sync --no-default-groups --no-editable
+  
+  FROM python:3.13-slim
+  
+  LABEL org.opencontainers.image.licenses="MIT"
+  
+  COPY --from=builder /app/.venv /app/.venv
+  
+  RUN useradd --no-create-home --shell /bin/false app
+  USER app
+  
+  ENV PATH="/app/.venv/bin:$PATH"
+  ENV PYTHONUNBUFFERED=1
+  
+  CMD ["python", "-m", "pkfire"]
+  
+  '''
+# ---
+# name: test_dockerfile[3.15-3.11-application]
   '''
   FROM python:3.15-slim AS builder
   
@@ -104,7 +176,43 @@
   
   '''
 # ---
-# name: test_dockerfile[3.15-3.13]
+# name: test_dockerfile[3.15-3.11-library]
+  '''
+  FROM python:3.15-slim AS builder
+  
+  COPY --from=ghcr.io/astral-sh/uv /uv /uvx /bin/
+  
+  WORKDIR /app
+  
+  # Install dependencies
+  COPY pyproject.toml .
+  RUN --mount=type=cache,target=/root/.cache/uv \
+      touch README.md && \
+      uv sync --no-default-groups --no-install-project
+  
+  # Install project
+  COPY README.md LICENSE .
+  COPY pkfire/ ./pkfire/
+  ARG UV_DYNAMIC_VERSIONING_BYPASS=0.0.0
+  RUN uv sync --no-default-groups --no-editable
+  
+  FROM python:3.15-slim
+  
+  LABEL org.opencontainers.image.licenses="MIT"
+  
+  COPY --from=builder /app/.venv /app/.venv
+  
+  RUN useradd --no-create-home --shell /bin/false app
+  USER app
+  
+  ENV PATH="/app/.venv/bin:$PATH"
+  ENV PYTHONUNBUFFERED=1
+  
+  CMD ["python", "-m", "pkfire"]
+  
+  '''
+# ---
+# name: test_dockerfile[3.15-3.13-application]
   '''
   FROM python:3.15-slim AS builder
   
@@ -139,7 +247,43 @@
   
   '''
 # ---
-# name: test_dockerfile[No maximum-3.11]
+# name: test_dockerfile[3.15-3.13-library]
+  '''
+  FROM python:3.15-slim AS builder
+  
+  COPY --from=ghcr.io/astral-sh/uv /uv /uvx /bin/
+  
+  WORKDIR /app
+  
+  # Install dependencies
+  COPY pyproject.toml .
+  RUN --mount=type=cache,target=/root/.cache/uv \
+      touch README.md && \
+      uv sync --no-default-groups --no-install-project
+  
+  # Install project
+  COPY README.md LICENSE .
+  COPY pkfire/ ./pkfire/
+  ARG UV_DYNAMIC_VERSIONING_BYPASS=0.0.0
+  RUN uv sync --no-default-groups --no-editable
+  
+  FROM python:3.15-slim
+  
+  LABEL org.opencontainers.image.licenses="MIT"
+  
+  COPY --from=builder /app/.venv /app/.venv
+  
+  RUN useradd --no-create-home --shell /bin/false app
+  USER app
+  
+  ENV PATH="/app/.venv/bin:$PATH"
+  ENV PYTHONUNBUFFERED=1
+  
+  CMD ["python", "-m", "pkfire"]
+  
+  '''
+# ---
+# name: test_dockerfile[No maximum-3.11-application]
   '''
   FROM python:3.15-slim AS builder
   
@@ -174,7 +318,43 @@
   
   '''
 # ---
-# name: test_dockerfile[No maximum-3.13]
+# name: test_dockerfile[No maximum-3.11-library]
+  '''
+  FROM python:3.15-slim AS builder
+  
+  COPY --from=ghcr.io/astral-sh/uv /uv /uvx /bin/
+  
+  WORKDIR /app
+  
+  # Install dependencies
+  COPY pyproject.toml .
+  RUN --mount=type=cache,target=/root/.cache/uv \
+      touch README.md && \
+      uv sync --no-default-groups --no-install-project
+  
+  # Install project
+  COPY README.md LICENSE .
+  COPY pkfire/ ./pkfire/
+  ARG UV_DYNAMIC_VERSIONING_BYPASS=0.0.0
+  RUN uv sync --no-default-groups --no-editable
+  
+  FROM python:3.15-slim
+  
+  LABEL org.opencontainers.image.licenses="MIT"
+  
+  COPY --from=builder /app/.venv /app/.venv
+  
+  RUN useradd --no-create-home --shell /bin/false app
+  USER app
+  
+  ENV PATH="/app/.venv/bin:$PATH"
+  ENV PYTHONUNBUFFERED=1
+  
+  CMD ["python", "-m", "pkfire"]
+  
+  '''
+# ---
+# name: test_dockerfile[No maximum-3.13-application]
   '''
   FROM python:3.15-slim AS builder
   
@@ -192,6 +372,42 @@
   COPY pkfire/ ./pkfire/
   ARG UV_DYNAMIC_VERSIONING_BYPASS=0.0.0
   RUN uv sync --locked --no-default-groups --no-editable
+  
+  FROM python:3.15-slim
+  
+  LABEL org.opencontainers.image.licenses="MIT"
+  
+  COPY --from=builder /app/.venv /app/.venv
+  
+  RUN useradd --no-create-home --shell /bin/false app
+  USER app
+  
+  ENV PATH="/app/.venv/bin:$PATH"
+  ENV PYTHONUNBUFFERED=1
+  
+  CMD ["python", "-m", "pkfire"]
+  
+  '''
+# ---
+# name: test_dockerfile[No maximum-3.13-library]
+  '''
+  FROM python:3.15-slim AS builder
+  
+  COPY --from=ghcr.io/astral-sh/uv /uv /uvx /bin/
+  
+  WORKDIR /app
+  
+  # Install dependencies
+  COPY pyproject.toml .
+  RUN --mount=type=cache,target=/root/.cache/uv \
+      touch README.md && \
+      uv sync --no-default-groups --no-install-project
+  
+  # Install project
+  COPY README.md LICENSE .
+  COPY pkfire/ ./pkfire/
+  ARG UV_DYNAMIC_VERSIONING_BYPASS=0.0.0
+  RUN uv sync --no-default-groups --no-editable
   
   FROM python:3.15-slim
   
