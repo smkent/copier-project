@@ -7,24 +7,30 @@
   
   WORKDIR /app
   
-  # Install dependencies first (cached layer, only invalidated by pyproject.toml changes)
-  COPY pyproject.toml README.md .
+  # Install dependencies
+  COPY pyproject.toml uv.lock .
   RUN --mount=type=cache,target=/root/.cache/uv \
-      uv sync --no-dev --no-install-project
+      uv sync --locked --no-default-groups --no-install-project
   
-  # Copy source and install project
+  # Install project
+  COPY README.md LICENSE .
   COPY pkfire/ ./pkfire/
-  RUN --mount=type=cache,target=/root/.cache/uv \
-      uv sync --no-dev --no-editable
+  ARG UV_DYNAMIC_VERSIONING_BYPASS=0.0.0
+  RUN uv sync --locked --no-default-groups --no-editable
   
   FROM python:3.13-slim
+  
+  LABEL org.opencontainers.image.licenses="MIT"
   
   COPY --from=builder /app/.venv /app/.venv
   
   RUN useradd --no-create-home --shell /bin/false app
   USER app
   
-  CMD ["/app/.venv/bin/python", "-m", "pkfire"]
+  ENV PATH="/app/.venv/bin:$PATH"
+  ENV PYTHONUNBUFFERED=1
+  
+  CMD ["python", "-m", "pkfire"]
   
   '''
 # ---
@@ -36,24 +42,30 @@
   
   WORKDIR /app
   
-  # Install dependencies first (cached layer, only invalidated by pyproject.toml changes)
-  COPY pyproject.toml README.md .
+  # Install dependencies
+  COPY pyproject.toml uv.lock .
   RUN --mount=type=cache,target=/root/.cache/uv \
-      uv sync --no-dev --no-install-project
+      uv sync --locked --no-default-groups --no-install-project
   
-  # Copy source and install project
+  # Install project
+  COPY README.md LICENSE .
   COPY pkfire/ ./pkfire/
-  RUN --mount=type=cache,target=/root/.cache/uv \
-      uv sync --no-dev --no-editable
+  ARG UV_DYNAMIC_VERSIONING_BYPASS=0.0.0
+  RUN uv sync --locked --no-default-groups --no-editable
   
   FROM python:3.13-slim
+  
+  LABEL org.opencontainers.image.licenses="MIT"
   
   COPY --from=builder /app/.venv /app/.venv
   
   RUN useradd --no-create-home --shell /bin/false app
   USER app
   
-  CMD ["/app/.venv/bin/python", "-m", "pkfire"]
+  ENV PATH="/app/.venv/bin:$PATH"
+  ENV PYTHONUNBUFFERED=1
+  
+  CMD ["python", "-m", "pkfire"]
   
   '''
 # ---
@@ -65,24 +77,30 @@
   
   WORKDIR /app
   
-  # Install dependencies first (cached layer, only invalidated by pyproject.toml changes)
-  COPY pyproject.toml README.md .
+  # Install dependencies
+  COPY pyproject.toml uv.lock .
   RUN --mount=type=cache,target=/root/.cache/uv \
-      uv sync --no-dev --no-install-project
+      uv sync --locked --no-default-groups --no-install-project
   
-  # Copy source and install project
+  # Install project
+  COPY README.md LICENSE .
   COPY pkfire/ ./pkfire/
-  RUN --mount=type=cache,target=/root/.cache/uv \
-      uv sync --no-dev --no-editable
+  ARG UV_DYNAMIC_VERSIONING_BYPASS=0.0.0
+  RUN uv sync --locked --no-default-groups --no-editable
   
   FROM python:3.15-slim
+  
+  LABEL org.opencontainers.image.licenses="MIT"
   
   COPY --from=builder /app/.venv /app/.venv
   
   RUN useradd --no-create-home --shell /bin/false app
   USER app
   
-  CMD ["/app/.venv/bin/python", "-m", "pkfire"]
+  ENV PATH="/app/.venv/bin:$PATH"
+  ENV PYTHONUNBUFFERED=1
+  
+  CMD ["python", "-m", "pkfire"]
   
   '''
 # ---
@@ -94,24 +112,30 @@
   
   WORKDIR /app
   
-  # Install dependencies first (cached layer, only invalidated by pyproject.toml changes)
-  COPY pyproject.toml README.md .
+  # Install dependencies
+  COPY pyproject.toml uv.lock .
   RUN --mount=type=cache,target=/root/.cache/uv \
-      uv sync --no-dev --no-install-project
+      uv sync --locked --no-default-groups --no-install-project
   
-  # Copy source and install project
+  # Install project
+  COPY README.md LICENSE .
   COPY pkfire/ ./pkfire/
-  RUN --mount=type=cache,target=/root/.cache/uv \
-      uv sync --no-dev --no-editable
+  ARG UV_DYNAMIC_VERSIONING_BYPASS=0.0.0
+  RUN uv sync --locked --no-default-groups --no-editable
   
   FROM python:3.15-slim
+  
+  LABEL org.opencontainers.image.licenses="MIT"
   
   COPY --from=builder /app/.venv /app/.venv
   
   RUN useradd --no-create-home --shell /bin/false app
   USER app
   
-  CMD ["/app/.venv/bin/python", "-m", "pkfire"]
+  ENV PATH="/app/.venv/bin:$PATH"
+  ENV PYTHONUNBUFFERED=1
+  
+  CMD ["python", "-m", "pkfire"]
   
   '''
 # ---
@@ -123,24 +147,30 @@
   
   WORKDIR /app
   
-  # Install dependencies first (cached layer, only invalidated by pyproject.toml changes)
-  COPY pyproject.toml README.md .
+  # Install dependencies
+  COPY pyproject.toml uv.lock .
   RUN --mount=type=cache,target=/root/.cache/uv \
-      uv sync --no-dev --no-install-project
+      uv sync --locked --no-default-groups --no-install-project
   
-  # Copy source and install project
+  # Install project
+  COPY README.md LICENSE .
   COPY pkfire/ ./pkfire/
-  RUN --mount=type=cache,target=/root/.cache/uv \
-      uv sync --no-dev --no-editable
+  ARG UV_DYNAMIC_VERSIONING_BYPASS=0.0.0
+  RUN uv sync --locked --no-default-groups --no-editable
   
   FROM python:3.15-slim
+  
+  LABEL org.opencontainers.image.licenses="MIT"
   
   COPY --from=builder /app/.venv /app/.venv
   
   RUN useradd --no-create-home --shell /bin/false app
   USER app
   
-  CMD ["/app/.venv/bin/python", "-m", "pkfire"]
+  ENV PATH="/app/.venv/bin:$PATH"
+  ENV PYTHONUNBUFFERED=1
+  
+  CMD ["python", "-m", "pkfire"]
   
   '''
 # ---
@@ -152,24 +182,30 @@
   
   WORKDIR /app
   
-  # Install dependencies first (cached layer, only invalidated by pyproject.toml changes)
-  COPY pyproject.toml README.md .
+  # Install dependencies
+  COPY pyproject.toml uv.lock .
   RUN --mount=type=cache,target=/root/.cache/uv \
-      uv sync --no-dev --no-install-project
+      uv sync --locked --no-default-groups --no-install-project
   
-  # Copy source and install project
+  # Install project
+  COPY README.md LICENSE .
   COPY pkfire/ ./pkfire/
-  RUN --mount=type=cache,target=/root/.cache/uv \
-      uv sync --no-dev --no-editable
+  ARG UV_DYNAMIC_VERSIONING_BYPASS=0.0.0
+  RUN uv sync --locked --no-default-groups --no-editable
   
   FROM python:3.15-slim
+  
+  LABEL org.opencontainers.image.licenses="MIT"
   
   COPY --from=builder /app/.venv /app/.venv
   
   RUN useradd --no-create-home --shell /bin/false app
   USER app
   
-  CMD ["/app/.venv/bin/python", "-m", "pkfire"]
+  ENV PATH="/app/.venv/bin:$PATH"
+  ENV PYTHONUNBUFFERED=1
+  
+  CMD ["python", "-m", "pkfire"]
   
   '''
 # ---

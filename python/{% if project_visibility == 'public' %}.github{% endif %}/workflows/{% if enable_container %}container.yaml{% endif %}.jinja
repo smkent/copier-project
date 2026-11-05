@@ -15,60 +15,52 @@ push:
 {% endblock %}
 
 {% block jobs %}
-build-push:
-  name: Build and push image
+version:
+  name: Version
   runs-on: ubuntu-latest
-  timeout-minutes: 15
-  permissions:
-    packages: write
-    contents: read
-    attestations: write
-    id-token: write
+  timeout-minutes: 5
+  outputs:
+    version: {% raw %}${{ steps.version.outputs.version }}{% endraw %}
   steps:
-    {{ ci.step_checkout() | indent(4) }}
+    {{ ci.step_checkout(full_history=true) | indent(4) }}
 
-    - name: 🛠️ Set up buildx
-      uses: docker/setup-buildx-action@v4
-      with:
-        cache-binary: {% raw %}${{ !startsWith(github.ref, 'refs/tags/') }}{% endraw %}
+    - name: 🏷️ Determine project version
+      id: version
+      run: |
+        pip install --quiet uv
+        version="$(uvx uv-dynamic-versioning)"
+        echo "version=${version}" >> "${GITHUB_OUTPUT}"
 
-    - name: 🔑 Log in to the container registry
-      uses: docker/login-action@v4
-      if: {% raw %}${{ github.event_name != 'pull_request' }}{% endraw %}
-      with:
-        registry: ghcr.io
+image:
+  name: Image
+  needs: version
+  uses: docker/github-builder/.github/workflows/build.yml@v1
+  permissions:
+    contents: read
+    packages: write
+    id-token: write
+  with:
+    output: image
+    push: {% raw %}${{ github.event_name != 'pull_request' }}{% endraw %}
+    platforms: linux/amd64,linux/arm64
+    cache: true
+    cache-mode: max
+    set-meta-labels: true
+    meta-images: {% raw %}ghcr.io/${{ github.repository }}{% endraw %}
+    meta-labels: |
+      org.opencontainers.image.licenses={{ copyright_license }}
+    meta-tags: |
+      type=ref,event=branch
+      {% raw %}type=semver,pattern={{version}}
+      type=semver,pattern={{major}}.{{minor}}
+      type=semver,pattern={{major}}{% endraw %}
+      type=sha
+    build-args: |
+      UV_DYNAMIC_VERSIONING_BYPASS={% raw %}${{ needs.version.outputs.version }}{% endraw %}
+  secrets:
+    registry-auths: |
+      - registry: ghcr.io
         username: {% raw %}${{ github.actor }}{% endraw %}
         password: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
-
-    - name: 📡 Collect image metadata
-      uses: docker/metadata-action@v6
-      id: meta
-      with:
-        images: {% raw %}ghcr.io/${{ github.repository }}{% endraw %}
-        tags: |
-          type=ref,event=branch
-          {% raw %}type=semver,pattern={{version}}
-          type=semver,pattern={{major}}.{{minor}}
-          type=semver,pattern={{major}}{% endraw %}
-          type=sha
-
-    - name: 📦 Build and publish container image
-      uses: docker/build-push-action@v7
-      id: push
-      with:
-        context: .
-        push: {% raw %}${{ github.event_name != 'pull_request' }}{% endraw %}
-        platforms: linux/amd64,linux/arm64
-        tags: {% raw %}${{ steps.meta.outputs.tags }}{% endraw %}
-        labels: {% raw %}${{ steps.meta.outputs.labels }}{% endraw %}
-        cache-from: {% raw %}${{ !startsWith(github.ref, 'refs/tags/') && 'type=gha' || '' }}{% endraw %}
-        cache-to: type=gha,mode=max
-
-    - name: 🔒 Attest build provenance
-      uses: actions/attest-build-provenance@v4
-      if: {% raw %}${{ github.event_name != 'pull_request' }}{% endraw %}
-      with:
-        subject-name: {% raw %}ghcr.io/${{ github.repository }}{% endraw %}
-        subject-digest: {% raw %}${{ steps.push.outputs.digest }}{% endraw %}
 {% endblock %}
 {#- vim: set ft=yaml: #}
