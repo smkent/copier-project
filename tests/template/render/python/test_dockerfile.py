@@ -19,7 +19,7 @@ if TYPE_CHECKING:
 @pytest.mark.parametrize(
     "python_version_maximum", template.python_versions.max_param
 )
-def test_workflows_container(
+def test_dockerfile(
     render_template: Callable[..., Path],
     snapshot: SnapshotAssertion,
     *,
