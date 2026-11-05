@@ -23,9 +23,10 @@
   RUN useradd --no-create-home --shell /bin/false app
   USER app
   
+  ENV PATH="/app/.venv/bin:$PATH"
   ENV PYTHONUNBUFFERED=1
   
-  CMD ["/app/.venv/bin/python", "-m", "pkfire"]
+  CMD ["python", "-m", "pkfire"]
   
   '''
 # ---
@@ -53,9 +54,10 @@
   RUN useradd --no-create-home --shell /bin/false app
   USER app
   
+  ENV PATH="/app/.venv/bin:$PATH"
   ENV PYTHONUNBUFFERED=1
   
-  CMD ["/app/.venv/bin/python", "-m", "pkfire"]
+  CMD ["python", "-m", "pkfire"]
   
   '''
 # ---
@@ -83,9 +85,10 @@
   RUN useradd --no-create-home --shell /bin/false app
   USER app
   
+  ENV PATH="/app/.venv/bin:$PATH"
   ENV PYTHONUNBUFFERED=1
   
-  CMD ["/app/.venv/bin/python", "-m", "pkfire"]
+  CMD ["python", "-m", "pkfire"]
   
   '''
 # ---
@@ -113,9 +116,10 @@
   RUN useradd --no-create-home --shell /bin/false app
   USER app
   
+  ENV PATH="/app/.venv/bin:$PATH"
   ENV PYTHONUNBUFFERED=1
   
-  CMD ["/app/.venv/bin/python", "-m", "pkfire"]
+  CMD ["python", "-m", "pkfire"]
   
   '''
 # ---
@@ -143,9 +147,10 @@
   RUN useradd --no-create-home --shell /bin/false app
   USER app
   
+  ENV PATH="/app/.venv/bin:$PATH"
   ENV PYTHONUNBUFFERED=1
   
-  CMD ["/app/.venv/bin/python", "-m", "pkfire"]
+  CMD ["python", "-m", "pkfire"]
   
   '''
 # ---
@@ -173,9 +178,10 @@
   RUN useradd --no-create-home --shell /bin/false app
   USER app
   
+  ENV PATH="/app/.venv/bin:$PATH"
   ENV PYTHONUNBUFFERED=1
   
-  CMD ["/app/.venv/bin/python", "-m", "pkfire"]
+  CMD ["python", "-m", "pkfire"]
   
   '''
 # ---
