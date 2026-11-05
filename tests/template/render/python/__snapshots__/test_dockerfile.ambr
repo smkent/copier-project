@@ -45,6 +45,7 @@
   # Install dependencies
   COPY pyproject.toml .
   RUN --mount=type=cache,target=/root/.cache/uv \
+      touch README.md && \
       uv sync --no-default-groups --no-install-project
   
   # Install project
@@ -115,6 +116,7 @@
   # Install dependencies
   COPY pyproject.toml .
   RUN --mount=type=cache,target=/root/.cache/uv \
+      touch README.md && \
       uv sync --no-default-groups --no-install-project
   
   # Install project
@@ -185,6 +187,7 @@
   # Install dependencies
   COPY pyproject.toml .
   RUN --mount=type=cache,target=/root/.cache/uv \
+      touch README.md && \
       uv sync --no-default-groups --no-install-project
   
   # Install project
@@ -255,6 +258,7 @@
   # Install dependencies
   COPY pyproject.toml .
   RUN --mount=type=cache,target=/root/.cache/uv \
+      touch README.md && \
       uv sync --no-default-groups --no-install-project
   
   # Install project
@@ -325,6 +329,7 @@
   # Install dependencies
   COPY pyproject.toml .
   RUN --mount=type=cache,target=/root/.cache/uv \
+      touch README.md && \
       uv sync --no-default-groups --no-install-project
   
   # Install project
@@ -395,6 +400,7 @@
   # Install dependencies
   COPY pyproject.toml .
   RUN --mount=type=cache,target=/root/.cache/uv \
+      touch README.md && \
       uv sync --no-default-groups --no-install-project
   
   # Install project

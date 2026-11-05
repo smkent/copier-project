@@ -12,6 +12,9 @@ WORKDIR /app
 # Install dependencies
 COPY pyproject.toml{% if project_type == "application" %} uv.lock{% endif %} .
 RUN --mount=type=cache,target=/root/.cache/uv \
+{%- if project_type != "application" %}
+    touch README.md && \
+{%- endif %}
     {{ uv_sync }} --no-install-project
 
 # Install project
