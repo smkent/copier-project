@@ -49,6 +49,11 @@ def test_structure(
         },
     )
     case.expect_if(
+        project_type == "application",
+        "pkfire/__main__.py",
+        "tests/test_main.py",
+    )
+    case.expect_if(
         project_visibility == "public",
         ".github/workflows/audit.yaml",
         ".github/workflows/ci.yaml",

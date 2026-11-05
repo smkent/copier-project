@@ -13,6 +13,7 @@ if TYPE_CHECKING:
     from syrupy.assertion import SnapshotAssertion
 
 
+@pytest.mark.parametrize("project_type", template.choices.project_type)
 @pytest.mark.parametrize(
     "project_visibility", template.choices.project_visibility
 )
@@ -34,6 +35,7 @@ if TYPE_CHECKING:
 def test_pyproject_features(
     render_template: Callable[..., Path],
     snapshot: SnapshotAssertion,
+    project_type: str,
     *,
     project_visibility: bool,
     python_version_minimum: str,
@@ -42,6 +44,7 @@ def test_pyproject_features(
     enable_xdist: bool,
 ) -> None:
     rendered = render_template(
+        project_type=project_type,
         project_visibility=project_visibility,
         python_version_minimum=python_version_minimum,
         enable_docs=enable_docs,
