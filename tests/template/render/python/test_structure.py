@@ -24,13 +24,6 @@ if TYPE_CHECKING:
     [pytest.param(True, id="pypi"), pytest.param(False, id="no_pypi")],
 )
 @pytest.mark.parametrize(
-    "enable_container",
-    [
-        pytest.param(True, id="container"),
-        pytest.param(False, id="no_container"),
-    ],
-)
-@pytest.mark.parametrize(
     "enable_docs",
     [pytest.param(True, id="docs"), pytest.param(False, id="no_docs")],
 )
@@ -41,7 +34,6 @@ def test_structure(
     *,
     enable_coverage: bool,
     enable_pypi: bool,
-    enable_container: bool,
     enable_docs: bool,
 ) -> None:
     case = StructureTestCase(
@@ -51,7 +43,6 @@ def test_structure(
         extra_data={
             "project_type": project_type,
             "project_visibility": project_visibility,
-            "enable_container": enable_container,
             "enable_coverage": enable_coverage,
             "enable_pypi": enable_pypi,
             "enable_docs": enable_docs,
@@ -66,16 +57,6 @@ def test_structure(
     case.expect_if(
         project_visibility == "public" and enable_pypi,
         ".github/workflows/release.yaml",
-    )
-    case.expect_if(
-        enable_container,
-        "Dockerfile",
-        ".dockerignore",
-    )
-    case.expect_if(
-        project_visibility == "public" and enable_container,
-        ".github/workflows/container.yaml",
-        ".github/workflows/ghcr.yaml",
     )
     case.expect_if(
         enable_docs,
@@ -94,9 +75,6 @@ def test_structure(
         "docs/contributing.md",
         "docs/setup.md",
         "docs/releasing.md",
-    )
-    case.expect_if(
-        project_type == "application" and enable_container, "compose.yaml"
     )
     structure_test(case)
 
@@ -147,4 +125,45 @@ def test_structure_contributing(
             project_visibility == "public", ".github/commit-check.toml"
         )
         case.expect_if(project_visibility == "private", "commit-check.toml")
+    structure_test(case)
+
+
+@pytest.mark.parametrize(
+    ("project_type", "enable_container"),
+    [
+        pytest.param("application", False, id="application-no_container"),
+        pytest.param("application", True, id="application-container"),
+        pytest.param("library", False, id="library"),
+    ],
+)
+@pytest.mark.parametrize(
+    "project_visibility", template.choices.project_visibility
+)
+def test_structure_container(
+    structure_test: StructureTest,
+    project_type: str,
+    project_visibility: str,
+    *,
+    enable_container: bool,
+) -> None:
+    case = StructureTestCase(
+        expected_present={"pkfire/py.typed"},
+        extra_data={
+            "project_type": project_type,
+            "project_visibility": project_visibility,
+            **(
+                {"enable_container": enable_container}
+                if project_type == "application"
+                else {}
+            ),
+        },
+    )
+    case.expect_if(
+        enable_container, ".dockerignore", "Dockerfile", "compose.yaml"
+    )
+    case.expect_if(
+        project_visibility == "public" and enable_container,
+        ".github/workflows/container.yaml",
+        ".github/workflows/ghcr.yaml",
+    )
     structure_test(case)
