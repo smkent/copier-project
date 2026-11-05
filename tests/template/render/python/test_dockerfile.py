@@ -14,6 +14,7 @@ if TYPE_CHECKING:
     from syrupy.assertion import SnapshotAssertion
 
 
+@pytest.mark.parametrize("project_type", template.choices.project_type)
 @pytest.mark.parametrize(
     "python_version_minimum", template.python_versions.min_param
 )
@@ -24,10 +25,12 @@ def test_dockerfile(
     render_template: Callable[..., Path],
     snapshot: SnapshotAssertion,
     *,
+    project_type: str,
     python_version_minimum: str,
     python_version_maximum: str,
 ) -> None:
     rendered = render_template(
+        project_type=project_type,
         project_visibility="public",
         enable_container=True,
         python_version_minimum=python_version_minimum,
