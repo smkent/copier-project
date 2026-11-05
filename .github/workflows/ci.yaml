@@ -69,35 +69,7 @@ jobs:
         with:
           fail_ci_if_error: true
           use_pypi: true
-          version: 11.2.8
-
-  docs:
-    name: Documentation
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    steps:
-      - name: 💾 Check out repository
-        uses: actions/checkout@v7
-        with:
-          fetch-depth: 0
-          persist-credentials: false
-
-      - name: 📦 Cache uv managed packages
-        uses: actions/cache@v6
-        with:
-          path: ~/.cache/uv
-          key: uv-${{ runner.os }}-${{ hashFiles('pyproject.toml', 'uv.lock') }}
-          restore-keys: |
-            uv-${{ runner.os }}-
-
-      - name: 🍳 Set up mise
-        uses: jdx/mise-action@v5
-        with:
-          cache: true
-          install: true
-
-      - name: 📖 Build documentation
-        run: mise run docs-build
+          version: 11.3.2
 
   betterleaks:
     name: Secret scan
