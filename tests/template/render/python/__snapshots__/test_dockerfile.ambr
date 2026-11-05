@@ -14,8 +14,7 @@
   
   # Copy source and install project
   COPY pkfire/ ./pkfire/
-  RUN --mount=type=cache,target=/root/.cache/uv \
-      uv sync --locked --no-default-groups --no-editable
+  RUN uv sync --locked --no-default-groups --no-editable
   
   FROM python:3.13-slim
   
@@ -43,8 +42,7 @@
   
   # Copy source and install project
   COPY pkfire/ ./pkfire/
-  RUN --mount=type=cache,target=/root/.cache/uv \
-      uv sync --locked --no-default-groups --no-editable
+  RUN uv sync --locked --no-default-groups --no-editable
   
   FROM python:3.13-slim
   
@@ -72,8 +70,7 @@
   
   # Copy source and install project
   COPY pkfire/ ./pkfire/
-  RUN --mount=type=cache,target=/root/.cache/uv \
-      uv sync --locked --no-default-groups --no-editable
+  RUN uv sync --locked --no-default-groups --no-editable
   
   FROM python:3.15-slim
   
@@ -101,8 +98,7 @@
   
   # Copy source and install project
   COPY pkfire/ ./pkfire/
-  RUN --mount=type=cache,target=/root/.cache/uv \
-      uv sync --locked --no-default-groups --no-editable
+  RUN uv sync --locked --no-default-groups --no-editable
   
   FROM python:3.15-slim
   
@@ -130,8 +126,7 @@
   
   # Copy source and install project
   COPY pkfire/ ./pkfire/
-  RUN --mount=type=cache,target=/root/.cache/uv \
-      uv sync --locked --no-default-groups --no-editable
+  RUN uv sync --locked --no-default-groups --no-editable
   
   FROM python:3.15-slim
   
@@ -159,8 +154,7 @@
   
   # Copy source and install project
   COPY pkfire/ ./pkfire/
-  RUN --mount=type=cache,target=/root/.cache/uv \
-      uv sync --locked --no-default-groups --no-editable
+  RUN uv sync --locked --no-default-groups --no-editable
   
   FROM python:3.15-slim
   
