@@ -15,6 +15,7 @@
   # Install project
   COPY README.md LICENSE .
   COPY pkfire/ ./pkfire/
+  ARG UV_DYNAMIC_VERSIONING_BYPASS=0.0.0
   RUN uv sync --locked --no-default-groups --no-editable
   
   FROM python:3.13-slim
@@ -49,6 +50,7 @@
   # Install project
   COPY README.md LICENSE .
   COPY pkfire/ ./pkfire/
+  ARG UV_DYNAMIC_VERSIONING_BYPASS=0.0.0
   RUN uv sync --locked --no-default-groups --no-editable
   
   FROM python:3.13-slim
@@ -83,6 +85,7 @@
   # Install project
   COPY README.md LICENSE .
   COPY pkfire/ ./pkfire/
+  ARG UV_DYNAMIC_VERSIONING_BYPASS=0.0.0
   RUN uv sync --locked --no-default-groups --no-editable
   
   FROM python:3.15-slim
@@ -117,6 +120,7 @@
   # Install project
   COPY README.md LICENSE .
   COPY pkfire/ ./pkfire/
+  ARG UV_DYNAMIC_VERSIONING_BYPASS=0.0.0
   RUN uv sync --locked --no-default-groups --no-editable
   
   FROM python:3.15-slim
@@ -151,6 +155,7 @@
   # Install project
   COPY README.md LICENSE .
   COPY pkfire/ ./pkfire/
+  ARG UV_DYNAMIC_VERSIONING_BYPASS=0.0.0
   RUN uv sync --locked --no-default-groups --no-editable
   
   FROM python:3.15-slim
@@ -185,6 +190,7 @@
   # Install project
   COPY README.md LICENSE .
   COPY pkfire/ ./pkfire/
+  ARG UV_DYNAMIC_VERSIONING_BYPASS=0.0.0
   RUN uv sync --locked --no-default-groups --no-editable
   
   FROM python:3.15-slim

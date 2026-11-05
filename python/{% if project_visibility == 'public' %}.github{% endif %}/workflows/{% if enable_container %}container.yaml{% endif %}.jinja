@@ -15,8 +15,25 @@ push:
 {% endblock %}
 
 {% block jobs %}
+version:
+  name: Version
+  runs-on: ubuntu-latest
+  timeout-minutes: 5
+  outputs:
+    version: {% raw %}${{ steps.version.outputs.version }}{% endraw %}
+  steps:
+    {{ ci.step_checkout(full_history=true) | indent(4) }}
+
+    - name: 🏷️ Determine project version
+      id: version
+      run: |
+        pip install --quiet uv
+        version="$(uvx uv-dynamic-versioning)"
+        echo "version=${version}" >> "${GITHUB_OUTPUT}"
+
 build-push:
   name: Build and push image
+  needs: version
   runs-on: ubuntu-latest
   timeout-minutes: 15
   permissions:
@@ -63,6 +80,8 @@ build-push:
         platforms: linux/amd64,linux/arm64
         tags: {% raw %}${{ steps.meta.outputs.tags }}{% endraw %}
         labels: {% raw %}${{ steps.meta.outputs.labels }}{% endraw %}
+        build-args: |
+          UV_DYNAMIC_VERSIONING_BYPASS={% raw %}${{ needs.version.outputs.version }}{% endraw %}
         cache-from: {% raw %}${{ !startsWith(github.ref, 'refs/tags/') && 'type=gha' || '' }}{% endraw %}
         cache-to: type=gha,mode=max
 
