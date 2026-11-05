@@ -28,6 +28,11 @@ classifiers = [
 ]
 keywords = []
 dependencies = []
+{%- if project_type == 'application' %}
+
+[project.scripts]
+"{{ project_name }}" = "{{ project_slug }}.__main__:main"
+{%- endif %}
 {%- if project_visibility == 'public' %}
 
 [project.urls]
