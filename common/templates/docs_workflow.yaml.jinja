@@ -9,12 +9,9 @@ Docs
 push:
   branches:
     - main
+pull_request:
 workflow_dispatch:
 {% endblock %}
-
-{% block concurrency_cancel_in_progress -%}
-false
-{%- endblock %}
 
 {% block jobs %}
 build:
@@ -37,6 +34,7 @@ build:
 deploy:
   name: Deploy Documentation
   needs: build
+  if: {% raw %}${{ github.ref == 'refs/heads/main' }}{% endraw %}
   runs-on: ubuntu-latest
   timeout-minutes: 15
   environment:
