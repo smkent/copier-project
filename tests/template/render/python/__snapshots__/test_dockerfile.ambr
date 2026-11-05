@@ -7,15 +7,15 @@
   
   WORKDIR /app
   
-  # Install dependencies first (cached layer, only invalidated by pyproject.toml changes)
-  COPY pyproject.toml README.md .
+  # Install dependencies
+  COPY pyproject.toml README.md uv.lock .
   RUN --mount=type=cache,target=/root/.cache/uv \
-      uv sync --no-dev --no-install-project
+      uv sync --locked --no-dev --no-install-project
   
   # Copy source and install project
   COPY pkfire/ ./pkfire/
   RUN --mount=type=cache,target=/root/.cache/uv \
-      uv sync --no-dev --no-editable
+      uv sync --locked --no-dev --no-editable
   
   FROM python:3.13-slim
   
@@ -36,15 +36,15 @@
   
   WORKDIR /app
   
-  # Install dependencies first (cached layer, only invalidated by pyproject.toml changes)
-  COPY pyproject.toml README.md .
+  # Install dependencies
+  COPY pyproject.toml README.md uv.lock .
   RUN --mount=type=cache,target=/root/.cache/uv \
-      uv sync --no-dev --no-install-project
+      uv sync --locked --no-dev --no-install-project
   
   # Copy source and install project
   COPY pkfire/ ./pkfire/
   RUN --mount=type=cache,target=/root/.cache/uv \
-      uv sync --no-dev --no-editable
+      uv sync --locked --no-dev --no-editable
   
   FROM python:3.13-slim
   
@@ -65,15 +65,15 @@
   
   WORKDIR /app
   
-  # Install dependencies first (cached layer, only invalidated by pyproject.toml changes)
-  COPY pyproject.toml README.md .
+  # Install dependencies
+  COPY pyproject.toml README.md uv.lock .
   RUN --mount=type=cache,target=/root/.cache/uv \
-      uv sync --no-dev --no-install-project
+      uv sync --locked --no-dev --no-install-project
   
   # Copy source and install project
   COPY pkfire/ ./pkfire/
   RUN --mount=type=cache,target=/root/.cache/uv \
-      uv sync --no-dev --no-editable
+      uv sync --locked --no-dev --no-editable
   
   FROM python:3.15-slim
   
@@ -94,15 +94,15 @@
   
   WORKDIR /app
   
-  # Install dependencies first (cached layer, only invalidated by pyproject.toml changes)
-  COPY pyproject.toml README.md .
+  # Install dependencies
+  COPY pyproject.toml README.md uv.lock .
   RUN --mount=type=cache,target=/root/.cache/uv \
-      uv sync --no-dev --no-install-project
+      uv sync --locked --no-dev --no-install-project
   
   # Copy source and install project
   COPY pkfire/ ./pkfire/
   RUN --mount=type=cache,target=/root/.cache/uv \
-      uv sync --no-dev --no-editable
+      uv sync --locked --no-dev --no-editable
   
   FROM python:3.15-slim
   
@@ -123,15 +123,15 @@
   
   WORKDIR /app
   
-  # Install dependencies first (cached layer, only invalidated by pyproject.toml changes)
-  COPY pyproject.toml README.md .
+  # Install dependencies
+  COPY pyproject.toml README.md uv.lock .
   RUN --mount=type=cache,target=/root/.cache/uv \
-      uv sync --no-dev --no-install-project
+      uv sync --locked --no-dev --no-install-project
   
   # Copy source and install project
   COPY pkfire/ ./pkfire/
   RUN --mount=type=cache,target=/root/.cache/uv \
-      uv sync --no-dev --no-editable
+      uv sync --locked --no-dev --no-editable
   
   FROM python:3.15-slim
   
@@ -152,15 +152,15 @@
   
   WORKDIR /app
   
-  # Install dependencies first (cached layer, only invalidated by pyproject.toml changes)
-  COPY pyproject.toml README.md .
+  # Install dependencies
+  COPY pyproject.toml README.md uv.lock .
   RUN --mount=type=cache,target=/root/.cache/uv \
-      uv sync --no-dev --no-install-project
+      uv sync --locked --no-dev --no-install-project
   
   # Copy source and install project
   COPY pkfire/ ./pkfire/
   RUN --mount=type=cache,target=/root/.cache/uv \
-      uv sync --no-dev --no-editable
+      uv sync --locked --no-dev --no-editable
   
   FROM python:3.15-slim
   
