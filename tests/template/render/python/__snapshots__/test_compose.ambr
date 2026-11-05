@@ -4,6 +4,7 @@
   services:
     PKFire:
       build: .
+      init: true
       restart: unless-stopped
   
   '''
@@ -13,6 +14,7 @@
   services:
     PKFire:
       image: ghcr.io/ness/PKFire:latest
+      init: true
       restart: unless-stopped
   
   '''

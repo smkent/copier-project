@@ -5,5 +5,6 @@ services:
 {%- else %}
     build: .
 {%- endif %}
+    init: true
     restart: unless-stopped
 {#- vim: set ft=yaml: #}
