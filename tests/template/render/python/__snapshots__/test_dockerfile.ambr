@@ -8,15 +8,18 @@
   WORKDIR /app
   
   # Install dependencies
-  COPY pyproject.toml README.md uv.lock .
+  COPY pyproject.toml uv.lock .
   RUN --mount=type=cache,target=/root/.cache/uv \
       uv sync --locked --no-default-groups --no-install-project
   
-  # Copy source and install project
+  # Install project
+  COPY README.md LICENSE .
   COPY pkfire/ ./pkfire/
   RUN uv sync --locked --no-default-groups --no-editable
   
   FROM python:3.13-slim
+  
+  LABEL org.opencontainers.image.licenses="MIT"
   
   COPY --from=builder /app/.venv /app/.venv
   
@@ -39,15 +42,18 @@
   WORKDIR /app
   
   # Install dependencies
-  COPY pyproject.toml README.md uv.lock .
+  COPY pyproject.toml uv.lock .
   RUN --mount=type=cache,target=/root/.cache/uv \
       uv sync --locked --no-default-groups --no-install-project
   
-  # Copy source and install project
+  # Install project
+  COPY README.md LICENSE .
   COPY pkfire/ ./pkfire/
   RUN uv sync --locked --no-default-groups --no-editable
   
   FROM python:3.13-slim
+  
+  LABEL org.opencontainers.image.licenses="MIT"
   
   COPY --from=builder /app/.venv /app/.venv
   
@@ -70,15 +76,18 @@
   WORKDIR /app
   
   # Install dependencies
-  COPY pyproject.toml README.md uv.lock .
+  COPY pyproject.toml uv.lock .
   RUN --mount=type=cache,target=/root/.cache/uv \
       uv sync --locked --no-default-groups --no-install-project
   
-  # Copy source and install project
+  # Install project
+  COPY README.md LICENSE .
   COPY pkfire/ ./pkfire/
   RUN uv sync --locked --no-default-groups --no-editable
   
   FROM python:3.15-slim
+  
+  LABEL org.opencontainers.image.licenses="MIT"
   
   COPY --from=builder /app/.venv /app/.venv
   
@@ -101,15 +110,18 @@
   WORKDIR /app
   
   # Install dependencies
-  COPY pyproject.toml README.md uv.lock .
+  COPY pyproject.toml uv.lock .
   RUN --mount=type=cache,target=/root/.cache/uv \
       uv sync --locked --no-default-groups --no-install-project
   
-  # Copy source and install project
+  # Install project
+  COPY README.md LICENSE .
   COPY pkfire/ ./pkfire/
   RUN uv sync --locked --no-default-groups --no-editable
   
   FROM python:3.15-slim
+  
+  LABEL org.opencontainers.image.licenses="MIT"
   
   COPY --from=builder /app/.venv /app/.venv
   
@@ -132,15 +144,18 @@
   WORKDIR /app
   
   # Install dependencies
-  COPY pyproject.toml README.md uv.lock .
+  COPY pyproject.toml uv.lock .
   RUN --mount=type=cache,target=/root/.cache/uv \
       uv sync --locked --no-default-groups --no-install-project
   
-  # Copy source and install project
+  # Install project
+  COPY README.md LICENSE .
   COPY pkfire/ ./pkfire/
   RUN uv sync --locked --no-default-groups --no-editable
   
   FROM python:3.15-slim
+  
+  LABEL org.opencontainers.image.licenses="MIT"
   
   COPY --from=builder /app/.venv /app/.venv
   
@@ -163,15 +178,18 @@
   WORKDIR /app
   
   # Install dependencies
-  COPY pyproject.toml README.md uv.lock .
+  COPY pyproject.toml uv.lock .
   RUN --mount=type=cache,target=/root/.cache/uv \
       uv sync --locked --no-default-groups --no-install-project
   
-  # Copy source and install project
+  # Install project
+  COPY README.md LICENSE .
   COPY pkfire/ ./pkfire/
   RUN uv sync --locked --no-default-groups --no-editable
   
   FROM python:3.15-slim
+  
+  LABEL org.opencontainers.image.licenses="MIT"
   
   COPY --from=builder /app/.venv /app/.venv
   

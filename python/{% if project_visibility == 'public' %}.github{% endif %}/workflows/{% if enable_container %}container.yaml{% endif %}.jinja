@@ -51,6 +51,8 @@ build-push:
           type=semver,pattern={{major}}.{{minor}}
           type=semver,pattern={{major}}{% endraw %}
           type=sha
+        labels: |
+          org.opencontainers.image.licenses={{ copyright_license }}
 
     - name: 📦 Build and publish container image
       uses: docker/build-push-action@v7

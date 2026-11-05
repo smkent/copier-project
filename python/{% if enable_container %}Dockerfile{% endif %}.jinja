@@ -1,3 +1,4 @@
+{%- import "common/license.jinja" as license with context -%}
 {%- import "common/python.jinja" as py with context -%}
 FROM python:{{ py.latest() }}-slim AS builder
 
@@ -6,15 +7,18 @@ COPY --from=ghcr.io/astral-sh/uv /uv /uvx /bin/
 WORKDIR /app
 
 # Install dependencies
-COPY pyproject.toml README.md uv.lock .
+COPY pyproject.toml uv.lock .
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --locked --no-default-groups --no-install-project
 
-# Copy source and install project
+# Install project
+COPY README.md {{ license.files | join(' ') }} .
 COPY {{ project_slug }}/ ./{{ project_slug }}/
 RUN uv sync --locked --no-default-groups --no-editable
 
 FROM python:{{ py.latest() }}-slim
+
+LABEL org.opencontainers.image.licenses="{{ copyright_license }}"
 
 COPY --from=builder /app/.venv /app/.venv
 
