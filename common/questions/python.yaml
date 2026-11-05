@@ -62,7 +62,7 @@ enable_container:
   qmark: 📦
   help: Enable Docker container{% if project_visibility == 'public' %} build and publishing to ghcr.io{% endif %}?
   default: "{{ project_type == 'application' }}"
-  when: "{{ template_variant == 'python' }}"
+  when: "{{ template_variant == 'python' and project_type == 'application' }}"
 
 enable_features:
   type: str
