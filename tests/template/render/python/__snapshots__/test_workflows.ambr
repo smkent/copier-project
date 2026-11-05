@@ -125,7 +125,7 @@
           with:
             fail_ci_if_error: true
             use_pypi: true
-            version: 11.2.8
+            version: 11.3.2
   
     docs:
       name: Documentation
@@ -411,7 +411,7 @@
           with:
             fail_ci_if_error: true
             use_pypi: true
-            version: 11.2.8
+            version: 11.3.2
   
     betterleaks:
       name: Secret scan
@@ -639,7 +639,7 @@
           with:
             fail_ci_if_error: true
             use_pypi: true
-            version: 11.2.8
+            version: 11.3.2
   
     docs:
       name: Documentation
@@ -784,7 +784,7 @@
           with:
             fail_ci_if_error: true
             use_pypi: true
-            version: 11.2.8
+            version: 11.3.2
   
     docs:
       name: Documentation
@@ -933,7 +933,7 @@
           with:
             fail_ci_if_error: true
             use_pypi: true
-            version: 11.2.8
+            version: 11.3.2
   
     docs:
       name: Documentation
@@ -1080,7 +1080,7 @@
           with:
             fail_ci_if_error: true
             use_pypi: true
-            version: 11.2.8
+            version: 11.3.2
   
     docs:
       name: Documentation
@@ -1229,7 +1229,7 @@
           with:
             fail_ci_if_error: true
             use_pypi: true
-            version: 11.2.8
+            version: 11.3.2
   
     docs:
       name: Documentation
@@ -1376,7 +1376,7 @@
           with:
             fail_ci_if_error: true
             use_pypi: true
-            version: 11.2.8
+            version: 11.3.2
   
     docs:
       name: Documentation
