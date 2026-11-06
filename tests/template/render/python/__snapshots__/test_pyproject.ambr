@@ -309,7 +309,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -446,7 +446,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -839,7 +839,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -972,7 +972,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -1375,7 +1375,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -1511,7 +1511,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -1901,7 +1901,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -2033,7 +2033,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -2439,7 +2439,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -2577,7 +2577,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -2973,7 +2973,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -3107,7 +3107,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -3513,7 +3513,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -3650,7 +3650,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -4043,7 +4043,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -4176,7 +4176,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -4587,7 +4587,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -4727,7 +4727,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -5129,7 +5129,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -5265,7 +5265,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -5677,7 +5677,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -5816,7 +5816,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -6215,7 +6215,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -6350,7 +6350,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -6765,7 +6765,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -6906,7 +6906,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -7311,7 +7311,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -7448,7 +7448,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -7863,7 +7863,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -8003,7 +8003,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -8405,7 +8405,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -8541,7 +8541,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -8684,7 +8684,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -8828,7 +8828,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -8972,7 +8972,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -9116,7 +9116,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -9260,7 +9260,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -9404,7 +9404,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -9548,7 +9548,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -9692,7 +9692,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -9836,7 +9836,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -9980,7 +9980,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -10124,7 +10124,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -10268,7 +10268,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -10412,7 +10412,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -10554,7 +10554,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -10694,7 +10694,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -10838,7 +10838,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -10980,7 +10980,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -11124,7 +11124,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
@@ -11266,7 +11266,7 @@
   dev = [
     "bump-my-version>=1.3.0",
     "commit-check>=2.18",
-    "pysentry-rs>=0.4",
+    "pysentry-rs>=0.5",
     "pytest>=9,<9.2",
     "pytest-cov>=7",
     "pytest-sugar>=1",
