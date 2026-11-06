@@ -52,7 +52,7 @@ dev = [
   "commit-check>=2.18",
 {%- endif %}
 {%- if project_visibility == 'public' %}
-  "pysentry-rs>=0.4",
+  "pysentry-rs>=0.5",
 {%- endif %}
   "pytest>=9,<9.2",
   "pytest-cov>=7",
@@ -60,11 +60,11 @@ dev = [
 {%- if "xdist" in enable_features %}
   "pytest-xdist>=3",
 {%- endif %}
-  "ruff>=0.15",
+  "ruff>=0.17",
 {%- if "syrupy" in enable_features %}
   "syrupy>=5",
 {%- endif %}
-  "ty>=0.0.49",
+  "ty>=0.0.84",
 ]
 {%- if enable_docs %}
 docs = ["mkdocstrings[python]>=1", "zensical>=0.1"]
