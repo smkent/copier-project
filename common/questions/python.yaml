@@ -46,7 +46,7 @@ python_version_maximum:
 enable_coverage:
   type: bool
   qmark: 📊
-  help: Enable coverage.io reports?
+  help: Enable code coverage reports with codecov.io?
   default: "{{ project_visibility == 'public' }}"
   when: "{{ template_variant == 'python' and project_visibility == 'public' }}"
 
