@@ -29,7 +29,7 @@ copier copy "gh:smkent/copier-project" /new/project/path
 The **Generic** project variant is a language-agnostic project template with
 features common to all project variants:
 
-* [**mise-en-place**][mise] ("mise") for development toolchain management
+* [**mise-en-place**][mise] for development toolchain management
 
     [![mise][mise-badge]][mise]
 
