@@ -21,6 +21,12 @@ icon: lucide/settings
 
 [Repository Settings → General][github-settings-docs]:
 
+**Releases**
+
+- [x] Enable release immutability
+
+**Pull Requests**
+
 - [x] Allow merge commits
 - [x] Allow squash merging
 - [ ] Allow rebase merging
