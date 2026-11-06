@@ -1,5 +1,62 @@
 # serializer version: 1
-# name: test_workflows_audit
+# name: test_workflows_audit[application]
+  '''
+  name: Audit
+  
+  on:
+    push:
+      branches:
+        - main
+      paths:
+        - pyproject.toml
+        - uv.lock
+    pull_request:
+      paths:
+        - pyproject.toml
+        - uv.lock
+  
+  permissions:
+    contents: read
+  
+  concurrency:
+    group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+    cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  
+  env:
+    UV_LOCKED: 1
+    UV_PYTHON: '3.15'
+  
+  jobs:
+    audit:
+      name: Dependencies
+      runs-on: ubuntu-latest
+      timeout-minutes: 15
+      steps:
+        - name: 💾 Check out repository
+          uses: actions/checkout@v7
+          with:
+            persist-credentials: false
+  
+        - name: 📦 Cache uv managed packages
+          uses: actions/cache@v6
+          with:
+            path: ~/.cache/uv
+            key: uv-${{ runner.os }}-${{ hashFiles('pyproject.toml', 'uv.lock') }}
+            restore-keys: |
+              uv-${{ runner.os }}-
+  
+        - name: 🍳 Set up mise
+          uses: jdx/mise-action@v5
+          with:
+            cache: true
+            install: true
+  
+        - name: 🔍 Check dependencies
+          run: mise run audit
+  
+  '''
+# ---
+# name: test_workflows_audit[library]
   '''
   name: Audit
   
@@ -55,7 +112,157 @@
   
   '''
 # ---
-# name: test_workflows_ci[docs-coverage]
+# name: test_workflows_ci[docs-coverage-application]
+  '''
+  name: CI
+  
+  on:
+    push:
+      branches:
+        - main
+    pull_request:
+  
+  permissions:
+    contents: read
+  
+  concurrency:
+    group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+    cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  
+  env:
+    UV_LOCKED: 1
+    UV_PYTHON: '3.15'
+  
+  jobs:
+    ci:
+      name: Test (Python ${{ matrix.python-version }})
+      runs-on: ubuntu-latest
+      timeout-minutes: 15
+      env:
+        UV_PYTHON: ${{ matrix.python-version }}
+      strategy:
+        fail-fast: false
+        matrix:
+          python-version:
+            - '3.11'
+            - '3.12'
+            - '3.13'
+            - '3.14'
+            - '3.15'
+      steps:
+        - name: 💾 Check out repository
+          uses: actions/checkout@v7
+          with:
+            persist-credentials: false
+  
+        - name: 📦 Cache uv managed packages
+          uses: actions/cache@v6
+          with:
+            path: ~/.cache/uv
+            key: uv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('pyproject.toml', 'uv.lock') }}
+            restore-keys: |
+              uv-${{ runner.os }}-${{ matrix.python-version }}-
+  
+        - name: 🍳 Set up mise
+          uses: jdx/mise-action@v5
+          with:
+            cache: true
+            install: true
+  
+        - name: 📐 Lint
+          run: mise run lint
+  
+        - name: 🔥 Test
+          run: mise run test
+  
+        - name: 🔍 Collect coverage results
+          run: uv run coverage xml
+          if: ${{ matrix.python-version == '3.15' }}
+  
+        - name: 📊 Upload coverage to Codecov
+          uses: codecov/codecov-action@v7
+          if: ${{ matrix.python-version == '3.15' }}
+          with:
+            fail_ci_if_error: true
+            use_pypi: true
+            version: 11.3.2
+  
+    docs:
+      name: Documentation
+      runs-on: ubuntu-latest
+      timeout-minutes: 15
+      steps:
+        - name: 💾 Check out repository
+          uses: actions/checkout@v7
+          with:
+            fetch-depth: 0
+            persist-credentials: false
+  
+        - name: 📦 Cache uv managed packages
+          uses: actions/cache@v6
+          with:
+            path: ~/.cache/uv
+            key: uv-${{ runner.os }}-${{ hashFiles('pyproject.toml', 'uv.lock') }}
+            restore-keys: |
+              uv-${{ runner.os }}-
+  
+        - name: 🍳 Set up mise
+          uses: jdx/mise-action@v5
+          with:
+            cache: true
+            install: true
+  
+        - name: 📖 Build documentation
+          run: mise run docs-build
+  
+    betterleaks:
+      name: Secret scan
+      runs-on: ubuntu-latest
+      timeout-minutes: 15
+      steps:
+        - name: 💾 Check out repository
+          uses: actions/checkout@v7
+          with:
+            fetch-depth: 0
+            persist-credentials: false
+  
+        - name: 📦 Cache uv managed packages
+          uses: actions/cache@v6
+          with:
+            path: ~/.cache/uv
+            key: uv-${{ runner.os }}-${{ hashFiles('pyproject.toml', 'uv.lock') }}
+            restore-keys: |
+              uv-${{ runner.os }}-
+  
+        - name: 🍳 Set up mise
+          uses: jdx/mise-action@v5
+          with:
+            cache: true
+            install: true
+  
+        - name: 🔍 Check for secrets
+          run: mise run secretscan
+  
+    commit-messages:
+      name: Commit messages
+      if: ${{ github.event_name == 'pull_request' }}
+      runs-on: ubuntu-latest
+      timeout-minutes: 15
+      steps:
+        - name: 💾 Check out repository
+          uses: actions/checkout@v7
+          with:
+            fetch-depth: 0
+            persist-credentials: false
+  
+        - name: ✉️ Check commit messages
+          uses: commit-check/commit-check-action@v2
+          with:
+            branch: false
+  
+  '''
+# ---
+# name: test_workflows_ci[docs-coverage-library]
   '''
   name: CI
   
@@ -204,7 +411,145 @@
   
   '''
 # ---
-# name: test_workflows_ci[docs-no_coverage]
+# name: test_workflows_ci[docs-no_coverage-application]
+  '''
+  name: CI
+  
+  on:
+    push:
+      branches:
+        - main
+    pull_request:
+  
+  permissions:
+    contents: read
+  
+  concurrency:
+    group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+    cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  
+  env:
+    UV_LOCKED: 1
+    UV_PYTHON: '3.15'
+  
+  jobs:
+    ci:
+      name: Test (Python ${{ matrix.python-version }})
+      runs-on: ubuntu-latest
+      timeout-minutes: 15
+      env:
+        UV_PYTHON: ${{ matrix.python-version }}
+      strategy:
+        fail-fast: false
+        matrix:
+          python-version:
+            - '3.11'
+            - '3.12'
+            - '3.13'
+            - '3.14'
+            - '3.15'
+      steps:
+        - name: 💾 Check out repository
+          uses: actions/checkout@v7
+          with:
+            persist-credentials: false
+  
+        - name: 📦 Cache uv managed packages
+          uses: actions/cache@v6
+          with:
+            path: ~/.cache/uv
+            key: uv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('pyproject.toml', 'uv.lock') }}
+            restore-keys: |
+              uv-${{ runner.os }}-${{ matrix.python-version }}-
+  
+        - name: 🍳 Set up mise
+          uses: jdx/mise-action@v5
+          with:
+            cache: true
+            install: true
+  
+        - name: 📐 Lint
+          run: mise run lint
+  
+        - name: 🔥 Test
+          run: mise run test
+  
+    docs:
+      name: Documentation
+      runs-on: ubuntu-latest
+      timeout-minutes: 15
+      steps:
+        - name: 💾 Check out repository
+          uses: actions/checkout@v7
+          with:
+            fetch-depth: 0
+            persist-credentials: false
+  
+        - name: 📦 Cache uv managed packages
+          uses: actions/cache@v6
+          with:
+            path: ~/.cache/uv
+            key: uv-${{ runner.os }}-${{ hashFiles('pyproject.toml', 'uv.lock') }}
+            restore-keys: |
+              uv-${{ runner.os }}-
+  
+        - name: 🍳 Set up mise
+          uses: jdx/mise-action@v5
+          with:
+            cache: true
+            install: true
+  
+        - name: 📖 Build documentation
+          run: mise run docs-build
+  
+    betterleaks:
+      name: Secret scan
+      runs-on: ubuntu-latest
+      timeout-minutes: 15
+      steps:
+        - name: 💾 Check out repository
+          uses: actions/checkout@v7
+          with:
+            fetch-depth: 0
+            persist-credentials: false
+  
+        - name: 📦 Cache uv managed packages
+          uses: actions/cache@v6
+          with:
+            path: ~/.cache/uv
+            key: uv-${{ runner.os }}-${{ hashFiles('pyproject.toml', 'uv.lock') }}
+            restore-keys: |
+              uv-${{ runner.os }}-
+  
+        - name: 🍳 Set up mise
+          uses: jdx/mise-action@v5
+          with:
+            cache: true
+            install: true
+  
+        - name: 🔍 Check for secrets
+          run: mise run secretscan
+  
+    commit-messages:
+      name: Commit messages
+      if: ${{ github.event_name == 'pull_request' }}
+      runs-on: ubuntu-latest
+      timeout-minutes: 15
+      steps:
+        - name: 💾 Check out repository
+          uses: actions/checkout@v7
+          with:
+            fetch-depth: 0
+            persist-credentials: false
+  
+        - name: ✉️ Check commit messages
+          uses: commit-check/commit-check-action@v2
+          with:
+            branch: false
+  
+  '''
+# ---
+# name: test_workflows_ci[docs-no_coverage-library]
   '''
   name: CI
   
@@ -341,7 +686,129 @@
   
   '''
 # ---
-# name: test_workflows_ci[no_docs-coverage]
+# name: test_workflows_ci[no_docs-coverage-application]
+  '''
+  name: CI
+  
+  on:
+    push:
+      branches:
+        - main
+    pull_request:
+  
+  permissions:
+    contents: read
+  
+  concurrency:
+    group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+    cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  
+  env:
+    UV_LOCKED: 1
+    UV_PYTHON: '3.15'
+  
+  jobs:
+    ci:
+      name: Test (Python ${{ matrix.python-version }})
+      runs-on: ubuntu-latest
+      timeout-minutes: 15
+      env:
+        UV_PYTHON: ${{ matrix.python-version }}
+      strategy:
+        fail-fast: false
+        matrix:
+          python-version:
+            - '3.11'
+            - '3.12'
+            - '3.13'
+            - '3.14'
+            - '3.15'
+      steps:
+        - name: 💾 Check out repository
+          uses: actions/checkout@v7
+          with:
+            persist-credentials: false
+  
+        - name: 📦 Cache uv managed packages
+          uses: actions/cache@v6
+          with:
+            path: ~/.cache/uv
+            key: uv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('pyproject.toml', 'uv.lock') }}
+            restore-keys: |
+              uv-${{ runner.os }}-${{ matrix.python-version }}-
+  
+        - name: 🍳 Set up mise
+          uses: jdx/mise-action@v5
+          with:
+            cache: true
+            install: true
+  
+        - name: 📐 Lint
+          run: mise run lint
+  
+        - name: 🔥 Test
+          run: mise run test
+  
+        - name: 🔍 Collect coverage results
+          run: uv run coverage xml
+          if: ${{ matrix.python-version == '3.15' }}
+  
+        - name: 📊 Upload coverage to Codecov
+          uses: codecov/codecov-action@v7
+          if: ${{ matrix.python-version == '3.15' }}
+          with:
+            fail_ci_if_error: true
+            use_pypi: true
+            version: 11.3.2
+  
+    betterleaks:
+      name: Secret scan
+      runs-on: ubuntu-latest
+      timeout-minutes: 15
+      steps:
+        - name: 💾 Check out repository
+          uses: actions/checkout@v7
+          with:
+            fetch-depth: 0
+            persist-credentials: false
+  
+        - name: 📦 Cache uv managed packages
+          uses: actions/cache@v6
+          with:
+            path: ~/.cache/uv
+            key: uv-${{ runner.os }}-${{ hashFiles('pyproject.toml', 'uv.lock') }}
+            restore-keys: |
+              uv-${{ runner.os }}-
+  
+        - name: 🍳 Set up mise
+          uses: jdx/mise-action@v5
+          with:
+            cache: true
+            install: true
+  
+        - name: 🔍 Check for secrets
+          run: mise run secretscan
+  
+    commit-messages:
+      name: Commit messages
+      if: ${{ github.event_name == 'pull_request' }}
+      runs-on: ubuntu-latest
+      timeout-minutes: 15
+      steps:
+        - name: 💾 Check out repository
+          uses: actions/checkout@v7
+          with:
+            fetch-depth: 0
+            persist-credentials: false
+  
+        - name: ✉️ Check commit messages
+          uses: commit-check/commit-check-action@v2
+          with:
+            branch: false
+  
+  '''
+# ---
+# name: test_workflows_ci[no_docs-coverage-library]
   '''
   name: CI
   
@@ -462,7 +929,117 @@
   
   '''
 # ---
-# name: test_workflows_ci[no_docs-no_coverage]
+# name: test_workflows_ci[no_docs-no_coverage-application]
+  '''
+  name: CI
+  
+  on:
+    push:
+      branches:
+        - main
+    pull_request:
+  
+  permissions:
+    contents: read
+  
+  concurrency:
+    group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+    cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  
+  env:
+    UV_LOCKED: 1
+    UV_PYTHON: '3.15'
+  
+  jobs:
+    ci:
+      name: Test (Python ${{ matrix.python-version }})
+      runs-on: ubuntu-latest
+      timeout-minutes: 15
+      env:
+        UV_PYTHON: ${{ matrix.python-version }}
+      strategy:
+        fail-fast: false
+        matrix:
+          python-version:
+            - '3.11'
+            - '3.12'
+            - '3.13'
+            - '3.14'
+            - '3.15'
+      steps:
+        - name: 💾 Check out repository
+          uses: actions/checkout@v7
+          with:
+            persist-credentials: false
+  
+        - name: 📦 Cache uv managed packages
+          uses: actions/cache@v6
+          with:
+            path: ~/.cache/uv
+            key: uv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('pyproject.toml', 'uv.lock') }}
+            restore-keys: |
+              uv-${{ runner.os }}-${{ matrix.python-version }}-
+  
+        - name: 🍳 Set up mise
+          uses: jdx/mise-action@v5
+          with:
+            cache: true
+            install: true
+  
+        - name: 📐 Lint
+          run: mise run lint
+  
+        - name: 🔥 Test
+          run: mise run test
+  
+    betterleaks:
+      name: Secret scan
+      runs-on: ubuntu-latest
+      timeout-minutes: 15
+      steps:
+        - name: 💾 Check out repository
+          uses: actions/checkout@v7
+          with:
+            fetch-depth: 0
+            persist-credentials: false
+  
+        - name: 📦 Cache uv managed packages
+          uses: actions/cache@v6
+          with:
+            path: ~/.cache/uv
+            key: uv-${{ runner.os }}-${{ hashFiles('pyproject.toml', 'uv.lock') }}
+            restore-keys: |
+              uv-${{ runner.os }}-
+  
+        - name: 🍳 Set up mise
+          uses: jdx/mise-action@v5
+          with:
+            cache: true
+            install: true
+  
+        - name: 🔍 Check for secrets
+          run: mise run secretscan
+  
+    commit-messages:
+      name: Commit messages
+      if: ${{ github.event_name == 'pull_request' }}
+      runs-on: ubuntu-latest
+      timeout-minutes: 15
+      steps:
+        - name: 💾 Check out repository
+          uses: actions/checkout@v7
+          with:
+            fetch-depth: 0
+            persist-credentials: false
+  
+        - name: ✉️ Check commit messages
+          uses: commit-check/commit-check-action@v2
+          with:
+            branch: false
+  
+  '''
+# ---
+# name: test_workflows_ci[no_docs-no_coverage-library]
   '''
   name: CI
   
@@ -589,6 +1166,7 @@
     cancel-in-progress: ${{ github.event_name == 'pull_request' }}
   
   env:
+    UV_LOCKED: 1
     UV_PYTHON: '3.13'
   
   jobs:
@@ -736,6 +1314,7 @@
     cancel-in-progress: ${{ github.event_name == 'pull_request' }}
   
   env:
+    UV_LOCKED: 1
     UV_PYTHON: '3.13'
   
   jobs:
@@ -881,6 +1460,7 @@
     cancel-in-progress: ${{ github.event_name == 'pull_request' }}
   
   env:
+    UV_LOCKED: 1
     UV_PYTHON: '3.15'
   
   jobs:
@@ -1030,6 +1610,7 @@
     cancel-in-progress: ${{ github.event_name == 'pull_request' }}
   
   env:
+    UV_LOCKED: 1
     UV_PYTHON: '3.15'
   
   jobs:
@@ -1177,6 +1758,7 @@
     cancel-in-progress: ${{ github.event_name == 'pull_request' }}
   
   env:
+    UV_LOCKED: 1
     UV_PYTHON: '3.15'
   
   jobs:
@@ -1326,6 +1908,7 @@
     cancel-in-progress: ${{ github.event_name == 'pull_request' }}
   
   env:
+    UV_LOCKED: 1
     UV_PYTHON: '3.15'
   
   jobs:
@@ -1571,7 +2154,83 @@
   
   '''
 # ---
-# name: test_workflows_docs
+# name: test_workflows_docs[application]
+  '''
+  name: Docs
+  
+  on:
+    push:
+      branches:
+        - main
+    workflow_dispatch:
+  
+  permissions:
+    contents: read
+  
+  concurrency:
+    group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+    cancel-in-progress: false
+  
+  env:
+    UV_LOCKED: 1
+    UV_PYTHON: '3.15'
+  
+  jobs:
+    build:
+      name: Build Documentation
+      runs-on: ubuntu-latest
+      timeout-minutes: 15
+      steps:
+        - name: 💾 Check out repository
+          uses: actions/checkout@v7
+          with:
+            fetch-depth: 0
+            persist-credentials: false
+  
+        - name: 📦 Cache uv managed packages
+          uses: actions/cache@v6
+          with:
+            path: ~/.cache/uv
+            key: uv-${{ runner.os }}-${{ hashFiles('pyproject.toml', 'uv.lock') }}
+            restore-keys: |
+              uv-${{ runner.os }}-
+  
+        - name: 🍳 Set up mise
+          uses: jdx/mise-action@v5
+          with:
+            cache: true
+            install: true
+  
+        - name: 📖 Build documentation
+          run: mise run docs-build
+  
+        - name: 🔼 Upload artifact
+          uses: actions/upload-pages-artifact@v5
+          with:
+            path: site/
+  
+    deploy:
+      name: Deploy Documentation
+      needs: build
+      runs-on: ubuntu-latest
+      timeout-minutes: 15
+      environment:
+        name: github-pages
+        url: ${{ steps.deployment.outputs.page_url }}
+      permissions:
+        pages: write
+        id-token: write
+      concurrency:
+        group: pages
+        cancel-in-progress: false
+      steps:
+        - name: 🚀 Deploy site
+          uses: actions/deploy-pages@v5
+          id: deployment
+  
+  '''
+# ---
+# name: test_workflows_docs[library]
   '''
   name: Docs
   
@@ -1646,7 +2305,100 @@
   
   '''
 # ---
-# name: test_workflows_release
+# name: test_workflows_release[application]
+  '''
+  name: Release
+  
+  on:
+    push:
+      tags:
+        - v[0-9]*.[0-9]*
+  
+  permissions:
+    contents: read
+  
+  concurrency:
+    group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+    cancel-in-progress: false
+  
+  env:
+    UV_LOCKED: 1
+    UV_PYTHON: '3.15'
+  
+  jobs:
+    build:
+      name: Build distribution
+      runs-on: ubuntu-latest
+      cache-mode: none
+      timeout-minutes: 15
+      steps:
+        - name: 💾 Check out repository
+          uses: actions/checkout@v7
+          with:
+            fetch-depth: 0
+            persist-credentials: false
+  
+        - name: 🍳 Set up mise
+          uses: jdx/mise-action@v5
+          with:
+            install: true
+  
+        - name: 📦 Build package
+          run: mise run build
+  
+        - name: 🔼 Upload artifact
+          uses: actions/upload-artifact@v7
+          with:
+            if-no-files-found: error
+            name: dist
+            path: dist/
+  
+    release:
+      name: Create GitHub release
+      needs: build
+      runs-on: ubuntu-latest
+      timeout-minutes: 15
+      permissions:
+        contents: write
+      steps:
+        - name: 🔽 Download artifact
+          uses: actions/download-artifact@v8
+          with:
+            name: dist
+            path: dist/
+  
+        - name: 🏷️ Create GitHub release
+          run: gh release create "${REF_NAME}" dist/* --generate-notes
+          env:
+            GH_REPO: ${{ github.repository }}
+            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            REF_NAME: ${{ github.ref_name }}
+  
+    publish:
+      name: Publish to PyPI
+      needs: build
+      runs-on: ubuntu-latest
+      timeout-minutes: 15
+      environment:
+        name: pypi
+        url: https://pypi.org/project/PKFire/
+      permissions:
+        id-token: write
+      steps:
+        - name: 🔽 Download artifact
+          uses: actions/download-artifact@v8
+          with:
+            name: dist
+            path: dist/
+  
+        - name: ☢️ Publish to PyPI
+          uses: pypa/gh-action-pypi-publish@release/v1
+          with:
+            attestations: true
+  
+  '''
+# ---
+# name: test_workflows_release[library]
   '''
   name: Release
   
