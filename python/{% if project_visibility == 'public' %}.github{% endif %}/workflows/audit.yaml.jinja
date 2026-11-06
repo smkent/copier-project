@@ -7,14 +7,19 @@ Audit
 {%- endblock %}
 
 {% block triggers %}
+{%- set paths = ['pyproject.toml', 'uv.lock'] -%}
 push:
   branches:
     - main
   paths:
-    - uv.lock
+{%- for path in paths %}
+    - {{ path }}
+{%- endfor %}
 pull_request:
   paths:
-    - uv.lock
+{%- for path in paths %}
+    - {{ path }}
+{%- endfor %}
 {% endblock %}
 
 {% block env %}
