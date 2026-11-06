@@ -1,4 +1,4 @@
-{% extends "common/templates/github-workflow.yaml.jinja" %}
+{% extends "common/templates/workflows/base.jinja" %}
 {% import "common/github-workflow-steps.jinja" as ci with context %}
 {% import "common/python.jinja" as py with context %}
 
@@ -18,7 +18,7 @@ pull_request:
 {% endblock %}
 
 {% block env %}
-UV_PYTHON: '{{ py.latest() }}'
+{{ py.workflow_env() }}
 {% endblock %}
 
 {% block jobs %}
