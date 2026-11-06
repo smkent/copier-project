@@ -26,8 +26,7 @@ build:
 
     {{ ci.steps_project_setup() | indent(4) }}
 
-    - name: 📖 Build documentation
-      run: mise run docs-build
+    {{ ci.step_docs_build() | indent(4) }}
 
     - name: 🔼 Upload artifact
       uses: actions/upload-pages-artifact@v5
