@@ -20,3 +20,7 @@
 ,<3.{{ max_minor + 1 }}
 {%- endif %}
 {%- endmacro -%}
+
+{%- macro workflow_env() -%}
+UV_PYTHON: '{{ latest() }}'
+{%- endmacro -%}

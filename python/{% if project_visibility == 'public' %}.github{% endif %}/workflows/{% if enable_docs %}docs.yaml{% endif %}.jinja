@@ -1,6 +1,6 @@
-{% extends "common/templates/docs_workflow.yaml.jinja" %}
+{% extends "common/templates/workflows/docs.yaml.jinja" %}
 {% import "common/python.jinja" as py with context %}
 
 {% block env %}
-UV_PYTHON: '{{ py.latest() }}'
+{{ py.workflow_env() }}
 {% endblock %}
