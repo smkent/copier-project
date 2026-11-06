@@ -36,3 +36,8 @@
 - name: 🔥 Test
   run: mise run test
 {%- endmacro -%}
+
+{%- macro step_docs_build() -%}
+- name: 📖 Build documentation
+  run: mise run docs-build
+{%- endmacro -%}
