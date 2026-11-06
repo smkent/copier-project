@@ -22,5 +22,8 @@
 {%- endmacro -%}
 
 {%- macro workflow_env() -%}
+{%- if project_type == "application" %}
+UV_LOCKED: 1
+{%- endif %}
 UV_PYTHON: '{{ latest() }}'
 {%- endmacro -%}

@@ -13,6 +13,7 @@ if TYPE_CHECKING:
     from syrupy.assertion import SnapshotAssertion
 
 
+@pytest.mark.parametrize("project_type", template.choices.project_type)
 @pytest.mark.parametrize(
     "enable_coverage",
     [pytest.param(True, id="coverage"), pytest.param(False, id="no_coverage")],
@@ -24,12 +25,13 @@ if TYPE_CHECKING:
 def test_workflows_ci(
     render_template: Callable[..., Path],
     snapshot: SnapshotAssertion,
+    project_type: str,
     *,
     enable_coverage: bool,
     enable_docs: bool,
 ) -> None:
     rendered = render_template(
-        project_type="application",
+        project_type=project_type,
         project_visibility="public",
         enable_coverage=enable_coverage,
         enable_docs=enable_docs,
@@ -62,22 +64,28 @@ def test_workflows_ci_versions(
     ).read_text() == snapshot
 
 
+@pytest.mark.parametrize("project_type", template.choices.project_type)
 def test_workflows_audit(
-    render_template: Callable[..., Path], snapshot: SnapshotAssertion
+    render_template: Callable[..., Path],
+    snapshot: SnapshotAssertion,
+    project_type: str,
 ) -> None:
     rendered = render_template(
-        project_type="application", project_visibility="public"
+        project_type=project_type, project_visibility="public"
     )
     assert (
         rendered / ".github" / "workflows" / "audit.yaml"
     ).read_text() == snapshot
 
 
+@pytest.mark.parametrize("project_type", template.choices.project_type)
 def test_workflows_docs(
-    render_template: Callable[..., Path], snapshot: SnapshotAssertion
+    render_template: Callable[..., Path],
+    snapshot: SnapshotAssertion,
+    project_type: str,
 ) -> None:
     rendered = render_template(
-        project_type="application",
+        project_type=project_type,
         project_visibility="public",
         enable_docs=True,
     )
@@ -102,11 +110,14 @@ def test_workflows_container(
     ).read_text() == snapshot
 
 
+@pytest.mark.parametrize("project_type", template.choices.project_type)
 def test_workflows_release(
-    render_template: Callable[..., Path], snapshot: SnapshotAssertion
+    render_template: Callable[..., Path],
+    snapshot: SnapshotAssertion,
+    project_type: str,
 ) -> None:
     rendered = render_template(
-        project_type="application",
+        project_type=project_type,
         project_visibility="public",
         enable_pypi=True,
     )

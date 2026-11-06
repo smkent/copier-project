@@ -75,6 +75,8 @@ def uv_dirs(disallow_subprocess: DisallowCallable) -> Iterator[None]:
             )
 
     with pytest.MonkeyPatch.context() as mp:
+        mp.delenv("UV_FROZEN", raising=False)
+        mp.delenv("UV_LOCKED", raising=False)
         mp.setenv("UV_CACHE_DIR", str(_uv_dir("cache")))
         mp.setenv("UV_PYTHON_INSTALL_DIR", str(_uv_dir("python")))
         yield
