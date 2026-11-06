@@ -48,17 +48,17 @@ dev = [
   "commit-check>=2.18",
   "copier>=9",
   "poethepoet>=0.46",
-  "pysentry-rs>=0.4",
+  "pysentry-rs>=0.5",
   "pytest>=9,<9.2",
   "pytest-cov>=7",
   "pytest-sugar>=1",
   "pytest-xdist>=3",
-  "ruff>=0.15",
+  "ruff>=0.17",
   "syrupy>=5",
-  "ty>=0.0.49",
+  "ty>=0.0.84",
   "typing-extensions>=4",
 ]
-docs = ["zensical>=0.0.45"]
+docs = ["zensical>=0.1"]
 
 [tool.bumpversion]
 commit = false

@@ -13,6 +13,12 @@ icon: lucide/package-plus
 
 [Settings → General][repo-settings]:
 
+**Releases**
+
+- [x] Enable release immutability
+
+**Pull Requests**
+
 - [x] Allow merge commits
 - [x] Allow squash merging
 - [ ] Allow rebase merging
