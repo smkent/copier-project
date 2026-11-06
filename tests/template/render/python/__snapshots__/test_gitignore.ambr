@@ -1,5 +1,5 @@
 # serializer version: 1
-# name: test_gitignore[docs-private]
+# name: test_gitignore[docs-private-application]
   '''
   # Python
   __pycache__/
@@ -26,7 +26,35 @@
   
   '''
 # ---
-# name: test_gitignore[docs-public]
+# name: test_gitignore[docs-private-library]
+  '''
+  # Python
+  __pycache__/
+  *.egg-info/
+  *.py[cod]
+  
+  # uv and packaging
+  .venv*/
+  /build/
+  /dist/
+  uv.lock
+  
+  # mise
+  mise.local.toml
+  .mise.local.toml
+  
+  # Development tools
+  .cache/
+  .coverage*
+  .pytest_cache/
+  .ruff_cache/
+  /htmlcov/
+  /site/
+  coverage.xml
+  
+  '''
+# ---
+# name: test_gitignore[docs-public-application]
   '''
   # Python
   __pycache__/
@@ -53,7 +81,35 @@
   
   '''
 # ---
-# name: test_gitignore[no_docs-private]
+# name: test_gitignore[docs-public-library]
+  '''
+  # Python
+  __pycache__/
+  *.egg-info/
+  *.py[cod]
+  
+  # uv and packaging
+  .venv*/
+  /build/
+  /dist/
+  uv.lock
+  
+  # mise
+  mise.local.toml
+  .mise.local.toml
+  
+  # Development tools
+  .cache/
+  .coverage*
+  .pytest_cache/
+  .ruff_cache/
+  /htmlcov/
+  /site/
+  coverage.xml
+  
+  '''
+# ---
+# name: test_gitignore[no_docs-private-application]
   '''
   # Python
   __pycache__/
@@ -79,7 +135,7 @@
   
   '''
 # ---
-# name: test_gitignore[no_docs-public]
+# name: test_gitignore[no_docs-private-library]
   '''
   # Python
   __pycache__/
@@ -90,6 +146,60 @@
   .venv*/
   /build/
   /dist/
+  uv.lock
+  
+  # mise
+  mise.local.toml
+  .mise.local.toml
+  
+  # Development tools
+  .cache/
+  .coverage*
+  .pytest_cache/
+  .ruff_cache/
+  /htmlcov/
+  coverage.xml
+  
+  '''
+# ---
+# name: test_gitignore[no_docs-public-application]
+  '''
+  # Python
+  __pycache__/
+  *.egg-info/
+  *.py[cod]
+  
+  # uv and packaging
+  .venv*/
+  /build/
+  /dist/
+  
+  # mise
+  mise.local.toml
+  .mise.local.toml
+  
+  # Development tools
+  .cache/
+  .coverage*
+  .pytest_cache/
+  .ruff_cache/
+  /htmlcov/
+  coverage.xml
+  
+  '''
+# ---
+# name: test_gitignore[no_docs-public-library]
+  '''
+  # Python
+  __pycache__/
+  *.egg-info/
+  *.py[cod]
+  
+  # uv and packaging
+  .venv*/
+  /build/
+  /dist/
+  uv.lock
   
   # mise
   mise.local.toml
