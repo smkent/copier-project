@@ -27,7 +27,7 @@ classifiers = [
   "Typing :: Typed",
 ]
 keywords = []
-dependencies = ["pyyaml>=6", "rich>=15", "typer>=0.9"]
+dependencies = ["pyyaml>=6", "rich>=15", "typer>=0.27"]
 
 [project.scripts]
 "copier-project" = "copier_project.__main__:main"
