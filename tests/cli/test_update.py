@@ -109,9 +109,7 @@ def create_project(
         ]
         for cmd in setup_commands:
             with disallow_subprocess.pause():
-                subprocess.run(  # noqa: S603
-                    cmd, cwd=project, check=True, capture_output=True
-                )
+                subprocess.run(cmd, cwd=project, check=True)  # noqa: S603
         if postcreate:
             postcreate(project)
         return project
