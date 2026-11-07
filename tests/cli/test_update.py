@@ -19,6 +19,7 @@ import yaml
 
 from copier_project.__main__ import main, update
 from copier_project.repo import PROJECT_URL, SELF_ALIAS
+from copier_project.update import COPIER_CMD
 from tests.template.utils import template
 
 if TYPE_CHECKING:
@@ -151,7 +152,7 @@ class ExpectRun:
     expected_calls: list[_Call] = field(default_factory=list, init=False)
 
     @contextmanager
-    def patch(
+    def patch(  # noqa: C901
         self,
         *,
         mock: bool = True,
@@ -161,12 +162,16 @@ class ExpectRun:
 
         subp_run = subprocess.run
 
+        def _is_copier_cmd(cmd: Sequence[str], *is_cmd: str) -> bool:
+            check_cmd = (*COPIER_CMD, *is_cmd)
+            return tuple(cmd[: len(check_cmd)]) == check_cmd
+
         def _run(cmd: Sequence[str], *args: Any, **kwargs: Any) -> Any:
             if cmd[0] == str(self.mock_shell):
                 if shell_callback:
                     return shell_callback()
                 return MagicMock()
-            if tuple(cmd[:2]) == ("copier", "check-update"):
+            if _is_copier_cmd(cmd, "check-update"):
                 if mock:
                     current_version = "11.38.0"
                     latest_version = current_version
@@ -183,7 +188,7 @@ class ExpectRun:
                 return SimpleNamespace(stdout=json.dumps(data))
             if mock:
                 return MagicMock()
-            if tuple(cmd[:2]) == ("copier", "update"):
+            if _is_copier_cmd(cmd, "update"):
                 cmd = tuple(
                     "--defaults" if arg == "--skip-answered" else arg
                     for arg in cmd
@@ -233,7 +238,7 @@ class ExpectRun:
         ]:
             self.expect(cmd, cwd=self.worktree)
         self.expect(
-            ["copier", "check-update", "--output-format", "json"],
+            [*COPIER_CMD, "check-update", "--output-format", "json"],
             cwd=self.worktree,
             capture_output=True,
         )
@@ -241,7 +246,7 @@ class ExpectRun:
     def expect_copier_update(self) -> None:
         self.expect(
             [
-                "copier",
+                *COPIER_CMD,
                 "update",
                 "--skip-answered",
                 "--vcs-ref",
