@@ -342,18 +342,24 @@ def test_main_help(monkeypatch: pytest.MonkeyPatch) -> None:
         main()
 
 
+@pytest.mark.parametrize("template_variant", template.choices.template_variant)
 @pytest.mark.parametrize(
     "project_visibility", template.choices.project_visibility
 )
 def test_main_update_with_project_current(
     expect_run: ExpectRun,
     create_project: Callable[..., Path],
+    template_variant: str,
     project_visibility: str,
     end_ref: str,
     *,
     dry_run: bool,
 ) -> None:
-    create_project(vcs_ref=end_ref, project_visibility=project_visibility)
+    create_project(
+        vcs_ref=end_ref,
+        template_variant=template_variant,
+        project_visibility=project_visibility,
+    )
     expect_run.latest_ref = end_ref
     expect_run.expect_clone_and_setup()
     with expect_run.patch(mock=False):
