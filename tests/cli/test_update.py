@@ -101,7 +101,7 @@ def create_project(
             setup_commands.append(
                 ["env", f"UV_EXCLUDE_NEWER={timestamp}", "mise", "install"]
             )
-            setup_commands.append(["mise", "install"])
+            setup_commands.append(["mise", "exec", "--", "uv", "sync"])
         setup_commands += [
             ["git", "add", "."],
             ["git", "commit", "-m", "init from template"],
