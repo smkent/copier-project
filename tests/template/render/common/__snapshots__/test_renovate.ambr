@@ -3,7 +3,7 @@
   '''
   {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "extends": ["config:recommended", "schedule:weekly"],
+    "extends": ["config:recommended", "schedule:weekly", ":enablePreCommit"],
     "osvVulnerabilityAlerts": true,
     "vulnerabilityAlerts": {
       "schedule": ["at any time"]
@@ -23,14 +23,14 @@
   '''
   {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "extends": ["config:recommended", "schedule:weekly"],
+    "extends": ["config:recommended", "schedule:weekly", ":enablePreCommit"],
     "osvVulnerabilityAlerts": true,
     "vulnerabilityAlerts": {
       "schedule": ["at any time"]
     },
     "packageRules": [
       {
-        "matchManagers": ["github-actions", "mise", "pre-commit", "uv"],
+        "matchManagers": ["github-actions", "mise", "pep621", "pre-commit"],
         "matchUpdateTypes": ["minor", "patch"],
         "groupName": "non-major dependencies"
       }
