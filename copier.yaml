@@ -1,5 +1,5 @@
 ---
-_min_copier_version: '9.5'
+_min_copier_version: '9.8'
 _external_data:
   # Previous answers, used to migrate deprecated answer values
   previous_answers: '{{ _copier_conf.answers_file }}'

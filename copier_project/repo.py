@@ -3,6 +3,7 @@ from __future__ import annotations
 import os
 import re
 import subprocess
+import sys
 import tempfile
 from contextlib import ExitStack, suppress
 from dataclasses import InitVar, dataclass, field
@@ -102,7 +103,11 @@ class RepoWorktree(ExitStack):
             kwargs.setdefault("cwd", self.path)
         kwargs.setdefault("check", True)
         kwargs.setdefault("text", True)
-        cmd_text = Text(" ".join(cmd), style="color(153)")
+        display_args = [
+            "python" if cmd[0] == sys.executable else cmd[0],
+            *cmd[1:],
+        ]
+        cmd_text = Text(" ".join(display_args), style="color(153)")
         txt = Text.assemble(
             Text(f"{self.repo.github_repo} => ", style="bold"),
             cmd_text,

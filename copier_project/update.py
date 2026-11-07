@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import subprocess
+import sys
 from contextlib import contextmanager
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
@@ -12,6 +13,9 @@ if TYPE_CHECKING:
     from collections.abc import Generator
 
     from .repo import RepoTarget
+
+
+COPIER_CMD = (sys.executable, "-P", "-m", "copier")
 
 
 @dataclass
@@ -42,7 +46,7 @@ class UpdateAction:
         """Run copier update in the repo worktree."""
         copier_status = json.loads(
             repo.run(
-                ["copier", "check-update", "--output-format", "json"],
+                [*COPIER_CMD, "check-update", "--output-format", "json"],
                 capture_output=True,
             ).stdout.strip()
         )
@@ -50,7 +54,15 @@ class UpdateAction:
         end_ref = self.vcs_ref or ("v" + copier_status["latest_version"])
         if not copier_status.get("update_available", False):
             return None
-        repo.run(["copier", "update", "--skip-answered", "--vcs-ref", end_ref])
+        repo.run(
+            [
+                *COPIER_CMD,
+                "update",
+                "--skip-answered",
+                "--vcs-ref",
+                end_ref,
+            ]
+        )
 
         status = repo.git_status()
         if not status or (
