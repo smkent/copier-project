@@ -47,18 +47,9 @@ class ProjectFactory:
         kwargs.setdefault("template_variant", "generic")
         kwargs.setdefault("project_type", "application")
         project = self.render_template(vcs_ref=vcs_ref, **kwargs)
-        timestamp = self._vcs_ref_timestamp(vcs_ref)
-
         setup_commands = [
             ["git", "init", "-b", DEFAULT_BRANCH_NAME],
             ["git", "remote", "add", "origin", str(self.origin)],
-        ]
-        if (project / "pyproject.toml").is_file():
-            setup_commands.append(
-                ["env", f"UV_EXCLUDE_NEWER={timestamp}", "mise", "install"]
-            )
-            setup_commands.append(["mise", "install"])
-        setup_commands += [
             ["git", "add", "."],
             ["git", "commit", "-m", "init from template"],
             ["git", "push", "-u", "origin", DEFAULT_BRANCH_NAME],
@@ -69,15 +60,6 @@ class ProjectFactory:
         if postcreate:
             postcreate(project)
         return project
-
-    def _vcs_ref_timestamp(self, ref: str) -> str:
-        with self.disallow_subprocess.pause():
-            return subprocess.run(  # noqa: S603
-                ["git", "log", "-n", "1", "--format=%aI", str(ref), "--"],
-                check=True,
-                capture_output=True,
-                text=True,
-            ).stdout.strip()
 
 
 @pytest.fixture(params=["v0.16.2"])
@@ -233,7 +215,7 @@ class ExpectRun:
     def expect_shell(self) -> None:
         self.expect([str(self.mock_shell)], cwd=self.worktree)
 
-    def expect_clone_and_setup(self, *, poe: bool = False) -> None:
+    def expect_clone(self) -> None:
         self.expect(
             [
                 "git",
@@ -243,7 +225,6 @@ class ExpectRun:
             ]
         )
         for cmd in [
-            (["poe", "setup"] if poe else ["mise", "install"]),
             ["git", "checkout", "-b", "updates"],
         ]:
             self.expect(cmd, cwd=self.worktree)
@@ -365,7 +346,7 @@ def test_main_update_with_project_current(
 ) -> None:
     project_factory(vcs_ref=end_ref, project_visibility=project_visibility)
     expect_run.latest_ref = end_ref
-    expect_run.expect_clone_and_setup()
+    expect_run.expect_clone()
     with expect_run.patch(mock=False):
         update(["gh:ness/pkfire"], dry_run=dry_run)
 
@@ -388,7 +369,7 @@ def test_main_update_allow_empty(
     dry_run = True
     project_factory(vcs_ref=start_ref, project_visibility="public")
     expect_run.latest_ref = end_ref
-    expect_run.expect_clone_and_setup()
+    expect_run.expect_clone()
     expect_run.expect_copier_update()
     if allow_empty:
         expect_run.expect_mise_install_and_lt()
@@ -420,7 +401,7 @@ def test_main_update_legacy_poethepoet(
 ) -> None:
     project_factory(vcs_ref=start_ref)
     expect_run.latest_ref = end_ref
-    expect_run.expect_clone_and_setup(poe=True)
+    expect_run.expect_clone()
     expect_run.expect_copier_update()
     if expect_lt_poe:
         expect_run.expect_poe_lt()
@@ -455,7 +436,7 @@ def test_main_update_mise_config_moved(
 
     project_factory(vcs_ref=start_ref, postcreate=_postcreate)
     expect_run.latest_ref = end_ref
-    expect_run.expect_clone_and_setup()
+    expect_run.expect_clone()
     expect_run.expect_copier_update()
     expect_run.expect_mise_install_and_lt()
     expect_run.expect_git_commit(start_ref, end_ref)
@@ -494,7 +475,7 @@ def test_main_update_error(
                 subprocess.check_call(cmd, cwd=worktree)  # noqa: S603
 
     expect_run.latest_ref = end_ref
-    expect_run.expect_clone_and_setup()
+    expect_run.expect_clone()
     expect_run.expect_copier_update()
     expect_run.expect_shell()
     expect_run.expect_git_status()
@@ -561,7 +542,7 @@ def test_main_update_with_project(
         project_visibility=project_visibility,
     )
     expect_run.latest_ref = end_ref
-    expect_run.expect_clone_and_setup()
+    expect_run.expect_clone()
     expect_run.expect_copier_update()
     expect_run.expect_mise_install_and_lt()
     expect_run.expect_git_commit(start_ref, end_ref, dry_run=dry_run)
