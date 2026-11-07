@@ -29,7 +29,7 @@ if TYPE_CHECKING:
 
 
 DEFAULT_BRANCH_NAME = "fhqwhgads"
-DEFAULT_END_REF = "v0.32.1"
+DEFAULT_END_REF = "v0.41.1"
 
 
 @dataclass
