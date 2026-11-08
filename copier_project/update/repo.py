@@ -7,7 +7,6 @@ import sys
 import tempfile
 from contextlib import ExitStack, contextmanager, suppress
 from dataclasses import InitVar, dataclass, field
-from functools import cached_property
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, ClassVar, Self
 
@@ -53,10 +52,6 @@ class RepoTarget:
                 cwd=path,
             ).strip()
         return None
-
-    @cached_property
-    def name(self) -> str:
-        return self.github_repo.split("/")[-1]
 
     @property
     def url(self) -> str:

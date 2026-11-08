@@ -49,9 +49,8 @@ class UpdateAction:
         if not results:
             return
         grid = Table.grid(padding=(0, 1), expand=True)
-        grid.add_column()
-        grid.add_column()
-        grid.add_column()
+        for _ in range(3):
+            grid.add_column()
         for repo, result in sorted(results, key=lambda r: r[0].github_repo):
             grid.add_row(
                 result.status.formatted_name,
