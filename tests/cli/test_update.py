@@ -45,6 +45,7 @@ class ProjectFactory:
         **kwargs: Any,
     ) -> Path:
         kwargs.setdefault("template_variant", "generic")
+        kwargs.setdefault("project_type", "application")
         project = self.render_template(vcs_ref=vcs_ref, **kwargs)
         timestamp = self._vcs_ref_timestamp(vcs_ref)
 
