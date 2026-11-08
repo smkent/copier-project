@@ -107,6 +107,14 @@ class UpdateProject:
             )
 
         if repo.has_conflicts(status):
+            if self.dry_run:
+                return UpdateResult(
+                    type=UpdateResultType.CONFLICT,
+                    start_ref=start_ref,
+                    end_ref=end_ref,
+                    message="Conflicts detected",
+                )
+
             print(  # noqa: T201
                 "Conflicts detected."
                 " Resolve them and exit the shell to continue."

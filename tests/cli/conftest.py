@@ -12,9 +12,9 @@ from copier_project.__main__ import main
 class MainRunner:
     monkeypatch: pytest.MonkeyPatch
 
-    def __call__(self, *cmd: str) -> None:
+    def __call__(self, *cmd: str, match: int = 0) -> None:
         self.monkeypatch.setattr(sys, "argv", ["copier-project", *cmd])
-        with pytest.raises(SystemExit, match=str(0)):
+        with pytest.raises(SystemExit, match=str(match)):
             main()
 
 
