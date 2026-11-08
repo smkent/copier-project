@@ -75,13 +75,7 @@ class UpdateProject:
             return UpdateResult(status=UpdateStatus.CURRENT)
         repo.run(["git", "checkout", "-b", self.branch])
         repo.run(
-            [
-                *COPIER_CMD,
-                "update",
-                "--skip-answered",
-                "--vcs-ref",
-                end_ref,
-            ]
+            [*COPIER_CMD, "update", "--skip-answered", "--vcs-ref", end_ref]
         )
 
         status = repo.git_status()
