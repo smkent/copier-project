@@ -17,7 +17,7 @@ if TYPE_CHECKING:
     from .repo import RepoTarget, RepoWorktree
 
 
-class UpdateStatus(Enum):
+class UpdateResultType(Enum):
     UPDATED = "bold green"
     CURRENT = "bold blue"
     FAILED = "bold red"
@@ -29,7 +29,7 @@ class UpdateStatus(Enum):
 
 @dataclass
 class UpdateResult:
-    status: UpdateStatus
+    type: UpdateResultType
     pr_url: str | None = None
     message: str | None = None
 
@@ -47,7 +47,7 @@ class UpdateProject:
             with self.repo.worktree(branch=self.branch) as worktree:
                 return self._run(worktree)
         except Exception as e:  # noqa: BLE001
-            return UpdateResult(status=UpdateStatus.FAILED, message=str(e))
+            return UpdateResult(type=UpdateResultType.FAILED, message=str(e))
 
     @contextmanager
     def _success_or_shell(
@@ -72,7 +72,7 @@ class UpdateProject:
         start_ref = "v" + copier_status["current_version"]
         end_ref = self.vcs_ref or ("v" + copier_status["latest_version"])
         if not copier_status.get("update_available", False):
-            return UpdateResult(status=UpdateStatus.CURRENT)
+            return UpdateResult(type=UpdateResultType.CURRENT)
         repo.run(["git", "checkout", "-b", self.branch])
         repo.run(
             [*COPIER_CMD, "update", "--skip-answered", "--vcs-ref", end_ref]
@@ -82,7 +82,7 @@ class UpdateProject:
         if not status or (
             not self.allow_empty and status.keys() == {".copier-answers.yml"}
         ):
-            return UpdateResult(status=UpdateStatus.CURRENT)
+            return UpdateResult(type=UpdateResultType.CURRENT)
 
         if repo.has_conflicts(status):
             print(  # noqa: T201
@@ -109,7 +109,7 @@ class UpdateProject:
 
         if self.dry_run:
             return UpdateResult(
-                status=UpdateStatus.UPDATED,
+                type=UpdateResultType.UPDATED,
                 message=f"Update from {start_ref} to {end_ref}",
             )
 
@@ -117,4 +117,4 @@ class UpdateProject:
             ["git", "push", "-u", "origin", repo.branch, "--force-with-lease"]
         )
         pr_url = repo.open_pr(title, body)
-        return UpdateResult(status=UpdateStatus.UPDATED, pr_url=pr_url)
+        return UpdateResult(type=UpdateResultType.UPDATED, pr_url=pr_url)

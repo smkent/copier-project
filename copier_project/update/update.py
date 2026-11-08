@@ -9,7 +9,7 @@ from rich.table import Table
 from rich.text import Text
 from typer import Exit
 
-from .project import UpdateProject, UpdateResult, UpdateStatus
+from .project import UpdateProject, UpdateResult, UpdateResultType
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -37,7 +37,7 @@ class UpdateAction:
             )()
             results.append((repo, result))
         self._print_summary(results, dry_run=self.dry_run)
-        if any(r[1].status == UpdateStatus.FAILED for r in results):
+        if any(r[1].type == UpdateResultType.FAILED for r in results):
             raise Exit(1)
 
     def _print_summary(
@@ -53,7 +53,7 @@ class UpdateAction:
             grid.add_column()
         for repo, result in sorted(results, key=lambda r: r[0].github_repo):
             grid.add_row(
-                result.status.formatted_name,
+                result.type.formatted_name,
                 repo.text,
                 Text(str(result.pr_url or result.message)),
             )
