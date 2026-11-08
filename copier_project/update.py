@@ -54,6 +54,7 @@ class UpdateAction:
         end_ref = self.vcs_ref or ("v" + copier_status["latest_version"])
         if not copier_status.get("update_available", False):
             return None
+        repo.run(["git", "checkout", "-b", self.branch])
         repo.run(
             [
                 *COPIER_CMD,

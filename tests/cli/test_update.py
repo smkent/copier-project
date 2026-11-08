@@ -224,10 +224,6 @@ class ExpectRun:
                 str(self.worktree),
             ]
         )
-        for cmd in [
-            ["git", "checkout", "-b", "updates"],
-        ]:
-            self.expect(cmd, cwd=self.worktree)
         self.expect(
             [*COPIER_CMD, "check-update", "--output-format", "json"],
             cwd=self.worktree,
@@ -235,6 +231,7 @@ class ExpectRun:
         )
 
     def expect_copier_update(self) -> None:
+        self.expect(["git", "checkout", "-b", "updates"], cwd=self.worktree)
         self.expect(
             [
                 *COPIER_CMD,

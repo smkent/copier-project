@@ -82,7 +82,6 @@ class RepoWorktree(ExitStack):
         self.run(
             ["git", "clone", self.repo.url, str(self.path)], set_cwd=False
         )
-        self.run(["git", "checkout", "-b", self.branch])
         return self
 
     def use_mise(self) -> bool:
