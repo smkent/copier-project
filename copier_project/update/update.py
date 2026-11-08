@@ -35,7 +35,7 @@ class UpdateAction:
                 dry_run=self.dry_run,
                 allow_empty=self.allow_empty,
             )()
-            repo.print(result.type.formatted_name)
+            repo.print(result.text)
             results.append((repo, result))
         self._print_summary(results, dry_run=self.dry_run)
         if any(r[1].type == UpdateResultType.FAILED for r in results):
@@ -49,14 +49,16 @@ class UpdateAction:
     ) -> None:
         if not results:
             return
-        grid = Table.grid(padding=(0, 1), expand=True)
-        for _ in range(3):
+        grid = Table.grid(padding=(0, 2), expand=True)
+        for _ in range(5):
             grid.add_column()
         for repo, result in sorted(results, key=lambda r: r[0].github_repo):
             grid.add_row(
                 repo.text,
                 result.type.formatted_name,
-                Text(str(result.pr_url or result.message)),
+                result.start_ref,
+                result.end_ref or "-",
+                Text(str(result.pr_url or result.message or "-")),
             )
         title = Text("Update Results", style="bold")
         if dry_run:

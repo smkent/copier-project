@@ -32,6 +32,22 @@ class UpdateResult:
     type: UpdateResultType
     pr_url: str | None = None
     message: str | None = None
+    start_ref: str | None = None
+    end_ref: str | None = None
+
+    @property
+    def text(self) -> Text:
+        text = Text.assemble(self.type.formatted_name)
+        if self.start_ref or self.end_ref:
+            text.append(" ")
+            if self.start_ref and self.end_ref:
+                text.append(f"{self.start_ref} -> {self.end_ref}")
+            else:
+                text.append(self.end_ref or self.start_ref or "")
+        if message := (self.pr_url or self.message):
+            text.append(" ")
+            text.append(message)
+        return text
 
 
 @dataclass
@@ -41,6 +57,7 @@ class UpdateProject:
     vcs_ref: str | None = None
     dry_run: bool = field(default=False, kw_only=True)
     allow_empty: bool = field(default=False, kw_only=True)
+    start_ref: str | None = None
 
     def __call__(self) -> UpdateResult:
         try:
@@ -69,10 +86,12 @@ class UpdateProject:
                 capture_output=True,
             ).stdout.strip()
         )
-        start_ref = "v" + copier_status["current_version"]
+        self.start_ref = start_ref = "v" + copier_status["current_version"]
         end_ref = self.vcs_ref or ("v" + copier_status["latest_version"])
         if not copier_status.get("update_available", False):
-            return UpdateResult(type=UpdateResultType.CURRENT)
+            return UpdateResult(
+                type=UpdateResultType.CURRENT, start_ref=start_ref
+            )
         repo.run(["git", "checkout", "-b", self.branch])
         repo.run(
             [*COPIER_CMD, "update", "--skip-answered", "--vcs-ref", end_ref]
@@ -82,7 +101,9 @@ class UpdateProject:
         if not status or (
             not self.allow_empty and status.keys() == {".copier-answers.yml"}
         ):
-            return UpdateResult(type=UpdateResultType.CURRENT)
+            return UpdateResult(
+                type=UpdateResultType.CURRENT, start_ref=start_ref
+            )
 
         if repo.has_conflicts(status):
             print(  # noqa: T201
@@ -110,11 +131,17 @@ class UpdateProject:
         if self.dry_run:
             return UpdateResult(
                 type=UpdateResultType.UPDATED,
-                message=f"Update from {start_ref} to {end_ref}",
+                start_ref=start_ref,
+                end_ref=end_ref,
             )
 
         repo.run(
             ["git", "push", "-u", "origin", repo.branch, "--force-with-lease"]
         )
         pr_url = repo.open_pr(title, body)
-        return UpdateResult(type=UpdateResultType.UPDATED, pr_url=pr_url)
+        return UpdateResult(
+            type=UpdateResultType.UPDATED,
+            start_ref=start_ref,
+            end_ref=end_ref,
+            pr_url=pr_url,
+        )
