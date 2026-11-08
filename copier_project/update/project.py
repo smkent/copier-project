@@ -2,33 +2,52 @@ from __future__ import annotations
 
 import json
 import subprocess
-import sys
 from contextlib import contextmanager
 from dataclasses import dataclass, field
+from enum import Enum
 from typing import TYPE_CHECKING
 
-from .repo import PROJECT_URL, RepoWorktree
+from rich.text import Text
+
+from .constants import COPIER_CMD, PROJECT_URL
 
 if TYPE_CHECKING:
     from collections.abc import Generator
 
-    from .repo import RepoTarget
+    from .repo import RepoTarget, RepoWorktree
 
 
-COPIER_CMD = (sys.executable, "-P", "-m", "copier")
+class UpdateStatus(Enum):
+    UPDATED = "bold green"
+    CURRENT = "bold blue"
+    FAILED = "bold red"
+
+    @property
+    def formatted_name(self) -> Text:
+        return Text(f"{self.name:<7}", style=self.value)
 
 
 @dataclass
-class UpdateAction:
+class UpdateResult:
+    status: UpdateStatus
+    exception: Exception | None = None
+    pr_url: str | None = None
+
+
+@dataclass
+class UpdateProject:
     repo: RepoTarget
     branch: str
     vcs_ref: str | None = None
     dry_run: bool = field(default=False, kw_only=True)
     allow_empty: bool = field(default=False, kw_only=True)
 
-    def __call__(self) -> str | None:
-        with RepoWorktree(self.repo, branch=self.branch) as worktree:
-            return self._run(worktree)
+    def __call__(self) -> UpdateResult:
+        try:
+            with self.repo.worktree(branch=self.branch) as worktree:
+                return self._run(worktree)
+        except Exception as e:  # noqa: BLE001
+            return UpdateResult(status=UpdateStatus.FAILED, exception=e)
 
     @contextmanager
     def _success_or_shell(
@@ -42,7 +61,7 @@ class UpdateAction:
             )
             repo.shell()
 
-    def _run(self, repo: RepoWorktree) -> str | None:
+    def _run(self, repo: RepoWorktree) -> UpdateResult:
         """Run copier update in the repo worktree."""
         copier_status = json.loads(
             repo.run(
@@ -53,7 +72,7 @@ class UpdateAction:
         start_ref = "v" + copier_status["current_version"]
         end_ref = self.vcs_ref or ("v" + copier_status["latest_version"])
         if not copier_status.get("update_available", False):
-            return None
+            return UpdateResult(status=UpdateStatus.CURRENT)
         repo.run(["git", "checkout", "-b", self.branch])
         repo.run(
             [
@@ -69,7 +88,7 @@ class UpdateAction:
         if not status or (
             not self.allow_empty and status.keys() == {".copier-answers.yml"}
         ):
-            return None
+            return UpdateResult(status=UpdateStatus.CURRENT)
 
         if repo.has_conflicts(status):
             print(  # noqa: T201
@@ -95,9 +114,13 @@ class UpdateAction:
         repo.run(["git", "commit", "-m", f"{title}\n\n{body}".strip()])
 
         if self.dry_run:
-            return f"Update from {start_ref} to {end_ref}"
+            return UpdateResult(
+                status=UpdateStatus.UPDATED,
+                pr_url=f"Update from {start_ref} to {end_ref}",
+            )
 
         repo.run(
             ["git", "push", "-u", "origin", repo.branch, "--force-with-lease"]
         )
-        return repo.open_pr(title, body)
+        pr_url = repo.open_pr(title, body)
+        return UpdateResult(status=UpdateStatus.UPDATED, pr_url=pr_url)

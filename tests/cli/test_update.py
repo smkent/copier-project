@@ -18,8 +18,7 @@ import pytest
 import yaml
 
 from copier_project.__main__ import main, update
-from copier_project.repo import PROJECT_URL, SELF_ALIAS
-from copier_project.update import COPIER_CMD
+from copier_project.update.constants import COPIER_CMD, PROJECT_URL, SELF_ALIAS
 from tests.template.utils import template
 
 if TYPE_CHECKING:

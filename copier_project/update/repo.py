@@ -5,22 +5,20 @@ import re
 import subprocess
 import sys
 import tempfile
-from contextlib import ExitStack, suppress
+from contextlib import ExitStack, contextmanager, suppress
 from dataclasses import InitVar, dataclass, field
 from functools import cached_property
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, ClassVar, Self
 
-import yaml
 from rich import print  # noqa: A004
 from rich.panel import Panel
 from rich.text import Text
 
-if TYPE_CHECKING:
-    from collections.abc import Sequence
+from .constants import PROJECT_URL, SELF_ALIAS
 
-SELF_ALIAS = "self"
-PROJECT_URL = "https://github.com/smkent/copier-project"
+if TYPE_CHECKING:
+    from collections.abc import Generator, Sequence
 
 
 @dataclass(unsafe_hash=True)
@@ -63,6 +61,11 @@ class RepoTarget:
     @property
     def url(self) -> str:
         return f"https://github.com/{self.github_repo}"
+
+    @contextmanager
+    def worktree(self, branch: str) -> Generator[RepoWorktree]:
+        with RepoWorktree(repo=self, branch=branch) as worktree:
+            yield worktree
 
 
 @dataclass
@@ -133,12 +136,6 @@ class RepoWorktree(ExitStack):
     def has_conflicts(status: dict[str, str]) -> bool:
         conflict_codes = {"UU", "AA", "DD", "AU", "UA", "DU", "UD"}
         return bool(set(status.values()) & conflict_codes)
-
-    @property
-    def template_ref(self) -> str:
-        return yaml.safe_load(  # type: ignore[no-any-return]
-            (self.path / ".copier-answers.yml").read_text()
-        ).get("_commit")
 
     def shell(self) -> None:
         self.run([os.environ.get("SHELL", "/bin/bash")])
