@@ -65,7 +65,7 @@ class UpdateAction:
                     f"[link={repo.url}]{repo.github_repo}[/link]",
                     style="bold",
                 ),
-                Text(str(result.pr_url or result.exception)),
+                Text(str(result.pr_url or result.message)),
             )
         title = Text("Update Results", style="bold")
         if dry_run:

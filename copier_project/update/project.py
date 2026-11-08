@@ -30,8 +30,8 @@ class UpdateStatus(Enum):
 @dataclass
 class UpdateResult:
     status: UpdateStatus
-    exception: Exception | None = None
     pr_url: str | None = None
+    message: str | None = None
 
 
 @dataclass
@@ -47,7 +47,7 @@ class UpdateProject:
             with self.repo.worktree(branch=self.branch) as worktree:
                 return self._run(worktree)
         except Exception as e:  # noqa: BLE001
-            return UpdateResult(status=UpdateStatus.FAILED, exception=e)
+            return UpdateResult(status=UpdateStatus.FAILED, message=str(e))
 
     @contextmanager
     def _success_or_shell(
@@ -116,7 +116,7 @@ class UpdateProject:
         if self.dry_run:
             return UpdateResult(
                 status=UpdateStatus.UPDATED,
-                pr_url=f"Update from {start_ref} to {end_ref}",
+                message=f"Update from {start_ref} to {end_ref}",
             )
 
         repo.run(
