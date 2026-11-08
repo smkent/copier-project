@@ -82,8 +82,6 @@ class RepoWorktree(ExitStack):
         self.run(
             ["git", "clone", self.repo.url, str(self.path)], set_cwd=False
         )
-        self.run(["mise", "install"] if self.use_mise() else ["poe", "setup"])
-        self.run(["git", "checkout", "-b", self.branch])
         return self
 
     def use_mise(self) -> bool:
