@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from functools import cached_property
 from typing import TYPE_CHECKING
 
 from rich import print  # noqa: A004
@@ -11,37 +10,32 @@ from rich.text import Text
 from typer import Exit
 
 from .project import UpdateProject, UpdateResult, UpdateStatus
-from .repo import RepoTarget
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
+    from .repo import RepoTarget
+
 
 @dataclass
 class UpdateAction:
-    repos: Sequence[str]
+    repos: Sequence[RepoTarget]
     vcs_ref: str | None = None
     dry_run: bool = False
     allow_empty: bool = False
     branch: str = "updates"
 
-    @cached_property
-    def repo_targets(self) -> dict[str, RepoTarget]:
-        return {
-            (target := RepoTarget(repo)).url: target for repo in self.repos
-        }
-
     def __call__(self) -> None:
         results = []
-        for target in self.repo_targets.values():
+        for repo in self.repos:
             result = UpdateProject(
-                target,
+                repo,
                 branch=self.branch,
                 vcs_ref=self.vcs_ref,
                 dry_run=self.dry_run,
                 allow_empty=self.allow_empty,
             )()
-            results.append((target, result))
+            results.append((repo, result))
         self._print_summary(results, dry_run=self.dry_run)
         if any(r[1].status == UpdateStatus.FAILED for r in results):
             raise Exit(1)

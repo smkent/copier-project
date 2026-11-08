@@ -8,17 +8,19 @@ from typer import Argument, Exit, Option, Typer
 
 from . import version as package_version
 from .console import console
+from .update.repo import RepoTarget
 from .update.update import UpdateAction
 
 
 class Args:
     Repos = Annotated[
-        list[str],
+        list[RepoTarget],
         Argument(
+            parser=RepoTarget,
             help=(
                 "Repositories to update. Accepts gh:user/repo"
                 " or github.com/user/repo."
-            )
+            ),
         ),
     ]
     DryRun = Annotated[
