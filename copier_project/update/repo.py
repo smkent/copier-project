@@ -71,7 +71,7 @@ class RepoTarget:
         )
 
     def print(self, text: str | Text) -> None:
-        txt = Text.assemble(Text(f"{self.text} => ", style="bold"), text)
+        txt = Text.assemble(self.text, Text(" => ", style="bold"), text)
         print(Panel(txt, expand=False, border_style="white dim"))
 
 
