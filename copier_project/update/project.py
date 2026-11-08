@@ -20,6 +20,7 @@ if TYPE_CHECKING:
 class UpdateResultType(Enum):
     UPDATED = "bold green"
     CURRENT = "bold blue"
+    CONFLICT = "bold yellow"
     FAILED = "bold red"
 
     @property
@@ -106,6 +107,14 @@ class UpdateProject:
             )
 
         if repo.has_conflicts(status):
+            if self.dry_run:
+                return UpdateResult(
+                    type=UpdateResultType.CONFLICT,
+                    start_ref=start_ref,
+                    end_ref=end_ref,
+                    message="Conflicts detected",
+                )
+
             print(  # noqa: T201
                 "Conflicts detected."
                 " Resolve them and exit the shell to continue."
@@ -113,7 +122,12 @@ class UpdateProject:
             repo.shell()
             status = repo.git_status()
             if repo.has_conflicts(status):
-                raise RuntimeError("Conflicts remain, aborting")
+                return UpdateResult(
+                    type=UpdateResultType.CONFLICT,
+                    start_ref=start_ref,
+                    end_ref=end_ref,
+                    message="Conflicts remain, aborting",
+                )
 
         if repo.use_mise():
             with self._success_or_shell(repo, "`mise install`"):

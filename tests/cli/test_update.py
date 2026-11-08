@@ -450,7 +450,7 @@ def test_main_update_mise_config_moved(
         main_runner("update", "gh:ness/pkfire", "--dry-run")
 
 
-def test_main_update_error(
+def test_main_update_conflict(
     main_runner: MainRunner,
     disallow_subprocess: DisallowCallable,
     worktree: Path,
@@ -458,6 +458,8 @@ def test_main_update_error(
     project_factory: ProjectFactory,
     start_ref: str,
     end_ref: str,
+    *,
+    dry_run: bool,
 ) -> None:
     def _postcreate(project: Path) -> None:
         (project / "AGENTS.md").write_text("Overwritten file, no newline")
@@ -484,13 +486,49 @@ def test_main_update_error(
     expect_run.latest_ref = end_ref
     expect_run.expect_clone()
     expect_run.expect_copier_update()
-    expect_run.expect_shell()
-    expect_run.expect_git_status()
-    expect_run.expect_mise_install_and_lt()
-    expect_run.expect_shell()
-    expect_run.expect_git_commit(start_ref, end_ref)
+    if not dry_run:
+        expect_run.expect_shell()
+        expect_run.expect_git_status()
+        expect_run.expect_mise_install_and_lt()
+        expect_run.expect_shell()
+        expect_run.expect_git_commit(start_ref, end_ref, dry_run=dry_run)
     with expect_run.patch(mock=False, shell_callback=_shell):
-        main_runner("update", "gh:ness/pkfire", "--dry-run")
+        main_runner(
+            "update", "gh:ness/pkfire", *(["--dry-run"] if dry_run else [])
+        )
+
+
+def test_main_update_error(
+    main_runner: MainRunner,
+    disallow_subprocess: DisallowCallable,
+    expect_run: ExpectRun,
+    project_factory: ProjectFactory,
+    start_ref: str,
+    end_ref: str,
+) -> None:
+    def _postcreate(project: Path) -> None:
+        (project / "AGENTS.md").write_text("Overwritten file, no newline")
+        for cmd in (
+            ["git", "add", "."],
+            ["git", "commit", "-n", "-m", "Add conflicting change"],
+            ["git", "push"],
+        ):
+            with disallow_subprocess.pause():
+                subprocess.run(  # noqa: S603
+                    cmd, cwd=project, check=True, capture_output=True
+                )
+
+    project_factory(vcs_ref=start_ref, postcreate=_postcreate)
+
+    def _shell() -> None:
+        raise Exception("Test error")  # noqa: TRY002
+
+    expect_run.latest_ref = end_ref
+    expect_run.expect_clone()
+    expect_run.expect_copier_update()
+    expect_run.expect_shell()
+    with expect_run.patch(mock=False, shell_callback=_shell):
+        main_runner("update", "gh:ness/pkfire", match=1)
 
 
 @pytest.mark.parametrize(
