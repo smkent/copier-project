@@ -7,6 +7,7 @@ import sys
 import tempfile
 from contextlib import ExitStack, contextmanager, suppress
 from dataclasses import InitVar, dataclass, field
+from functools import cached_property
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, ClassVar, Self
 
@@ -62,6 +63,17 @@ class RepoTarget:
         with RepoWorktree(repo=self, branch=branch) as worktree:
             yield worktree
 
+    @cached_property
+    def text(self) -> Text:
+        return Text.from_markup(
+            f"[link={self.url}]{self.github_repo}[/link]",
+            style="bold",
+        )
+
+    def print(self, text: str | Text) -> None:
+        txt = Text.assemble(Text(f"{self.text} => ", style="bold"), text)
+        print(Panel(txt, expand=False, border_style="white dim"))
+
 
 @dataclass
 class RepoWorktree(ExitStack):
@@ -104,11 +116,7 @@ class RepoWorktree(ExitStack):
             *cmd[1:],
         ]
         cmd_text = Text(" ".join(display_args), style="color(153)")
-        txt = Text.assemble(
-            Text(f"{self.repo.github_repo} => ", style="bold"),
-            cmd_text,
-        )
-        print(Panel(txt, expand=False, border_style="white dim"))
+        self.repo.print(cmd_text)
         return subprocess.run(cmd, **kwargs)  # noqa: S603 PLW1510
 
     def run_task(

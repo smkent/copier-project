@@ -54,10 +54,7 @@ class UpdateAction:
         for repo, result in sorted(results, key=lambda r: r[0].github_repo):
             grid.add_row(
                 result.status.formatted_name,
-                Text.from_markup(
-                    f"[link={repo.url}]{repo.github_repo}[/link]",
-                    style="bold",
-                ),
+                repo.text,
                 Text(str(result.pr_url or result.message)),
             )
         title = Text("Update Results", style="bold")
