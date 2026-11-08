@@ -35,6 +35,7 @@ class UpdateAction:
                 dry_run=self.dry_run,
                 allow_empty=self.allow_empty,
             )()
+            repo.print(result.type.formatted_name)
             results.append((repo, result))
         self._print_summary(results, dry_run=self.dry_run)
         if any(r[1].type == UpdateResultType.FAILED for r in results):
