@@ -27,7 +27,7 @@ class UpdateAction:
 
     def __call__(self) -> None:
         results = []
-        for repo in self.repos:
+        for repo in [*dict.fromkeys(self.repos)]:
             result = UpdateProject(
                 repo,
                 branch=self.branch,
