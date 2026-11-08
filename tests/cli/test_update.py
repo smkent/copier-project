@@ -17,15 +17,16 @@ from unittest.mock import MagicMock, _Call, call, patch
 import pytest
 import yaml
 
-from copier_project.__main__ import main, update
-from copier_project.repo import PROJECT_URL, SELF_ALIAS
-from copier_project.update import COPIER_CMD
+from copier_project.__main__ import main
+from copier_project.update.constants import COPIER_CMD, PROJECT_URL, SELF_ALIAS
 from tests.template.utils import template
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Generator, Sequence
 
     from tests.utils import DisallowCallable
+
+    from .conftest import MainRunner
 
 
 DEFAULT_BRANCH_NAME = "fhqwhgads"
@@ -334,6 +335,7 @@ def test_main_help(monkeypatch: pytest.MonkeyPatch) -> None:
     "project_visibility", template.choices.project_visibility
 )
 def test_main_update_with_project_current(
+    main_runner: MainRunner,
     expect_run: ExpectRun,
     project_factory: ProjectFactory,
     project_visibility: str,
@@ -345,7 +347,9 @@ def test_main_update_with_project_current(
     expect_run.latest_ref = end_ref
     expect_run.expect_clone()
     with expect_run.patch(mock=False):
-        update(["gh:ness/pkfire"], dry_run=dry_run)
+        main_runner(
+            "update", "gh:ness/pkfire", *(["--dry-run"] if dry_run else [])
+        )
 
 
 @pytest.mark.parametrize(
@@ -356,6 +360,7 @@ def test_main_update_with_project_current(
     ],
 )
 def test_main_update_allow_empty(
+    main_runner: MainRunner,
     expect_run: ExpectRun,
     project_factory: ProjectFactory,
     *,
@@ -372,11 +377,13 @@ def test_main_update_allow_empty(
         expect_run.expect_mise_install_and_lt()
         expect_run.expect_git_commit(start_ref, end_ref, dry_run=dry_run)
     with expect_run.patch(mock=False):
-        update(
-            ["gh:ness/pkfire"],
-            vcs_ref=end_ref,
-            dry_run=dry_run,
-            allow_empty=allow_empty,
+        main_runner(
+            "update",
+            "gh:ness/pkfire",
+            "--dry-run",
+            "--vcs-ref",
+            end_ref,
+            *(["--allow-empty"] if allow_empty else []),
         )
 
 
@@ -389,6 +396,7 @@ def test_main_update_allow_empty(
     ],
 )
 def test_main_update_legacy_poethepoet(
+    main_runner: MainRunner,
     expect_run: ExpectRun,
     project_factory: ProjectFactory,
     start_ref: str,
@@ -406,11 +414,12 @@ def test_main_update_legacy_poethepoet(
         expect_run.expect_mise_install_and_lt()
     expect_run.expect_git_commit(start_ref, end_ref)
     with expect_run.patch(mock=False):
-        update(["gh:ness/pkfire"], dry_run=True)
+        main_runner("update", "gh:ness/pkfire", "--dry-run")
 
 
 @pytest.mark.parametrize("start_ref", ["v0.27.0"])
 def test_main_update_mise_config_moved(
+    main_runner: MainRunner,
     disallow_subprocess: DisallowCallable,
     expect_run: ExpectRun,
     project_factory: ProjectFactory,
@@ -438,10 +447,11 @@ def test_main_update_mise_config_moved(
     expect_run.expect_mise_install_and_lt()
     expect_run.expect_git_commit(start_ref, end_ref)
     with expect_run.patch(mock=False):
-        update(["gh:ness/pkfire"], dry_run=True)
+        main_runner("update", "gh:ness/pkfire", "--dry-run")
 
 
 def test_main_update_error(
+    main_runner: MainRunner,
     disallow_subprocess: DisallowCallable,
     worktree: Path,
     expect_run: ExpectRun,
@@ -480,7 +490,7 @@ def test_main_update_error(
     expect_run.expect_shell()
     expect_run.expect_git_commit(start_ref, end_ref)
     with expect_run.patch(mock=False, shell_callback=_shell):
-        update(["gh:ness/pkfire"], dry_run=True)
+        main_runner("update", "gh:ness/pkfire", "--dry-run")
 
 
 @pytest.mark.parametrize(
@@ -502,21 +512,25 @@ def test_main_update_error(
     ],
 )
 def test_main_update_repo_arguments(
-    worktree: Path, expect_run: ExpectRun, arg: str, repo: str
+    main_runner: MainRunner,
+    worktree: Path,
+    expect_run: ExpectRun,
+    arg: str,
+    repo: str,
 ) -> None:
     expect_run.expect(
         ["git", "clone", f"https://github.com/{repo}", str(worktree)]
     )
     with expect_run.patch(mock=True, has_any=True):
-        update([arg], dry_run=True)
+        main_runner("update", arg, "--dry-run")
 
 
 def test_main_update_repo_arguments_self(
-    worktree: Path, expect_run: ExpectRun
+    main_runner: MainRunner, worktree: Path, expect_run: ExpectRun
 ) -> None:
     expect_run.expect(["git", "clone", PROJECT_URL, str(worktree)])
     with expect_run.patch(mock=True, has_any=True):
-        update([SELF_ALIAS], dry_run=True)
+        main_runner("update", SELF_ALIAS, "--dry-run")
 
 
 @pytest.mark.parametrize("template_variant", template.choices.template_variant)
@@ -524,6 +538,7 @@ def test_main_update_repo_arguments_self(
     "project_visibility", template.choices.project_visibility
 )
 def test_main_update_with_project(
+    main_runner: MainRunner,
     expect_run: ExpectRun,
     project_factory: ProjectFactory,
     template_variant: str,
@@ -544,4 +559,6 @@ def test_main_update_with_project(
     expect_run.expect_mise_install_and_lt()
     expect_run.expect_git_commit(start_ref, end_ref, dry_run=dry_run)
     with expect_run.patch(mock=False):
-        update(["gh:ness/pkfire"], dry_run=dry_run)
+        main_runner(
+            "update", "gh:ness/pkfire", *(["--dry-run"] if dry_run else [])
+        )

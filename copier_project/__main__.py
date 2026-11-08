@@ -2,36 +2,25 @@ from __future__ import annotations
 
 import os
 import shutil
-from dataclasses import dataclass
-from enum import Enum
-from typing import TYPE_CHECKING, Annotated
+from typing import Annotated
 
-from rich import print  # noqa: A004
-from rich.console import Console
-from rich.panel import Panel
-from rich.table import Table
-from rich.text import Text
 from typer import Argument, Exit, Option, Typer
 
 from . import version as package_version
-from .repo import RepoTarget
-from .update import UpdateAction
-
-if TYPE_CHECKING:
-    from collections.abc import Sequence
-
-
-console = Console()
+from .console import console
+from .update.repo import RepoTarget
+from .update.update import UpdateAction
 
 
 class Args:
     Repos = Annotated[
-        list[str],
+        list[RepoTarget],
         Argument(
+            parser=RepoTarget,
             help=(
                 "Repositories to update. Accepts gh:user/repo"
                 " or github.com/user/repo."
-            )
+            ),
         ),
     ]
     DryRun = Annotated[
@@ -60,24 +49,6 @@ def setup(
         raise Exit
 
 
-class UpdateStatus(Enum):
-    UPDATED = "bold green"
-    CURRENT = "bold blue"
-    FAILED = "bold red"
-
-    @property
-    def formatted_name(self) -> Text:
-        return Text(f"{self.name:<7}", style=self.value)
-
-
-@dataclass
-class UpdateResult:
-    repo: RepoTarget
-    status: UpdateStatus
-    exception: Exception | None = None
-    pr_url: str | None = None
-
-
 @cli.command()
 def update(
     repos: Args.Repos,
@@ -97,62 +68,18 @@ def update(
     branch: Annotated[str, Option(help="Branch name to create.")] = "updates",
 ) -> None:
     """Apply copier-project template updates to downstream repositories."""
-    results = []
-
-    repo_targets = {(target := RepoTarget(repo)).url: target for repo in repos}
-    for target in repo_targets.values():
-        try:
-            pr_url = UpdateAction(
-                target,
-                branch=branch,
-                vcs_ref=vcs_ref,
-                dry_run=dry_run,
-                allow_empty=allow_empty,
-            )()
-            if pr_url:
-                results.append(
-                    UpdateResult(target, UpdateStatus.UPDATED, pr_url=pr_url)
-                )
-            else:
-                results.append(UpdateResult(target, UpdateStatus.CURRENT))
-        except Exception as exc:  # noqa: BLE001
-            console.print_exception()
-            results.append(
-                UpdateResult(target, status=UpdateStatus.FAILED, exception=exc)
-            )
-
-    _print_summary(results, dry_run=dry_run)
-    if any(r.status == UpdateStatus.FAILED for r in results):
-        raise Exit(1)
+    UpdateAction(
+        repos=repos,
+        vcs_ref=vcs_ref,
+        dry_run=dry_run,
+        allow_empty=allow_empty,
+        branch=branch,
+    )()
 
 
 @cli.command(help=f"Show version ({package_version}) and exit.")
 def version() -> None:
     console.print(package_version, highlight=False)
-
-
-def _print_summary(results: Sequence[UpdateResult], *, dry_run: bool) -> None:
-    if not results:
-        return
-    grid = Table.grid(padding=(0, 1), expand=True)
-    grid.add_column()
-    grid.add_column()
-    grid.add_column()
-    for result in sorted(results, key=lambda r: r.repo.github_repo):
-        grid.add_row(
-            result.status.formatted_name,
-            Text.from_markup(
-                f"[link={result.repo.url}]{result.repo.github_repo}[/link]",
-                style="bold",
-            ),
-            Text(str(result.pr_url or result.exception)),
-        )
-    title = Text("Update Results", style="bold")
-    if dry_run:
-        title += Text(" (dry run)", style="green")
-    print(
-        Panel(grid, title=title, title_align="left", expand=False, padding=1)
-    )
 
 
 def setup_env() -> None:
