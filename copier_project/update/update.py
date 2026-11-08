@@ -53,8 +53,8 @@ class UpdateAction:
             grid.add_column()
         for repo, result in sorted(results, key=lambda r: r[0].github_repo):
             grid.add_row(
-                result.type.formatted_name,
                 repo.text,
+                result.type.formatted_name,
                 Text(str(result.pr_url or result.message)),
             )
         title = Text("Update Results", style="bold")
