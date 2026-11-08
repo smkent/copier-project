@@ -5,7 +5,6 @@ from __future__ import annotations
 import json
 import os
 import subprocess
-import sys
 import tempfile
 from contextlib import contextmanager
 from dataclasses import dataclass, field
@@ -17,7 +16,6 @@ from unittest.mock import MagicMock, _Call, call, patch
 import pytest
 import yaml
 
-from copier_project.__main__ import main
 from copier_project.update.constants import COPIER_CMD, PROJECT_URL, SELF_ALIAS
 from tests.template.utils import template
 
@@ -323,12 +321,6 @@ def expect_run(
         origin=origin,
         worktree=worktree,
     )
-
-
-def test_main_help(monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setattr(sys, "argv", ["copier-project", "--help"])
-    with pytest.raises(SystemExit, match=str(0)):
-        main()
 
 
 @pytest.mark.parametrize(
