@@ -32,6 +32,53 @@ DEFAULT_BRANCH_NAME = "fhqwhgads"
 DEFAULT_END_REF = "v0.32.1"
 
 
+@dataclass
+class ProjectFactory:
+    disallow_subprocess: DisallowCallable
+    render_template: Callable[..., Path]
+    origin: Path
+
+    def __call__(
+        self,
+        vcs_ref: str,
+        postcreate: Callable[[Path], None] | None = None,
+        **kwargs: Any,
+    ) -> Path:
+        kwargs.setdefault("template_variant", "generic")
+        project = self.render_template(vcs_ref=vcs_ref, **kwargs)
+        timestamp = self._vcs_ref_timestamp(vcs_ref)
+
+        setup_commands = [
+            ["git", "init", "-b", DEFAULT_BRANCH_NAME],
+            ["git", "remote", "add", "origin", str(self.origin)],
+        ]
+        if (project / "pyproject.toml").is_file():
+            setup_commands.append(
+                ["env", f"UV_EXCLUDE_NEWER={timestamp}", "mise", "install"]
+            )
+            setup_commands.append(["mise", "install"])
+        setup_commands += [
+            ["git", "add", "."],
+            ["git", "commit", "-m", "init from template"],
+            ["git", "push", "-u", "origin", DEFAULT_BRANCH_NAME],
+        ]
+        for cmd in setup_commands:
+            with self.disallow_subprocess.pause():
+                subprocess.run(cmd, cwd=project, check=True)  # noqa: S603
+        if postcreate:
+            postcreate(project)
+        return project
+
+    def _vcs_ref_timestamp(self, ref: str) -> str:
+        with self.disallow_subprocess.pause():
+            return subprocess.run(  # noqa: S603
+                ["git", "log", "-n", "1", "--format=%aI", str(ref), "--"],
+                check=True,
+                capture_output=True,
+                text=True,
+            ).stdout.strip()
+
+
 @pytest.fixture(params=["v0.16.2"])
 def start_ref(request: pytest.FixtureRequest) -> str:
     return request.param
@@ -69,54 +116,16 @@ def origin(tmp_path: Path, disallow_subprocess: DisallowCallable) -> Path:
 
 
 @pytest.fixture
-def create_project(
+def project_factory(
     disallow_subprocess: DisallowCallable,
     render_template: Callable[..., Path],
     origin: Path,
-) -> Callable[..., Path]:
-
-    def _vcs_ref_timestamp(ref: str) -> str:
-        with disallow_subprocess.pause():
-            return subprocess.run(  # noqa: S603
-                ["git", "log", "-n", "1", "--format=%aI", str(ref), "--"],
-                check=True,
-                capture_output=True,
-                text=True,
-            ).stdout.strip()
-
-    def _create(
-        vcs_ref: str,
-        postcreate: Callable[[Path], None] | None = None,
-        **kwargs: Any,
-    ) -> Path:
-        kwargs.setdefault("template_variant", "generic")
-        project = render_template(vcs_ref=vcs_ref, **kwargs)
-        timestamp = _vcs_ref_timestamp(vcs_ref)
-
-        setup_commands = [
-            ["git", "init", "-b", DEFAULT_BRANCH_NAME],
-            ["git", "remote", "add", "origin", str(origin)],
-        ]
-        if (project / "pyproject.toml").is_file():
-            setup_commands.append(
-                ["env", f"UV_EXCLUDE_NEWER={timestamp}", "mise", "install"]
-            )
-            setup_commands.append(["mise", "install"])
-        setup_commands += [
-            ["git", "add", "."],
-            ["git", "commit", "-m", "init from template"],
-            ["git", "push", "-u", "origin", DEFAULT_BRANCH_NAME],
-        ]
-        for cmd in setup_commands:
-            with disallow_subprocess.pause():
-                subprocess.run(  # noqa: S603
-                    cmd, cwd=project, check=True, capture_output=True
-                )
-        if postcreate:
-            postcreate(project)
-        return project
-
-    return _create
+) -> ProjectFactory:
+    return ProjectFactory(
+        disallow_subprocess=disallow_subprocess,
+        render_template=render_template,
+        origin=origin,
+    )
 
 
 @pytest.fixture
@@ -347,13 +356,13 @@ def test_main_help(monkeypatch: pytest.MonkeyPatch) -> None:
 )
 def test_main_update_with_project_current(
     expect_run: ExpectRun,
-    create_project: Callable[..., Path],
+    project_factory: ProjectFactory,
     project_visibility: str,
     end_ref: str,
     *,
     dry_run: bool,
 ) -> None:
-    create_project(vcs_ref=end_ref, project_visibility=project_visibility)
+    project_factory(vcs_ref=end_ref, project_visibility=project_visibility)
     expect_run.latest_ref = end_ref
     expect_run.expect_clone_and_setup()
     with expect_run.patch(mock=False):
@@ -369,14 +378,14 @@ def test_main_update_with_project_current(
 )
 def test_main_update_allow_empty(
     expect_run: ExpectRun,
-    create_project: Callable[..., Path],
+    project_factory: ProjectFactory,
     *,
     allow_empty: bool,
 ) -> None:
     start_ref = "v0.23.0"
     end_ref = "v0.23.1"
     dry_run = True
-    create_project(vcs_ref=start_ref, project_visibility="public")
+    project_factory(vcs_ref=start_ref, project_visibility="public")
     expect_run.latest_ref = end_ref
     expect_run.expect_clone_and_setup()
     expect_run.expect_copier_update()
@@ -402,13 +411,13 @@ def test_main_update_allow_empty(
 )
 def test_main_update_legacy_poethepoet(
     expect_run: ExpectRun,
-    create_project: Callable[..., Path],
+    project_factory: ProjectFactory,
     start_ref: str,
     end_ref: str,
     *,
     expect_lt_poe: bool,
 ) -> None:
-    create_project(vcs_ref=start_ref)
+    project_factory(vcs_ref=start_ref)
     expect_run.latest_ref = end_ref
     expect_run.expect_clone_and_setup(poe=True)
     expect_run.expect_copier_update()
@@ -425,7 +434,7 @@ def test_main_update_legacy_poethepoet(
 def test_main_update_mise_config_moved(
     disallow_subprocess: DisallowCallable,
     expect_run: ExpectRun,
-    create_project: Callable[..., Path],
+    project_factory: ProjectFactory,
     start_ref: str,
     end_ref: str,
 ) -> None:
@@ -443,7 +452,7 @@ def test_main_update_mise_config_moved(
                     cmd, cwd=project, check=True, capture_output=True
                 )
 
-    create_project(vcs_ref=start_ref, postcreate=_postcreate)
+    project_factory(vcs_ref=start_ref, postcreate=_postcreate)
     expect_run.latest_ref = end_ref
     expect_run.expect_clone_and_setup()
     expect_run.expect_copier_update()
@@ -457,7 +466,7 @@ def test_main_update_error(
     disallow_subprocess: DisallowCallable,
     worktree: Path,
     expect_run: ExpectRun,
-    create_project: Callable[..., Path],
+    project_factory: ProjectFactory,
     start_ref: str,
     end_ref: str,
 ) -> None:
@@ -473,7 +482,7 @@ def test_main_update_error(
                     cmd, cwd=project, check=True, capture_output=True
                 )
 
-    create_project(vcs_ref=start_ref, postcreate=_postcreate)
+    project_factory(vcs_ref=start_ref, postcreate=_postcreate)
 
     def _shell() -> None:
         with disallow_subprocess.pause():
@@ -537,7 +546,7 @@ def test_main_update_repo_arguments_self(
 )
 def test_main_update_with_project(
     expect_run: ExpectRun,
-    create_project: Callable[..., Path],
+    project_factory: ProjectFactory,
     template_variant: str,
     project_visibility: str,
     end_ref: str,
@@ -545,7 +554,7 @@ def test_main_update_with_project(
     *,
     dry_run: bool,
 ) -> None:
-    create_project(
+    project_factory(
         vcs_ref=start_ref,
         template_variant=template_variant,
         project_visibility=project_visibility,
