@@ -1,16 +1,17 @@
 from __future__ import annotations
 
 import os
-import sys
 from typing import TYPE_CHECKING
 
 import pytest
 
 import copier_project
-from copier_project.__main__ import main, version
+from copier_project.__main__ import version
 
 if TYPE_CHECKING:
     from collections.abc import Generator
+
+    from .conftest import MainRunner
 
 
 def test_version() -> None:
@@ -27,12 +28,8 @@ def version_output(capsys: pytest.CaptureFixture[str]) -> Generator[None]:
 
 @pytest.mark.usefixtures("version_output")
 @pytest.mark.parametrize("cli_option", ["version", "--version", "-V"])
-def test_version_main(
-    monkeypatch: pytest.MonkeyPatch, cli_option: str
-) -> None:
-    monkeypatch.setattr(sys, "argv", ["copier-project", cli_option])
-    with pytest.raises(SystemExit, match=str(0)):
-        main()
+def test_version_main(main_runner: MainRunner, cli_option: str) -> None:
+    main_runner(cli_option)
 
 
 @pytest.mark.usefixtures("version_output")
