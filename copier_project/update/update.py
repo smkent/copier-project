@@ -52,13 +52,20 @@ class UpdateAction:
         grid = Table.grid(padding=(0, 2), expand=True)
         for _ in range(5):
             grid.add_column()
+        grid.add_row(
+            *(
+                Text(t, style="white bold")
+                for t in ("Repository", "Result", "Prev Ref", "New Ref")
+            )
+        )
+        grid.add_row()
         for repo, result in sorted(results, key=lambda r: r[0].github_repo):
             grid.add_row(
                 repo.text,
                 result.type.formatted_name,
                 result.start_ref,
                 result.end_ref or "-",
-                Text(str(result.pr_url or result.message or "-")),
+                Text(str(result.pr_url or result.message or " ")),
             )
         title = Text("Update Results", style="bold")
         if dry_run:
