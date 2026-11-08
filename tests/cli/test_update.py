@@ -98,10 +98,14 @@ def create_project(
             ["git", "remote", "add", "origin", str(origin)],
         ]
         if (project / "pyproject.toml").is_file():
-            setup_commands.append(
-                ["env", f"UV_EXCLUDE_NEWER={timestamp}", "mise", "install"]
-            )
-            setup_commands.append(["mise", "exec", "--", "uv", "sync"])
+            uv_env = ["env", f"UV_EXCLUDE_NEWER={timestamp}"]
+            uv_sync = ["uv", "sync"]
+            if (project / "mise.toml").is_file():
+                setup_commands.append([*uv_env, "mise", "install"])
+                uv_sync = ["mise", "exec", "--", *uv_sync]
+            else:
+                setup_commands.append([*uv_env, *uv_sync])
+            setup_commands.append(uv_sync)
         setup_commands += [
             ["git", "add", "."],
             ["git", "commit", "-m", "init from template"],
