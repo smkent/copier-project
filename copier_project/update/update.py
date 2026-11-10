@@ -37,15 +37,12 @@ class UpdateAction:
             )()
             repo.print(result.text)
             results.append((repo, result))
-        self._print_summary(results, dry_run=self.dry_run)
+        self._print_summary(results)
         if any(r[1].type == UpdateResultType.FAILED for r in results):
             raise Exit(1)
 
     def _print_summary(
-        self,
-        results: Sequence[tuple[RepoTarget, UpdateResult]],
-        *,
-        dry_run: bool,
+        self, results: Sequence[tuple[RepoTarget, UpdateResult]]
     ) -> None:
         if not results:
             return
@@ -68,7 +65,7 @@ class UpdateAction:
                 Text(str(result.pr_url or result.message or " ")),
             )
         title = Text("Update Results", style="bold")
-        if dry_run:
+        if self.dry_run:
             title += Text(" (dry run)", style="green")
         print(
             Panel(
