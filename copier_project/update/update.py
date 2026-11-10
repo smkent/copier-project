@@ -36,15 +36,13 @@ class UpdateAction:
                 allow_empty=self.allow_empty,
             )()
             results.append((repo, result))
-        self._print_summary(results)
+        print(self._results_summary(results))
         if any(r[1].type == UpdateResultType.FAILED for r in results):
             raise Exit(1)
 
-    def _print_summary(
+    def _results_summary(
         self, results: Sequence[tuple[RepoTarget, UpdateResult]]
-    ) -> None:
-        if not results:
-            return
+    ) -> Panel:
         grid = Table.grid(padding=(0, 2), expand=True)
         for _ in range(5):
             grid.add_column()
@@ -63,11 +61,16 @@ class UpdateAction:
                 result.end_ref or "-",
                 Text(str(result.pr_url or result.message or " ")),
             )
-        title = Text("Update Results", style="bold")
+        return Panel(
+            grid,
+            title=self._title("Update Results"),
+            title_align="left",
+            expand=False,
+            padding=1,
+        )
+
+    def _title(self, text: str) -> Text:
+        title = Text(text, style="bold")
         if self.dry_run:
             title += Text(" (dry run)", style="green")
-        print(
-            Panel(
-                grid, title=title, title_align="left", expand=False, padding=1
-            )
-        )
+        return title
