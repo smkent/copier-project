@@ -27,7 +27,7 @@ class UpdateAction:
 
     def __call__(self) -> None:
         results = []
-        for repo in [*dict.fromkeys(self.repos)]:
+        for repo in self.repos:
             result = UpdateProject(
                 repo,
                 branch=self.branch,
@@ -35,20 +35,14 @@ class UpdateAction:
                 dry_run=self.dry_run,
                 allow_empty=self.allow_empty,
             )()
-            repo.print(result.text)
             results.append((repo, result))
-        self._print_summary(results, dry_run=self.dry_run)
+        print(self._results_summary(results))
         if any(r[1].type == UpdateResultType.FAILED for r in results):
             raise Exit(1)
 
-    def _print_summary(
-        self,
-        results: Sequence[tuple[RepoTarget, UpdateResult]],
-        *,
-        dry_run: bool,
-    ) -> None:
-        if not results:
-            return
+    def _results_summary(
+        self, results: Sequence[tuple[RepoTarget, UpdateResult]]
+    ) -> Panel:
         grid = Table.grid(padding=(0, 2), expand=True)
         for _ in range(5):
             grid.add_column()
@@ -67,11 +61,16 @@ class UpdateAction:
                 result.end_ref or "-",
                 Text(str(result.pr_url or result.message or " ")),
             )
-        title = Text("Update Results", style="bold")
-        if dry_run:
-            title += Text(" (dry run)", style="green")
-        print(
-            Panel(
-                grid, title=title, title_align="left", expand=False, padding=1
-            )
+        return Panel(
+            grid,
+            title=self._title("Update Results"),
+            title_align="left",
+            expand=False,
+            padding=1,
         )
+
+    def _title(self, text: str) -> Text:
+        title = Text(text, style="bold")
+        if self.dry_run:
+            title += Text(" (dry run)", style="green")
+        return title

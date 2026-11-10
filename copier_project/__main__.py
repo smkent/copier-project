@@ -69,7 +69,7 @@ def update(
 ) -> None:
     """Apply copier-project template updates to downstream repositories."""
     UpdateAction(
-        repos=repos,
+        repos=[*dict.fromkeys(repos)],
         vcs_ref=vcs_ref,
         dry_run=dry_run,
         allow_empty=allow_empty,
