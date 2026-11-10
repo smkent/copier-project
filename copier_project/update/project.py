@@ -63,9 +63,11 @@ class UpdateProject:
     def __call__(self) -> UpdateResult:
         try:
             with self.repo.worktree(branch=self.branch) as worktree:
-                return self._run(worktree)
+                result = self._run(worktree)
         except Exception as e:  # noqa: BLE001
-            return UpdateResult(type=UpdateResultType.FAILED, message=str(e))
+            result = UpdateResult(type=UpdateResultType.FAILED, message=str(e))
+        self.repo.print(result.text)
+        return result
 
     @contextmanager
     def _success_or_shell(
