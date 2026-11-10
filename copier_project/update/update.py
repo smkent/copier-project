@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
@@ -27,6 +28,7 @@ class UpdateAction:
 
     def __call__(self) -> None:
         results = []
+        print(self._repositories_summary())
         for repo in self.repos:
             result = UpdateProject(
                 repo,
@@ -39,6 +41,15 @@ class UpdateAction:
         print(self._results_summary(results))
         if any(r[1].type == UpdateResultType.FAILED for r in results):
             raise Exit(1)
+
+    def _repositories_summary(self) -> Panel:
+        return Panel(
+            Text(os.linesep).join(repo.text for repo in self.repos),
+            title=self._title("Repositories to Update"),
+            title_align="left",
+            expand=False,
+            padding=1,
+        )
 
     def _results_summary(
         self, results: Sequence[tuple[RepoTarget, UpdateResult]]
