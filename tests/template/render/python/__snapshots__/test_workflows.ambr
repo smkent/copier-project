@@ -2136,14 +2136,14 @@
   
   jobs:
     cleanup-pr:
-      name: Remove closed pull request image
+      name: Remove pull request image
       if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
       runs-on: ubuntu-latest
       timeout-minutes: 15
       permissions:
         packages: write
       steps:
-        - name: 🧹 Remove pull request image
+        - name: 🧹 Remove image for pull request ${{ github.event.pull_request.number }}
           uses: dataaxiom/ghcr-cleanup-action@v1
           with:
             token: ${{ secrets.GITHUB_TOKEN }}

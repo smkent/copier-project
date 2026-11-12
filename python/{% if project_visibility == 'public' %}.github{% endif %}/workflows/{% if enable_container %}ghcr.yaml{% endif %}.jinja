@@ -43,10 +43,10 @@ cancel-in-progress: false
 {% block jobs %}
 {% call ghcr_cleanup_job(
   id="cleanup-pr",
-  name="Remove closed pull request image",
+  name="Remove pull request image",
   condition="github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository",
 ) %}
-{% call ghcr_cleanup_step(name="Remove pull request image") %}
+{% call ghcr_cleanup_step(name="Remove image for pull request ${{ github.event.pull_request.number }}") %}
 delete-tags: {% raw %}pr-${{ github.event.pull_request.number }}{% endraw %}
 {% endcall %}
 {% endcall %}
