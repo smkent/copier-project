@@ -30,6 +30,7 @@ version:
         pip install --quiet uv
         version="$(uvx uv-dynamic-versioning)"
         echo "version=${version}" >> "${GITHUB_OUTPUT}"
+        echo "::notice title=Project version::${version}"
 
 image:
   name: Image
