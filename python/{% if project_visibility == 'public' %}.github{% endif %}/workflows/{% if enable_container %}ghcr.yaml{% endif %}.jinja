@@ -20,10 +20,16 @@ group: ghcr-cleanup-{% raw %}${{ github.event.pull_request.number || 'scheduled'
 cancel-in-progress: false
 {% endblock %}
 
-{% macro ghcr_cleanup_job(id, name, condition) -%}
+{% macro ghcr_cleanup_job(id, name, condition, needs=[]) -%}
 {{ id }}:
   name: {{ name }}
   if: {{ condition }}
+{%- if needs %}
+  needs:
+{%- for need in needs %}
+    - {{ need }}
+{%- endfor %}
+{%- endif %}
   runs-on: ubuntu-latest
   timeout-minutes: 15
   permissions:
@@ -56,16 +62,26 @@ delete-tags: {% raw %}pr-${{ github.event.pull_request.number }}{% endraw %}
   name="Remove stale images",
   condition="github.event_name != 'pull_request'",
 ) %}
-
 {% call ghcr_cleanup_step(name="Remove stray stale images") %}
 keep-n-tagged: 0
 use-regex: true
 exclude-tags: ^(\d+|\d+\.\d+|\d+\.\d+\.\d+|latest|edge|{% raw %}${{ github.event.repository.default_branch }}{% endraw %})$
 older-than: 30 days
 {% endcall %}
+{% endcall %}
 
+{% call ghcr_cleanup_job(
+  id="cleanup-untagged",
+  name="Remove untagged images",
+  condition="${{ !cancelled() && !failure() && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) }}",
+  needs=["cleanup-pr", "cleanup-stale"],
+) %}
 {% call ghcr_cleanup_step(name="Remove untagged container images") %}
 delete-untagged: true
+older-than: 1 hour
+{% endcall %}
+
+{% call ghcr_cleanup_step(name="Remove orphaned container images") %}
 delete-orphaned-images: true
 {% endcall %}
 {% endcall %}
