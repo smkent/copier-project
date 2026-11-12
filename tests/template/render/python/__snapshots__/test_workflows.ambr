@@ -2171,6 +2171,7 @@
           with:
             token: ${{ secrets.GITHUB_TOKEN }}
             delete-untagged: true
+            delete-orphaned-images: true
   
   '''
 # ---

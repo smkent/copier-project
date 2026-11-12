@@ -66,6 +66,7 @@ older-than: 30 days
 
 {% call ghcr_cleanup_step(name="Remove untagged container images") %}
 delete-untagged: true
+delete-orphaned-images: true
 {% endcall %}
 {% endcall %}
 {% endblock %}
