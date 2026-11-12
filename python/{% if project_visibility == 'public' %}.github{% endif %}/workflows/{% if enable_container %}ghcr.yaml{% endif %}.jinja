@@ -52,8 +52,8 @@ delete-tags: {% raw %}pr-${{ github.event.pull_request.number }}{% endraw %}
 {% endcall %}
 
 {% call ghcr_cleanup_job(
-  id="cleanup",
-  name="Remove images",
+  id="cleanup-stale",
+  name="Remove stale images",
   condition="github.event_name != 'pull_request'",
 ) %}
 

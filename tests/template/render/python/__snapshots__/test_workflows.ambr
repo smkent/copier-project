@@ -2149,8 +2149,8 @@
             token: ${{ secrets.GITHUB_TOKEN }}
             delete-tags: pr-${{ github.event.pull_request.number }}
   
-    cleanup:
-      name: Remove images
+    cleanup-stale:
+      name: Remove stale images
       if: github.event_name != 'pull_request'
       runs-on: ubuntu-latest
       timeout-minutes: 15
