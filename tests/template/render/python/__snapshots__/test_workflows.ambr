@@ -2136,28 +2136,28 @@
   
   jobs:
     cleanup-pr:
-      name: Clean up closed pull request image
+      name: Remove closed pull request image
       if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
       runs-on: ubuntu-latest
       timeout-minutes: 15
       permissions:
         packages: write
       steps:
-        - name: 🧹 Clean up pull request image
+        - name: 🧹 Remove pull request image
           uses: dataaxiom/ghcr-cleanup-action@v1
           with:
             token: ${{ secrets.GITHUB_TOKEN }}
             delete-tags: pr-${{ github.event.pull_request.number }}
   
     cleanup:
-      name: Clean up images
+      name: Remove images
       if: github.event_name != 'pull_request'
       runs-on: ubuntu-latest
       timeout-minutes: 15
       permissions:
         packages: write
       steps:
-        - name: 🧹 Delete stray stale images
+        - name: 🧹 Remove stray stale images
           uses: dataaxiom/ghcr-cleanup-action@v1
           with:
             token: ${{ secrets.GITHUB_TOKEN }}
@@ -2166,7 +2166,7 @@
             exclude-tags: ^(\d+|\d+\.\d+|\d+\.\d+\.\d+|latest|edge|${{ github.event.repository.default_branch }})$
             older-than: 30 days
   
-        - name: 🧹 Delete untagged container images
+        - name: 🧹 Remove untagged container images
           uses: dataaxiom/ghcr-cleanup-action@v1
           with:
             token: ${{ secrets.GITHUB_TOKEN }}

@@ -43,28 +43,28 @@ cancel-in-progress: false
 {% block jobs %}
 {% call ghcr_cleanup_job(
   id="cleanup-pr",
-  name="Clean up closed pull request image",
+  name="Remove closed pull request image",
   condition="github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository",
 ) %}
-{% call ghcr_cleanup_step(name="Clean up pull request image") %}
+{% call ghcr_cleanup_step(name="Remove pull request image") %}
 delete-tags: {% raw %}pr-${{ github.event.pull_request.number }}{% endraw %}
 {% endcall %}
 {% endcall %}
 
 {% call ghcr_cleanup_job(
   id="cleanup",
-  name="Clean up images",
+  name="Remove images",
   condition="github.event_name != 'pull_request'",
 ) %}
 
-{% call ghcr_cleanup_step(name="Delete stray stale images") %}
+{% call ghcr_cleanup_step(name="Remove stray stale images") %}
 keep-n-tagged: 0
 use-regex: true
 exclude-tags: ^(\d+|\d+\.\d+|\d+\.\d+\.\d+|latest|edge|{% raw %}${{ github.event.repository.default_branch }}{% endraw %})$
 older-than: 30 days
 {% endcall %}
 
-{% call ghcr_cleanup_step(name="Delete untagged container images") %}
+{% call ghcr_cleanup_step(name="Remove untagged container images") %}
 delete-untagged: true
 {% endcall %}
 {% endcall %}
