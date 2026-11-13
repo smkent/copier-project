@@ -2,8 +2,6 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-import pytest
-
 from tests.template.utils import template
 
 if TYPE_CHECKING:
@@ -13,12 +11,8 @@ if TYPE_CHECKING:
     from syrupy.assertion import SnapshotAssertion
 
 
-@pytest.mark.parametrize(
-    "llm_contribution_policy", template.choices.llm_contribution_policy
-)
-@pytest.mark.parametrize("enable_docs", template.choices.enable_docs)
-@pytest.mark.parametrize(
-    "project_visibility", template.choices.project_visibility
+@template.parameterize(
+    "llm_contribution_policy", "enable_docs", "project_visibility"
 )
 def test_mise_config(
     render_template: Callable[..., Path],

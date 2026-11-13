@@ -2,8 +2,6 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-import pytest
-
 from tests.template.utils import template
 
 if TYPE_CHECKING:
@@ -13,13 +11,7 @@ if TYPE_CHECKING:
     from syrupy.assertion import SnapshotAssertion
 
 
-@pytest.mark.parametrize(
-    "template_attribution",
-    [
-        pytest.param(True, id="attribution"),
-        pytest.param(False, id="no_attribution"),
-    ],
-)
+@template.parameterize("template_attribution")
 def test_readme_features(
     render_template: Callable[..., Path],
     snapshot: SnapshotAssertion,
@@ -30,12 +22,7 @@ def test_readme_features(
     assert (rendered / "README.md").read_text() == snapshot
 
 
-@pytest.mark.parametrize(
-    "project_visibility", template.choices.project_visibility
-)
-@pytest.mark.parametrize(
-    "copyright_license", template.choices.copyright_license
-)
+@template.parameterize("project_visibility", "copyright_license")
 def test_readme_project_visibility(
     render_template: Callable[..., Path],
     snapshot: SnapshotAssertion,

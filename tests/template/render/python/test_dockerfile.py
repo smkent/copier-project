@@ -36,9 +36,7 @@ def test_dockerfile(
     assert (rendered / "Dockerfile").read_text() == snapshot
 
 
-@pytest.mark.parametrize(
-    "copyright_license", template.choices.copyright_license
-)
+@template.parameterize("copyright_license")
 def test_container_license(
     render_template: Callable[..., Path], copyright_license: str
 ) -> None:

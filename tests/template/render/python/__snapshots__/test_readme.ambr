@@ -1,5 +1,103 @@
 # serializer version: 1
-# name: test_readme_features[attribution-enable_pypi-enable_coverage]
+# name: test_readme_features[no-template_attribution-enable_pypi-enable_coverage]
+  '''
+  # PKFire
+  
+  Onett Little League
+  
+  [![License](https://img.shields.io/github/license/ness/PKFire)](https://github.com/ness/PKFire/blob/main/LICENSE)
+  [![PyPI](https://img.shields.io/pypi/v/PKFire)](https://pypi.org/project/PKFire/)
+  [![Python](https://img.shields.io/pypi/pyversions/PKFire)](https://pypi.org/project/PKFire/)
+  [![CI](https://github.com/ness/PKFire/actions/workflows/ci.yaml/badge.svg)](https://github.com/ness/PKFire/actions/workflows/ci.yaml)
+  [![Coverage](https://codecov.io/gh/ness/PKFire/branch/main/graph/badge.svg)](https://codecov.io/gh/ness/PKFire)
+  [![Renovate](https://img.shields.io/badge/renovate-enabled-brightgreen?logo=renovatebot)](https://renovatebot.com)
+  [![GitHub stars](https://img.shields.io/github/stars/ness/PKFire?style=social)](https://github.com/ness/PKFire)
+  
+  ## Installation
+  
+  ```sh
+  pip install PKFire
+  ```
+  
+  ## License
+  
+  Copyright (C) 1995 Ness and contributors
+  
+  Licensed under the MIT License
+  ([`MIT`](https://github.com/ness/PKFire/blob/main/LICENSE)).
+  
+  '''
+# ---
+# name: test_readme_features[no-template_attribution-enable_pypi-no-enable_coverage]
+  '''
+  # PKFire
+  
+  Onett Little League
+  
+  [![License](https://img.shields.io/github/license/ness/PKFire)](https://github.com/ness/PKFire/blob/main/LICENSE)
+  [![PyPI](https://img.shields.io/pypi/v/PKFire)](https://pypi.org/project/PKFire/)
+  [![Python](https://img.shields.io/pypi/pyversions/PKFire)](https://pypi.org/project/PKFire/)
+  [![CI](https://github.com/ness/PKFire/actions/workflows/ci.yaml/badge.svg)](https://github.com/ness/PKFire/actions/workflows/ci.yaml)
+  [![Renovate](https://img.shields.io/badge/renovate-enabled-brightgreen?logo=renovatebot)](https://renovatebot.com)
+  [![GitHub stars](https://img.shields.io/github/stars/ness/PKFire?style=social)](https://github.com/ness/PKFire)
+  
+  ## Installation
+  
+  ```sh
+  pip install PKFire
+  ```
+  
+  ## License
+  
+  Copyright (C) 1995 Ness and contributors
+  
+  Licensed under the MIT License
+  ([`MIT`](https://github.com/ness/PKFire/blob/main/LICENSE)).
+  
+  '''
+# ---
+# name: test_readme_features[no-template_attribution-no-enable_pypi-enable_coverage]
+  '''
+  # PKFire
+  
+  Onett Little League
+  
+  [![License](https://img.shields.io/github/license/ness/PKFire)](https://github.com/ness/PKFire/blob/main/LICENSE)
+  [![CI](https://github.com/ness/PKFire/actions/workflows/ci.yaml/badge.svg)](https://github.com/ness/PKFire/actions/workflows/ci.yaml)
+  [![Coverage](https://codecov.io/gh/ness/PKFire/branch/main/graph/badge.svg)](https://codecov.io/gh/ness/PKFire)
+  [![Renovate](https://img.shields.io/badge/renovate-enabled-brightgreen?logo=renovatebot)](https://renovatebot.com)
+  [![GitHub stars](https://img.shields.io/github/stars/ness/PKFire?style=social)](https://github.com/ness/PKFire)
+  
+  ## License
+  
+  Copyright (C) 1995 Ness and contributors
+  
+  Licensed under the MIT License
+  ([`MIT`](https://github.com/ness/PKFire/blob/main/LICENSE)).
+  
+  '''
+# ---
+# name: test_readme_features[no-template_attribution-no-enable_pypi-no-enable_coverage]
+  '''
+  # PKFire
+  
+  Onett Little League
+  
+  [![License](https://img.shields.io/github/license/ness/PKFire)](https://github.com/ness/PKFire/blob/main/LICENSE)
+  [![CI](https://github.com/ness/PKFire/actions/workflows/ci.yaml/badge.svg)](https://github.com/ness/PKFire/actions/workflows/ci.yaml)
+  [![Renovate](https://img.shields.io/badge/renovate-enabled-brightgreen?logo=renovatebot)](https://renovatebot.com)
+  [![GitHub stars](https://img.shields.io/github/stars/ness/PKFire?style=social)](https://github.com/ness/PKFire)
+  
+  ## License
+  
+  Copyright (C) 1995 Ness and contributors
+  
+  Licensed under the MIT License
+  ([`MIT`](https://github.com/ness/PKFire/blob/main/LICENSE)).
+  
+  '''
+# ---
+# name: test_readme_features[template_attribution-enable_pypi-enable_coverage]
   '''
   # PKFire
   
@@ -34,7 +132,7 @@
   
   '''
 # ---
-# name: test_readme_features[attribution-enable_pypi-no-enable_coverage]
+# name: test_readme_features[template_attribution-enable_pypi-no-enable_coverage]
   '''
   # PKFire
   
@@ -68,7 +166,7 @@
   
   '''
 # ---
-# name: test_readme_features[attribution-no-enable_pypi-enable_coverage]
+# name: test_readme_features[template_attribution-no-enable_pypi-enable_coverage]
   '''
   # PKFire
   
@@ -95,7 +193,7 @@
   
   '''
 # ---
-# name: test_readme_features[attribution-no-enable_pypi-no-enable_coverage]
+# name: test_readme_features[template_attribution-no-enable_pypi-no-enable_coverage]
   '''
   # PKFire
   
@@ -118,104 +216,6 @@
   This project is based on and maintained with [copier-project][copier-project].
   
   [copier-project]: https://smkent.github.io/copier-project
-  
-  '''
-# ---
-# name: test_readme_features[no_attribution-enable_pypi-enable_coverage]
-  '''
-  # PKFire
-  
-  Onett Little League
-  
-  [![License](https://img.shields.io/github/license/ness/PKFire)](https://github.com/ness/PKFire/blob/main/LICENSE)
-  [![PyPI](https://img.shields.io/pypi/v/PKFire)](https://pypi.org/project/PKFire/)
-  [![Python](https://img.shields.io/pypi/pyversions/PKFire)](https://pypi.org/project/PKFire/)
-  [![CI](https://github.com/ness/PKFire/actions/workflows/ci.yaml/badge.svg)](https://github.com/ness/PKFire/actions/workflows/ci.yaml)
-  [![Coverage](https://codecov.io/gh/ness/PKFire/branch/main/graph/badge.svg)](https://codecov.io/gh/ness/PKFire)
-  [![Renovate](https://img.shields.io/badge/renovate-enabled-brightgreen?logo=renovatebot)](https://renovatebot.com)
-  [![GitHub stars](https://img.shields.io/github/stars/ness/PKFire?style=social)](https://github.com/ness/PKFire)
-  
-  ## Installation
-  
-  ```sh
-  pip install PKFire
-  ```
-  
-  ## License
-  
-  Copyright (C) 1995 Ness and contributors
-  
-  Licensed under the MIT License
-  ([`MIT`](https://github.com/ness/PKFire/blob/main/LICENSE)).
-  
-  '''
-# ---
-# name: test_readme_features[no_attribution-enable_pypi-no-enable_coverage]
-  '''
-  # PKFire
-  
-  Onett Little League
-  
-  [![License](https://img.shields.io/github/license/ness/PKFire)](https://github.com/ness/PKFire/blob/main/LICENSE)
-  [![PyPI](https://img.shields.io/pypi/v/PKFire)](https://pypi.org/project/PKFire/)
-  [![Python](https://img.shields.io/pypi/pyversions/PKFire)](https://pypi.org/project/PKFire/)
-  [![CI](https://github.com/ness/PKFire/actions/workflows/ci.yaml/badge.svg)](https://github.com/ness/PKFire/actions/workflows/ci.yaml)
-  [![Renovate](https://img.shields.io/badge/renovate-enabled-brightgreen?logo=renovatebot)](https://renovatebot.com)
-  [![GitHub stars](https://img.shields.io/github/stars/ness/PKFire?style=social)](https://github.com/ness/PKFire)
-  
-  ## Installation
-  
-  ```sh
-  pip install PKFire
-  ```
-  
-  ## License
-  
-  Copyright (C) 1995 Ness and contributors
-  
-  Licensed under the MIT License
-  ([`MIT`](https://github.com/ness/PKFire/blob/main/LICENSE)).
-  
-  '''
-# ---
-# name: test_readme_features[no_attribution-no-enable_pypi-enable_coverage]
-  '''
-  # PKFire
-  
-  Onett Little League
-  
-  [![License](https://img.shields.io/github/license/ness/PKFire)](https://github.com/ness/PKFire/blob/main/LICENSE)
-  [![CI](https://github.com/ness/PKFire/actions/workflows/ci.yaml/badge.svg)](https://github.com/ness/PKFire/actions/workflows/ci.yaml)
-  [![Coverage](https://codecov.io/gh/ness/PKFire/branch/main/graph/badge.svg)](https://codecov.io/gh/ness/PKFire)
-  [![Renovate](https://img.shields.io/badge/renovate-enabled-brightgreen?logo=renovatebot)](https://renovatebot.com)
-  [![GitHub stars](https://img.shields.io/github/stars/ness/PKFire?style=social)](https://github.com/ness/PKFire)
-  
-  ## License
-  
-  Copyright (C) 1995 Ness and contributors
-  
-  Licensed under the MIT License
-  ([`MIT`](https://github.com/ness/PKFire/blob/main/LICENSE)).
-  
-  '''
-# ---
-# name: test_readme_features[no_attribution-no-enable_pypi-no-enable_coverage]
-  '''
-  # PKFire
-  
-  Onett Little League
-  
-  [![License](https://img.shields.io/github/license/ness/PKFire)](https://github.com/ness/PKFire/blob/main/LICENSE)
-  [![CI](https://github.com/ness/PKFire/actions/workflows/ci.yaml/badge.svg)](https://github.com/ness/PKFire/actions/workflows/ci.yaml)
-  [![Renovate](https://img.shields.io/badge/renovate-enabled-brightgreen?logo=renovatebot)](https://renovatebot.com)
-  [![GitHub stars](https://img.shields.io/github/stars/ness/PKFire?style=social)](https://github.com/ness/PKFire)
-  
-  ## License
-  
-  Copyright (C) 1995 Ness and contributors
-  
-  Licensed under the MIT License
-  ([`MIT`](https://github.com/ness/PKFire/blob/main/LICENSE)).
   
   '''
 # ---

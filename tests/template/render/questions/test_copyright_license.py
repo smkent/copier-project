@@ -17,7 +17,7 @@ def template_variant() -> str:
     return "python"
 
 
-@pytest.mark.parametrize("project_type", template.choices.project_type)
+@template.parameterize("project_type")
 def test_license_default(
     render_template: Callable[..., Path], project_type: str
 ) -> None:
@@ -30,9 +30,7 @@ def test_license_default(
     )
 
 
-@pytest.mark.parametrize(
-    "copyright_license", template.choices.copyright_license
-)
+@template.parameterize("copyright_license")
 def test_license_choices_have_templates(copyright_license: str) -> None:
     assert (template.dir / "common" / "licenses" / copyright_license).is_file()
 

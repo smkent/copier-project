@@ -13,14 +13,11 @@ if TYPE_CHECKING:
     from syrupy.assertion import SnapshotAssertion
 
 
-@pytest.mark.parametrize("project_type", template.choices.project_type)
-@pytest.mark.parametrize(
-    "project_visibility", template.choices.project_visibility
-)
+@template.parameterize("project_type", "project_visibility")
 @pytest.mark.parametrize(
     "python_version_minimum", template.python_versions.min_param_full_range
 )
-@pytest.mark.parametrize("enable_docs", template.choices.enable_docs)
+@template.parameterize("enable_docs")
 @pytest.mark.parametrize(
     "enable_syrupy",
     [pytest.param(True, id="syrupy"), pytest.param(False, id="no_syrupy")],
@@ -73,9 +70,7 @@ def test_pyproject_versions(
     assert (rendered / "pyproject.toml").read_text() == snapshot
 
 
-@pytest.mark.parametrize(
-    "copyright_license", template.choices.copyright_license
-)
+@template.parameterize("copyright_license")
 def test_pyproject_licenses(
     render_template: Callable[..., Path],
     snapshot: SnapshotAssertion,

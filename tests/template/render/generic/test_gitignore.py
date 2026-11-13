@@ -2,8 +2,6 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-import pytest
-
 from tests.template.utils import template
 
 if TYPE_CHECKING:
@@ -13,7 +11,7 @@ if TYPE_CHECKING:
     from syrupy.assertion import SnapshotAssertion
 
 
-@pytest.mark.parametrize("enable_docs", template.choices.enable_docs)
+@template.parameterize("enable_docs")
 def test_gitignore(
     render_template: Callable[..., Path],
     snapshot: SnapshotAssertion,

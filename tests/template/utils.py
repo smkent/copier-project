@@ -114,6 +114,16 @@ class Template:
         Loader.add_constructor("!include", Loader.include)
         return Loader.load()
 
+    def parameterize(self, *question_name: str) -> Callable[..., Any]:
+        def _wrapper(fn: Callable[..., Any]) -> Callable[..., Any]:
+            for name in reversed(question_name):
+                fn = pytest.mark.parametrize(
+                    name, getattr(self.choices, name)
+                )(fn)
+            return fn
+
+        return _wrapper
+
     @cached_property
     def choices(self) -> SimpleNamespace:
         def _label_to_id(label: str) -> str:

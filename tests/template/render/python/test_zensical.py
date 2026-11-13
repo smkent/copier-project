@@ -13,10 +13,7 @@ if TYPE_CHECKING:
     from syrupy.assertion import SnapshotAssertion
 
 
-@pytest.mark.parametrize(
-    "project_visibility", template.choices.project_visibility
-)
-@pytest.mark.parametrize("enable_pypi", template.choices.enable_pypi)
+@template.parameterize("project_visibility", "enable_pypi")
 def test_zensical_features(
     render_template: Callable[..., Path],
     snapshot: SnapshotAssertion,

@@ -2,8 +2,6 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-import pytest
-
 from tests.template.utils import template
 
 if TYPE_CHECKING:
@@ -13,9 +11,7 @@ if TYPE_CHECKING:
     from syrupy.assertion import SnapshotAssertion
 
 
-@pytest.mark.parametrize(
-    "project_visibility", template.choices.project_visibility
-)
+@template.parameterize("project_visibility")
 def test_compose_features(
     render_template: Callable[..., Path],
     snapshot: SnapshotAssertion,
