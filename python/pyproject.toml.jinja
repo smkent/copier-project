@@ -178,6 +178,9 @@ cache-keys = [
   { git = { commit = true, tags = true } },
 ]
 default-groups = ["{{ tool_uv_default_groups | sort | join('\", \"') }}"]
+{%- if dependency_cooldown %}
+exclude-newer = "{{ dependency_cooldown }}"
+{%- endif %}
 
 [tool.uv-dynamic-versioning]
 pattern = "default-unprefixed"

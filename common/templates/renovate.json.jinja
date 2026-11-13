@@ -7,6 +7,12 @@
   "vulnerabilityAlerts": {
     "schedule": ["at any time"]
   },
+{%- if dependency_cooldown %}
+{%- set num = dependency_cooldown[1:-1] | int %}
+{%- set unit = {"D": "day", "W": "week"}[dependency_cooldown[-1]] %}
+{%- set minimum_release_age %}{{ num }} {{ unit }}{{ 's' if num != 1 }}{% endset %}
+  "minimumReleaseAge": {{ minimum_release_age | tojson }},
+{%- endif %}
   "packageRules": [
     {
       "matchManagers": {{ current_match_managers | unique | sort | tojson }},

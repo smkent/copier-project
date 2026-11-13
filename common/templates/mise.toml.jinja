@@ -1,6 +1,11 @@
 {%- import "common/blocks.jinja" as blocks -%}
 
 min_version = "2026.10.3"
+{%- if dependency_cooldown %}
+
+[settings]
+minimum_release_age = "{{ dependency_cooldown }}"
+{%- endif %}
 
 [hooks]
 postinstall = [

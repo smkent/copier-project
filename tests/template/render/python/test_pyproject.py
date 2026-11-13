@@ -50,6 +50,18 @@ def test_pyproject_features(
     assert (rendered / "pyproject.toml").read_text() == snapshot
 
 
+@template.parameterize("dependency_cooldown")
+def test_pyproject_dependency_cooldown(
+    render_template: Callable[..., Path],
+    snapshot: SnapshotAssertion,
+    dependency_cooldown: str,
+) -> None:
+    rendered = render_template(
+        dependency_cooldown=dependency_cooldown,
+    )
+    assert (rendered / "pyproject.toml").read_text() == snapshot
+
+
 @pytest.mark.parametrize(
     "python_version_minimum", template.python_versions.min_param
 )

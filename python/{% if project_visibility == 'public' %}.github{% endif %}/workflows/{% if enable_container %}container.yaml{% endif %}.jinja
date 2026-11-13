@@ -28,7 +28,7 @@ version:
       id: version
       run: |
         pip install --quiet uv
-        version="$(uvx uv-dynamic-versioning)"
+        version="$(uvx{% if dependency_cooldown %} --exclude-newer={{ dependency_cooldown }}{% endif %} uv-dynamic-versioning)"
         echo "version=${version}" >> "${GITHUB_OUTPUT}"
         echo "::notice title=Project version::${version}"
 

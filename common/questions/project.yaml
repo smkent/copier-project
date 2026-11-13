@@ -118,6 +118,19 @@ llm_contribution_policy:
     Accepted with disclosure: accepted-with-disclosure
     Not accepted: not-accepted
 
+dependency_cooldown:
+  type: str
+  qmark: 🧊
+  help: Dependency cooldown (exclude dependency versions newer than this length of time)
+  default: P1W
+  choices:
+    Not configured (use package manager default): ''
+    None (override package manager default): P0D
+    1 day: P1D
+    3 days: P3D
+    1 week: P1W
+    2 weeks: P2W
+
 enable_docs:
   type: bool
   qmark: 📕
