@@ -1,5 +1,110 @@
 # serializer version: 1
-# name: test_renovate[generic]
+# name: test_renovate[generic-P0D]
+  '''
+  {
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": ["config:recommended", "schedule:weekly", ":enablePreCommit"],
+    "osvVulnerabilityAlerts": true,
+    "vulnerabilityAlerts": {
+      "schedule": ["at any time"]
+    },
+    "minimumReleaseAge": "0 days",
+    "packageRules": [
+      {
+        "matchManagers": ["github-actions", "mise", "pre-commit"],
+        "matchUpdateTypes": ["minor", "patch"],
+        "groupName": "non-major dependencies"
+      }
+    ]
+  }
+  
+  '''
+# ---
+# name: test_renovate[generic-P1D]
+  '''
+  {
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": ["config:recommended", "schedule:weekly", ":enablePreCommit"],
+    "osvVulnerabilityAlerts": true,
+    "vulnerabilityAlerts": {
+      "schedule": ["at any time"]
+    },
+    "minimumReleaseAge": "1 day",
+    "packageRules": [
+      {
+        "matchManagers": ["github-actions", "mise", "pre-commit"],
+        "matchUpdateTypes": ["minor", "patch"],
+        "groupName": "non-major dependencies"
+      }
+    ]
+  }
+  
+  '''
+# ---
+# name: test_renovate[generic-P1W]
+  '''
+  {
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": ["config:recommended", "schedule:weekly", ":enablePreCommit"],
+    "osvVulnerabilityAlerts": true,
+    "vulnerabilityAlerts": {
+      "schedule": ["at any time"]
+    },
+    "minimumReleaseAge": "1 week",
+    "packageRules": [
+      {
+        "matchManagers": ["github-actions", "mise", "pre-commit"],
+        "matchUpdateTypes": ["minor", "patch"],
+        "groupName": "non-major dependencies"
+      }
+    ]
+  }
+  
+  '''
+# ---
+# name: test_renovate[generic-P2W]
+  '''
+  {
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": ["config:recommended", "schedule:weekly", ":enablePreCommit"],
+    "osvVulnerabilityAlerts": true,
+    "vulnerabilityAlerts": {
+      "schedule": ["at any time"]
+    },
+    "minimumReleaseAge": "2 weeks",
+    "packageRules": [
+      {
+        "matchManagers": ["github-actions", "mise", "pre-commit"],
+        "matchUpdateTypes": ["minor", "patch"],
+        "groupName": "non-major dependencies"
+      }
+    ]
+  }
+  
+  '''
+# ---
+# name: test_renovate[generic-P3D]
+  '''
+  {
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": ["config:recommended", "schedule:weekly", ":enablePreCommit"],
+    "osvVulnerabilityAlerts": true,
+    "vulnerabilityAlerts": {
+      "schedule": ["at any time"]
+    },
+    "minimumReleaseAge": "3 days",
+    "packageRules": [
+      {
+        "matchManagers": ["github-actions", "mise", "pre-commit"],
+        "matchUpdateTypes": ["minor", "patch"],
+        "groupName": "non-major dependencies"
+      }
+    ]
+  }
+  
+  '''
+# ---
+# name: test_renovate[generic-not-configured-use-package-manager-default]
   '''
   {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
@@ -19,7 +124,112 @@
   
   '''
 # ---
-# name: test_renovate[python]
+# name: test_renovate[python-P0D]
+  '''
+  {
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": ["config:recommended", "schedule:weekly", ":enablePreCommit"],
+    "osvVulnerabilityAlerts": true,
+    "vulnerabilityAlerts": {
+      "schedule": ["at any time"]
+    },
+    "minimumReleaseAge": "0 days",
+    "packageRules": [
+      {
+        "matchManagers": ["github-actions", "mise", "pep621", "pre-commit"],
+        "matchUpdateTypes": ["minor", "patch"],
+        "groupName": "non-major dependencies"
+      }
+    ]
+  }
+  
+  '''
+# ---
+# name: test_renovate[python-P1D]
+  '''
+  {
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": ["config:recommended", "schedule:weekly", ":enablePreCommit"],
+    "osvVulnerabilityAlerts": true,
+    "vulnerabilityAlerts": {
+      "schedule": ["at any time"]
+    },
+    "minimumReleaseAge": "1 day",
+    "packageRules": [
+      {
+        "matchManagers": ["github-actions", "mise", "pep621", "pre-commit"],
+        "matchUpdateTypes": ["minor", "patch"],
+        "groupName": "non-major dependencies"
+      }
+    ]
+  }
+  
+  '''
+# ---
+# name: test_renovate[python-P1W]
+  '''
+  {
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": ["config:recommended", "schedule:weekly", ":enablePreCommit"],
+    "osvVulnerabilityAlerts": true,
+    "vulnerabilityAlerts": {
+      "schedule": ["at any time"]
+    },
+    "minimumReleaseAge": "1 week",
+    "packageRules": [
+      {
+        "matchManagers": ["github-actions", "mise", "pep621", "pre-commit"],
+        "matchUpdateTypes": ["minor", "patch"],
+        "groupName": "non-major dependencies"
+      }
+    ]
+  }
+  
+  '''
+# ---
+# name: test_renovate[python-P2W]
+  '''
+  {
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": ["config:recommended", "schedule:weekly", ":enablePreCommit"],
+    "osvVulnerabilityAlerts": true,
+    "vulnerabilityAlerts": {
+      "schedule": ["at any time"]
+    },
+    "minimumReleaseAge": "2 weeks",
+    "packageRules": [
+      {
+        "matchManagers": ["github-actions", "mise", "pep621", "pre-commit"],
+        "matchUpdateTypes": ["minor", "patch"],
+        "groupName": "non-major dependencies"
+      }
+    ]
+  }
+  
+  '''
+# ---
+# name: test_renovate[python-P3D]
+  '''
+  {
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": ["config:recommended", "schedule:weekly", ":enablePreCommit"],
+    "osvVulnerabilityAlerts": true,
+    "vulnerabilityAlerts": {
+      "schedule": ["at any time"]
+    },
+    "minimumReleaseAge": "3 days",
+    "packageRules": [
+      {
+        "matchManagers": ["github-actions", "mise", "pep621", "pre-commit"],
+        "matchUpdateTypes": ["minor", "patch"],
+        "groupName": "non-major dependencies"
+      }
+    ]
+  }
+  
+  '''
+# ---
+# name: test_renovate[python-not-configured-use-package-manager-default]
   '''
   {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",

@@ -127,7 +127,7 @@ class Template:
     @cached_property
     def choices(self) -> SimpleNamespace:
         def _label_to_id(label: str) -> str:
-            return re.sub(r"[\W\_]+", "-", str(label).lower())
+            return re.sub(r"[\W\_]+", "-", str(label).lower()).strip("-")
 
         def _defined_choices(
             choices_config: list[Any] | dict[str, Any],

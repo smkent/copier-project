@@ -45,3 +45,15 @@ def test_mise_config(
     )
     for file in ["mise.toml", ".mise/conf.d/init.toml"]:
         assert (rendered / file).read_text() == snapshot
+
+
+@template.parameterize("dependency_cooldown")
+def test_mise_dependency_cooldown(
+    render_template: Callable[..., Path],
+    snapshot: SnapshotAssertion,
+    *,
+    dependency_cooldown: str,
+) -> None:
+    rendered = render_template(dependency_cooldown=dependency_cooldown)
+    for file in ["mise.toml", ".mise/conf.d/init.toml"]:
+        assert (rendered / file).read_text() == snapshot

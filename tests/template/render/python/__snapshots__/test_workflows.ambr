@@ -2038,7 +2038,397 @@
   
   '''
 # ---
-# name: test_workflows_container[container]
+# name: test_workflows_container[P0D]
+  '''
+  name: Container
+  
+  on:
+    pull_request:
+    push:
+      branches:
+        - main
+      tags:
+        - v[0-9]*.[0-9]*
+  
+  permissions:
+    contents: read
+  
+  concurrency:
+    group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+    cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  
+  jobs:
+    version:
+      name: Version
+      runs-on: ubuntu-latest
+      timeout-minutes: 5
+      outputs:
+        version: ${{ steps.version.outputs.version }}
+      steps:
+        - name: 💾 Check out repository
+          uses: actions/checkout@v7
+          with:
+            fetch-depth: 0
+            persist-credentials: false
+  
+        - name: 🏷️ Determine project version
+          id: version
+          run: |
+            pip install --quiet uv
+            version="$(uvx --exclude-newer=P0D uv-dynamic-versioning)"
+            echo "version=${version}" >> "${GITHUB_OUTPUT}"
+            echo "::notice title=Project version::${version}"
+  
+    image:
+      name: Image
+      needs: version
+      uses: docker/github-builder/.github/workflows/build.yml@v1
+      permissions:
+        contents: read
+        packages: write
+        id-token: write
+      with:
+        output: image
+        push: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+        platforms: linux/amd64,linux/arm64
+        cache: true
+        cache-mode: max
+        set-meta-labels: true
+        meta-images: ghcr.io/${{ github.repository }}
+        meta-labels: |
+          org.opencontainers.image.licenses=MIT
+        meta-flavor: |
+          latest=auto
+        meta-tags: |
+          type=edge
+          type=ref,event=pr
+          type=ref,event=branch,enable={{is_default_branch}}
+          type=semver,pattern={{version}}
+          type=semver,pattern={{major}}.{{minor}}
+          type=semver,pattern={{major}}
+        build-args: |
+          UV_DYNAMIC_VERSIONING_BYPASS=${{ needs.version.outputs.version }}
+      secrets:
+        registry-auths: |
+          - registry: ghcr.io
+            username: ${{ github.actor }}
+            password: ${{ secrets.GITHUB_TOKEN }}
+  
+  '''
+# ---
+# name: test_workflows_container[P1D]
+  '''
+  name: Container
+  
+  on:
+    pull_request:
+    push:
+      branches:
+        - main
+      tags:
+        - v[0-9]*.[0-9]*
+  
+  permissions:
+    contents: read
+  
+  concurrency:
+    group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+    cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  
+  jobs:
+    version:
+      name: Version
+      runs-on: ubuntu-latest
+      timeout-minutes: 5
+      outputs:
+        version: ${{ steps.version.outputs.version }}
+      steps:
+        - name: 💾 Check out repository
+          uses: actions/checkout@v7
+          with:
+            fetch-depth: 0
+            persist-credentials: false
+  
+        - name: 🏷️ Determine project version
+          id: version
+          run: |
+            pip install --quiet uv
+            version="$(uvx --exclude-newer=P1D uv-dynamic-versioning)"
+            echo "version=${version}" >> "${GITHUB_OUTPUT}"
+            echo "::notice title=Project version::${version}"
+  
+    image:
+      name: Image
+      needs: version
+      uses: docker/github-builder/.github/workflows/build.yml@v1
+      permissions:
+        contents: read
+        packages: write
+        id-token: write
+      with:
+        output: image
+        push: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+        platforms: linux/amd64,linux/arm64
+        cache: true
+        cache-mode: max
+        set-meta-labels: true
+        meta-images: ghcr.io/${{ github.repository }}
+        meta-labels: |
+          org.opencontainers.image.licenses=MIT
+        meta-flavor: |
+          latest=auto
+        meta-tags: |
+          type=edge
+          type=ref,event=pr
+          type=ref,event=branch,enable={{is_default_branch}}
+          type=semver,pattern={{version}}
+          type=semver,pattern={{major}}.{{minor}}
+          type=semver,pattern={{major}}
+        build-args: |
+          UV_DYNAMIC_VERSIONING_BYPASS=${{ needs.version.outputs.version }}
+      secrets:
+        registry-auths: |
+          - registry: ghcr.io
+            username: ${{ github.actor }}
+            password: ${{ secrets.GITHUB_TOKEN }}
+  
+  '''
+# ---
+# name: test_workflows_container[P1W]
+  '''
+  name: Container
+  
+  on:
+    pull_request:
+    push:
+      branches:
+        - main
+      tags:
+        - v[0-9]*.[0-9]*
+  
+  permissions:
+    contents: read
+  
+  concurrency:
+    group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+    cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  
+  jobs:
+    version:
+      name: Version
+      runs-on: ubuntu-latest
+      timeout-minutes: 5
+      outputs:
+        version: ${{ steps.version.outputs.version }}
+      steps:
+        - name: 💾 Check out repository
+          uses: actions/checkout@v7
+          with:
+            fetch-depth: 0
+            persist-credentials: false
+  
+        - name: 🏷️ Determine project version
+          id: version
+          run: |
+            pip install --quiet uv
+            version="$(uvx --exclude-newer=P1W uv-dynamic-versioning)"
+            echo "version=${version}" >> "${GITHUB_OUTPUT}"
+            echo "::notice title=Project version::${version}"
+  
+    image:
+      name: Image
+      needs: version
+      uses: docker/github-builder/.github/workflows/build.yml@v1
+      permissions:
+        contents: read
+        packages: write
+        id-token: write
+      with:
+        output: image
+        push: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+        platforms: linux/amd64,linux/arm64
+        cache: true
+        cache-mode: max
+        set-meta-labels: true
+        meta-images: ghcr.io/${{ github.repository }}
+        meta-labels: |
+          org.opencontainers.image.licenses=MIT
+        meta-flavor: |
+          latest=auto
+        meta-tags: |
+          type=edge
+          type=ref,event=pr
+          type=ref,event=branch,enable={{is_default_branch}}
+          type=semver,pattern={{version}}
+          type=semver,pattern={{major}}.{{minor}}
+          type=semver,pattern={{major}}
+        build-args: |
+          UV_DYNAMIC_VERSIONING_BYPASS=${{ needs.version.outputs.version }}
+      secrets:
+        registry-auths: |
+          - registry: ghcr.io
+            username: ${{ github.actor }}
+            password: ${{ secrets.GITHUB_TOKEN }}
+  
+  '''
+# ---
+# name: test_workflows_container[P2W]
+  '''
+  name: Container
+  
+  on:
+    pull_request:
+    push:
+      branches:
+        - main
+      tags:
+        - v[0-9]*.[0-9]*
+  
+  permissions:
+    contents: read
+  
+  concurrency:
+    group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+    cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  
+  jobs:
+    version:
+      name: Version
+      runs-on: ubuntu-latest
+      timeout-minutes: 5
+      outputs:
+        version: ${{ steps.version.outputs.version }}
+      steps:
+        - name: 💾 Check out repository
+          uses: actions/checkout@v7
+          with:
+            fetch-depth: 0
+            persist-credentials: false
+  
+        - name: 🏷️ Determine project version
+          id: version
+          run: |
+            pip install --quiet uv
+            version="$(uvx --exclude-newer=P2W uv-dynamic-versioning)"
+            echo "version=${version}" >> "${GITHUB_OUTPUT}"
+            echo "::notice title=Project version::${version}"
+  
+    image:
+      name: Image
+      needs: version
+      uses: docker/github-builder/.github/workflows/build.yml@v1
+      permissions:
+        contents: read
+        packages: write
+        id-token: write
+      with:
+        output: image
+        push: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+        platforms: linux/amd64,linux/arm64
+        cache: true
+        cache-mode: max
+        set-meta-labels: true
+        meta-images: ghcr.io/${{ github.repository }}
+        meta-labels: |
+          org.opencontainers.image.licenses=MIT
+        meta-flavor: |
+          latest=auto
+        meta-tags: |
+          type=edge
+          type=ref,event=pr
+          type=ref,event=branch,enable={{is_default_branch}}
+          type=semver,pattern={{version}}
+          type=semver,pattern={{major}}.{{minor}}
+          type=semver,pattern={{major}}
+        build-args: |
+          UV_DYNAMIC_VERSIONING_BYPASS=${{ needs.version.outputs.version }}
+      secrets:
+        registry-auths: |
+          - registry: ghcr.io
+            username: ${{ github.actor }}
+            password: ${{ secrets.GITHUB_TOKEN }}
+  
+  '''
+# ---
+# name: test_workflows_container[P3D]
+  '''
+  name: Container
+  
+  on:
+    pull_request:
+    push:
+      branches:
+        - main
+      tags:
+        - v[0-9]*.[0-9]*
+  
+  permissions:
+    contents: read
+  
+  concurrency:
+    group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+    cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  
+  jobs:
+    version:
+      name: Version
+      runs-on: ubuntu-latest
+      timeout-minutes: 5
+      outputs:
+        version: ${{ steps.version.outputs.version }}
+      steps:
+        - name: 💾 Check out repository
+          uses: actions/checkout@v7
+          with:
+            fetch-depth: 0
+            persist-credentials: false
+  
+        - name: 🏷️ Determine project version
+          id: version
+          run: |
+            pip install --quiet uv
+            version="$(uvx --exclude-newer=P3D uv-dynamic-versioning)"
+            echo "version=${version}" >> "${GITHUB_OUTPUT}"
+            echo "::notice title=Project version::${version}"
+  
+    image:
+      name: Image
+      needs: version
+      uses: docker/github-builder/.github/workflows/build.yml@v1
+      permissions:
+        contents: read
+        packages: write
+        id-token: write
+      with:
+        output: image
+        push: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+        platforms: linux/amd64,linux/arm64
+        cache: true
+        cache-mode: max
+        set-meta-labels: true
+        meta-images: ghcr.io/${{ github.repository }}
+        meta-labels: |
+          org.opencontainers.image.licenses=MIT
+        meta-flavor: |
+          latest=auto
+        meta-tags: |
+          type=edge
+          type=ref,event=pr
+          type=ref,event=branch,enable={{is_default_branch}}
+          type=semver,pattern={{version}}
+          type=semver,pattern={{major}}.{{minor}}
+          type=semver,pattern={{major}}
+        build-args: |
+          UV_DYNAMIC_VERSIONING_BYPASS=${{ needs.version.outputs.version }}
+      secrets:
+        registry-auths: |
+          - registry: ghcr.io
+            username: ${{ github.actor }}
+            password: ${{ secrets.GITHUB_TOKEN }}
+  
+  '''
+# ---
+# name: test_workflows_container[not-configured-use-package-manager-default]
   '''
   name: Container
   
@@ -2116,7 +2506,7 @@
   
   '''
 # ---
-# name: test_workflows_container[ghcr]
+# name: test_workflows_container_registry
   '''
   name: Container Registry
   

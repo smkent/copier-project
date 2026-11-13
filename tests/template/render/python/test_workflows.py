@@ -86,11 +86,25 @@ def test_workflows_docs(
     ).read_text() == snapshot
 
 
-@pytest.mark.parametrize("workflow", ["container", "ghcr"])
+@template.parameterize("dependency_cooldown")
 def test_workflows_container(
     render_template: Callable[..., Path],
     snapshot: SnapshotAssertion,
-    workflow: str,
+    dependency_cooldown: str,
+) -> None:
+    rendered = render_template(
+        project_type="application",
+        project_visibility="public",
+        dependency_cooldown=dependency_cooldown,
+        enable_container=True,
+    )
+    assert (
+        rendered / ".github" / "workflows" / "container.yaml"
+    ).read_text() == snapshot
+
+
+def test_workflows_container_registry(
+    render_template: Callable[..., Path], snapshot: SnapshotAssertion
 ) -> None:
     rendered = render_template(
         project_type="application",
@@ -98,7 +112,7 @@ def test_workflows_container(
         enable_container=True,
     )
     assert (
-        rendered / ".github" / "workflows" / f"{workflow}.yaml"
+        rendered / ".github" / "workflows" / "ghcr.yaml"
     ).read_text() == snapshot
 
 
