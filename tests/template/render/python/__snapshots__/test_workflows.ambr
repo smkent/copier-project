@@ -112,7 +112,7 @@
   
   '''
 # ---
-# name: test_workflows_ci[docs-coverage-application]
+# name: test_workflows_ci[enable_docs-enable_coverage-application]
   '''
   name: CI
   
@@ -262,7 +262,7 @@
   
   '''
 # ---
-# name: test_workflows_ci[docs-coverage-library]
+# name: test_workflows_ci[enable_docs-enable_coverage-library]
   '''
   name: CI
   
@@ -411,7 +411,7 @@
   
   '''
 # ---
-# name: test_workflows_ci[docs-no_coverage-application]
+# name: test_workflows_ci[enable_docs-no-enable_coverage-application]
   '''
   name: CI
   
@@ -549,7 +549,7 @@
   
   '''
 # ---
-# name: test_workflows_ci[docs-no_coverage-library]
+# name: test_workflows_ci[enable_docs-no-enable_coverage-library]
   '''
   name: CI
   
@@ -686,7 +686,7 @@
   
   '''
 # ---
-# name: test_workflows_ci[no_docs-coverage-application]
+# name: test_workflows_ci[no-enable_docs-enable_coverage-application]
   '''
   name: CI
   
@@ -808,7 +808,7 @@
   
   '''
 # ---
-# name: test_workflows_ci[no_docs-coverage-library]
+# name: test_workflows_ci[no-enable_docs-enable_coverage-library]
   '''
   name: CI
   
@@ -929,7 +929,7 @@
   
   '''
 # ---
-# name: test_workflows_ci[no_docs-no_coverage-application]
+# name: test_workflows_ci[no-enable_docs-no-enable_coverage-application]
   '''
   name: CI
   
@@ -1039,7 +1039,7 @@
   
   '''
 # ---
-# name: test_workflows_ci[no_docs-no_coverage-library]
+# name: test_workflows_ci[no-enable_docs-no-enable_coverage-library]
   '''
   name: CI
   

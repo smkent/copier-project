@@ -16,10 +16,7 @@ if TYPE_CHECKING:
 @pytest.mark.parametrize(
     "project_visibility", template.choices.project_visibility
 )
-@pytest.mark.parametrize(
-    "enable_pypi",
-    [pytest.param(True, id="pypi"), pytest.param(False, id="no_pypi")],
-)
+@pytest.mark.parametrize("enable_pypi", template.choices.enable_pypi)
 def test_zensical_features(
     render_template: Callable[..., Path],
     snapshot: SnapshotAssertion,

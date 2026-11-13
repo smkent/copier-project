@@ -22,17 +22,8 @@ def test_docs_basic(
         assert (rendered / "docs" / doc_file).read_text() == snapshot
 
 
-@pytest.mark.parametrize(
-    "enable_pypi",
-    [pytest.param(True, id="pypi"), pytest.param(False, id="no_pypi")],
-)
-@pytest.mark.parametrize(
-    "enable_container",
-    [
-        pytest.param(True, id="container"),
-        pytest.param(False, id="no_container"),
-    ],
-)
+@pytest.mark.parametrize("enable_pypi", template.choices.enable_pypi)
+@pytest.mark.parametrize("enable_container", template.choices.enable_container)
 def test_docs_features(
     render_template: Callable[..., Path],
     snapshot: SnapshotAssertion,
@@ -53,10 +44,7 @@ def test_docs_features(
 @pytest.mark.parametrize(
     "project_visibility", template.choices.project_visibility
 )
-@pytest.mark.parametrize(
-    "enable_pypi",
-    [pytest.param(True, id="pypi"), pytest.param(False, id="no_pypi")],
-)
+@pytest.mark.parametrize("enable_pypi", template.choices.enable_pypi)
 @pytest.mark.parametrize(
     "enable_syrupy",
     [pytest.param(True, id="syrupy"), pytest.param(False, id="no_syrupy")],

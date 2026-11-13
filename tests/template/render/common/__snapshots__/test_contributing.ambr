@@ -1,5 +1,5 @@
 # serializer version: 1
-# name: test_contributing_features[generic-accepted-docs]
+# name: test_contributing_features[generic-accepted-enable_docs]
   '''
   # Contributing to PKFire
   
@@ -33,7 +33,7 @@
   
   '''
 # ---
-# name: test_contributing_features[generic-accepted-no_docs]
+# name: test_contributing_features[generic-accepted-no-enable_docs]
   '''
   # Contributing to PKFire
   
@@ -132,7 +132,7 @@
   
   '''
 # ---
-# name: test_contributing_features[generic-accepted-with-disclosure-docs]
+# name: test_contributing_features[generic-accepted-with-disclosure-enable_docs]
   '''
   # Contributing to PKFire
   
@@ -176,7 +176,7 @@
   
   '''
 # ---
-# name: test_contributing_features[generic-accepted-with-disclosure-no_docs]
+# name: test_contributing_features[generic-accepted-with-disclosure-no-enable_docs]
   '''
   # Contributing to PKFire
   
@@ -285,7 +285,7 @@
   
   '''
 # ---
-# name: test_contributing_features[generic-not-accepted-docs]
+# name: test_contributing_features[generic-not-accepted-enable_docs]
   '''
   # Contributing to PKFire
   
@@ -324,7 +324,7 @@
   
   '''
 # ---
-# name: test_contributing_features[generic-not-accepted-no_docs]
+# name: test_contributing_features[generic-not-accepted-no-enable_docs]
   '''
   # Contributing to PKFire
   
@@ -428,7 +428,7 @@
   
   '''
 # ---
-# name: test_contributing_features[python-accepted-docs]
+# name: test_contributing_features[python-accepted-enable_docs]
   '''
   # Contributing to PKFire
   
@@ -462,7 +462,7 @@
   
   '''
 # ---
-# name: test_contributing_features[python-accepted-no_docs]
+# name: test_contributing_features[python-accepted-no-enable_docs]
   '''
   # Contributing to PKFire
   
@@ -581,7 +581,7 @@
   
   '''
 # ---
-# name: test_contributing_features[python-accepted-with-disclosure-docs]
+# name: test_contributing_features[python-accepted-with-disclosure-enable_docs]
   '''
   # Contributing to PKFire
   
@@ -625,7 +625,7 @@
   
   '''
 # ---
-# name: test_contributing_features[python-accepted-with-disclosure-no_docs]
+# name: test_contributing_features[python-accepted-with-disclosure-no-enable_docs]
   '''
   # Contributing to PKFire
   
@@ -754,7 +754,7 @@
   
   '''
 # ---
-# name: test_contributing_features[python-not-accepted-docs]
+# name: test_contributing_features[python-not-accepted-enable_docs]
   '''
   # Contributing to PKFire
   
@@ -793,7 +793,7 @@
   
   '''
 # ---
-# name: test_contributing_features[python-not-accepted-no_docs]
+# name: test_contributing_features[python-not-accepted-no-enable_docs]
   '''
   # Contributing to PKFire
   

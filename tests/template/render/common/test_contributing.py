@@ -13,10 +13,7 @@ if TYPE_CHECKING:
     from syrupy.assertion import SnapshotAssertion
 
 
-@pytest.mark.parametrize(
-    "enable_docs",
-    [pytest.param(True, id="docs"), pytest.param(False, id="no_docs")],
-)
+@pytest.mark.parametrize("enable_docs", template.choices.enable_docs)
 @pytest.mark.parametrize(
     "llm_contribution_policy", template.choices.llm_contribution_policy
 )

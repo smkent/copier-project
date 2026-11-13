@@ -1,5 +1,5 @@
 # serializer version: 1
-# name: test_mise_config[private-docs-accepted-with-disclosure]
+# name: test_mise_config[private-enable_docs-accepted-with-disclosure]
   '''
   min_version = "2026.10.3"
   
@@ -52,7 +52,7 @@
   
   '''
 # ---
-# name: test_mise_config[private-docs-accepted-with-disclosure].1
+# name: test_mise_config[private-enable_docs-accepted-with-disclosure].1
   '''
   [tasks.init]
   description = "Initialize git repository once on project creation"
@@ -67,7 +67,7 @@
   
   '''
 # ---
-# name: test_mise_config[private-docs-accepted]
+# name: test_mise_config[private-enable_docs-accepted]
   '''
   min_version = "2026.10.3"
   
@@ -119,7 +119,7 @@
   
   '''
 # ---
-# name: test_mise_config[private-docs-accepted].1
+# name: test_mise_config[private-enable_docs-accepted].1
   '''
   [tasks.init]
   description = "Initialize git repository once on project creation"
@@ -134,7 +134,7 @@
   
   '''
 # ---
-# name: test_mise_config[private-docs-not-accepted]
+# name: test_mise_config[private-enable_docs-not-accepted]
   '''
   min_version = "2026.10.3"
   
@@ -187,7 +187,7 @@
   
   '''
 # ---
-# name: test_mise_config[private-docs-not-accepted].1
+# name: test_mise_config[private-enable_docs-not-accepted].1
   '''
   [tasks.init]
   description = "Initialize git repository once on project creation"
@@ -202,7 +202,7 @@
   
   '''
 # ---
-# name: test_mise_config[private-no_docs-accepted-with-disclosure]
+# name: test_mise_config[private-no-enable_docs-accepted-with-disclosure]
   '''
   min_version = "2026.10.3"
   
@@ -240,7 +240,7 @@
   
   '''
 # ---
-# name: test_mise_config[private-no_docs-accepted-with-disclosure].1
+# name: test_mise_config[private-no-enable_docs-accepted-with-disclosure].1
   '''
   [tasks.init]
   description = "Initialize git repository once on project creation"
@@ -255,7 +255,7 @@
   
   '''
 # ---
-# name: test_mise_config[private-no_docs-accepted]
+# name: test_mise_config[private-no-enable_docs-accepted]
   '''
   min_version = "2026.10.3"
   
@@ -292,7 +292,7 @@
   
   '''
 # ---
-# name: test_mise_config[private-no_docs-accepted].1
+# name: test_mise_config[private-no-enable_docs-accepted].1
   '''
   [tasks.init]
   description = "Initialize git repository once on project creation"
@@ -307,7 +307,7 @@
   
   '''
 # ---
-# name: test_mise_config[private-no_docs-not-accepted]
+# name: test_mise_config[private-no-enable_docs-not-accepted]
   '''
   min_version = "2026.10.3"
   
@@ -345,7 +345,7 @@
   
   '''
 # ---
-# name: test_mise_config[private-no_docs-not-accepted].1
+# name: test_mise_config[private-no-enable_docs-not-accepted].1
   '''
   [tasks.init]
   description = "Initialize git repository once on project creation"
@@ -360,7 +360,7 @@
   
   '''
 # ---
-# name: test_mise_config[public-docs-accepted-with-disclosure]
+# name: test_mise_config[public-enable_docs-accepted-with-disclosure]
   '''
   min_version = "2026.10.3"
   
@@ -414,7 +414,7 @@
   
   '''
 # ---
-# name: test_mise_config[public-docs-accepted-with-disclosure].1
+# name: test_mise_config[public-enable_docs-accepted-with-disclosure].1
   '''
   [tasks.init]
   description = "Initialize git repository once on project creation"
@@ -430,7 +430,7 @@
   
   '''
 # ---
-# name: test_mise_config[public-docs-accepted]
+# name: test_mise_config[public-enable_docs-accepted]
   '''
   min_version = "2026.10.3"
   
@@ -483,7 +483,7 @@
   
   '''
 # ---
-# name: test_mise_config[public-docs-accepted].1
+# name: test_mise_config[public-enable_docs-accepted].1
   '''
   [tasks.init]
   description = "Initialize git repository once on project creation"
@@ -499,7 +499,7 @@
   
   '''
 # ---
-# name: test_mise_config[public-docs-not-accepted]
+# name: test_mise_config[public-enable_docs-not-accepted]
   '''
   min_version = "2026.10.3"
   
@@ -553,7 +553,7 @@
   
   '''
 # ---
-# name: test_mise_config[public-docs-not-accepted].1
+# name: test_mise_config[public-enable_docs-not-accepted].1
   '''
   [tasks.init]
   description = "Initialize git repository once on project creation"
@@ -569,7 +569,7 @@
   
   '''
 # ---
-# name: test_mise_config[public-no_docs-accepted-with-disclosure]
+# name: test_mise_config[public-no-enable_docs-accepted-with-disclosure]
   '''
   min_version = "2026.10.3"
   
@@ -608,7 +608,7 @@
   
   '''
 # ---
-# name: test_mise_config[public-no_docs-accepted-with-disclosure].1
+# name: test_mise_config[public-no-enable_docs-accepted-with-disclosure].1
   '''
   [tasks.init]
   description = "Initialize git repository once on project creation"
@@ -624,7 +624,7 @@
   
   '''
 # ---
-# name: test_mise_config[public-no_docs-accepted]
+# name: test_mise_config[public-no-enable_docs-accepted]
   '''
   min_version = "2026.10.3"
   
@@ -662,7 +662,7 @@
   
   '''
 # ---
-# name: test_mise_config[public-no_docs-accepted].1
+# name: test_mise_config[public-no-enable_docs-accepted].1
   '''
   [tasks.init]
   description = "Initialize git repository once on project creation"
@@ -678,7 +678,7 @@
   
   '''
 # ---
-# name: test_mise_config[public-no_docs-not-accepted]
+# name: test_mise_config[public-no-enable_docs-not-accepted]
   '''
   min_version = "2026.10.3"
   
@@ -717,7 +717,7 @@
   
   '''
 # ---
-# name: test_mise_config[public-no_docs-not-accepted].1
+# name: test_mise_config[public-no-enable_docs-not-accepted].1
   '''
   [tasks.init]
   description = "Initialize git repository once on project creation"

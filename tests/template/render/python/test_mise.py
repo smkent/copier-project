@@ -19,10 +19,7 @@ if TYPE_CHECKING:
 @pytest.mark.parametrize(
     "project_visibility", template.choices.project_visibility
 )
-@pytest.mark.parametrize(
-    "enable_docs",
-    [pytest.param(True, id="docs"), pytest.param(False, id="no_docs")],
-)
+@pytest.mark.parametrize("enable_docs", template.choices.enable_docs)
 @pytest.mark.parametrize(
     "enable_syrupy",
     [pytest.param(True, id="syrupy"), pytest.param(False, id="no_syrupy")],

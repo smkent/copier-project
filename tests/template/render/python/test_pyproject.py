@@ -20,10 +20,7 @@ if TYPE_CHECKING:
 @pytest.mark.parametrize(
     "python_version_minimum", template.python_versions.min_param_full_range
 )
-@pytest.mark.parametrize(
-    "enable_docs",
-    [pytest.param(True, id="docs"), pytest.param(False, id="no_docs")],
-)
+@pytest.mark.parametrize("enable_docs", template.choices.enable_docs)
 @pytest.mark.parametrize(
     "enable_syrupy",
     [pytest.param(True, id="syrupy"), pytest.param(False, id="no_syrupy")],

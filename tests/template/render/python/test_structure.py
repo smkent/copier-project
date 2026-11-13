@@ -15,18 +15,9 @@ if TYPE_CHECKING:
 @pytest.mark.parametrize(
     "project_visibility", template.choices.project_visibility
 )
-@pytest.mark.parametrize(
-    "enable_coverage",
-    [pytest.param(True, id="coverage"), pytest.param(False, id="no_coverage")],
-)
-@pytest.mark.parametrize(
-    "enable_pypi",
-    [pytest.param(True, id="pypi"), pytest.param(False, id="no_pypi")],
-)
-@pytest.mark.parametrize(
-    "enable_docs",
-    [pytest.param(True, id="docs"), pytest.param(False, id="no_docs")],
-)
+@pytest.mark.parametrize("enable_coverage", template.choices.enable_coverage)
+@pytest.mark.parametrize("enable_pypi", template.choices.enable_pypi)
+@pytest.mark.parametrize("enable_docs", template.choices.enable_docs)
 def test_structure(
     structure_test: StructureTest,
     project_type: str,

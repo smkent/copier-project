@@ -27,10 +27,7 @@ PYTHON_ONLY_PATHS = {
 @pytest.mark.parametrize(
     "project_visibility", template.choices.project_visibility
 )
-@pytest.mark.parametrize(
-    "enable_docs",
-    [pytest.param(True, id="docs"), pytest.param(False, id="no_docs")],
-)
+@pytest.mark.parametrize("enable_docs", template.choices.enable_docs)
 def test_structure(
     structure_test: StructureTest,
     project_type: str,

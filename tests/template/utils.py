@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass, field
 from functools import cached_property
 from pathlib import Path
 from types import SimpleNamespace
 from typing import TYPE_CHECKING, Any
 
+import pytest
 import yaml
 
 if TYPE_CHECKING:
@@ -114,15 +116,41 @@ class Template:
 
     @cached_property
     def choices(self) -> SimpleNamespace:
+        def _label_to_id(label: str) -> str:
+            return re.sub(r"[\W\_]+", "-", str(label).lower())
+
+        def _defined_choices(
+            choices_config: list[Any] | dict[str, Any],
+        ) -> list[Any]:
+            if isinstance(choices_config, dict):
+                return [
+                    pytest.param(value, id=str(value) or _label_to_id(label))
+                    for label, value in choices_config.items()
+                ]
+            return choices_config
+
+        def _find_choices(
+            question_name: str, question_config: dict[str, Any]
+        ) -> list[Any] | None:
+            answer_type = question_config["type"]
+            if (choices := question_config.get("choices")) and isinstance(
+                choices, (dict, list)
+            ):
+                return _defined_choices(choices)
+            if answer_type == "bool":
+                return [
+                    pytest.param(True, id=f"{question_name}"),
+                    pytest.param(False, id=f"no-{question_name}"),
+                ]
+            return None
+
         return SimpleNamespace(
             **{
-                k: list(choices.values())
-                if isinstance(choices, dict)
-                else choices
+                k: found_choices
                 for k, v in self.config.items()
-                if isinstance(v, dict)
-                and (choices := v.get("choices"))
-                and isinstance(choices, (dict, list))
+                if not k.startswith("_")
+                and isinstance(v, dict)
+                and (found_choices := _find_choices(k, v))
             }
         )
 

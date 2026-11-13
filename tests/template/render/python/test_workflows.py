@@ -14,14 +14,8 @@ if TYPE_CHECKING:
 
 
 @pytest.mark.parametrize("project_type", template.choices.project_type)
-@pytest.mark.parametrize(
-    "enable_coverage",
-    [pytest.param(True, id="coverage"), pytest.param(False, id="no_coverage")],
-)
-@pytest.mark.parametrize(
-    "enable_docs",
-    [pytest.param(True, id="docs"), pytest.param(False, id="no_docs")],
-)
+@pytest.mark.parametrize("enable_coverage", template.choices.enable_coverage)
+@pytest.mark.parametrize("enable_docs", template.choices.enable_docs)
 def test_workflows_ci(
     render_template: Callable[..., Path],
     snapshot: SnapshotAssertion,

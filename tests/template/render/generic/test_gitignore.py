@@ -4,6 +4,8 @@ from typing import TYPE_CHECKING
 
 import pytest
 
+from tests.template.utils import template
+
 if TYPE_CHECKING:
     from collections.abc import Callable
     from pathlib import Path
@@ -11,10 +13,7 @@ if TYPE_CHECKING:
     from syrupy.assertion import SnapshotAssertion
 
 
-@pytest.mark.parametrize(
-    "enable_docs",
-    [pytest.param(True, id="docs"), pytest.param(False, id="no_docs")],
-)
+@pytest.mark.parametrize("enable_docs", template.choices.enable_docs)
 def test_gitignore(
     render_template: Callable[..., Path],
     snapshot: SnapshotAssertion,

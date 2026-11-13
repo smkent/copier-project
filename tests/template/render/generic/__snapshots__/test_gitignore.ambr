@@ -1,5 +1,5 @@
 # serializer version: 1
-# name: test_gitignore[docs]
+# name: test_gitignore[enable_docs]
   '''
   # mise
   mise.local.toml
@@ -10,7 +10,7 @@
   
   '''
 # ---
-# name: test_gitignore[no_docs]
+# name: test_gitignore[no-enable_docs]
   '''
   # mise
   mise.local.toml
