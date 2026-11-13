@@ -5,6 +5,7 @@ copyright_holder: Stephen Kent
 copyright_license: MIT
 copyright_year: '2026'
 dependency_cooldown: P1W
+enable_container: false
 enable_coverage: true
 enable_docs: true
 enable_features:
@@ -16,7 +17,7 @@ llm_contribution_policy: accepted-with-disclosure
 project_description: Copier template for software projects with modern tooling
 project_name: copier-project
 project_slug: copier_project
-project_type: library
+project_type: application
 project_visibility: public
 python_version_maximum: No maximum
 python_version_minimum: '3.11'
