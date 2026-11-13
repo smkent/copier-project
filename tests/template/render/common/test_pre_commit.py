@@ -2,8 +2,6 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-import pytest
-
 from tests.template.utils import template
 
 if TYPE_CHECKING:
@@ -13,12 +11,7 @@ if TYPE_CHECKING:
     from syrupy.assertion import SnapshotAssertion
 
 
-@pytest.mark.parametrize(
-    "project_visibility", template.choices.project_visibility
-)
-@pytest.mark.parametrize(
-    "llm_contribution_policy", template.choices.llm_contribution_policy
-)
+@template.parameterize("project_visibility", "llm_contribution_policy")
 def test_pre_commit_config(
     render_template: Callable[..., Path],
     snapshot: SnapshotAssertion,

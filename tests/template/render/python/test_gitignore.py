@@ -2,8 +2,6 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-import pytest
-
 from tests.template.utils import template
 
 if TYPE_CHECKING:
@@ -13,14 +11,7 @@ if TYPE_CHECKING:
     from syrupy.assertion import SnapshotAssertion
 
 
-@pytest.mark.parametrize("project_type", template.choices.project_type)
-@pytest.mark.parametrize(
-    "project_visibility", template.choices.project_visibility
-)
-@pytest.mark.parametrize(
-    "enable_docs",
-    [pytest.param(True, id="docs"), pytest.param(False, id="no_docs")],
-)
+@template.parameterize("project_type", "project_visibility", "enable_docs")
 def test_gitignore(
     render_template: Callable[..., Path],
     snapshot: SnapshotAssertion,

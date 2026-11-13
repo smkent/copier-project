@@ -11,21 +11,12 @@ if TYPE_CHECKING:
     from tests.template.utils import StructureTest
 
 
-@pytest.mark.parametrize("project_type", template.choices.project_type)
-@pytest.mark.parametrize(
-    "project_visibility", template.choices.project_visibility
-)
-@pytest.mark.parametrize(
+@template.parameterize(
+    "project_type",
+    "project_visibility",
     "enable_coverage",
-    [pytest.param(True, id="coverage"), pytest.param(False, id="no_coverage")],
-)
-@pytest.mark.parametrize(
     "enable_pypi",
-    [pytest.param(True, id="pypi"), pytest.param(False, id="no_pypi")],
-)
-@pytest.mark.parametrize(
     "enable_docs",
-    [pytest.param(True, id="docs"), pytest.param(False, id="no_docs")],
 )
 def test_structure(
     structure_test: StructureTest,
@@ -84,9 +75,7 @@ def test_structure(
     structure_test(case)
 
 
-@pytest.mark.parametrize(
-    "copyright_license", template.choices.copyright_license
-)
+@template.parameterize("copyright_license")
 def test_structure_license(
     structure_test: StructureTest,
     copyright_license: str,
@@ -102,12 +91,7 @@ def test_structure_license(
     structure_test(case)
 
 
-@pytest.mark.parametrize(
-    "llm_contribution_policy", template.choices.llm_contribution_policy
-)
-@pytest.mark.parametrize(
-    "project_visibility", template.choices.project_visibility
-)
+@template.parameterize("llm_contribution_policy", "project_visibility")
 def test_structure_contributing(
     structure_test: StructureTest,
     project_visibility: str,
@@ -141,9 +125,7 @@ def test_structure_contributing(
         pytest.param("library", False, id="library"),
     ],
 )
-@pytest.mark.parametrize(
-    "project_visibility", template.choices.project_visibility
-)
+@template.parameterize("project_visibility")
 def test_structure_container(
     structure_test: StructureTest,
     project_type: str,

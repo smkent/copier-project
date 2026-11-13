@@ -38,7 +38,7 @@
   
   '''
 # ---
-# name: test_docs_development_features[no_syrupy-no_pypi-private]
+# name: test_docs_development_features[no_syrupy-enable_pypi-private]
   '''
   ---
   title: Required software
@@ -67,7 +67,7 @@
   
   '''
 # ---
-# name: test_docs_development_features[no_syrupy-no_pypi-private].1
+# name: test_docs_development_features[no_syrupy-enable_pypi-private].1
   '''
   ---
   title: Development workflow
@@ -112,7 +112,7 @@
   
   '''
 # ---
-# name: test_docs_development_features[no_syrupy-no_pypi-private].2
+# name: test_docs_development_features[no_syrupy-enable_pypi-private].2
   '''
   ---
   title: Template updates
@@ -150,7 +150,7 @@
   
   '''
 # ---
-# name: test_docs_development_features[no_syrupy-no_pypi-public]
+# name: test_docs_development_features[no_syrupy-enable_pypi-public]
   '''
   ---
   title: Required software
@@ -179,236 +179,7 @@
   
   '''
 # ---
-# name: test_docs_development_features[no_syrupy-no_pypi-public].1
-  '''
-  ---
-  title: Development workflow
-  icon: lucide/braces
-  ---
-  
-  # Project development workflow
-  
-  ## Cloning the repository
-  
-  ```sh
-  git clone https://github.com/ness/PKFire
-  cd PKFire
-  ```
-  
-  Run `mise install` in new repository clones to install tools, dependencies, and
-  git hooks:
-  
-  ```sh
-  mise install
-  ```
-  
-  ## Development tools
-  
-  * `mise run lint`: Run formatters and static checks
-  * `mise run test`: Run tests
-  
-  The `lint` and `test` tasks can also be run as a single combined command with:
-  
-  ```sh
-  mise run lt
-  ```
-  
-  ## Documentation server
-  
-  Start the development server with:
-  
-  ```sh
-  mise run docs
-  ```
-  
-  The documentation site will be served at:
-  
-  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
-  
-  To use a different bind host/port, run `mise run docs --help` for usage info.
-  
-  '''
-# ---
-# name: test_docs_development_features[no_syrupy-no_pypi-public].2
-  '''
-  ---
-  title: Template updates
-  icon: lucide/git-merge
-  ---
-  
-  # Applying copier-project template updates
-  
-  Copier can update your project with template changes that have occurred since
-  the project was created.
-  
-  To apply updates, simply run in your project directory:
-  
-  ```sh
-  copier update
-  ```
-  
-  This will repeat the setup prompts, in case any prompts have been added or
-  changed.
-  
-  !!! tip
-      To change template-provided features in your project, simply change your
-      answers in the update prompts.
-  
-  To apply updates without being prompted (reusing all previous answers), run:
-  
-  ```sh
-  copier update -l
-  ```
-  
-  When [`copier update`][copier-update] is finished, view changes with
-  `git status` and `git diff`. Resolve any conflicts, and then commit the result.
-  
-  [copier-update]: https://copier.readthedocs.io/en/stable/updating/
-  
-  '''
-# ---
-# name: test_docs_development_features[no_syrupy-pypi-private]
-  '''
-  ---
-  title: Required software
-  icon: lucide/bookmark-check
-  ---
-  
-  # Prerequisites
-  
-  - [x] [**git** for version control][git]
-  - [x] [**mise**][mise] tool manager: `curl https://mise.run | sh` or
-    [alternate installation method][mise-installation]
-  
-      !!! info
-  
-          `mise` ensures additional software is available, such as:
-  
-          * A [supported version][python-versions] of [**Python**][python]
-          * [Astral's **uv** Python project manager][uv]
-  
-  [git]: https://git-scm.com
-  [mise-installation]: https://mise.jdx.dev/installing-mise.html
-  [mise]: https://mise.jdx.dev
-  [python-versions]: https://devguide.python.org/versions/
-  [python]: https://python.org
-  [uv]: https://docs.astral.sh/uv/
-  
-  '''
-# ---
-# name: test_docs_development_features[no_syrupy-pypi-private].1
-  '''
-  ---
-  title: Development workflow
-  icon: lucide/braces
-  ---
-  
-  # Project development workflow
-  
-  ## Cloning the repository
-  
-  Run `mise install` in new repository clones to install tools, dependencies, and
-  git hooks:
-  
-  ```sh
-  mise install
-  ```
-  
-  ## Development tools
-  
-  * `mise run lint`: Run formatters and static checks
-  * `mise run test`: Run tests
-  
-  The `lint` and `test` tasks can also be run as a single combined command with:
-  
-  ```sh
-  mise run lt
-  ```
-  
-  ## Documentation server
-  
-  Start the development server with:
-  
-  ```sh
-  mise run docs
-  ```
-  
-  The documentation site will be served at:
-  
-  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
-  
-  To use a different bind host/port, run `mise run docs --help` for usage info.
-  
-  '''
-# ---
-# name: test_docs_development_features[no_syrupy-pypi-private].2
-  '''
-  ---
-  title: Template updates
-  icon: lucide/git-merge
-  ---
-  
-  # Applying copier-project template updates
-  
-  Copier can update your project with template changes that have occurred since
-  the project was created.
-  
-  To apply updates, simply run in your project directory:
-  
-  ```sh
-  copier update
-  ```
-  
-  This will repeat the setup prompts, in case any prompts have been added or
-  changed.
-  
-  !!! tip
-      To change template-provided features in your project, simply change your
-      answers in the update prompts.
-  
-  To apply updates without being prompted (reusing all previous answers), run:
-  
-  ```sh
-  copier update -l
-  ```
-  
-  When [`copier update`][copier-update] is finished, view changes with
-  `git status` and `git diff`. Resolve any conflicts, and then commit the result.
-  
-  [copier-update]: https://copier.readthedocs.io/en/stable/updating/
-  
-  '''
-# ---
-# name: test_docs_development_features[no_syrupy-pypi-public]
-  '''
-  ---
-  title: Required software
-  icon: lucide/bookmark-check
-  ---
-  
-  # Prerequisites
-  
-  - [x] [**git** for version control][git]
-  - [x] [**mise**][mise] tool manager: `curl https://mise.run | sh` or
-    [alternate installation method][mise-installation]
-  
-      !!! info
-  
-          `mise` ensures additional software is available, such as:
-  
-          * A [supported version][python-versions] of [**Python**][python]
-          * [Astral's **uv** Python project manager][uv]
-  
-  [git]: https://git-scm.com
-  [mise-installation]: https://mise.jdx.dev/installing-mise.html
-  [mise]: https://mise.jdx.dev
-  [python-versions]: https://devguide.python.org/versions/
-  [python]: https://python.org
-  [uv]: https://docs.astral.sh/uv/
-  
-  '''
-# ---
-# name: test_docs_development_features[no_syrupy-pypi-public].1
+# name: test_docs_development_features[no_syrupy-enable_pypi-public].1
   '''
   ---
   title: Development workflow
@@ -458,7 +229,7 @@
   
   '''
 # ---
-# name: test_docs_development_features[no_syrupy-pypi-public].2
+# name: test_docs_development_features[no_syrupy-enable_pypi-public].2
   '''
   ---
   title: Template updates
@@ -496,7 +267,7 @@
   
   '''
 # ---
-# name: test_docs_development_features[syrupy-no_pypi-private]
+# name: test_docs_development_features[no_syrupy-no-enable_pypi-private]
   '''
   ---
   title: Required software
@@ -525,7 +296,236 @@
   
   '''
 # ---
-# name: test_docs_development_features[syrupy-no_pypi-private].1
+# name: test_docs_development_features[no_syrupy-no-enable_pypi-private].1
+  '''
+  ---
+  title: Development workflow
+  icon: lucide/braces
+  ---
+  
+  # Project development workflow
+  
+  ## Cloning the repository
+  
+  Run `mise install` in new repository clones to install tools, dependencies, and
+  git hooks:
+  
+  ```sh
+  mise install
+  ```
+  
+  ## Development tools
+  
+  * `mise run lint`: Run formatters and static checks
+  * `mise run test`: Run tests
+  
+  The `lint` and `test` tasks can also be run as a single combined command with:
+  
+  ```sh
+  mise run lt
+  ```
+  
+  ## Documentation server
+  
+  Start the development server with:
+  
+  ```sh
+  mise run docs
+  ```
+  
+  The documentation site will be served at:
+  
+  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
+  
+  To use a different bind host/port, run `mise run docs --help` for usage info.
+  
+  '''
+# ---
+# name: test_docs_development_features[no_syrupy-no-enable_pypi-private].2
+  '''
+  ---
+  title: Template updates
+  icon: lucide/git-merge
+  ---
+  
+  # Applying copier-project template updates
+  
+  Copier can update your project with template changes that have occurred since
+  the project was created.
+  
+  To apply updates, simply run in your project directory:
+  
+  ```sh
+  copier update
+  ```
+  
+  This will repeat the setup prompts, in case any prompts have been added or
+  changed.
+  
+  !!! tip
+      To change template-provided features in your project, simply change your
+      answers in the update prompts.
+  
+  To apply updates without being prompted (reusing all previous answers), run:
+  
+  ```sh
+  copier update -l
+  ```
+  
+  When [`copier update`][copier-update] is finished, view changes with
+  `git status` and `git diff`. Resolve any conflicts, and then commit the result.
+  
+  [copier-update]: https://copier.readthedocs.io/en/stable/updating/
+  
+  '''
+# ---
+# name: test_docs_development_features[no_syrupy-no-enable_pypi-public]
+  '''
+  ---
+  title: Required software
+  icon: lucide/bookmark-check
+  ---
+  
+  # Prerequisites
+  
+  - [x] [**git** for version control][git]
+  - [x] [**mise**][mise] tool manager: `curl https://mise.run | sh` or
+    [alternate installation method][mise-installation]
+  
+      !!! info
+  
+          `mise` ensures additional software is available, such as:
+  
+          * A [supported version][python-versions] of [**Python**][python]
+          * [Astral's **uv** Python project manager][uv]
+  
+  [git]: https://git-scm.com
+  [mise-installation]: https://mise.jdx.dev/installing-mise.html
+  [mise]: https://mise.jdx.dev
+  [python-versions]: https://devguide.python.org/versions/
+  [python]: https://python.org
+  [uv]: https://docs.astral.sh/uv/
+  
+  '''
+# ---
+# name: test_docs_development_features[no_syrupy-no-enable_pypi-public].1
+  '''
+  ---
+  title: Development workflow
+  icon: lucide/braces
+  ---
+  
+  # Project development workflow
+  
+  ## Cloning the repository
+  
+  ```sh
+  git clone https://github.com/ness/PKFire
+  cd PKFire
+  ```
+  
+  Run `mise install` in new repository clones to install tools, dependencies, and
+  git hooks:
+  
+  ```sh
+  mise install
+  ```
+  
+  ## Development tools
+  
+  * `mise run lint`: Run formatters and static checks
+  * `mise run test`: Run tests
+  
+  The `lint` and `test` tasks can also be run as a single combined command with:
+  
+  ```sh
+  mise run lt
+  ```
+  
+  ## Documentation server
+  
+  Start the development server with:
+  
+  ```sh
+  mise run docs
+  ```
+  
+  The documentation site will be served at:
+  
+  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
+  
+  To use a different bind host/port, run `mise run docs --help` for usage info.
+  
+  '''
+# ---
+# name: test_docs_development_features[no_syrupy-no-enable_pypi-public].2
+  '''
+  ---
+  title: Template updates
+  icon: lucide/git-merge
+  ---
+  
+  # Applying copier-project template updates
+  
+  Copier can update your project with template changes that have occurred since
+  the project was created.
+  
+  To apply updates, simply run in your project directory:
+  
+  ```sh
+  copier update
+  ```
+  
+  This will repeat the setup prompts, in case any prompts have been added or
+  changed.
+  
+  !!! tip
+      To change template-provided features in your project, simply change your
+      answers in the update prompts.
+  
+  To apply updates without being prompted (reusing all previous answers), run:
+  
+  ```sh
+  copier update -l
+  ```
+  
+  When [`copier update`][copier-update] is finished, view changes with
+  `git status` and `git diff`. Resolve any conflicts, and then commit the result.
+  
+  [copier-update]: https://copier.readthedocs.io/en/stable/updating/
+  
+  '''
+# ---
+# name: test_docs_development_features[syrupy-enable_pypi-private]
+  '''
+  ---
+  title: Required software
+  icon: lucide/bookmark-check
+  ---
+  
+  # Prerequisites
+  
+  - [x] [**git** for version control][git]
+  - [x] [**mise**][mise] tool manager: `curl https://mise.run | sh` or
+    [alternate installation method][mise-installation]
+  
+      !!! info
+  
+          `mise` ensures additional software is available, such as:
+  
+          * A [supported version][python-versions] of [**Python**][python]
+          * [Astral's **uv** Python project manager][uv]
+  
+  [git]: https://git-scm.com
+  [mise-installation]: https://mise.jdx.dev/installing-mise.html
+  [mise]: https://mise.jdx.dev
+  [python-versions]: https://devguide.python.org/versions/
+  [python]: https://python.org
+  [uv]: https://docs.astral.sh/uv/
+  
+  '''
+# ---
+# name: test_docs_development_features[syrupy-enable_pypi-private].1
   '''
   ---
   title: Development workflow
@@ -579,7 +579,7 @@
   
   '''
 # ---
-# name: test_docs_development_features[syrupy-no_pypi-private].2
+# name: test_docs_development_features[syrupy-enable_pypi-private].2
   '''
   ---
   title: Template updates
@@ -617,7 +617,7 @@
   
   '''
 # ---
-# name: test_docs_development_features[syrupy-no_pypi-public]
+# name: test_docs_development_features[syrupy-enable_pypi-public]
   '''
   ---
   title: Required software
@@ -646,254 +646,7 @@
   
   '''
 # ---
-# name: test_docs_development_features[syrupy-no_pypi-public].1
-  '''
-  ---
-  title: Development workflow
-  icon: lucide/braces
-  ---
-  
-  # Project development workflow
-  
-  ## Cloning the repository
-  
-  ```sh
-  git clone https://github.com/ness/PKFire
-  cd PKFire
-  ```
-  
-  Run `mise install` in new repository clones to install tools, dependencies, and
-  git hooks:
-  
-  ```sh
-  mise install
-  ```
-  
-  ## Development tools
-  
-  * `mise run lint`: Run formatters and static checks
-  * `mise run test`: Run tests
-  
-  The `lint` and `test` tasks can also be run as a single combined command with:
-  
-  ```sh
-  mise run lt
-  ```
-  
-  ### Test snapshots
-  
-  Some tests compare test results with saved snapshots. Test snapshots can be
-  updated by running:
-  
-  ```sh
-  mise run snapup
-  ```
-  
-  ## Documentation server
-  
-  Start the development server with:
-  
-  ```sh
-  mise run docs
-  ```
-  
-  The documentation site will be served at:
-  
-  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
-  
-  To use a different bind host/port, run `mise run docs --help` for usage info.
-  
-  '''
-# ---
-# name: test_docs_development_features[syrupy-no_pypi-public].2
-  '''
-  ---
-  title: Template updates
-  icon: lucide/git-merge
-  ---
-  
-  # Applying copier-project template updates
-  
-  Copier can update your project with template changes that have occurred since
-  the project was created.
-  
-  To apply updates, simply run in your project directory:
-  
-  ```sh
-  copier update
-  ```
-  
-  This will repeat the setup prompts, in case any prompts have been added or
-  changed.
-  
-  !!! tip
-      To change template-provided features in your project, simply change your
-      answers in the update prompts.
-  
-  To apply updates without being prompted (reusing all previous answers), run:
-  
-  ```sh
-  copier update -l
-  ```
-  
-  When [`copier update`][copier-update] is finished, view changes with
-  `git status` and `git diff`. Resolve any conflicts, and then commit the result.
-  
-  [copier-update]: https://copier.readthedocs.io/en/stable/updating/
-  
-  '''
-# ---
-# name: test_docs_development_features[syrupy-pypi-private]
-  '''
-  ---
-  title: Required software
-  icon: lucide/bookmark-check
-  ---
-  
-  # Prerequisites
-  
-  - [x] [**git** for version control][git]
-  - [x] [**mise**][mise] tool manager: `curl https://mise.run | sh` or
-    [alternate installation method][mise-installation]
-  
-      !!! info
-  
-          `mise` ensures additional software is available, such as:
-  
-          * A [supported version][python-versions] of [**Python**][python]
-          * [Astral's **uv** Python project manager][uv]
-  
-  [git]: https://git-scm.com
-  [mise-installation]: https://mise.jdx.dev/installing-mise.html
-  [mise]: https://mise.jdx.dev
-  [python-versions]: https://devguide.python.org/versions/
-  [python]: https://python.org
-  [uv]: https://docs.astral.sh/uv/
-  
-  '''
-# ---
-# name: test_docs_development_features[syrupy-pypi-private].1
-  '''
-  ---
-  title: Development workflow
-  icon: lucide/braces
-  ---
-  
-  # Project development workflow
-  
-  ## Cloning the repository
-  
-  Run `mise install` in new repository clones to install tools, dependencies, and
-  git hooks:
-  
-  ```sh
-  mise install
-  ```
-  
-  ## Development tools
-  
-  * `mise run lint`: Run formatters and static checks
-  * `mise run test`: Run tests
-  
-  The `lint` and `test` tasks can also be run as a single combined command with:
-  
-  ```sh
-  mise run lt
-  ```
-  
-  ### Test snapshots
-  
-  Some tests compare test results with saved snapshots. Test snapshots can be
-  updated by running:
-  
-  ```sh
-  mise run snapup
-  ```
-  
-  ## Documentation server
-  
-  Start the development server with:
-  
-  ```sh
-  mise run docs
-  ```
-  
-  The documentation site will be served at:
-  
-  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
-  
-  To use a different bind host/port, run `mise run docs --help` for usage info.
-  
-  '''
-# ---
-# name: test_docs_development_features[syrupy-pypi-private].2
-  '''
-  ---
-  title: Template updates
-  icon: lucide/git-merge
-  ---
-  
-  # Applying copier-project template updates
-  
-  Copier can update your project with template changes that have occurred since
-  the project was created.
-  
-  To apply updates, simply run in your project directory:
-  
-  ```sh
-  copier update
-  ```
-  
-  This will repeat the setup prompts, in case any prompts have been added or
-  changed.
-  
-  !!! tip
-      To change template-provided features in your project, simply change your
-      answers in the update prompts.
-  
-  To apply updates without being prompted (reusing all previous answers), run:
-  
-  ```sh
-  copier update -l
-  ```
-  
-  When [`copier update`][copier-update] is finished, view changes with
-  `git status` and `git diff`. Resolve any conflicts, and then commit the result.
-  
-  [copier-update]: https://copier.readthedocs.io/en/stable/updating/
-  
-  '''
-# ---
-# name: test_docs_development_features[syrupy-pypi-public]
-  '''
-  ---
-  title: Required software
-  icon: lucide/bookmark-check
-  ---
-  
-  # Prerequisites
-  
-  - [x] [**git** for version control][git]
-  - [x] [**mise**][mise] tool manager: `curl https://mise.run | sh` or
-    [alternate installation method][mise-installation]
-  
-      !!! info
-  
-          `mise` ensures additional software is available, such as:
-  
-          * A [supported version][python-versions] of [**Python**][python]
-          * [Astral's **uv** Python project manager][uv]
-  
-  [git]: https://git-scm.com
-  [mise-installation]: https://mise.jdx.dev/installing-mise.html
-  [mise]: https://mise.jdx.dev
-  [python-versions]: https://devguide.python.org/versions/
-  [python]: https://python.org
-  [uv]: https://docs.astral.sh/uv/
-  
-  '''
-# ---
-# name: test_docs_development_features[syrupy-pypi-public].1
+# name: test_docs_development_features[syrupy-enable_pypi-public].1
   '''
   ---
   title: Development workflow
@@ -952,7 +705,7 @@
   
   '''
 # ---
-# name: test_docs_development_features[syrupy-pypi-public].2
+# name: test_docs_development_features[syrupy-enable_pypi-public].2
   '''
   ---
   title: Template updates
@@ -990,109 +743,254 @@
   
   '''
 # ---
-# name: test_docs_features[container-no_pypi]
+# name: test_docs_development_features[syrupy-no-enable_pypi-private]
   '''
   ---
-  title: One time setup
-  icon: lucide/package-plus
+  title: Required software
+  icon: lucide/bookmark-check
   ---
   
-  # One time setup
+  # Prerequisites
   
-  These steps only need to be completed once after the project is first created.
+  - [x] [**git** for version control][git]
+  - [x] [**mise**][mise] tool manager: `curl https://mise.run | sh` or
+    [alternate installation method][mise-installation]
   
-  ## GitHub repository
+      !!! info
   
-  [Settings → General][repo-settings]:
+          `mise` ensures additional software is available, such as:
   
-  **Releases**
+          * A [supported version][python-versions] of [**Python**][python]
+          * [Astral's **uv** Python project manager][uv]
   
-  - [x] Enable release immutability
-  
-  **Pull Requests**
-  
-  - [x] Allow merge commits
-  - [x] Allow squash merging
-  - [ ] Allow rebase merging
-  - [x] Automatically delete head branches
-  
-  [Settings → Branches][repo-settings-branches] → Add branch protection rule
-  for the Default branch (`main`):
-  
-  - [x] Restrict deletions
-  - [x] Require a pull request before merging
-  - [x] Block force pushes
-  
-  ## Renovate
-  
-  Ensure the [Renovate app][renovate] is installed on your account, then
-  enable it for `ness/PKFire`.
-  
-  ## Container registry (ghcr.io)
-  
-  Enable write access for Actions:
-  
-  [Settings → Actions → General][repo-settings-actions-general]
-  → Workflow permissions → Read and write permissions
-  
-  ## GitHub Pages
-  
-  [Settings → Pages][repo-settings-pages] → Source → GitHub Actions
-  
-  [renovate]: https://github.com/apps/renovate
-  [repo-settings]: https://github.com/ness/PKFire/settings
-  [repo-settings-actions-general]: https://github.com/ness/PKFire/settings/actions
-  [repo-settings-branches]: https://github.com/ness/PKFire/settings/branches
-  [repo-settings-pages]: https://github.com/ness/PKFire/settings/pages
+  [git]: https://git-scm.com
+  [mise-installation]: https://mise.jdx.dev/installing-mise.html
+  [mise]: https://mise.jdx.dev
+  [python-versions]: https://devguide.python.org/versions/
+  [python]: https://python.org
+  [uv]: https://docs.astral.sh/uv/
   
   '''
 # ---
-# name: test_docs_features[container-no_pypi].1
+# name: test_docs_development_features[syrupy-no-enable_pypi-private].1
   '''
   ---
-  title: Releasing a new version
-  icon: lucide/rocket
+  title: Development workflow
+  icon: lucide/braces
   ---
   
-  # Releasing a new version
+  # Project development workflow
   
-  Release version numbers should follow [Semantic Versioning][semver].
+  ## Cloning the repository
   
-  To create a release, run `mise run release` with one of `patch`, `minor`, or
-  `major` corresponding to the version number component to update:
-  
-  ```sh
-  mise run release patch|minor|major
-  ```
-  
-  A new tag with the new release version number will be created automatically
-  using [bump-my-version][bump-my-version] (for example, `v1.2.3`).
-  
-  Afterward, push the new release tag:
+  Run `mise install` in new repository clones to install tools, dependencies, and
+  git hooks:
   
   ```sh
-  git push --tags
+  mise install
   ```
   
-  * A corresponding [GitHub release][github-releases]
-    will be created automatically.
+  ## Development tools
   
-      [![GitHub Release][github-release-badge]][github-release-latest]
+  * `mise run lint`: Run formatters and static checks
+  * `mise run test`: Run tests
   
-  * A container image will be built and published to
-    the [GitHub Container Registry (GHCR)][ghcr-docs].
+  The `lint` and `test` tasks can also be run as a single combined command with:
   
-  [bump-my-version]: https://callowayproject.github.io/bump-my-version/
-  [ghcr-docs]: https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry
-  [ghcr-project]: https://github.com/ness/PKFire/pkgs/container/PKFire
-  [github-release-badge]: https://img.shields.io/github/v/release/ness/PKFire
-  [github-release-latest]: https://github.com/ness/PKFire/releases/latest
-  [github-releases]: https://github.com/ness/PKFire/releases
-  [semver]: https://semver.org/
+  ```sh
+  mise run lt
+  ```
+  
+  ### Test snapshots
+  
+  Some tests compare test results with saved snapshots. Test snapshots can be
+  updated by running:
+  
+  ```sh
+  mise run snapup
+  ```
+  
+  ## Documentation server
+  
+  Start the development server with:
+  
+  ```sh
+  mise run docs
+  ```
+  
+  The documentation site will be served at:
+  
+  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
+  
+  To use a different bind host/port, run `mise run docs --help` for usage info.
   
   '''
 # ---
-# name: test_docs_features[container-pypi]
+# name: test_docs_development_features[syrupy-no-enable_pypi-private].2
+  '''
+  ---
+  title: Template updates
+  icon: lucide/git-merge
+  ---
+  
+  # Applying copier-project template updates
+  
+  Copier can update your project with template changes that have occurred since
+  the project was created.
+  
+  To apply updates, simply run in your project directory:
+  
+  ```sh
+  copier update
+  ```
+  
+  This will repeat the setup prompts, in case any prompts have been added or
+  changed.
+  
+  !!! tip
+      To change template-provided features in your project, simply change your
+      answers in the update prompts.
+  
+  To apply updates without being prompted (reusing all previous answers), run:
+  
+  ```sh
+  copier update -l
+  ```
+  
+  When [`copier update`][copier-update] is finished, view changes with
+  `git status` and `git diff`. Resolve any conflicts, and then commit the result.
+  
+  [copier-update]: https://copier.readthedocs.io/en/stable/updating/
+  
+  '''
+# ---
+# name: test_docs_development_features[syrupy-no-enable_pypi-public]
+  '''
+  ---
+  title: Required software
+  icon: lucide/bookmark-check
+  ---
+  
+  # Prerequisites
+  
+  - [x] [**git** for version control][git]
+  - [x] [**mise**][mise] tool manager: `curl https://mise.run | sh` or
+    [alternate installation method][mise-installation]
+  
+      !!! info
+  
+          `mise` ensures additional software is available, such as:
+  
+          * A [supported version][python-versions] of [**Python**][python]
+          * [Astral's **uv** Python project manager][uv]
+  
+  [git]: https://git-scm.com
+  [mise-installation]: https://mise.jdx.dev/installing-mise.html
+  [mise]: https://mise.jdx.dev
+  [python-versions]: https://devguide.python.org/versions/
+  [python]: https://python.org
+  [uv]: https://docs.astral.sh/uv/
+  
+  '''
+# ---
+# name: test_docs_development_features[syrupy-no-enable_pypi-public].1
+  '''
+  ---
+  title: Development workflow
+  icon: lucide/braces
+  ---
+  
+  # Project development workflow
+  
+  ## Cloning the repository
+  
+  ```sh
+  git clone https://github.com/ness/PKFire
+  cd PKFire
+  ```
+  
+  Run `mise install` in new repository clones to install tools, dependencies, and
+  git hooks:
+  
+  ```sh
+  mise install
+  ```
+  
+  ## Development tools
+  
+  * `mise run lint`: Run formatters and static checks
+  * `mise run test`: Run tests
+  
+  The `lint` and `test` tasks can also be run as a single combined command with:
+  
+  ```sh
+  mise run lt
+  ```
+  
+  ### Test snapshots
+  
+  Some tests compare test results with saved snapshots. Test snapshots can be
+  updated by running:
+  
+  ```sh
+  mise run snapup
+  ```
+  
+  ## Documentation server
+  
+  Start the development server with:
+  
+  ```sh
+  mise run docs
+  ```
+  
+  The documentation site will be served at:
+  
+  [**http://localhost:8000**](http://localhost:8000){ .md-button .md-button--primary target="_blank" }
+  
+  To use a different bind host/port, run `mise run docs --help` for usage info.
+  
+  '''
+# ---
+# name: test_docs_development_features[syrupy-no-enable_pypi-public].2
+  '''
+  ---
+  title: Template updates
+  icon: lucide/git-merge
+  ---
+  
+  # Applying copier-project template updates
+  
+  Copier can update your project with template changes that have occurred since
+  the project was created.
+  
+  To apply updates, simply run in your project directory:
+  
+  ```sh
+  copier update
+  ```
+  
+  This will repeat the setup prompts, in case any prompts have been added or
+  changed.
+  
+  !!! tip
+      To change template-provided features in your project, simply change your
+      answers in the update prompts.
+  
+  To apply updates without being prompted (reusing all previous answers), run:
+  
+  ```sh
+  copier update -l
+  ```
+  
+  When [`copier update`][copier-update] is finished, view changes with
+  `git status` and `git diff`. Resolve any conflicts, and then commit the result.
+  
+  [copier-update]: https://copier.readthedocs.io/en/stable/updating/
+  
+  '''
+# ---
+# name: test_docs_features[enable_container-enable_pypi]
   '''
   ---
   title: One time setup
@@ -1172,7 +1070,7 @@
   
   '''
 # ---
-# name: test_docs_features[container-pypi].1
+# name: test_docs_features[enable_container-enable_pypi].1
   '''
   ---
   title: Releasing a new version
@@ -1223,7 +1121,7 @@
   
   '''
 # ---
-# name: test_docs_features[no_container-no_pypi]
+# name: test_docs_features[enable_container-no-enable_pypi]
   '''
   ---
   title: One time setup
@@ -1261,18 +1159,26 @@
   Ensure the [Renovate app][renovate] is installed on your account, then
   enable it for `ness/PKFire`.
   
+  ## Container registry (ghcr.io)
+  
+  Enable write access for Actions:
+  
+  [Settings → Actions → General][repo-settings-actions-general]
+  → Workflow permissions → Read and write permissions
+  
   ## GitHub Pages
   
   [Settings → Pages][repo-settings-pages] → Source → GitHub Actions
   
   [renovate]: https://github.com/apps/renovate
   [repo-settings]: https://github.com/ness/PKFire/settings
+  [repo-settings-actions-general]: https://github.com/ness/PKFire/settings/actions
   [repo-settings-branches]: https://github.com/ness/PKFire/settings/branches
   [repo-settings-pages]: https://github.com/ness/PKFire/settings/pages
   
   '''
 # ---
-# name: test_docs_features[no_container-no_pypi].1
+# name: test_docs_features[enable_container-no-enable_pypi].1
   '''
   ---
   title: Releasing a new version
@@ -1304,7 +1210,12 @@
   
       [![GitHub Release][github-release-badge]][github-release-latest]
   
+  * A container image will be built and published to
+    the [GitHub Container Registry (GHCR)][ghcr-docs].
+  
   [bump-my-version]: https://callowayproject.github.io/bump-my-version/
+  [ghcr-docs]: https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry
+  [ghcr-project]: https://github.com/ness/PKFire/pkgs/container/PKFire
   [github-release-badge]: https://img.shields.io/github/v/release/ness/PKFire
   [github-release-latest]: https://github.com/ness/PKFire/releases/latest
   [github-releases]: https://github.com/ness/PKFire/releases
@@ -1312,7 +1223,7 @@
   
   '''
 # ---
-# name: test_docs_features[no_container-pypi]
+# name: test_docs_features[no-enable_container-enable_pypi]
   '''
   ---
   title: One time setup
@@ -1384,7 +1295,7 @@
   
   '''
 # ---
-# name: test_docs_features[no_container-pypi].1
+# name: test_docs_features[no-enable_container-enable_pypi].1
   '''
   ---
   title: Releasing a new version
@@ -1426,6 +1337,95 @@
   [github-releases]: https://github.com/ness/PKFire/releases
   [pypi-badge]: https://img.shields.io/pypi/v/PKFire
   [pypi-project]: https://pypi.org/project/PKFire/
+  [semver]: https://semver.org/
+  
+  '''
+# ---
+# name: test_docs_features[no-enable_container-no-enable_pypi]
+  '''
+  ---
+  title: One time setup
+  icon: lucide/package-plus
+  ---
+  
+  # One time setup
+  
+  These steps only need to be completed once after the project is first created.
+  
+  ## GitHub repository
+  
+  [Settings → General][repo-settings]:
+  
+  **Releases**
+  
+  - [x] Enable release immutability
+  
+  **Pull Requests**
+  
+  - [x] Allow merge commits
+  - [x] Allow squash merging
+  - [ ] Allow rebase merging
+  - [x] Automatically delete head branches
+  
+  [Settings → Branches][repo-settings-branches] → Add branch protection rule
+  for the Default branch (`main`):
+  
+  - [x] Restrict deletions
+  - [x] Require a pull request before merging
+  - [x] Block force pushes
+  
+  ## Renovate
+  
+  Ensure the [Renovate app][renovate] is installed on your account, then
+  enable it for `ness/PKFire`.
+  
+  ## GitHub Pages
+  
+  [Settings → Pages][repo-settings-pages] → Source → GitHub Actions
+  
+  [renovate]: https://github.com/apps/renovate
+  [repo-settings]: https://github.com/ness/PKFire/settings
+  [repo-settings-branches]: https://github.com/ness/PKFire/settings/branches
+  [repo-settings-pages]: https://github.com/ness/PKFire/settings/pages
+  
+  '''
+# ---
+# name: test_docs_features[no-enable_container-no-enable_pypi].1
+  '''
+  ---
+  title: Releasing a new version
+  icon: lucide/rocket
+  ---
+  
+  # Releasing a new version
+  
+  Release version numbers should follow [Semantic Versioning][semver].
+  
+  To create a release, run `mise run release` with one of `patch`, `minor`, or
+  `major` corresponding to the version number component to update:
+  
+  ```sh
+  mise run release patch|minor|major
+  ```
+  
+  A new tag with the new release version number will be created automatically
+  using [bump-my-version][bump-my-version] (for example, `v1.2.3`).
+  
+  Afterward, push the new release tag:
+  
+  ```sh
+  git push --tags
+  ```
+  
+  * A corresponding [GitHub release][github-releases]
+    will be created automatically.
+  
+      [![GitHub Release][github-release-badge]][github-release-latest]
+  
+  [bump-my-version]: https://callowayproject.github.io/bump-my-version/
+  [github-release-badge]: https://img.shields.io/github/v/release/ness/PKFire
+  [github-release-latest]: https://github.com/ness/PKFire/releases/latest
+  [github-releases]: https://github.com/ness/PKFire/releases
   [semver]: https://semver.org/
   
   '''

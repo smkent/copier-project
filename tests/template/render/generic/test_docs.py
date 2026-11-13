@@ -2,8 +2,6 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-import pytest
-
 from tests.template.utils import template
 
 if TYPE_CHECKING:
@@ -31,9 +29,7 @@ def test_docs_features(
         assert (rendered / "docs" / doc_file).read_text() == snapshot
 
 
-@pytest.mark.parametrize(
-    "project_visibility", template.choices.project_visibility
-)
+@template.parameterize("project_visibility")
 def test_docs_development_features(
     render_template: Callable[..., Path],
     snapshot: SnapshotAssertion,
@@ -50,9 +46,7 @@ def test_docs_development_features(
         ).read_text() == snapshot
 
 
-@pytest.mark.parametrize(
-    "copyright_license", template.choices.copyright_license
-)
+@template.parameterize("copyright_license")
 def test_docs_license(
     render_template: Callable[..., Path],
     snapshot: SnapshotAssertion,

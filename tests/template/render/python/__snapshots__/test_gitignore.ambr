@@ -1,5 +1,5 @@
 # serializer version: 1
-# name: test_gitignore[docs-private-application]
+# name: test_gitignore[enable_docs-private-application]
   '''
   # Python
   __pycache__/
@@ -26,7 +26,7 @@
   
   '''
 # ---
-# name: test_gitignore[docs-private-library]
+# name: test_gitignore[enable_docs-private-library]
   '''
   # Python
   __pycache__/
@@ -54,7 +54,7 @@
   
   '''
 # ---
-# name: test_gitignore[docs-public-application]
+# name: test_gitignore[enable_docs-public-application]
   '''
   # Python
   __pycache__/
@@ -81,7 +81,7 @@
   
   '''
 # ---
-# name: test_gitignore[docs-public-library]
+# name: test_gitignore[enable_docs-public-library]
   '''
   # Python
   __pycache__/
@@ -109,7 +109,7 @@
   
   '''
 # ---
-# name: test_gitignore[no_docs-private-application]
+# name: test_gitignore[no-enable_docs-private-application]
   '''
   # Python
   __pycache__/
@@ -135,7 +135,7 @@
   
   '''
 # ---
-# name: test_gitignore[no_docs-private-library]
+# name: test_gitignore[no-enable_docs-private-library]
   '''
   # Python
   __pycache__/
@@ -162,7 +162,7 @@
   
   '''
 # ---
-# name: test_gitignore[no_docs-public-application]
+# name: test_gitignore[no-enable_docs-public-application]
   '''
   # Python
   __pycache__/
@@ -188,7 +188,7 @@
   
   '''
 # ---
-# name: test_gitignore[no_docs-public-library]
+# name: test_gitignore[no-enable_docs-public-library]
   '''
   # Python
   __pycache__/

@@ -13,15 +13,7 @@ if TYPE_CHECKING:
     from syrupy.assertion import SnapshotAssertion
 
 
-@pytest.mark.parametrize("project_type", template.choices.project_type)
-@pytest.mark.parametrize(
-    "enable_coverage",
-    [pytest.param(True, id="coverage"), pytest.param(False, id="no_coverage")],
-)
-@pytest.mark.parametrize(
-    "enable_docs",
-    [pytest.param(True, id="docs"), pytest.param(False, id="no_docs")],
-)
+@template.parameterize("project_type", "enable_coverage", "enable_docs")
 def test_workflows_ci(
     render_template: Callable[..., Path],
     snapshot: SnapshotAssertion,
@@ -64,7 +56,7 @@ def test_workflows_ci_versions(
     ).read_text() == snapshot
 
 
-@pytest.mark.parametrize("project_type", template.choices.project_type)
+@template.parameterize("project_type")
 def test_workflows_audit(
     render_template: Callable[..., Path],
     snapshot: SnapshotAssertion,
@@ -78,7 +70,7 @@ def test_workflows_audit(
     ).read_text() == snapshot
 
 
-@pytest.mark.parametrize("project_type", template.choices.project_type)
+@template.parameterize("project_type")
 def test_workflows_docs(
     render_template: Callable[..., Path],
     snapshot: SnapshotAssertion,
@@ -110,7 +102,7 @@ def test_workflows_container(
     ).read_text() == snapshot
 
 
-@pytest.mark.parametrize("project_type", template.choices.project_type)
+@template.parameterize("project_type")
 def test_workflows_release(
     render_template: Callable[..., Path],
     snapshot: SnapshotAssertion,

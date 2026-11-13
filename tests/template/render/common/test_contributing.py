@@ -2,8 +2,6 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-import pytest
-
 from tests.template.utils import template
 
 if TYPE_CHECKING:
@@ -13,13 +11,7 @@ if TYPE_CHECKING:
     from syrupy.assertion import SnapshotAssertion
 
 
-@pytest.mark.parametrize(
-    "enable_docs",
-    [pytest.param(True, id="docs"), pytest.param(False, id="no_docs")],
-)
-@pytest.mark.parametrize(
-    "llm_contribution_policy", template.choices.llm_contribution_policy
-)
+@template.parameterize("enable_docs", "llm_contribution_policy")
 def test_contributing_features(
     render_template: Callable[..., Path],
     snapshot: SnapshotAssertion,
@@ -34,9 +26,7 @@ def test_contributing_features(
     assert (rendered / "CONTRIBUTING.md").read_text() == snapshot
 
 
-@pytest.mark.parametrize(
-    "copyright_license", template.choices.copyright_license
-)
+@template.parameterize("copyright_license")
 def test_contributing_license(
     render_template: Callable[..., Path],
     snapshot: SnapshotAssertion,

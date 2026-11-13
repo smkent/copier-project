@@ -22,17 +22,7 @@ def test_docs_basic(
         assert (rendered / "docs" / doc_file).read_text() == snapshot
 
 
-@pytest.mark.parametrize(
-    "enable_pypi",
-    [pytest.param(True, id="pypi"), pytest.param(False, id="no_pypi")],
-)
-@pytest.mark.parametrize(
-    "enable_container",
-    [
-        pytest.param(True, id="container"),
-        pytest.param(False, id="no_container"),
-    ],
-)
+@template.parameterize("enable_pypi", "enable_container")
 def test_docs_features(
     render_template: Callable[..., Path],
     snapshot: SnapshotAssertion,
@@ -50,13 +40,7 @@ def test_docs_features(
         assert (rendered / "docs" / doc_file).read_text() == snapshot
 
 
-@pytest.mark.parametrize(
-    "project_visibility", template.choices.project_visibility
-)
-@pytest.mark.parametrize(
-    "enable_pypi",
-    [pytest.param(True, id="pypi"), pytest.param(False, id="no_pypi")],
-)
+@template.parameterize("project_visibility", "enable_pypi")
 @pytest.mark.parametrize(
     "enable_syrupy",
     [pytest.param(True, id="syrupy"), pytest.param(False, id="no_syrupy")],
@@ -81,9 +65,7 @@ def test_docs_development_features(
         ).read_text() == snapshot
 
 
-@pytest.mark.parametrize(
-    "copyright_license", template.choices.copyright_license
-)
+@template.parameterize("copyright_license")
 def test_docs_license(
     render_template: Callable[..., Path],
     snapshot: SnapshotAssertion,

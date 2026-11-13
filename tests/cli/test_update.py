@@ -323,9 +323,7 @@ def expect_run(
     )
 
 
-@pytest.mark.parametrize(
-    "project_visibility", template.choices.project_visibility
-)
+@template.parameterize("project_visibility")
 def test_main_update_with_project_current(
     main_runner: MainRunner,
     expect_run: ExpectRun,
@@ -563,10 +561,7 @@ def test_main_update_repo_arguments_self(
         main_runner("update", SELF_ALIAS, "--dry-run")
 
 
-@pytest.mark.parametrize("template_variant", template.choices.template_variant)
-@pytest.mark.parametrize(
-    "project_visibility", template.choices.project_visibility
-)
+@template.parameterize("template_variant", "project_visibility")
 def test_main_update_with_project(
     main_runner: MainRunner,
     expect_run: ExpectRun,
