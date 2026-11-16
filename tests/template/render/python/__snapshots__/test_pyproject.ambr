@@ -60,7 +60,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -205,7 +204,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -350,7 +348,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -495,7 +492,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -640,7 +636,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -785,7 +780,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -921,7 +915,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -1053,7 +1046,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -1194,7 +1186,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -1332,7 +1323,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -1463,7 +1453,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -1591,7 +1580,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -1728,7 +1716,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -1862,7 +1849,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -1996,7 +1982,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -2127,7 +2112,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -2267,7 +2251,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -2404,7 +2387,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -2534,7 +2516,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -2661,7 +2642,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -2797,7 +2777,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -2930,7 +2909,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -3066,7 +3044,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -3199,7 +3176,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -3341,7 +3317,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -3480,7 +3455,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -3612,7 +3586,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -3741,7 +3714,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -3879,7 +3851,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -4014,7 +3985,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -4149,7 +4119,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -4281,7 +4250,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -4422,7 +4390,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -4560,7 +4527,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -4691,7 +4657,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -4819,7 +4784,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -4956,7 +4920,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -5090,7 +5053,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -5226,7 +5188,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -5361,7 +5322,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -5505,7 +5465,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -5646,7 +5605,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -5780,7 +5738,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -5911,7 +5868,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -6051,7 +6007,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -6188,7 +6143,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -6325,7 +6279,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -6459,7 +6412,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -6602,7 +6554,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -6742,7 +6693,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -6875,7 +6825,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -7005,7 +6954,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -7144,7 +7092,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -7280,7 +7227,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -7419,7 +7365,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -7555,7 +7500,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -7700,7 +7644,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -7842,7 +7785,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -7977,7 +7919,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -8109,7 +8050,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -8250,7 +8190,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -8388,7 +8327,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -8526,7 +8464,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -8661,7 +8598,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -8805,7 +8741,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -8946,7 +8881,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -9080,7 +9014,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -9211,7 +9144,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -9351,7 +9283,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -9488,7 +9419,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -9633,7 +9563,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "COPYING"]
@@ -9778,7 +9707,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "COPYING"]
@@ -9923,7 +9851,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -10068,7 +9995,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -10213,7 +10139,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -10358,7 +10283,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -10503,7 +10427,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -10648,7 +10571,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "COPYING"]
@@ -10793,7 +10715,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "COPYING"]
@@ -10938,7 +10859,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -11083,7 +11003,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "COPYING", "COPYING.LESSER"]
@@ -11228,7 +11147,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "COPYING", "COPYING.LESSER"]
@@ -11373,7 +11291,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -11516,7 +11433,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -11657,7 +11573,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -11802,7 +11717,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -11945,7 +11859,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -12090,7 +12003,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
@@ -12233,7 +12145,6 @@
   tag = true
   tag_name = "v{new_version}"
   tag_message = ""
-  push = true
   
   [tool.hatch.build.targets.sdist]
   include = ["/pkfire", "/tests", "*.md", "LICENSE"]
