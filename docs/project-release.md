@@ -5,6 +5,8 @@ icon: lucide/rocket
 
 # Releasing a project
 
+!!! info "Releases are only currently supported for Python projects."
+
 Release version numbers should follow [Semantic Versioning][semver].
 
 To create a release, run `mise run release -n` with one of `patch`, `minor`, or
