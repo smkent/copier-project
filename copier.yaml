@@ -4,8 +4,6 @@ _external_data:
   # Previous answers, used to migrate deprecated answer values
   previous_answers: '{{ _copier_conf.answers_file }}'
 _preserve_symlinks: true
-_skip_if_exists:
-  - CHANGELOG.md
 _exclude:
   - "{% if _copier_operation == 'update' -%}.mise/conf.d/init.toml{% endif %}"
 _subdirectory: '{{ template_variant }}'
