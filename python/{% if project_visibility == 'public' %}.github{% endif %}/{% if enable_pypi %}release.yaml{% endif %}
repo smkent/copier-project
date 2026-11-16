@@ -10,5 +10,5 @@ changelog:
       labels: [documentation]
     - title: 📦 Dependencies
       labels: [dependencies]
-    - title: 💾 Other changes
+    - title: 💾 General changes
       labels: ['*']
