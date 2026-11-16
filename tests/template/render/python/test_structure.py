@@ -52,6 +52,7 @@ def test_structure(
     )
     case.expect_if(
         project_visibility == "public" and enable_pypi,
+        ".github/release.yaml",
         ".github/workflows/release.yaml",
     )
     case.expect_if(

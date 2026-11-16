@@ -8,6 +8,7 @@
     "vulnerabilityAlerts": {
       "schedule": ["at any time"]
     },
+    "labels": ["dependencies"],
     "minimumReleaseAge": "0 days",
     "packageRules": [
       {
@@ -29,6 +30,7 @@
     "vulnerabilityAlerts": {
       "schedule": ["at any time"]
     },
+    "labels": ["dependencies"],
     "minimumReleaseAge": "1 day",
     "packageRules": [
       {
@@ -50,6 +52,7 @@
     "vulnerabilityAlerts": {
       "schedule": ["at any time"]
     },
+    "labels": ["dependencies"],
     "minimumReleaseAge": "1 week",
     "packageRules": [
       {
@@ -71,6 +74,7 @@
     "vulnerabilityAlerts": {
       "schedule": ["at any time"]
     },
+    "labels": ["dependencies"],
     "minimumReleaseAge": "2 weeks",
     "packageRules": [
       {
@@ -92,6 +96,7 @@
     "vulnerabilityAlerts": {
       "schedule": ["at any time"]
     },
+    "labels": ["dependencies"],
     "minimumReleaseAge": "3 days",
     "packageRules": [
       {
@@ -113,6 +118,7 @@
     "vulnerabilityAlerts": {
       "schedule": ["at any time"]
     },
+    "labels": ["dependencies"],
     "packageRules": [
       {
         "matchManagers": ["github-actions", "mise", "pre-commit"],
@@ -133,6 +139,7 @@
     "vulnerabilityAlerts": {
       "schedule": ["at any time"]
     },
+    "labels": ["dependencies"],
     "minimumReleaseAge": "0 days",
     "packageRules": [
       {
@@ -154,6 +161,7 @@
     "vulnerabilityAlerts": {
       "schedule": ["at any time"]
     },
+    "labels": ["dependencies"],
     "minimumReleaseAge": "1 day",
     "packageRules": [
       {
@@ -175,6 +183,7 @@
     "vulnerabilityAlerts": {
       "schedule": ["at any time"]
     },
+    "labels": ["dependencies"],
     "minimumReleaseAge": "1 week",
     "packageRules": [
       {
@@ -196,6 +205,7 @@
     "vulnerabilityAlerts": {
       "schedule": ["at any time"]
     },
+    "labels": ["dependencies"],
     "minimumReleaseAge": "2 weeks",
     "packageRules": [
       {
@@ -217,6 +227,7 @@
     "vulnerabilityAlerts": {
       "schedule": ["at any time"]
     },
+    "labels": ["dependencies"],
     "minimumReleaseAge": "3 days",
     "packageRules": [
       {
@@ -238,6 +249,7 @@
     "vulnerabilityAlerts": {
       "schedule": ["at any time"]
     },
+    "labels": ["dependencies"],
     "packageRules": [
       {
         "matchManagers": ["github-actions", "mise", "pep621", "pre-commit"],

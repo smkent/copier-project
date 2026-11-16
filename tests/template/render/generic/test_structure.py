@@ -10,6 +10,7 @@ if TYPE_CHECKING:
 
 PYTHON_ONLY_PATHS = {
     ".dockerignore",
+    ".github/release.yaml",
     ".github/workflows/audit.yaml",
     ".github/workflows/release.yaml",
     "docs/releasing.md",
