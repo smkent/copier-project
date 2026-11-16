@@ -24,3 +24,19 @@ def test_workflows_ci(
     assert (
         rendered / ".github" / "workflows" / "ci.yaml"
     ).read_text() == snapshot
+
+
+@template.parameterize("project_type")
+def test_workflows_docs(
+    render_template: Callable[..., Path],
+    snapshot: SnapshotAssertion,
+    project_type: str,
+) -> None:
+    rendered = render_template(
+        project_type=project_type,
+        project_visibility="public",
+        enable_docs=True,
+    )
+    assert (
+        rendered / ".github" / "workflows" / "docs.yaml"
+    ).read_text() == snapshot
