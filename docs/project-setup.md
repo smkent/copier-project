@@ -39,6 +39,14 @@ Repository Settings → Branches → Add branch protection rule for the default 
 - [x] Require a pull request before merging
 - [x] Block force pushes
 
+[Issues → Labels][github-labels-docs] → Add label:
+
+- Name: **breaking**
+- Description: **Breaking change**
+- Color: **#b60205** (or click the top left red color in the input popup)
+
+!!! tip "Pull requests labeled `breaking` appear first in release notes"
+
 ## Renovate
 
 Ensure the [Renovate app][renovate] is installed on your account, then enable
@@ -81,6 +89,7 @@ Repository Settings → Actions → General → Workflow permissions
 
 Repository Settings → Pages → Source → GitHub Actions
 
+[github-labels-docs]: https://docs.github.com/en/issues/using-labels-and-milestones-to-track-work/managing-labels
 [github-settings-docs]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features
 [pypi-publishing-settings]: https://pypi.org/manage/account/publishing/
 [pypi-trusted-publishing]: https://docs.pypi.org/trusted-publishers/
