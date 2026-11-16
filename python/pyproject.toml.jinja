@@ -100,6 +100,7 @@ commit = false
 tag = true
 tag_name = "v{new_version}"
 tag_message = ""
+push_tag = true
 
 [tool.hatch.build.targets.sdist]
 include = ["/{{ project_slug }}", "/tests", "*.md", "{{ license.files | join('", "') }}"]

@@ -8,20 +8,26 @@ icon: lucide/rocket
 
 Release version numbers should follow [Semantic Versioning][semver].
 
-To create a release, run `mise run release` with one of `patch`, `minor`, or
-`major` corresponding to the version number component to update:
+To create a release, run `mise run release -n` with one of `patch`, `minor`, or
+`major` corresponding to the version number component to update.
+
+```sh
+mise run release -n patch|minor|major
+```
+
+This will display the new version number that would be created and pushed
+automatically using [bump-my-version][bump-my-version] (for example, `v1.2.3`).
+
+!!! info
+
+    Always run `mise run release` with `-n` or `--dry-run` first to preview the
+    tag that would be pushed!
+
+After confirming everything looks right, run the same command again without `-n`
+to create and push the release tag:
 
 ```sh
 mise run release patch|minor|major
-```
-
-A new tag with the new release version number will be created automatically
-using [bump-my-version][bump-my-version] (for example, `v1.2.3`).
-
-Afterward, push the new release tag:
-
-```sh
-git push --tags
 ```
 
 * A corresponding [GitHub release][github-releases]
