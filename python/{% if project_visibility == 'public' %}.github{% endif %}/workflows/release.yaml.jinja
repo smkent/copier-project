@@ -1,5 +1,5 @@
 {% extends "common/templates/workflows/release.yaml.jinja" %}
-{% import "common/github-workflow-steps.jinja" as ci with context %}
+{% import "common/github-workflow-steps.jinja" as wf with context %}
 {% import "common/python.jinja" as py with context %}
 
 {% block env %}
@@ -30,7 +30,7 @@ publish:
   permissions:
     id-token: write
   steps:
-    {{ ci.step_artifact_download(path=artifact_path) | indent(4) }}
+    {{ wf.step_artifact_download(path=artifact_path) | indent(4) }}
 
     - name: ☢️ Publish to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1

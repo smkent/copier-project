@@ -1,5 +1,5 @@
 {% extends "common/templates/workflows/ci.yaml.jinja" %}
-{% import "common/github-workflow-steps.jinja" as ci with context %}
+{% import "common/github-workflow-steps.jinja" as wf with context %}
 {% import "common/python.jinja" as py with context %}
 
 {% block env %}
@@ -21,11 +21,11 @@ ci:
         - '{{ v }}'
 {%- endcall %}
   steps:
-    {{ ci.step_checkout() | indent(4) }}
+    {{ wf.step_checkout() | indent(4) }}
 
-    {{ ci.steps_project_setup(cache_key_suffix="${{ matrix.python-version }}-") | indent(4) }}
+    {{ wf.steps_project_setup(cache_key_suffix="${{ matrix.python-version }}-") | indent(4) }}
 
-    {{ ci.steps_lint_test() | indent(4) }}
+    {{ wf.steps_lint_test() | indent(4) }}
 {%- if enable_coverage %}
 
     - name: 🔍 Collect coverage results
