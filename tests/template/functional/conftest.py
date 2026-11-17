@@ -20,7 +20,7 @@ if TYPE_CHECKING:
 TEMPLATE_VARIANT_DATA: dict[str, dict[str, Any]] = {
     "python": {
         "enable_container": True,
-        "enable_coverage": True,
+        "enable_coverage": "normal",
         "enable_docs": True,
         "enable_pypi": True,
     },

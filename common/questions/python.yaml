@@ -44,10 +44,20 @@ python_version_maximum:
   when: "{{ template_variant == 'python' }}"
 
 enable_coverage:
-  type: bool
+  type: yaml
   qmark: 📊
   help: Enable code coverage reports with codecov.io?
-  default: "{{ project_visibility == 'public' }}"
+  default: >-
+    {%- set previous = _external_data.previous_answers.enable_coverage | default(None) -%}
+    {%- if (previous if (previous is boolean) else project_visibility == 'public') -%}
+      normal
+    {%- else -%}
+      false
+    {%- endif -%}
+  choices:
+    Enabled, normal (Coverage can fail CI): normal
+    Enabled, informational (Coverage cannot fail CI): informational
+    Disabled: false
   when: "{{ template_variant == 'python' and project_visibility == 'public' }}"
 
 enable_pypi:
