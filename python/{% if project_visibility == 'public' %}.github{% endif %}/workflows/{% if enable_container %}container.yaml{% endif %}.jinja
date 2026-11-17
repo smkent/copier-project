@@ -1,5 +1,5 @@
 {% extends "common/templates/workflows/base.jinja" %}
-{% import "common/github-workflow-steps.jinja" as ci with context %}
+{% import "common/github-workflow-steps.jinja" as wf with context %}
 
 {% block name -%}
 Container
@@ -22,7 +22,7 @@ version:
   outputs:
     version: {% raw %}${{ steps.version.outputs.version }}{% endraw %}
   steps:
-    {{ ci.step_checkout(full_history=true) | indent(4) }}
+    {{ wf.step_checkout(full_history=true) | indent(4) }}
 
     - name: 🏷️ Determine project version
       id: version

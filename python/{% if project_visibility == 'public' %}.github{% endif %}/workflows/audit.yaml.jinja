@@ -1,5 +1,5 @@
 {% extends "common/templates/workflows/base.jinja" %}
-{% import "common/github-workflow-steps.jinja" as ci with context %}
+{% import "common/github-workflow-steps.jinja" as wf with context %}
 {% import "common/python.jinja" as py with context %}
 
 {% block name -%}
@@ -32,9 +32,9 @@ audit:
   runs-on: ubuntu-latest
   timeout-minutes: 15
   steps:
-    {{ ci.step_checkout() | indent(4) }}
+    {{ wf.step_checkout() | indent(4) }}
 
-    {{ ci.steps_project_setup() | indent(4) }}
+    {{ wf.steps_project_setup() | indent(4) }}
 
     - name: 🔍 Check dependencies
       run: mise run audit
