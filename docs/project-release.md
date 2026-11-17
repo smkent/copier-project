@@ -12,9 +12,9 @@ Project releases are created automatically when a correctly formatted
 
 ## Preparing release notes
 
-Release notes are generated automatically using the titles of pull requests
-merged since the previous release. Items in release notes are grouped in the
-following order based on how the corresponding pull request is labeled:
+Release notes are generated using the titles of pull requests merged since the
+previous release. Items in release notes are grouped in the following order
+based on how the corresponding pull request is labeled:
 
 | Pull request label | Release notes section |
 |---|---|
@@ -36,19 +36,15 @@ release notes sections.
 
 ### Previewing release notes with the GitHub CLI
 
-If the [GitHub CLI][github-cli] `gh` is available, you can preview the release notes
-that will be generated with:
+If the [GitHub CLI][github-cli] `gh` is available, you can preview the release
+notes that will be generated with:
 
 ```sh
-gh api repos/{owner}/{repo}/releases/generate-notes -f tag_name=vX.Y.Z -q .body
+mise run release-notes
 ```
 
-!!! note
-
-    * Although `tag_name` can be any value, replace `vX.Y.Z` with the new
-      release version number to preview that version's exact release notes.
-    * `{owner}` and `{repo}` are literal parts of the command.
-      `gh api` handles them automatically.
+The previewed release notes will show `(preview)` in place of a new release
+version.
 
 ## Publishing a release
 
@@ -59,13 +55,17 @@ To create a release, run `mise run release -n` with one of `patch`, `minor`, or
 mise run release -n patch|minor|major
 ```
 
-This will display the new version number that would be created and pushed
-automatically using [bump-my-version][bump-my-version] (for example, `v1.2.3`).
+This will display:
+
+* A preview of the release notes, if the [GitHub CLI][github-cli] `gh` is
+  available
+* The new version number that would be created and pushed automatically using
+  [bump-my-version][bump-my-version] (for example, `v1.2.3`).
 
 !!! info
 
-    Always run `mise run release` with `-n` or `--dry-run` first to preview the
-    tag that would be pushed!
+    Always run `mise run release` with `-n` or `--dry-run` first to preview new
+    release details!
 
 After confirming everything looks right, run the same command again without `-n`
 to create and push the release tag:
@@ -76,7 +76,7 @@ mise run release patch|minor|major
 
 When a release tag is created in the GitHub repository:
 
-* A corresponding GitHub release is created automatically.
+* A corresponding GitHub release is created.
 * For Python projects:
     * A release package is built.
     * If PyPI publishing is enabled, the release package is uploaded to PyPI.
