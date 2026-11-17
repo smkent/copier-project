@@ -13,6 +13,7 @@
   
   [tools]
   betterleaks = "latest"
+  "pipx:bump-my-version" = "latest"
   "pipx:commit-check" = "latest"
   "pipx:copier" = "latest"
   "pipx:zensical" = "latest"
@@ -42,6 +43,11 @@
   [tasks.lt]
   description = "Run all formatters, static checks, and tests"
   run = [{ task = "lint" }, { task = "test" }]
+  
+  [tasks.release]
+  description = "Create and push a release tag (patch/minor/major)"
+  raw_args = true
+  run = "bump-my-version bump -v"
   
   [tasks.secretscan]
   description = "Scan git history for secrets"
@@ -84,6 +90,7 @@
   
   [tools]
   betterleaks = "latest"
+  "pipx:bump-my-version" = "latest"
   "pipx:copier" = "latest"
   "pipx:zensical" = "latest"
   prek = "latest"
@@ -112,6 +119,11 @@
   [tasks.lt]
   description = "Run all formatters, static checks, and tests"
   run = [{ task = "lint" }, { task = "test" }]
+  
+  [tasks.release]
+  description = "Create and push a release tag (patch/minor/major)"
+  raw_args = true
+  run = "bump-my-version bump -v"
   
   [tasks.secretscan]
   description = "Scan git history for secrets"
@@ -154,6 +166,7 @@
   
   [tools]
   betterleaks = "latest"
+  "pipx:bump-my-version" = "latest"
   "pipx:commit-check" = "latest"
   "pipx:copier" = "latest"
   "pipx:zensical" = "latest"
@@ -183,6 +196,11 @@
   [tasks.lt]
   description = "Run all formatters, static checks, and tests"
   run = [{ task = "lint" }, { task = "test" }]
+  
+  [tasks.release]
+  description = "Create and push a release tag (patch/minor/major)"
+  raw_args = true
+  run = "bump-my-version bump -v"
   
   [tasks.secretscan]
   description = "Scan git history for secrets"
@@ -225,6 +243,7 @@
   
   [tools]
   betterleaks = "latest"
+  "pipx:bump-my-version" = "latest"
   "pipx:commit-check" = "latest"
   "pipx:copier" = "latest"
   prek = "latest"
@@ -239,6 +258,11 @@
   [tasks.lt]
   description = "Run all formatters, static checks, and tests"
   run = [{ task = "lint" }, { task = "test" }]
+  
+  [tasks.release]
+  description = "Create and push a release tag (patch/minor/major)"
+  raw_args = true
+  run = "bump-my-version bump -v"
   
   [tasks.secretscan]
   description = "Scan git history for secrets"
@@ -281,6 +305,7 @@
   
   [tools]
   betterleaks = "latest"
+  "pipx:bump-my-version" = "latest"
   "pipx:copier" = "latest"
   prek = "latest"
   taplo = "latest"
@@ -294,6 +319,11 @@
   [tasks.lt]
   description = "Run all formatters, static checks, and tests"
   run = [{ task = "lint" }, { task = "test" }]
+  
+  [tasks.release]
+  description = "Create and push a release tag (patch/minor/major)"
+  raw_args = true
+  run = "bump-my-version bump -v"
   
   [tasks.secretscan]
   description = "Scan git history for secrets"
@@ -336,6 +366,7 @@
   
   [tools]
   betterleaks = "latest"
+  "pipx:bump-my-version" = "latest"
   "pipx:commit-check" = "latest"
   "pipx:copier" = "latest"
   prek = "latest"
@@ -350,6 +381,11 @@
   [tasks.lt]
   description = "Run all formatters, static checks, and tests"
   run = [{ task = "lint" }, { task = "test" }]
+  
+  [tasks.release]
+  description = "Create and push a release tag (patch/minor/major)"
+  raw_args = true
+  run = "bump-my-version bump -v"
   
   [tasks.secretscan]
   description = "Scan git history for secrets"
@@ -393,6 +429,7 @@
   [tools]
   betterleaks = "latest"
   jactionlint = "latest"
+  "pipx:bump-my-version" = "latest"
   "pipx:commit-check" = "latest"
   "pipx:copier" = "latest"
   "pipx:zensical" = "latest"
@@ -422,6 +459,11 @@
   [tasks.lt]
   description = "Run all formatters, static checks, and tests"
   run = [{ task = "lint" }, { task = "test" }]
+  
+  [tasks.release]
+  description = "Create and push a release tag (patch/minor/major)"
+  raw_args = true
+  run = "bump-my-version bump -v"
   
   [tasks.secretscan]
   description = "Scan git history for secrets"
@@ -466,6 +508,7 @@
   [tools]
   betterleaks = "latest"
   jactionlint = "latest"
+  "pipx:bump-my-version" = "latest"
   "pipx:copier" = "latest"
   "pipx:zensical" = "latest"
   prek = "latest"
@@ -494,6 +537,11 @@
   [tasks.lt]
   description = "Run all formatters, static checks, and tests"
   run = [{ task = "lint" }, { task = "test" }]
+  
+  [tasks.release]
+  description = "Create and push a release tag (patch/minor/major)"
+  raw_args = true
+  run = "bump-my-version bump -v"
   
   [tasks.secretscan]
   description = "Scan git history for secrets"
@@ -538,6 +586,7 @@
   [tools]
   betterleaks = "latest"
   jactionlint = "latest"
+  "pipx:bump-my-version" = "latest"
   "pipx:commit-check" = "latest"
   "pipx:copier" = "latest"
   "pipx:zensical" = "latest"
@@ -567,6 +616,11 @@
   [tasks.lt]
   description = "Run all formatters, static checks, and tests"
   run = [{ task = "lint" }, { task = "test" }]
+  
+  [tasks.release]
+  description = "Create and push a release tag (patch/minor/major)"
+  raw_args = true
+  run = "bump-my-version bump -v"
   
   [tasks.secretscan]
   description = "Scan git history for secrets"
@@ -611,6 +665,7 @@
   [tools]
   betterleaks = "latest"
   jactionlint = "latest"
+  "pipx:bump-my-version" = "latest"
   "pipx:commit-check" = "latest"
   "pipx:copier" = "latest"
   prek = "latest"
@@ -625,6 +680,11 @@
   [tasks.lt]
   description = "Run all formatters, static checks, and tests"
   run = [{ task = "lint" }, { task = "test" }]
+  
+  [tasks.release]
+  description = "Create and push a release tag (patch/minor/major)"
+  raw_args = true
+  run = "bump-my-version bump -v"
   
   [tasks.secretscan]
   description = "Scan git history for secrets"
@@ -669,6 +729,7 @@
   [tools]
   betterleaks = "latest"
   jactionlint = "latest"
+  "pipx:bump-my-version" = "latest"
   "pipx:copier" = "latest"
   prek = "latest"
   taplo = "latest"
@@ -682,6 +743,11 @@
   [tasks.lt]
   description = "Run all formatters, static checks, and tests"
   run = [{ task = "lint" }, { task = "test" }]
+  
+  [tasks.release]
+  description = "Create and push a release tag (patch/minor/major)"
+  raw_args = true
+  run = "bump-my-version bump -v"
   
   [tasks.secretscan]
   description = "Scan git history for secrets"
@@ -726,6 +792,7 @@
   [tools]
   betterleaks = "latest"
   jactionlint = "latest"
+  "pipx:bump-my-version" = "latest"
   "pipx:commit-check" = "latest"
   "pipx:copier" = "latest"
   prek = "latest"
@@ -740,6 +807,11 @@
   [tasks.lt]
   description = "Run all formatters, static checks, and tests"
   run = [{ task = "lint" }, { task = "test" }]
+  
+  [tasks.release]
+  description = "Create and push a release tag (patch/minor/major)"
+  raw_args = true
+  run = "bump-my-version bump -v"
   
   [tasks.secretscan]
   description = "Scan git history for secrets"
@@ -784,6 +856,7 @@
   [tools]
   betterleaks = "latest"
   jactionlint = "latest"
+  "pipx:bump-my-version" = "latest"
   "pipx:commit-check" = "latest"
   "pipx:copier" = "latest"
   "pipx:zensical" = "latest"
@@ -813,6 +886,11 @@
   [tasks.lt]
   description = "Run all formatters, static checks, and tests"
   run = [{ task = "lint" }, { task = "test" }]
+  
+  [tasks.release]
+  description = "Create and push a release tag (patch/minor/major)"
+  raw_args = true
+  run = "bump-my-version bump -v"
   
   [tasks.secretscan]
   description = "Scan git history for secrets"
@@ -857,6 +935,7 @@
   [tools]
   betterleaks = "latest"
   jactionlint = "latest"
+  "pipx:bump-my-version" = "latest"
   "pipx:commit-check" = "latest"
   "pipx:copier" = "latest"
   "pipx:zensical" = "latest"
@@ -886,6 +965,11 @@
   [tasks.lt]
   description = "Run all formatters, static checks, and tests"
   run = [{ task = "lint" }, { task = "test" }]
+  
+  [tasks.release]
+  description = "Create and push a release tag (patch/minor/major)"
+  raw_args = true
+  run = "bump-my-version bump -v"
   
   [tasks.secretscan]
   description = "Scan git history for secrets"
@@ -930,6 +1014,7 @@
   [tools]
   betterleaks = "latest"
   jactionlint = "latest"
+  "pipx:bump-my-version" = "latest"
   "pipx:commit-check" = "latest"
   "pipx:copier" = "latest"
   "pipx:zensical" = "latest"
@@ -959,6 +1044,11 @@
   [tasks.lt]
   description = "Run all formatters, static checks, and tests"
   run = [{ task = "lint" }, { task = "test" }]
+  
+  [tasks.release]
+  description = "Create and push a release tag (patch/minor/major)"
+  raw_args = true
+  run = "bump-my-version bump -v"
   
   [tasks.secretscan]
   description = "Scan git history for secrets"
@@ -1003,6 +1093,7 @@
   [tools]
   betterleaks = "latest"
   jactionlint = "latest"
+  "pipx:bump-my-version" = "latest"
   "pipx:commit-check" = "latest"
   "pipx:copier" = "latest"
   "pipx:zensical" = "latest"
@@ -1032,6 +1123,11 @@
   [tasks.lt]
   description = "Run all formatters, static checks, and tests"
   run = [{ task = "lint" }, { task = "test" }]
+  
+  [tasks.release]
+  description = "Create and push a release tag (patch/minor/major)"
+  raw_args = true
+  run = "bump-my-version bump -v"
   
   [tasks.secretscan]
   description = "Scan git history for secrets"
@@ -1076,6 +1172,7 @@
   [tools]
   betterleaks = "latest"
   jactionlint = "latest"
+  "pipx:bump-my-version" = "latest"
   "pipx:commit-check" = "latest"
   "pipx:copier" = "latest"
   "pipx:zensical" = "latest"
@@ -1105,6 +1202,11 @@
   [tasks.lt]
   description = "Run all formatters, static checks, and tests"
   run = [{ task = "lint" }, { task = "test" }]
+  
+  [tasks.release]
+  description = "Create and push a release tag (patch/minor/major)"
+  raw_args = true
+  run = "bump-my-version bump -v"
   
   [tasks.secretscan]
   description = "Scan git history for secrets"
@@ -1146,6 +1248,7 @@
   [tools]
   betterleaks = "latest"
   jactionlint = "latest"
+  "pipx:bump-my-version" = "latest"
   "pipx:commit-check" = "latest"
   "pipx:copier" = "latest"
   "pipx:zensical" = "latest"
@@ -1175,6 +1278,11 @@
   [tasks.lt]
   description = "Run all formatters, static checks, and tests"
   run = [{ task = "lint" }, { task = "test" }]
+  
+  [tasks.release]
+  description = "Create and push a release tag (patch/minor/major)"
+  raw_args = true
+  run = "bump-my-version bump -v"
   
   [tasks.secretscan]
   description = "Scan git history for secrets"

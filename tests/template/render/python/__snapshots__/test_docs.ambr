@@ -1157,21 +1157,22 @@
   mise run release patch|minor|major
   ```
   
-  * A corresponding [GitHub release][github-releases]
-    will be created automatically.
+  When a release tag is created in the GitHub repository:
   
-      [![GitHub Release][github-release-badge]][github-release-latest]
-  
-  * A release package will be built and [uploaded to PyPI][pypi-project].
+  * A release package is built.
+  * The release package is [uploaded to PyPI][pypi-project].
   
       [![PyPI][pypi-badge]][pypi-project]
   
-  * A container image will be built and published to
-    the [GitHub Container Registry (GHCR)][ghcr-docs].
+  * A corresponding [GitHub release][github-releases] is created automatically.
+  
+      [![GitHub Release][github-release-badge]][github-release-latest]
+  
+  * A container image is built and published to the
+    [GitHub Container Registry (GHCR)][ghcr-docs].
   
   [bump-my-version]: https://callowayproject.github.io/bump-my-version/
   [ghcr-docs]: https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry
-  [ghcr-project]: https://github.com/ness/PKFire/pkgs/container/PKFire
   [git-book-tags]: https://git-scm.com/book/en/v2/Git-Basics-Tagging
   [github-cli]: https://cli.github.com/
   [github-release-badge]: https://img.shields.io/github/v/release/ness/PKFire
@@ -1216,6 +1217,14 @@
   - [x] Require a pull request before merging
   - [x] Block force pushes
   
+  [Issues → Labels][repo-labels] → Add label:
+  
+  - Name: **breaking**
+  - Description: **Breaking change**
+  - Color: **#b60205** (or click the top left red color in the input popup)
+  
+  !!! tip "Pull requests labeled `breaking` appear first in release notes"
+  
   ## Renovate
   
   Ensure the [Renovate app][renovate] is installed on your account, then
@@ -1233,6 +1242,7 @@
   [Settings → Pages][repo-settings-pages] → Source → GitHub Actions
   
   [renovate]: https://github.com/apps/renovate
+  [repo-labels]: https://github.com/ness/PKFire/labels
   [repo-settings]: https://github.com/ness/PKFire/settings
   [repo-settings-actions-general]: https://github.com/ness/PKFire/settings/actions
   [repo-settings-branches]: https://github.com/ness/PKFire/settings/branches
@@ -1318,17 +1328,18 @@
   mise run release patch|minor|major
   ```
   
-  * A corresponding [GitHub release][github-releases]
-    will be created automatically.
+  When a release tag is created in the GitHub repository:
+  
+  * A release package is built.
+  * A corresponding [GitHub release][github-releases] is created automatically.
   
       [![GitHub Release][github-release-badge]][github-release-latest]
   
-  * A container image will be built and published to
-    the [GitHub Container Registry (GHCR)][ghcr-docs].
+  * A container image is built and published to the
+    [GitHub Container Registry (GHCR)][ghcr-docs].
   
   [bump-my-version]: https://callowayproject.github.io/bump-my-version/
   [ghcr-docs]: https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry
-  [ghcr-project]: https://github.com/ness/PKFire/pkgs/container/PKFire
   [git-book-tags]: https://git-scm.com/book/en/v2/Git-Basics-Tagging
   [github-cli]: https://cli.github.com/
   [github-release-badge]: https://img.shields.io/github/v/release/ness/PKFire
@@ -1497,14 +1508,16 @@
   mise run release patch|minor|major
   ```
   
-  * A corresponding [GitHub release][github-releases]
-    will be created automatically.
+  When a release tag is created in the GitHub repository:
   
-      [![GitHub Release][github-release-badge]][github-release-latest]
-  
-  * A release package will be built and [uploaded to PyPI][pypi-project].
+  * A release package is built.
+  * The release package is [uploaded to PyPI][pypi-project].
   
       [![PyPI][pypi-badge]][pypi-project]
+  
+  * A corresponding [GitHub release][github-releases] is created automatically.
+  
+      [![GitHub Release][github-release-badge]][github-release-latest]
   
   [bump-my-version]: https://callowayproject.github.io/bump-my-version/
   [git-book-tags]: https://git-scm.com/book/en/v2/Git-Basics-Tagging
@@ -1551,6 +1564,14 @@
   - [x] Require a pull request before merging
   - [x] Block force pushes
   
+  [Issues → Labels][repo-labels] → Add label:
+  
+  - Name: **breaking**
+  - Description: **Breaking change**
+  - Color: **#b60205** (or click the top left red color in the input popup)
+  
+  !!! tip "Pull requests labeled `breaking` appear first in release notes"
+  
   ## Renovate
   
   Ensure the [Renovate app][renovate] is installed on your account, then
@@ -1561,6 +1582,7 @@
   [Settings → Pages][repo-settings-pages] → Source → GitHub Actions
   
   [renovate]: https://github.com/apps/renovate
+  [repo-labels]: https://github.com/ness/PKFire/labels
   [repo-settings]: https://github.com/ness/PKFire/settings
   [repo-settings-branches]: https://github.com/ness/PKFire/settings/branches
   [repo-settings-pages]: https://github.com/ness/PKFire/settings/pages
@@ -1645,8 +1667,10 @@
   mise run release patch|minor|major
   ```
   
-  * A corresponding [GitHub release][github-releases]
-    will be created automatically.
+  When a release tag is created in the GitHub repository:
+  
+  * A release package is built.
+  * A corresponding [GitHub release][github-releases] is created automatically.
   
       [![GitHub Release][github-release-badge]][github-release-latest]
   

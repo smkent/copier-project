@@ -5,6 +5,9 @@
 "uv sync",
 {% endblock %}
 
+{% block bump_my_version_tool %}
+{%- endblock %}
+
 {% block check_tool %}
 {%- endblock %}
 
@@ -26,13 +29,6 @@ run = "uv run pysentry-rs"
 description = "Build distribution package"
 raw_args = true
 run = "uv build"
-{% endblock %}
-
-{% block tasks_after_lt %}
-[tasks.release]
-description = "Create and push a release tag (patch/minor/major)"
-raw_args = true
-run = "uv run bump-my-version bump -v"
 {% endblock %}
 
 {% block tasks_after_secretscan %}

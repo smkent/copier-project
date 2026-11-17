@@ -5,8 +5,6 @@ icon: lucide/rocket
 
 # Releasing a project
 
-!!! info "Releases are only currently supported for Python projects."
-
 Release version numbers should follow [Semantic Versioning][semver].
 
 Project releases are created automatically when a correctly formatted
@@ -76,11 +74,14 @@ to create and push the release tag:
 mise run release patch|minor|major
 ```
 
-* A corresponding GitHub release will be created automatically.
-* If PyPI publishing is enabled, a release package will be built and uploaded to
-  PyPI.
-* If container image build and publishing is enabled, a container image will be
-  built and published to the [GitHub Container Registry (GHCR)][ghcr-docs].
+When a release tag is created in the GitHub repository:
+
+* A corresponding GitHub release is created automatically.
+* For Python projects:
+    * A release package is built.
+    * If PyPI publishing is enabled, the release package is uploaded to PyPI.
+    * If container image build and publishing is enabled, a container image is
+      built and published to the [GitHub Container Registry (GHCR)][ghcr-docs].
 
 [bump-my-version]: https://callowayproject.github.io/bump-my-version/
 [ghcr-docs]: https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry

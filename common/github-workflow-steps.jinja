@@ -41,3 +41,20 @@
 - name: 📖 Build documentation
   run: mise run docs-build
 {%- endmacro -%}
+
+{%- macro step_artifact_upload(path) -%}
+- name: 🔼 Upload artifact
+  uses: actions/upload-artifact@v7
+  with:
+    if-no-files-found: error
+    name: {{ path }}
+    path: {{ path }}/
+{%- endmacro -%}
+
+{%- macro step_artifact_download(path) -%}
+- name: 🔽 Download artifact
+  uses: actions/download-artifact@v8
+  with:
+    name: {{ path }}
+    path: {{ path }}/
+{%- endmacro -%}

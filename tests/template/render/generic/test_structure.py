@@ -10,10 +10,7 @@ if TYPE_CHECKING:
 
 PYTHON_ONLY_PATHS = {
     ".dockerignore",
-    ".github/release.yaml",
     ".github/workflows/audit.yaml",
-    ".github/workflows/release.yaml",
-    "docs/releasing.md",
     "Dockerfile",
     "compose.yaml",
     "pkfire/py.typed",
@@ -38,9 +35,12 @@ def test_structure(
         },
         expected_absent={"common", *PYTHON_ONLY_PATHS},
     )
+    case.expected_present |= {".bumpversion.toml"}
     case.expect_if(
         project_visibility == "public",
+        ".github/release.yaml",
         ".github/workflows/ci.yaml",
+        ".github/workflows/release.yaml",
         "CONTRIBUTING.md",
     )
     case.expect_if(
@@ -58,6 +58,7 @@ def test_structure(
         ".github/workflows/docs.yaml",
         "docs/contributing.md",
         "docs/setup.md",
+        "docs/releasing.md",
     )
     structure_test(case)
 

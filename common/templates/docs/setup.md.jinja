@@ -3,6 +3,7 @@
 {%- set repo_settings = repo_url + "/settings" -%}
 {%- set base_urls = {
     "renovate": "https://github.com/apps/renovate",
+    "repo-labels": repo_url + "/labels",
     "repo-settings": repo_settings,
     "repo-settings-branches": repo_settings + "/branches",
     "repo-settings-pages": repo_settings + "/pages",
@@ -37,8 +38,6 @@ for the Default branch (`main`):
 - [x] Restrict deletions
 - [x] Require a pull request before merging
 - [x] Block force pushes
-{%- if template_variant == "python" and enable_pypi %}
-{%- set _ = base_urls.update({"repo-labels": repo_url + "/labels"}) %}
 
 [Issues → Labels][repo-labels] → Add label:
 
@@ -47,7 +46,6 @@ for the Default branch (`main`):
 - Color: **#b60205** (or click the top left red color in the input popup)
 
 !!! tip "Pull requests labeled `breaking` appear first in release notes"
-{%- endif %}
 
 ## Renovate
 

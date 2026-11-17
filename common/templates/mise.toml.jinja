@@ -19,6 +19,9 @@ betterleaks = "latest"
 {%- if project_visibility == "public" %}
 jactionlint = "latest"
 {%- endif %}
+{%- block bump_my_version_tool %}
+"pipx:bump-my-version" = "latest"
+{%- endblock %}
 {%- block check_tool %}
 {%- if enable_commit_check %}
 "pipx:commit-check" = "latest"
@@ -70,8 +73,10 @@ run = "prek run --all-files"
 description = "Run all formatters, static checks, and tests"
 run = [{ task = "lint" }, { task = "test" }]
 
-{%- set tasks_after_lt %}{% block tasks_after_lt %}{% endblock %}{% endset -%}
-{{- blocks.put(tasks_after_lt, blank_lines=1) }}
+[tasks.release]
+description = "Create and push a release tag (patch/minor/major)"
+raw_args = true
+run = "{{ task_run_prefix }}bump-my-version bump -v"
 
 [tasks.secretscan]
 description = "Scan git history for secrets"
