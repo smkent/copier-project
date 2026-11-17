@@ -1,0 +1,8 @@
+{%- macro toml_config() -%}
+[tool.bumpversion]
+commit = false
+tag = true
+tag_name = "v{new_version}"
+tag_message = ""
+push_tag = true
+{%- endmacro -%}

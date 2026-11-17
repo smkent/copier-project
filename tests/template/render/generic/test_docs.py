@@ -25,7 +25,7 @@ def test_docs_features(
     snapshot: SnapshotAssertion,
 ) -> None:
     rendered = render_template(project_visibility="public", enable_docs=True)
-    for doc_file in ["setup.md"]:
+    for doc_file in ["setup.md", "releasing.md"]:
         assert (rendered / "docs" / doc_file).read_text() == snapshot
 
 

@@ -1,0 +1,59 @@
+{% extends "common/templates/workflows/base.jinja" %}
+{% import "common/github-workflow-steps.jinja" as ci with context %}
+
+{% set artifact_build %}{% block artifact_build %}{% endblock %}{% endset %}
+{% set artifact_path %}{% filter trim %}{% block artifact_path %}{% endblock %}{% endfilter %}{% endset %}
+
+{% block name -%}
+Release
+{%- endblock %}
+
+{% block triggers %}
+push:
+  tags:
+    - v[0-9]*.[0-9]*
+{% endblock %}
+
+{% block concurrency_cancel_in_progress -%}
+false
+{%- endblock %}
+
+{% block jobs %}
+{% if artifact_path -%}
+build:
+  name: Build distribution
+  runs-on: ubuntu-latest
+  cache-mode: none
+  timeout-minutes: 15
+  steps:
+    {{ ci.step_checkout(full_history=true) | indent(4) }}
+
+    {{ ci.steps_project_setup(cache=false) | indent(4) }}
+
+    {{ artifact_build | trim | indent(4) }}
+
+    {{ ci.step_artifact_upload(path=artifact_path) | indent(4) }}
+
+{% endif -%}
+release:
+  name: Create GitHub release
+{%- if artifact_path %}
+  needs: build
+{%- endif %}
+  runs-on: ubuntu-latest
+  timeout-minutes: 15
+  permissions:
+    contents: write
+  steps:
+    {% if artifact_path -%}
+    {{ ci.step_artifact_download(path=artifact_path) | indent(4) }}
+
+    {% endif -%}
+    - name: 🏷️ Create GitHub release
+      run: gh release create "${REF_NAME}"{% if artifact_path %} {{ artifact_path }}/*{% endif %} --verify-tag --generate-notes
+      env:
+        GH_REPO: {% raw %}${{ github.repository }}{% endraw %}
+        GH_TOKEN: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
+        REF_NAME: {% raw %}${{ github.ref_name }}{% endraw %}
+{%- endblock %}
+{#- vim: set ft=yaml: #}

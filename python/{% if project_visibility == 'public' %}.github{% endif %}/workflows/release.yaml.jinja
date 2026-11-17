@@ -1,0 +1,41 @@
+{% extends "common/templates/workflows/release.yaml.jinja" %}
+{% import "common/github-workflow-steps.jinja" as ci with context %}
+{% import "common/python.jinja" as py with context %}
+
+{% block env %}
+{{ py.workflow_env() }}
+{% endblock %}
+
+{% block artifact_build %}
+- name: 📦 Build package
+  run: mise run build
+{% endblock %}
+
+{% block artifact_path %}
+dist
+{% endblock %}
+
+{% block jobs %}
+{{ super() }}
+{%- if enable_pypi %}
+
+publish:
+  name: Publish to PyPI
+  needs: build
+  runs-on: ubuntu-latest
+  timeout-minutes: 15
+  environment:
+    name: pypi
+    url: https://pypi.org/project/{{ project_name }}/
+  permissions:
+    id-token: write
+  steps:
+    {{ ci.step_artifact_download(path=artifact_path) | indent(4) }}
+
+    - name: ☢️ Publish to PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        attestations: true
+{%- endif %}
+{% endblock %}
+{#- vim: set ft=yaml: #}

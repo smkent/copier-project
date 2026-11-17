@@ -1,0 +1,39 @@
+# serializer version: 1
+# name: test_release_yaml[generic]
+  '''
+  changelog:
+    categories:
+      - title: 💥 Breaking changes
+        labels: [breaking]
+      - title: ✨ New features
+        labels: [enhancement]
+      - title: 🐛 Fixes
+        labels: [bug]
+      - title: 📝 Documentation
+        labels: [documentation]
+      - title: 📦 Dependencies
+        labels: [dependencies]
+      - title: 💾 General changes
+        labels: ['*']
+  
+  '''
+# ---
+# name: test_release_yaml[python]
+  '''
+  changelog:
+    categories:
+      - title: 💥 Breaking changes
+        labels: [breaking]
+      - title: ✨ New features
+        labels: [enhancement]
+      - title: 🐛 Fixes
+        labels: [bug]
+      - title: 📝 Documentation
+        labels: [documentation]
+      - title: 📦 Dependencies
+        labels: [dependencies]
+      - title: 💾 General changes
+        labels: ['*']
+  
+  '''
+# ---

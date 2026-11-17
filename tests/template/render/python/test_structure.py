@@ -11,6 +11,9 @@ if TYPE_CHECKING:
     from tests.template.utils import StructureTest
 
 
+GENERIC_ONLY_PATHS = {".bumpversion.toml"}
+
+
 @template.parameterize(
     "project_type",
     "project_visibility",
@@ -31,6 +34,7 @@ def test_structure(
         expected_present={
             "pkfire/py.typed",
         },
+        expected_absent={"common", *GENERIC_ONLY_PATHS},
         extra_data={
             "project_type": project_type,
             "project_visibility": project_visibility,
@@ -46,14 +50,11 @@ def test_structure(
     )
     case.expect_if(
         project_visibility == "public",
+        ".github/release.yaml",
         ".github/workflows/audit.yaml",
         ".github/workflows/ci.yaml",
-        "CONTRIBUTING.md",
-    )
-    case.expect_if(
-        project_visibility == "public" and enable_pypi,
-        ".github/release.yaml",
         ".github/workflows/release.yaml",
+        "CONTRIBUTING.md",
     )
     case.expect_if(
         enable_docs,

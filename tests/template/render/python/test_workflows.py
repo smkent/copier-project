@@ -86,6 +86,24 @@ def test_workflows_docs(
     ).read_text() == snapshot
 
 
+@template.parameterize("project_type", "enable_pypi")
+def test_workflows_release(
+    render_template: Callable[..., Path],
+    snapshot: SnapshotAssertion,
+    project_type: str,
+    *,
+    enable_pypi: bool,
+) -> None:
+    rendered = render_template(
+        project_type=project_type,
+        project_visibility="public",
+        enable_pypi=enable_pypi,
+    )
+    assert (
+        rendered / ".github" / "workflows" / "release.yaml"
+    ).read_text() == snapshot
+
+
 @template.parameterize("dependency_cooldown")
 def test_workflows_container(
     render_template: Callable[..., Path],
@@ -113,20 +131,4 @@ def test_workflows_container_registry(
     )
     assert (
         rendered / ".github" / "workflows" / "ghcr.yaml"
-    ).read_text() == snapshot
-
-
-@template.parameterize("project_type")
-def test_workflows_release(
-    render_template: Callable[..., Path],
-    snapshot: SnapshotAssertion,
-    project_type: str,
-) -> None:
-    rendered = render_template(
-        project_type=project_type,
-        project_visibility="public",
-        enable_pypi=True,
-    )
-    assert (
-        rendered / ".github" / "workflows" / "release.yaml"
     ).read_text() == snapshot

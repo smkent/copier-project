@@ -1,0 +1,105 @@
+{%- import "common/blocks.jinja" as blocks -%}
+{%- set repo_url = "https://github.com/" + github_user + "/" + project_name -%}
+{%- set base_urls = {
+    "bump-my-version": "https://callowayproject.github.io/bump-my-version/",
+    "git-book-tags": "https://git-scm.com/book/en/v2/Git-Basics-Tagging",
+    "github-cli": "https://cli.github.com/",
+    "github-release-badge": "https://img.shields.io/github/v/release/" + github_user + "/" + project_name,
+    "github-release-latest": repo_url + "/releases/latest",
+    "github-releases": repo_url + "/releases",
+    "semver": "https://semver.org/",
+} -%}
+---
+title: Releasing a new version
+icon: lucide/rocket
+---
+
+# Releasing a new version
+
+Release version numbers should follow [Semantic Versioning][semver].
+
+Project releases are created automatically when a correctly formatted
+[git tag][git-book-tags] is created within the GitHub repository.
+
+## Preparing release notes
+
+Release notes are generated automatically using the titles of pull requests
+merged since the previous release. Items in release notes are grouped in the
+following order based on how the corresponding pull request is labeled:
+
+| Pull request label | Release notes section |
+|---|---|
+| `breaking` | 💥 Breaking changes |
+| `enhancement` | ✨ New features |
+| `bug` | 🐛 Fixes |
+| `documentation` | 📝 Documentation |
+| `dependencies` | 📦 Dependencies |
+| All other items | 💾 General changes |
+
+Before publishing a release, review and adjust the labels on pull requests
+merged since the previous release to ensure items will appear in the desired
+release notes sections.
+
+!!! tip
+
+    Pull requests with multiple matching labels appear in release notes within
+    the first matching section.
+
+### Previewing release notes with the GitHub CLI
+
+If the [GitHub CLI][github-cli] `gh` is available, you can preview the release notes
+that will be generated with:
+
+```sh
+gh api repos/{owner}/{repo}/releases/generate-notes -f tag_name=vX.Y.Z -q .body
+```
+
+!!! note
+
+    * Although `tag_name` can be any value, replace `vX.Y.Z` with the new
+      release version number to preview that version's exact release notes.
+    * `{owner}` and `{repo}` are literal parts of the command.
+      `gh api` handles them automatically.
+
+## Publishing a release
+
+To create a release, run `mise run release -n` with one of `patch`, `minor`, or
+`major` corresponding to the version number component to update.
+
+```sh
+mise run release -n patch|minor|major
+```
+
+This will display the new version number that would be created and pushed
+automatically using [bump-my-version][bump-my-version] (for example, `v1.2.3`).
+
+!!! info
+
+    Always run `mise run release` with `-n` or `--dry-run` first to preview the
+    tag that would be pushed!
+
+After confirming everything looks right, run the same command again without `-n`
+to create and push the release tag:
+
+```sh
+mise run release patch|minor|major
+```
+
+When a release tag is created in the GitHub repository:
+
+{% block release_effects -%}
+* A corresponding [GitHub release][github-releases] is created automatically.
+
+    [![GitHub Release][github-release-badge]][github-release-latest]
+{%- endblock %}
+{%- set extra_release_effects %}{% block extra_release_effects %}{% endblock %}{% endset -%}
+{{- blocks.put(extra_release_effects, blank_lines=1) }}
+
+{%- set _ = base_urls.update(urls | default({})) %}
+{%- set footer_urls %}
+{%- for key, url in base_urls.items() | sort %}
+[{{ key }}]: {{ url }}
+{%- endfor %}
+{%- endset %}
+{{- blocks.put(footer_urls, blank_lines=1) }}
+{#- vim: set ft=markdown: #}
