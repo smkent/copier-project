@@ -118,12 +118,12 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -247,12 +247,12 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -376,12 +376,12 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -511,13 +511,13 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git remote add origin https://github.com/ness/PKFire",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    "git remote get-url origin >/dev/null 2>&1 || git remote add origin https://github.com/ness/PKFire",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -647,13 +647,13 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git remote add origin https://github.com/ness/PKFire",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    "git remote get-url origin >/dev/null 2>&1 || git remote add origin https://github.com/ness/PKFire",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -783,13 +783,13 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git remote add origin https://github.com/ness/PKFire",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    "git remote get-url origin >/dev/null 2>&1 || git remote add origin https://github.com/ness/PKFire",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -899,12 +899,12 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -1014,12 +1014,12 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -1129,12 +1129,12 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -1250,13 +1250,13 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git remote add origin https://github.com/ness/PKFire",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    "git remote get-url origin >/dev/null 2>&1 || git remote add origin https://github.com/ness/PKFire",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -1372,13 +1372,13 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git remote add origin https://github.com/ness/PKFire",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    "git remote get-url origin >/dev/null 2>&1 || git remote add origin https://github.com/ness/PKFire",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -1494,13 +1494,13 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git remote add origin https://github.com/ness/PKFire",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    "git remote get-url origin >/dev/null 2>&1 || git remote add origin https://github.com/ness/PKFire",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -1629,12 +1629,12 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -1763,12 +1763,12 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -1897,12 +1897,12 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -2037,13 +2037,13 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git remote add origin https://github.com/ness/PKFire",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    "git remote get-url origin >/dev/null 2>&1 || git remote add origin https://github.com/ness/PKFire",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -2178,13 +2178,13 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git remote add origin https://github.com/ness/PKFire",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    "git remote get-url origin >/dev/null 2>&1 || git remote add origin https://github.com/ness/PKFire",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -2319,13 +2319,13 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git remote add origin https://github.com/ness/PKFire",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    "git remote get-url origin >/dev/null 2>&1 || git remote add origin https://github.com/ness/PKFire",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -2440,12 +2440,12 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -2560,12 +2560,12 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -2680,12 +2680,12 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -2806,13 +2806,13 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git remote add origin https://github.com/ness/PKFire",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    "git remote get-url origin >/dev/null 2>&1 || git remote add origin https://github.com/ness/PKFire",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -2933,13 +2933,13 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git remote add origin https://github.com/ness/PKFire",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    "git remote get-url origin >/dev/null 2>&1 || git remote add origin https://github.com/ness/PKFire",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -3060,13 +3060,13 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git remote add origin https://github.com/ness/PKFire",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    "git remote get-url origin >/dev/null 2>&1 || git remote add origin https://github.com/ness/PKFire",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -3190,12 +3190,12 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -3319,12 +3319,12 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -3448,12 +3448,12 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -3583,13 +3583,13 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git remote add origin https://github.com/ness/PKFire",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    "git remote get-url origin >/dev/null 2>&1 || git remote add origin https://github.com/ness/PKFire",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -3719,13 +3719,13 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git remote add origin https://github.com/ness/PKFire",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    "git remote get-url origin >/dev/null 2>&1 || git remote add origin https://github.com/ness/PKFire",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -3855,13 +3855,13 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git remote add origin https://github.com/ness/PKFire",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    "git remote get-url origin >/dev/null 2>&1 || git remote add origin https://github.com/ness/PKFire",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -3971,12 +3971,12 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -4086,12 +4086,12 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -4201,12 +4201,12 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -4322,13 +4322,13 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git remote add origin https://github.com/ness/PKFire",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    "git remote get-url origin >/dev/null 2>&1 || git remote add origin https://github.com/ness/PKFire",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -4444,13 +4444,13 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git remote add origin https://github.com/ness/PKFire",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    "git remote get-url origin >/dev/null 2>&1 || git remote add origin https://github.com/ness/PKFire",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -4566,13 +4566,13 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git remote add origin https://github.com/ness/PKFire",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    "git remote get-url origin >/dev/null 2>&1 || git remote add origin https://github.com/ness/PKFire",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -4701,12 +4701,12 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -4835,12 +4835,12 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -4969,12 +4969,12 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -5109,13 +5109,13 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git remote add origin https://github.com/ness/PKFire",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    "git remote get-url origin >/dev/null 2>&1 || git remote add origin https://github.com/ness/PKFire",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -5250,13 +5250,13 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git remote add origin https://github.com/ness/PKFire",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    "git remote get-url origin >/dev/null 2>&1 || git remote add origin https://github.com/ness/PKFire",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -5391,13 +5391,13 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git remote add origin https://github.com/ness/PKFire",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    "git remote get-url origin >/dev/null 2>&1 || git remote add origin https://github.com/ness/PKFire",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -5512,12 +5512,12 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -5632,12 +5632,12 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -5752,12 +5752,12 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -5878,13 +5878,13 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git remote add origin https://github.com/ness/PKFire",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    "git remote get-url origin >/dev/null 2>&1 || git remote add origin https://github.com/ness/PKFire",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -6005,13 +6005,13 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git remote add origin https://github.com/ness/PKFire",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    "git remote get-url origin >/dev/null 2>&1 || git remote add origin https://github.com/ness/PKFire",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -6132,13 +6132,13 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git remote add origin https://github.com/ness/PKFire",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    "git remote get-url origin >/dev/null 2>&1 || git remote add origin https://github.com/ness/PKFire",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -6273,13 +6273,13 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git remote add origin https://github.com/ness/PKFire",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    "git remote get-url origin >/dev/null 2>&1 || git remote add origin https://github.com/ness/PKFire",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -6414,13 +6414,13 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git remote add origin https://github.com/ness/PKFire",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    "git remote get-url origin >/dev/null 2>&1 || git remote add origin https://github.com/ness/PKFire",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -6555,13 +6555,13 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git remote add origin https://github.com/ness/PKFire",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    "git remote get-url origin >/dev/null 2>&1 || git remote add origin https://github.com/ness/PKFire",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -6696,13 +6696,13 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git remote add origin https://github.com/ness/PKFire",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    "git remote get-url origin >/dev/null 2>&1 || git remote add origin https://github.com/ness/PKFire",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -6837,13 +6837,13 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git remote add origin https://github.com/ness/PKFire",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    "git remote get-url origin >/dev/null 2>&1 || git remote add origin https://github.com/ness/PKFire",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
@@ -6975,13 +6975,13 @@
   [tasks.init]
   description = "Initialize git repository once on project creation"
   run = [
-    '[ ! -d .git ] || { echo "git repository already exists"; exit 1; }',
     "git init",
     "mise install",
-    "git remote add origin https://github.com/ness/PKFire",
-    "git add .",
-    "git rm -f .mise/conf.d/init.toml",
+    "git remote get-url origin >/dev/null 2>&1 || git remote add origin https://github.com/ness/PKFire",
+    '[ -z "$(git rev-list -n 1 --all)" ] || { echo "git repository already contains commits"; exit 1; }',
+    "git add . -- :!.mise/conf.d/init.toml",
     "git commit -m 'Create project from template'",
+    "git clean -dxf -- .mise/",
   ]
   
   '''
