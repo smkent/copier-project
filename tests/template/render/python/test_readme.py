@@ -18,7 +18,7 @@ def test_readme_features(
     render_template: Callable[..., Path],
     snapshot: SnapshotAssertion,
     *,
-    enable_coverage: bool,
+    enable_coverage: str | bool,
     enable_pypi: bool,
     template_attribution: bool,
 ) -> None:

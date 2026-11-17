@@ -26,7 +26,7 @@ def test_structure(
     project_type: str,
     project_visibility: str,
     *,
-    enable_coverage: bool,
+    enable_coverage: str | bool,
     enable_pypi: bool,
     enable_docs: bool,
 ) -> None:
@@ -55,6 +55,10 @@ def test_structure(
         ".github/workflows/ci.yaml",
         ".github/workflows/release.yaml",
         "CONTRIBUTING.md",
+    )
+    case.expect_if(
+        project_visibility == "public" and enable_coverage == "informational",
+        ".github/codecov.yml",
     )
     case.expect_if(
         enable_docs,

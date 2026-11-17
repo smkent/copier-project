@@ -19,7 +19,7 @@ def test_workflows_ci(
     snapshot: SnapshotAssertion,
     project_type: str,
     *,
-    enable_coverage: bool,
+    enable_coverage: str | bool,
     enable_docs: bool,
 ) -> None:
     rendered = render_template(
