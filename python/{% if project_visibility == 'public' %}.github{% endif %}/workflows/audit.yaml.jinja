@@ -20,6 +20,10 @@ pull_request:
 {%- for path in paths %}
     - {{ path }}
 {%- endfor %}
+schedule:
+  - cron: 38 11 * * 1
+    timezone: Etc/UTC
+workflow_dispatch:
 {% endblock %}
 
 {% block env %}
