@@ -126,32 +126,44 @@ class Template:
 
     @cached_property
     def choices(self) -> SimpleNamespace:
-        def _label_to_id(label: str) -> str:
-            return re.sub(r"[\W\_]+", "-", str(label).lower()).strip("-")
+        def _choice_param(
+            question_name: str, choice: Sequence[Any] | Any
+        ) -> Any:
+            if isinstance(choice, (tuple, list)):
+                label, value = choice
+                if isinstance(value, bool):
+                    return _choice_param(question_name, value)
+                choice_id = str(value) or re.sub(
+                    r"[\W\_]+", "-", str(label).lower()
+                ).strip("-")
+                return pytest.param(value, id=choice_id)
+            if isinstance(choice, bool):
+                return pytest.param(
+                    choice, id=("" if choice else "no-") + question_name
+                )
+            return str(choice)
 
         def _defined_choices(
-            choices_config: list[Any] | dict[str, Any],
-        ) -> list[Any]:
-            if isinstance(choices_config, dict):
+            question_name: str,
+            choices: Sequence[Any] | dict[str, Any],
+        ) -> Sequence[Any]:
+            if isinstance(choices, dict):
                 return [
-                    pytest.param(value, id=str(value) or _label_to_id(label))
-                    for label, value in choices_config.items()
+                    _choice_param(question_name, (label, value))
+                    for label, value in choices.items()
                 ]
-            return choices_config
+            return [_choice_param(question_name, choice) for choice in choices]
 
         def _find_choices(
             question_name: str, question_config: dict[str, Any]
-        ) -> list[Any] | None:
+        ) -> Sequence[Any] | None:
             answer_type = question_config["type"]
             if (choices := question_config.get("choices")) and isinstance(
                 choices, (dict, list)
             ):
-                return _defined_choices(choices)
+                return _defined_choices(question_name, choices)
             if answer_type == "bool":
-                return [
-                    pytest.param(True, id=f"{question_name}"),
-                    pytest.param(False, id=f"no-{question_name}"),
-                ]
+                return _defined_choices(question_name, (True, False))
             return None
 
         return SimpleNamespace(

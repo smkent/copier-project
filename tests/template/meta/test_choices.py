@@ -30,6 +30,26 @@ if TYPE_CHECKING:
             id="bool",
         ),
         pytest.param(
+            "grit_enabled",
+            {
+                "type": "yaml",
+                "qmark": "🌕",
+                "help": "Enable local grit?",
+                "default": True,
+                "choices": {
+                    "Enabled, default": True,
+                    "Enabled, scum and villainy": "scum_villainy",
+                    "Disabled": False,
+                },
+            },
+            [
+                pytest.param(True, id="grit_enabled"),
+                pytest.param("scum_villainy", id="scum_villainy"),
+                pytest.param(False, id="no-grit_enabled"),
+            ],
+            id="mixed_yaml",
+        ),
+        pytest.param(
             "starship",
             {
                 "type": "str",
