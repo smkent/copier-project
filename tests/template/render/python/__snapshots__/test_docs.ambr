@@ -1171,7 +1171,6 @@
   
   [bump-my-version]: https://callowayproject.github.io/bump-my-version/
   [ghcr-docs]: https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry
-  [ghcr-project]: https://github.com/ness/PKFire/pkgs/container/PKFire
   [git-book-tags]: https://git-scm.com/book/en/v2/Git-Basics-Tagging
   [github-cli]: https://cli.github.com/
   [github-release-badge]: https://img.shields.io/github/v/release/ness/PKFire
@@ -1328,7 +1327,6 @@
   
   [bump-my-version]: https://callowayproject.github.io/bump-my-version/
   [ghcr-docs]: https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry
-  [ghcr-project]: https://github.com/ness/PKFire/pkgs/container/PKFire
   [git-book-tags]: https://git-scm.com/book/en/v2/Git-Basics-Tagging
   [github-cli]: https://cli.github.com/
   [github-release-badge]: https://img.shields.io/github/v/release/ness/PKFire
