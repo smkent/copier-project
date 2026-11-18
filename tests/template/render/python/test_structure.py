@@ -81,6 +81,25 @@ def test_structure(
     structure_test(case)
 
 
+@pytest.mark.parametrize(
+    "enable_syrupy",
+    [pytest.param(True, id="syrupy"), pytest.param(False, id="no_syrupy")],
+)
+def test_structure_features(
+    structure_test: StructureTest, *, enable_syrupy: bool
+) -> None:
+    case = StructureTestCase(
+        extra_data={
+            "enable_features": [
+                *(["syrupy"] if enable_syrupy else []),
+                "xdist",
+            ]
+        },
+    )
+    case.expect_if(enable_syrupy, "tests/.gitattributes")
+    structure_test(case)
+
+
 @template.parameterize("copyright_license")
 def test_structure_license(
     structure_test: StructureTest,
