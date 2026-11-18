@@ -74,15 +74,6 @@ tokens need to be stored as secrets.
    git push --tags
    ```
 
-## Container registry (ghcr.io)
-
-!!! info "Only needed if your project will build and publish container images"
-
-Enable write access for Actions:
-
-Repository Settings → Actions → General → Workflow permissions
-→ Read and write permissions
-
 ## GitHub Pages
 
 !!! info "Only needed if your project will publish the documentation site"
