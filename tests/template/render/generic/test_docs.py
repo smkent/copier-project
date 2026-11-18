@@ -20,11 +20,18 @@ def test_docs_basic(
         assert (rendered / "docs" / doc_file).read_text() == snapshot
 
 
+@template.parameterize("enable_container")
 def test_docs_features(
     render_template: Callable[..., Path],
     snapshot: SnapshotAssertion,
+    *,
+    enable_container: bool,
 ) -> None:
-    rendered = render_template(project_visibility="public", enable_docs=True)
+    rendered = render_template(
+        project_visibility="public",
+        enable_container=enable_container,
+        enable_docs=True,
+    )
     for doc_file in ["setup.md", "releasing.md"]:
         assert (rendered / "docs" / doc_file).read_text() == snapshot
 

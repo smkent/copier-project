@@ -91,6 +91,14 @@ When a release tag is created in the GitHub repository:
 * A corresponding [GitHub release][github-releases] is created.
 
     [![GitHub Release][github-release-badge]][github-release-latest]
+{%- if enable_container %}
+{%- set _ = base_urls.update({
+    "ghcr-docs": "https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry",
+}) %}
+
+* A container image is built and published to the
+  [GitHub Container Registry (GHCR)][ghcr-docs].
+{%- endif -%}
 {%- endblock %}
 
 {%- set _ = base_urls.update(urls | default({})) %}

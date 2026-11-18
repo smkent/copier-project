@@ -1,0 +1,17 @@
+{%- import "common/blocks.jinja" as blocks -%}
+{%- import "common/license.jinja" as license with context -%}
+{%- set basic_files = ["README.md"] + (license.files | list) -%}
+# Exclude everything except specific files and directories
+*
+
+# License and project information
+{%- for file in basic_files | sort %}
+!{{ file }}
+{%- endfor %}
+
+{%- set project_files %}{% block project_files %}
+# Add files and directories to include in the image, such as:
+# !included_directory/
+# !included.file
+{% endblock %}{% endset -%}
+{{- blocks.put(project_files, blank_lines=1) }}

@@ -1,0 +1,41 @@
+# serializer version: 1
+# name: test_compose_features[generic-private]
+  '''
+  services:
+    PKFire:
+      build: .
+      init: true
+      restart: unless-stopped
+  
+  '''
+# ---
+# name: test_compose_features[generic-public]
+  '''
+  services:
+    PKFire:
+      image: ghcr.io/ness/PKFire:latest
+      init: true
+      restart: unless-stopped
+  
+  '''
+# ---
+# name: test_compose_features[python-private]
+  '''
+  services:
+    PKFire:
+      build: .
+      init: true
+      restart: unless-stopped
+  
+  '''
+# ---
+# name: test_compose_features[python-public]
+  '''
+  services:
+    PKFire:
+      image: ghcr.io/ness/PKFire:latest
+      init: true
+      restart: unless-stopped
+  
+  '''
+# ---

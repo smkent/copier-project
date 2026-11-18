@@ -66,13 +66,6 @@ enable_pypi:
   default: "{{ project_visibility == 'public' }}"
   when: "{{ template_variant == 'python' and project_visibility == 'public' }}"
 
-enable_container:
-  type: bool
-  qmark: 📦
-  help: Enable Docker container{% if project_visibility == 'public' %} build and publishing to ghcr.io{% endif %}?
-  default: false
-  when: "{{ template_variant == 'python' and project_type == 'application' }}"
-
 enable_features:
   type: str
   qmark: 🧩

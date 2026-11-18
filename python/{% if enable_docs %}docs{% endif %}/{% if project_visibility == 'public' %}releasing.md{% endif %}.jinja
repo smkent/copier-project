@@ -16,12 +16,4 @@
 
 {% endif -%}
 {{ super() }}
-{%- if enable_container %}
-{%- set _urls = urls.update({
-    "ghcr-docs": "https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry",
-}) %}
-
-* A container image is built and published to the
-  [GitHub Container Registry (GHCR)][ghcr-docs].
-{%- endif %}
 {%- endblock %}

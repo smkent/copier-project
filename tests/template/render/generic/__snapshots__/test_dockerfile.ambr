@@ -1,0 +1,196 @@
+# serializer version: 1
+# name: test_dockerfile[AGPL-3.0-only]
+  '''
+  FROM alpine:latest
+  
+  WORKDIR /app
+  
+  # Install license
+  COPY COPYING .
+  LABEL org.opencontainers.image.licenses="AGPL-3.0-only"
+  
+  # Replace this with your project's build and execution steps
+  CMD ["echo", "Modify Dockerfile for your project"]
+  
+  '''
+# ---
+# name: test_dockerfile[AGPL-3.0-or-later]
+  '''
+  FROM alpine:latest
+  
+  WORKDIR /app
+  
+  # Install license
+  COPY COPYING .
+  LABEL org.opencontainers.image.licenses="AGPL-3.0-or-later"
+  
+  # Replace this with your project's build and execution steps
+  CMD ["echo", "Modify Dockerfile for your project"]
+  
+  '''
+# ---
+# name: test_dockerfile[Apache-2.0]
+  '''
+  FROM alpine:latest
+  
+  WORKDIR /app
+  
+  # Install license
+  COPY LICENSE .
+  LABEL org.opencontainers.image.licenses="Apache-2.0"
+  
+  # Replace this with your project's build and execution steps
+  CMD ["echo", "Modify Dockerfile for your project"]
+  
+  '''
+# ---
+# name: test_dockerfile[BSD-3-Clause]
+  '''
+  FROM alpine:latest
+  
+  WORKDIR /app
+  
+  # Install license
+  COPY LICENSE .
+  LABEL org.opencontainers.image.licenses="BSD-3-Clause"
+  
+  # Replace this with your project's build and execution steps
+  CMD ["echo", "Modify Dockerfile for your project"]
+  
+  '''
+# ---
+# name: test_dockerfile[CC-BY-4.0]
+  '''
+  FROM alpine:latest
+  
+  WORKDIR /app
+  
+  # Install license
+  COPY LICENSE .
+  LABEL org.opencontainers.image.licenses="CC-BY-4.0"
+  
+  # Replace this with your project's build and execution steps
+  CMD ["echo", "Modify Dockerfile for your project"]
+  
+  '''
+# ---
+# name: test_dockerfile[CC-BY-SA-4.0]
+  '''
+  FROM alpine:latest
+  
+  WORKDIR /app
+  
+  # Install license
+  COPY LICENSE .
+  LABEL org.opencontainers.image.licenses="CC-BY-SA-4.0"
+  
+  # Replace this with your project's build and execution steps
+  CMD ["echo", "Modify Dockerfile for your project"]
+  
+  '''
+# ---
+# name: test_dockerfile[CC0-1.0]
+  '''
+  FROM alpine:latest
+  
+  WORKDIR /app
+  
+  # Install license
+  COPY LICENSE .
+  LABEL org.opencontainers.image.licenses="CC0-1.0"
+  
+  # Replace this with your project's build and execution steps
+  CMD ["echo", "Modify Dockerfile for your project"]
+  
+  '''
+# ---
+# name: test_dockerfile[GPL-3.0-only]
+  '''
+  FROM alpine:latest
+  
+  WORKDIR /app
+  
+  # Install license
+  COPY COPYING .
+  LABEL org.opencontainers.image.licenses="GPL-3.0-only"
+  
+  # Replace this with your project's build and execution steps
+  CMD ["echo", "Modify Dockerfile for your project"]
+  
+  '''
+# ---
+# name: test_dockerfile[GPL-3.0-or-later]
+  '''
+  FROM alpine:latest
+  
+  WORKDIR /app
+  
+  # Install license
+  COPY COPYING .
+  LABEL org.opencontainers.image.licenses="GPL-3.0-or-later"
+  
+  # Replace this with your project's build and execution steps
+  CMD ["echo", "Modify Dockerfile for your project"]
+  
+  '''
+# ---
+# name: test_dockerfile[ISC]
+  '''
+  FROM alpine:latest
+  
+  WORKDIR /app
+  
+  # Install license
+  COPY LICENSE .
+  LABEL org.opencontainers.image.licenses="ISC"
+  
+  # Replace this with your project's build and execution steps
+  CMD ["echo", "Modify Dockerfile for your project"]
+  
+  '''
+# ---
+# name: test_dockerfile[LGPL-3.0-only]
+  '''
+  FROM alpine:latest
+  
+  WORKDIR /app
+  
+  # Install license
+  COPY COPYING COPYING.LESSER .
+  LABEL org.opencontainers.image.licenses="LGPL-3.0-only"
+  
+  # Replace this with your project's build and execution steps
+  CMD ["echo", "Modify Dockerfile for your project"]
+  
+  '''
+# ---
+# name: test_dockerfile[LGPL-3.0-or-later]
+  '''
+  FROM alpine:latest
+  
+  WORKDIR /app
+  
+  # Install license
+  COPY COPYING COPYING.LESSER .
+  LABEL org.opencontainers.image.licenses="LGPL-3.0-or-later"
+  
+  # Replace this with your project's build and execution steps
+  CMD ["echo", "Modify Dockerfile for your project"]
+  
+  '''
+# ---
+# name: test_dockerfile[MIT]
+  '''
+  FROM alpine:latest
+  
+  WORKDIR /app
+  
+  # Install license
+  COPY LICENSE .
+  LABEL org.opencontainers.image.licenses="MIT"
+  
+  # Replace this with your project's build and execution steps
+  CMD ["echo", "Modify Dockerfile for your project"]
+  
+  '''
+# ---

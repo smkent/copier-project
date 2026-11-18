@@ -3,16 +3,15 @@ from __future__ import annotations
 import re
 from typing import TYPE_CHECKING
 
+import pytest
+
 from tests.template.utils import StructureTestCase, template
 
 if TYPE_CHECKING:
     from tests.template.utils import StructureTest
 
 PYTHON_ONLY_PATHS = {
-    ".dockerignore",
     ".github/workflows/audit.yaml",
-    "Dockerfile",
-    "compose.yaml",
     "pkfire/py.typed",
     "pyproject.toml",
     "tests",
@@ -102,4 +101,42 @@ def test_structure_contributing(
             project_visibility == "public", ".github/commit-check.toml"
         )
         case.expect_if(project_visibility == "private", "commit-check.toml")
+    structure_test(case)
+
+
+@pytest.mark.parametrize(
+    ("project_type", "enable_container"),
+    [
+        pytest.param("application", False, id="application-no_container"),
+        pytest.param("application", True, id="application-container"),
+        pytest.param("library", False, id="library"),
+    ],
+)
+@template.parameterize("project_visibility")
+def test_structure_container(
+    structure_test: StructureTest,
+    project_type: str,
+    project_visibility: str,
+    *,
+    enable_container: bool,
+) -> None:
+    case = StructureTestCase(
+        extra_data={
+            "project_type": project_type,
+            "project_visibility": project_visibility,
+            **(
+                {"enable_container": enable_container}
+                if project_type == "application"
+                else {}
+            ),
+        },
+    )
+    case.expect_if(
+        enable_container, ".dockerignore", "Dockerfile", "compose.yaml"
+    )
+    case.expect_if(
+        project_visibility == "public" and enable_container,
+        ".github/workflows/container.yaml",
+        ".github/workflows/ghcr.yaml",
+    )
     structure_test(case)

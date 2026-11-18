@@ -1,0 +1,10 @@
+{%- extends "common/templates/dockerignore.jinja" -%}
+
+{% block project_files %}
+# Python project files
+!pyproject.toml
+!uv.lock
+!{{ project_slug }}/
+**/__pycache__
+**/*.py[cod]
+{% endblock %}

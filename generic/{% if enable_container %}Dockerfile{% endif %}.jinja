@@ -1,0 +1,12 @@
+{%- import "common/license.jinja" as license with context -%}
+FROM alpine:latest
+
+WORKDIR /app
+
+# Install license
+COPY {{ license.files | join(' ') }} .
+LABEL org.opencontainers.image.licenses="{{ copyright_license }}"
+
+# Replace this with your project's build and execution steps
+CMD ["echo", "Modify Dockerfile for your project"]
+{#- vim: set ft=dockerfile: #}
