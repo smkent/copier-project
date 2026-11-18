@@ -48,8 +48,7 @@ enable_coverage:
   qmark: 📊
   help: Enable code coverage reports with codecov.io?
   default: >-
-    {%- set previous = _external_data.previous_answers.enable_coverage | default(None) -%}
-    {%- if (previous if (previous is boolean) else project_visibility == 'public') -%}
+    {%- if project_visibility == 'public' -%}
       normal
     {%- else -%}
       false
