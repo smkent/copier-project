@@ -1056,13 +1056,6 @@
      git push --tags
      ```
   
-  ## Container registry (ghcr.io)
-  
-  Enable write access for Actions:
-  
-  [Settings → Actions → General][repo-settings-actions-general]
-  → Workflow permissions → Read and write permissions
-  
   ## GitHub Pages
   
   [Settings → Pages][repo-settings-pages] → Source → GitHub Actions
@@ -1072,7 +1065,6 @@
   [renovate]: https://github.com/apps/renovate
   [repo-labels]: https://github.com/ness/PKFire/labels
   [repo-settings]: https://github.com/ness/PKFire/settings
-  [repo-settings-actions-general]: https://github.com/ness/PKFire/settings/actions
   [repo-settings-branches]: https://github.com/ness/PKFire/settings/branches
   [repo-settings-envs]: https://github.com/ness/PKFire/settings/environments
   [repo-settings-pages]: https://github.com/ness/PKFire/settings/pages
@@ -1230,13 +1222,6 @@
   Ensure the [Renovate app][renovate] is installed on your account, then
   enable it for `ness/PKFire`.
   
-  ## Container registry (ghcr.io)
-  
-  Enable write access for Actions:
-  
-  [Settings → Actions → General][repo-settings-actions-general]
-  → Workflow permissions → Read and write permissions
-  
   ## GitHub Pages
   
   [Settings → Pages][repo-settings-pages] → Source → GitHub Actions
@@ -1244,7 +1229,6 @@
   [renovate]: https://github.com/apps/renovate
   [repo-labels]: https://github.com/ness/PKFire/labels
   [repo-settings]: https://github.com/ness/PKFire/settings
-  [repo-settings-actions-general]: https://github.com/ness/PKFire/settings/actions
   [repo-settings-branches]: https://github.com/ness/PKFire/settings/branches
   [repo-settings-pages]: https://github.com/ness/PKFire/settings/pages
   

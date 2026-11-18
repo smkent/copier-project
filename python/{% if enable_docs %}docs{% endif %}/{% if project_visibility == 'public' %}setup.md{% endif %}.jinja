@@ -4,22 +4,13 @@
 
 {% set urls = {} %}
 
-{% if enable_pypi %}
-{% set _urls = urls.update({
+{% block extra_sections %}
+{%- if enable_pypi %}
+{%- set _urls = urls.update({
     "pypi-publishing-settings": "https://pypi.org/manage/account/publishing/",
     "pypi-trusted-publishing": "https://docs.pypi.org/trusted-publishers/",
     "repo-settings-envs": repo_settings + "/environments"
 }) %}
-{% endif %}
-
-{% if enable_container %}
-{% set _urls = urls.update({
-    "repo-settings-actions-general": repo_settings + "/actions",
-}) %}
-{% endif %}
-
-{% block extra_sections %}
-{%- if enable_pypi %}
 ## PyPI publishing
 
 This project uses [trusted publishing][pypi-trusted-publishing] so no API tokens
@@ -39,14 +30,5 @@ need to be stored as secrets.
    git tag v0.1.0  # or your desired first version number
    git push --tags
    ```
-{%- endif %}
-{%- if enable_container %}
-
-## Container registry (ghcr.io)
-
-Enable write access for Actions:
-
-[Settings → Actions → General][repo-settings-actions-general]
-→ Workflow permissions → Read and write permissions
 {%- endif %}
 {% endblock %}
