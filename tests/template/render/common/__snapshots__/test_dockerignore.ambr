@@ -1,0 +1,434 @@
+# serializer version: 1
+# name: test_dockerignore[generic-AGPL-3.0-only]
+  '''
+  # Exclude everything except specific files and directories
+  *
+  
+  # License and project information
+  !COPYING
+  !README.md
+  
+  # Add files and directories to include in the image, such as:
+  # !included_directory/
+  # !included.file
+  
+  '''
+# ---
+# name: test_dockerignore[generic-AGPL-3.0-or-later]
+  '''
+  # Exclude everything except specific files and directories
+  *
+  
+  # License and project information
+  !COPYING
+  !README.md
+  
+  # Add files and directories to include in the image, such as:
+  # !included_directory/
+  # !included.file
+  
+  '''
+# ---
+# name: test_dockerignore[generic-Apache-2.0]
+  '''
+  # Exclude everything except specific files and directories
+  *
+  
+  # License and project information
+  !LICENSE
+  !README.md
+  
+  # Add files and directories to include in the image, such as:
+  # !included_directory/
+  # !included.file
+  
+  '''
+# ---
+# name: test_dockerignore[generic-BSD-3-Clause]
+  '''
+  # Exclude everything except specific files and directories
+  *
+  
+  # License and project information
+  !LICENSE
+  !README.md
+  
+  # Add files and directories to include in the image, such as:
+  # !included_directory/
+  # !included.file
+  
+  '''
+# ---
+# name: test_dockerignore[generic-CC-BY-4.0]
+  '''
+  # Exclude everything except specific files and directories
+  *
+  
+  # License and project information
+  !LICENSE
+  !README.md
+  
+  # Add files and directories to include in the image, such as:
+  # !included_directory/
+  # !included.file
+  
+  '''
+# ---
+# name: test_dockerignore[generic-CC-BY-SA-4.0]
+  '''
+  # Exclude everything except specific files and directories
+  *
+  
+  # License and project information
+  !LICENSE
+  !README.md
+  
+  # Add files and directories to include in the image, such as:
+  # !included_directory/
+  # !included.file
+  
+  '''
+# ---
+# name: test_dockerignore[generic-CC0-1.0]
+  '''
+  # Exclude everything except specific files and directories
+  *
+  
+  # License and project information
+  !LICENSE
+  !README.md
+  
+  # Add files and directories to include in the image, such as:
+  # !included_directory/
+  # !included.file
+  
+  '''
+# ---
+# name: test_dockerignore[generic-GPL-3.0-only]
+  '''
+  # Exclude everything except specific files and directories
+  *
+  
+  # License and project information
+  !COPYING
+  !README.md
+  
+  # Add files and directories to include in the image, such as:
+  # !included_directory/
+  # !included.file
+  
+  '''
+# ---
+# name: test_dockerignore[generic-GPL-3.0-or-later]
+  '''
+  # Exclude everything except specific files and directories
+  *
+  
+  # License and project information
+  !COPYING
+  !README.md
+  
+  # Add files and directories to include in the image, such as:
+  # !included_directory/
+  # !included.file
+  
+  '''
+# ---
+# name: test_dockerignore[generic-ISC]
+  '''
+  # Exclude everything except specific files and directories
+  *
+  
+  # License and project information
+  !LICENSE
+  !README.md
+  
+  # Add files and directories to include in the image, such as:
+  # !included_directory/
+  # !included.file
+  
+  '''
+# ---
+# name: test_dockerignore[generic-LGPL-3.0-only]
+  '''
+  # Exclude everything except specific files and directories
+  *
+  
+  # License and project information
+  !COPYING
+  !COPYING.LESSER
+  !README.md
+  
+  # Add files and directories to include in the image, such as:
+  # !included_directory/
+  # !included.file
+  
+  '''
+# ---
+# name: test_dockerignore[generic-LGPL-3.0-or-later]
+  '''
+  # Exclude everything except specific files and directories
+  *
+  
+  # License and project information
+  !COPYING
+  !COPYING.LESSER
+  !README.md
+  
+  # Add files and directories to include in the image, such as:
+  # !included_directory/
+  # !included.file
+  
+  '''
+# ---
+# name: test_dockerignore[generic-MIT]
+  '''
+  # Exclude everything except specific files and directories
+  *
+  
+  # License and project information
+  !LICENSE
+  !README.md
+  
+  # Add files and directories to include in the image, such as:
+  # !included_directory/
+  # !included.file
+  
+  '''
+# ---
+# name: test_dockerignore[python-AGPL-3.0-only]
+  '''
+  # Exclude everything except specific files and directories
+  *
+  
+  # License and project information
+  !COPYING
+  !README.md
+  
+  # Python project files
+  !pyproject.toml
+  !uv.lock
+  !pkfire/
+  **/__pycache__
+  **/*.py[cod]
+  
+  '''
+# ---
+# name: test_dockerignore[python-AGPL-3.0-or-later]
+  '''
+  # Exclude everything except specific files and directories
+  *
+  
+  # License and project information
+  !COPYING
+  !README.md
+  
+  # Python project files
+  !pyproject.toml
+  !uv.lock
+  !pkfire/
+  **/__pycache__
+  **/*.py[cod]
+  
+  '''
+# ---
+# name: test_dockerignore[python-Apache-2.0]
+  '''
+  # Exclude everything except specific files and directories
+  *
+  
+  # License and project information
+  !LICENSE
+  !README.md
+  
+  # Python project files
+  !pyproject.toml
+  !uv.lock
+  !pkfire/
+  **/__pycache__
+  **/*.py[cod]
+  
+  '''
+# ---
+# name: test_dockerignore[python-BSD-3-Clause]
+  '''
+  # Exclude everything except specific files and directories
+  *
+  
+  # License and project information
+  !LICENSE
+  !README.md
+  
+  # Python project files
+  !pyproject.toml
+  !uv.lock
+  !pkfire/
+  **/__pycache__
+  **/*.py[cod]
+  
+  '''
+# ---
+# name: test_dockerignore[python-CC-BY-4.0]
+  '''
+  # Exclude everything except specific files and directories
+  *
+  
+  # License and project information
+  !LICENSE
+  !README.md
+  
+  # Python project files
+  !pyproject.toml
+  !uv.lock
+  !pkfire/
+  **/__pycache__
+  **/*.py[cod]
+  
+  '''
+# ---
+# name: test_dockerignore[python-CC-BY-SA-4.0]
+  '''
+  # Exclude everything except specific files and directories
+  *
+  
+  # License and project information
+  !LICENSE
+  !README.md
+  
+  # Python project files
+  !pyproject.toml
+  !uv.lock
+  !pkfire/
+  **/__pycache__
+  **/*.py[cod]
+  
+  '''
+# ---
+# name: test_dockerignore[python-CC0-1.0]
+  '''
+  # Exclude everything except specific files and directories
+  *
+  
+  # License and project information
+  !LICENSE
+  !README.md
+  
+  # Python project files
+  !pyproject.toml
+  !uv.lock
+  !pkfire/
+  **/__pycache__
+  **/*.py[cod]
+  
+  '''
+# ---
+# name: test_dockerignore[python-GPL-3.0-only]
+  '''
+  # Exclude everything except specific files and directories
+  *
+  
+  # License and project information
+  !COPYING
+  !README.md
+  
+  # Python project files
+  !pyproject.toml
+  !uv.lock
+  !pkfire/
+  **/__pycache__
+  **/*.py[cod]
+  
+  '''
+# ---
+# name: test_dockerignore[python-GPL-3.0-or-later]
+  '''
+  # Exclude everything except specific files and directories
+  *
+  
+  # License and project information
+  !COPYING
+  !README.md
+  
+  # Python project files
+  !pyproject.toml
+  !uv.lock
+  !pkfire/
+  **/__pycache__
+  **/*.py[cod]
+  
+  '''
+# ---
+# name: test_dockerignore[python-ISC]
+  '''
+  # Exclude everything except specific files and directories
+  *
+  
+  # License and project information
+  !LICENSE
+  !README.md
+  
+  # Python project files
+  !pyproject.toml
+  !uv.lock
+  !pkfire/
+  **/__pycache__
+  **/*.py[cod]
+  
+  '''
+# ---
+# name: test_dockerignore[python-LGPL-3.0-only]
+  '''
+  # Exclude everything except specific files and directories
+  *
+  
+  # License and project information
+  !COPYING
+  !COPYING.LESSER
+  !README.md
+  
+  # Python project files
+  !pyproject.toml
+  !uv.lock
+  !pkfire/
+  **/__pycache__
+  **/*.py[cod]
+  
+  '''
+# ---
+# name: test_dockerignore[python-LGPL-3.0-or-later]
+  '''
+  # Exclude everything except specific files and directories
+  *
+  
+  # License and project information
+  !COPYING
+  !COPYING.LESSER
+  !README.md
+  
+  # Python project files
+  !pyproject.toml
+  !uv.lock
+  !pkfire/
+  **/__pycache__
+  **/*.py[cod]
+  
+  '''
+# ---
+# name: test_dockerignore[python-MIT]
+  '''
+  # Exclude everything except specific files and directories
+  *
+  
+  # License and project information
+  !LICENSE
+  !README.md
+  
+  # Python project files
+  !pyproject.toml
+  !uv.lock
+  !pkfire/
+  **/__pycache__
+  **/*.py[cod]
+  
+  '''
+# ---

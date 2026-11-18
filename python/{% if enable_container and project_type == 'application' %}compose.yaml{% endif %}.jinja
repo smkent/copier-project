@@ -1,10 +1,1 @@
-services:
-  {{ project_name }}:
-{%- if project_visibility == 'public' %}
-    image: ghcr.io/{{ github_user }}/{{ project_name }}:latest
-{%- else %}
-    build: .
-{%- endif %}
-    init: true
-    restart: unless-stopped
-{#- vim: set ft=yaml: #}
+{% extends "common/templates/compose.yaml.jinja" %}

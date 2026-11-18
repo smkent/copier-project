@@ -54,3 +54,30 @@ def test_workflows_release(
     assert (
         rendered / ".github" / "workflows" / "release.yaml"
     ).read_text() == snapshot
+
+
+def test_workflows_container(
+    render_template: Callable[..., Path],
+    snapshot: SnapshotAssertion,
+) -> None:
+    rendered = render_template(
+        project_type="application",
+        project_visibility="public",
+        enable_container=True,
+    )
+    assert (
+        rendered / ".github" / "workflows" / "container.yaml"
+    ).read_text() == snapshot
+
+
+def test_workflows_container_registry(
+    render_template: Callable[..., Path], snapshot: SnapshotAssertion
+) -> None:
+    rendered = render_template(
+        project_type="application",
+        project_visibility="public",
+        enable_container=True,
+    )
+    assert (
+        rendered / ".github" / "workflows" / "ghcr.yaml"
+    ).read_text() == snapshot

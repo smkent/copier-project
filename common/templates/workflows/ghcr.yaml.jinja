@@ -1,0 +1,89 @@
+{% extends "common/templates/workflows/base.jinja" %}
+
+{% set cleanup_action = "dataaxiom/ghcr-cleanup-action@v1" %}
+
+{% block name -%}
+Container Registry
+{%- endblock %}
+
+{% block triggers %}
+pull_request:
+  types:
+    - closed
+schedule:
+  - cron: 0 3 * * 0
+workflow_dispatch:
+{% endblock %}
+
+{% block concurrency %}
+group: ghcr-cleanup-{% raw %}${{ github.event.pull_request.number || 'scheduled' }}{% endraw %}
+cancel-in-progress: false
+{% endblock %}
+
+{% macro ghcr_cleanup_job(id, name, condition, needs=[]) -%}
+{{ id }}:
+  name: {{ name }}
+  if: {{ condition }}
+{%- if needs %}
+  needs:
+{%- for need in needs %}
+    - {{ need }}
+{%- endfor %}
+{%- endif %}
+  runs-on: ubuntu-latest
+  timeout-minutes: 15
+  permissions:
+    packages: write
+  steps:
+{{ caller() | trim | indent(4, first=true) }}
+{%- endmacro %}
+
+{% macro ghcr_cleanup_step(name) -%}
+- name: 🧹 {{ name }}
+  uses: {{ cleanup_action }}
+  with:
+    token: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
+{{ caller() | trim | indent(4, first=true) }}
+{%- endmacro %}
+
+{% block jobs %}
+{% call ghcr_cleanup_job(
+  id="cleanup-pr",
+  name="Remove pull request image",
+  condition="github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository",
+) %}
+{% call ghcr_cleanup_step(name="Remove image for pull request ${{ github.event.pull_request.number }}") %}
+delete-tags: {% raw %}pr-${{ github.event.pull_request.number }}{% endraw %}
+{% endcall %}
+{% endcall %}
+
+{% call ghcr_cleanup_job(
+  id="cleanup-stale",
+  name="Remove stale images",
+  condition="github.event_name != 'pull_request'",
+) %}
+{% call ghcr_cleanup_step(name="Remove stray stale images") %}
+keep-n-tagged: 0
+use-regex: true
+exclude-tags: ^(\d+|\d+\.\d+|\d+\.\d+\.\d+|latest|edge|{% raw %}${{ github.event.repository.default_branch }}{% endraw %})$
+older-than: 30 days
+{% endcall %}
+{% endcall %}
+
+{% call ghcr_cleanup_job(
+  id="cleanup-untagged",
+  name="Remove untagged images",
+  condition="${{ !cancelled() && !failure() && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) }}",
+  needs=["cleanup-pr", "cleanup-stale"],
+) %}
+{% call ghcr_cleanup_step(name="Remove untagged container images") %}
+delete-untagged: true
+older-than: 1 hour
+{% endcall %}
+
+{% call ghcr_cleanup_step(name="Remove orphaned container images") %}
+delete-orphaned-images: true
+{% endcall %}
+{% endcall %}
+{% endblock %}
+{#- vim: set ft=yaml: #}

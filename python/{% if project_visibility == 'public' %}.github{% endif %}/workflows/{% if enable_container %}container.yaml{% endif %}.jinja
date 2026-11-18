@@ -1,17 +1,13 @@
-{% extends "common/templates/workflows/base.jinja" %}
+{% extends "common/templates/workflows/container.yaml.jinja" %}
 {% import "common/github-workflow-steps.jinja" as wf with context %}
 
-{% block name -%}
-Container
-{%- endblock %}
+{% block image_needs %}
+needs: version
+{% endblock %}
 
-{% block triggers %}
-pull_request:
-push:
-  branches:
-    - main
-  tags:
-    - v[0-9]*.[0-9]*
+{% block image_builder_args %}
+build-args: |
+  UV_DYNAMIC_VERSIONING_BYPASS={% raw %}${{ needs.version.outputs.version }}{% endraw %}
 {% endblock %}
 
 {% block jobs %}
@@ -31,40 +27,5 @@ version:
         version="$(uvx{% if dependency_cooldown %} --exclude-newer={{ dependency_cooldown }}{% endif %} uv-dynamic-versioning)"
         echo "version=${version}" >> "${GITHUB_OUTPUT}"
         echo "::notice title=Project version::${version}"
-
-image:
-  name: Image
-  needs: version
-  uses: docker/github-builder/.github/workflows/build.yml@v1
-  permissions:
-    contents: read
-    packages: write
-    id-token: write
-  with:
-    output: image
-    push: {% raw %}${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}{% endraw %}
-    platforms: linux/amd64,linux/arm64
-    cache: true
-    cache-mode: max
-    set-meta-labels: true
-    meta-images: {% raw %}ghcr.io/${{ github.repository }}{% endraw %}
-    meta-labels: |
-      org.opencontainers.image.licenses={{ copyright_license }}
-    meta-flavor: |
-      latest=auto
-    meta-tags: |
-      type=edge
-      type=ref,event=pr
-      {% raw %}type=ref,event=branch,enable={{is_default_branch}}
-      type=semver,pattern={{version}}
-      type=semver,pattern={{major}}.{{minor}}
-      type=semver,pattern={{major}}{% endraw %}
-    build-args: |
-      UV_DYNAMIC_VERSIONING_BYPASS={% raw %}${{ needs.version.outputs.version }}{% endraw %}
-  secrets:
-    registry-auths: |
-      - registry: ghcr.io
-        username: {% raw %}${{ github.actor }}{% endraw %}
-        password: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
+{{ super() }}
 {% endblock %}
-{#- vim: set ft=yaml: #}
