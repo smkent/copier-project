@@ -2,6 +2,18 @@
 
 {% set commit_check_command = "uv run commit-check" %}
 
+{% block hook_trailing_whitespace %}
+{%- if "syrupy" in enable_features %}
+exclude: \.ambr$
+{%- endif %}
+{%- endblock %}
+
+{% block hook_end_of_file_fixer %}
+{%- if "syrupy" in enable_features %}
+exclude: \.ambr$
+{%- endif %}
+{%- endblock %}
+
 {% block extra_builtin_hooks %}
 - id: debug-statements
 {% endblock %}

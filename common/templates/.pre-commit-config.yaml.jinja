@@ -8,7 +8,11 @@ repos:
     rev: v6.0.0
     hooks:
       - id: trailing-whitespace
+{%- set hook_trailing_whitespace %}{% block hook_trailing_whitespace %}{% endblock %}{% endset %}
+{{- blocks.put(hook_trailing_whitespace, indent=8) }}
       - id: end-of-file-fixer
+{%- set hook_end_of_file_fixer %}{% block hook_end_of_file_fixer %}{% endblock %}{% endset %}
+{{- blocks.put(hook_end_of_file_fixer, indent=8) }}
       - id: check-merge-conflict
       - id: check-yaml
       - id: check-toml
