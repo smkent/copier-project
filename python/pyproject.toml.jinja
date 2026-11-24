@@ -23,7 +23,7 @@
 {%- endif -%}
 
 {%- if "syrupy" in enable_features -%}
-{%- set _ = tool_uv_dependency_groups['dev'].append("syrupy>=6") -%}
+{%- set _ = tool_uv_dependency_groups['dev'].append("syrupy>=7") -%}
 {%- endif -%}
 
 {%- if "xdist" in enable_features -%}
