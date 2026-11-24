@@ -1570,7 +1570,7 @@
   [tasks.snapup]
   description = "Update test snapshots"
   raw_args = true
-  run = "uv run pytest --snapshot-update"
+  run = "uv run pytest --snapshot-update -m syrupy_snapshot"
   
   [tasks.test]
   description = "Run tests"
@@ -1704,7 +1704,7 @@
   [tasks.snapup]
   description = "Update test snapshots"
   raw_args = true
-  run = "uv run pytest --snapshot-update"
+  run = "uv run pytest --snapshot-update -m syrupy_snapshot"
   
   [tasks.test]
   description = "Run tests"
@@ -1838,7 +1838,7 @@
   [tasks.snapup]
   description = "Update test snapshots"
   raw_args = true
-  run = "uv run pytest --snapshot-update"
+  run = "uv run pytest --snapshot-update -m syrupy_snapshot"
   
   [tasks.test]
   description = "Run tests"
@@ -1978,7 +1978,7 @@
   [tasks.snapup]
   description = "Update test snapshots"
   raw_args = true
-  run = "uv run pytest --snapshot-update"
+  run = "uv run pytest --snapshot-update -m syrupy_snapshot"
   
   [tasks.test]
   description = "Run tests"
@@ -2119,7 +2119,7 @@
   [tasks.snapup]
   description = "Update test snapshots"
   raw_args = true
-  run = "uv run pytest --snapshot-update"
+  run = "uv run pytest --snapshot-update -m syrupy_snapshot"
   
   [tasks.test]
   description = "Run tests"
@@ -2260,7 +2260,7 @@
   [tasks.snapup]
   description = "Update test snapshots"
   raw_args = true
-  run = "uv run pytest --snapshot-update"
+  run = "uv run pytest --snapshot-update -m syrupy_snapshot"
   
   [tasks.test]
   description = "Run tests"
@@ -2381,7 +2381,7 @@
   [tasks.snapup]
   description = "Update test snapshots"
   raw_args = true
-  run = "uv run pytest --snapshot-update"
+  run = "uv run pytest --snapshot-update -m syrupy_snapshot"
   
   [tasks.test]
   description = "Run tests"
@@ -2501,7 +2501,7 @@
   [tasks.snapup]
   description = "Update test snapshots"
   raw_args = true
-  run = "uv run pytest --snapshot-update"
+  run = "uv run pytest --snapshot-update -m syrupy_snapshot"
   
   [tasks.test]
   description = "Run tests"
@@ -2621,7 +2621,7 @@
   [tasks.snapup]
   description = "Update test snapshots"
   raw_args = true
-  run = "uv run pytest --snapshot-update"
+  run = "uv run pytest --snapshot-update -m syrupy_snapshot"
   
   [tasks.test]
   description = "Run tests"
@@ -2747,7 +2747,7 @@
   [tasks.snapup]
   description = "Update test snapshots"
   raw_args = true
-  run = "uv run pytest --snapshot-update"
+  run = "uv run pytest --snapshot-update -m syrupy_snapshot"
   
   [tasks.test]
   description = "Run tests"
@@ -2874,7 +2874,7 @@
   [tasks.snapup]
   description = "Update test snapshots"
   raw_args = true
-  run = "uv run pytest --snapshot-update"
+  run = "uv run pytest --snapshot-update -m syrupy_snapshot"
   
   [tasks.test]
   description = "Run tests"
@@ -3001,7 +3001,7 @@
   [tasks.snapup]
   description = "Update test snapshots"
   raw_args = true
-  run = "uv run pytest --snapshot-update"
+  run = "uv run pytest --snapshot-update -m syrupy_snapshot"
   
   [tasks.test]
   description = "Run tests"
@@ -4642,7 +4642,7 @@
   [tasks.snapup]
   description = "Update test snapshots"
   raw_args = true
-  run = "uv run pytest --snapshot-update --numprocesses 0"
+  run = "uv run pytest --snapshot-update -m syrupy_snapshot --numprocesses 0"
   
   [tasks.test]
   description = "Run tests"
@@ -4776,7 +4776,7 @@
   [tasks.snapup]
   description = "Update test snapshots"
   raw_args = true
-  run = "uv run pytest --snapshot-update --numprocesses 0"
+  run = "uv run pytest --snapshot-update -m syrupy_snapshot --numprocesses 0"
   
   [tasks.test]
   description = "Run tests"
@@ -4910,7 +4910,7 @@
   [tasks.snapup]
   description = "Update test snapshots"
   raw_args = true
-  run = "uv run pytest --snapshot-update --numprocesses 0"
+  run = "uv run pytest --snapshot-update -m syrupy_snapshot --numprocesses 0"
   
   [tasks.test]
   description = "Run tests"
@@ -5050,7 +5050,7 @@
   [tasks.snapup]
   description = "Update test snapshots"
   raw_args = true
-  run = "uv run pytest --snapshot-update --numprocesses 0"
+  run = "uv run pytest --snapshot-update -m syrupy_snapshot --numprocesses 0"
   
   [tasks.test]
   description = "Run tests"
@@ -5191,7 +5191,7 @@
   [tasks.snapup]
   description = "Update test snapshots"
   raw_args = true
-  run = "uv run pytest --snapshot-update --numprocesses 0"
+  run = "uv run pytest --snapshot-update -m syrupy_snapshot --numprocesses 0"
   
   [tasks.test]
   description = "Run tests"
@@ -5332,7 +5332,7 @@
   [tasks.snapup]
   description = "Update test snapshots"
   raw_args = true
-  run = "uv run pytest --snapshot-update --numprocesses 0"
+  run = "uv run pytest --snapshot-update -m syrupy_snapshot --numprocesses 0"
   
   [tasks.test]
   description = "Run tests"
@@ -5453,7 +5453,7 @@
   [tasks.snapup]
   description = "Update test snapshots"
   raw_args = true
-  run = "uv run pytest --snapshot-update --numprocesses 0"
+  run = "uv run pytest --snapshot-update -m syrupy_snapshot --numprocesses 0"
   
   [tasks.test]
   description = "Run tests"
@@ -5573,7 +5573,7 @@
   [tasks.snapup]
   description = "Update test snapshots"
   raw_args = true
-  run = "uv run pytest --snapshot-update --numprocesses 0"
+  run = "uv run pytest --snapshot-update -m syrupy_snapshot --numprocesses 0"
   
   [tasks.test]
   description = "Run tests"
@@ -5693,7 +5693,7 @@
   [tasks.snapup]
   description = "Update test snapshots"
   raw_args = true
-  run = "uv run pytest --snapshot-update --numprocesses 0"
+  run = "uv run pytest --snapshot-update -m syrupy_snapshot --numprocesses 0"
   
   [tasks.test]
   description = "Run tests"
@@ -5819,7 +5819,7 @@
   [tasks.snapup]
   description = "Update test snapshots"
   raw_args = true
-  run = "uv run pytest --snapshot-update --numprocesses 0"
+  run = "uv run pytest --snapshot-update -m syrupy_snapshot --numprocesses 0"
   
   [tasks.test]
   description = "Run tests"
@@ -5946,7 +5946,7 @@
   [tasks.snapup]
   description = "Update test snapshots"
   raw_args = true
-  run = "uv run pytest --snapshot-update --numprocesses 0"
+  run = "uv run pytest --snapshot-update -m syrupy_snapshot --numprocesses 0"
   
   [tasks.test]
   description = "Run tests"
@@ -6073,7 +6073,7 @@
   [tasks.snapup]
   description = "Update test snapshots"
   raw_args = true
-  run = "uv run pytest --snapshot-update --numprocesses 0"
+  run = "uv run pytest --snapshot-update -m syrupy_snapshot --numprocesses 0"
   
   [tasks.test]
   description = "Run tests"
@@ -6214,7 +6214,7 @@
   [tasks.snapup]
   description = "Update test snapshots"
   raw_args = true
-  run = "uv run pytest --snapshot-update --numprocesses 0"
+  run = "uv run pytest --snapshot-update -m syrupy_snapshot --numprocesses 0"
   
   [tasks.test]
   description = "Run tests"
@@ -6355,7 +6355,7 @@
   [tasks.snapup]
   description = "Update test snapshots"
   raw_args = true
-  run = "uv run pytest --snapshot-update --numprocesses 0"
+  run = "uv run pytest --snapshot-update -m syrupy_snapshot --numprocesses 0"
   
   [tasks.test]
   description = "Run tests"
@@ -6496,7 +6496,7 @@
   [tasks.snapup]
   description = "Update test snapshots"
   raw_args = true
-  run = "uv run pytest --snapshot-update --numprocesses 0"
+  run = "uv run pytest --snapshot-update -m syrupy_snapshot --numprocesses 0"
   
   [tasks.test]
   description = "Run tests"
@@ -6637,7 +6637,7 @@
   [tasks.snapup]
   description = "Update test snapshots"
   raw_args = true
-  run = "uv run pytest --snapshot-update --numprocesses 0"
+  run = "uv run pytest --snapshot-update -m syrupy_snapshot --numprocesses 0"
   
   [tasks.test]
   description = "Run tests"
@@ -6778,7 +6778,7 @@
   [tasks.snapup]
   description = "Update test snapshots"
   raw_args = true
-  run = "uv run pytest --snapshot-update --numprocesses 0"
+  run = "uv run pytest --snapshot-update -m syrupy_snapshot --numprocesses 0"
   
   [tasks.test]
   description = "Run tests"
@@ -6916,7 +6916,7 @@
   [tasks.snapup]
   description = "Update test snapshots"
   raw_args = true
-  run = "uv run pytest --snapshot-update --numprocesses 0"
+  run = "uv run pytest --snapshot-update -m syrupy_snapshot --numprocesses 0"
   
   [tasks.test]
   description = "Run tests"
