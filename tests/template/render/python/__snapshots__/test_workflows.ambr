@@ -2641,7 +2641,7 @@
         output: image
         push: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
         platforms: linux/amd64,linux/arm64
-        cache: true
+        cache: ${{ github.ref_type != 'tag' }}
         cache-mode: max
         set-meta-labels: true
         meta-images: ghcr.io/${{ github.repository }}
@@ -2719,7 +2719,7 @@
         output: image
         push: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
         platforms: linux/amd64,linux/arm64
-        cache: true
+        cache: ${{ github.ref_type != 'tag' }}
         cache-mode: max
         set-meta-labels: true
         meta-images: ghcr.io/${{ github.repository }}
@@ -2797,7 +2797,7 @@
         output: image
         push: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
         platforms: linux/amd64,linux/arm64
-        cache: true
+        cache: ${{ github.ref_type != 'tag' }}
         cache-mode: max
         set-meta-labels: true
         meta-images: ghcr.io/${{ github.repository }}
@@ -2875,7 +2875,7 @@
         output: image
         push: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
         platforms: linux/amd64,linux/arm64
-        cache: true
+        cache: ${{ github.ref_type != 'tag' }}
         cache-mode: max
         set-meta-labels: true
         meta-images: ghcr.io/${{ github.repository }}
@@ -2953,7 +2953,7 @@
         output: image
         push: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
         platforms: linux/amd64,linux/arm64
-        cache: true
+        cache: ${{ github.ref_type != 'tag' }}
         cache-mode: max
         set-meta-labels: true
         meta-images: ghcr.io/${{ github.repository }}
@@ -3031,7 +3031,7 @@
         output: image
         push: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
         platforms: linux/amd64,linux/arm64
-        cache: true
+        cache: ${{ github.ref_type != 'tag' }}
         cache-mode: max
         set-meta-labels: true
         meta-images: ghcr.io/${{ github.repository }}
